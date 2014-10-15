@@ -1,0 +1,7 @@
+Graphics now use a fixed slice of pie, and for two-player games they don't fill the space.
+The max central angle has been made smaller.
+The number of possible games is displayed, as is the pause size.
+Many-handed games can be demoed.
+The pause size can be directly entered.
+Loops do not go outside the frame.
+Segment sizes gradually increase, so that the loops get larger / smaller when only one card arrives / leaves, instead of every 3 cards.

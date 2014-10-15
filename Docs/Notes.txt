@@ -1,0 +1,66 @@
+The number of possible games is 52!/(36!x(4!^4)) = (52x51x...38x37)/(4!^4) = (2.168269411362289 x 10^26) / 331776
+= 6.535341348868782 x 10^20 = 653,534,134,886,878,200,000
+
+6.535341348868782 x 10^20 seconds = 1.0892236e+19 minutes
+1.0892236e+19 minutes = 1.8153726e+17 hours
+1.8153726e+17 hours = 7.5640525e+15 days
+7.5640525e+15 days = 1.0805789e+15 weeks
+1.0805789e+15 weeks = 2.0780364e+13 years
+
+= 20,780,364,000,000 years = 20 thousand billion years
+
+In milliseconds, it's 20,780,364,000 years = 20 billion years
+The universe is (apparently) 4.5 billion years old!
+
+The number of possible card pack combinations is 52!, which is really big: 21 digits I think.
+
+Drag and drop functionality: 
+http://www.codeproject.com/Articles/3760/How-to-implement-simple-drag-and-drop-functionalit
+
+Bitmaps:
+From here: http://social.msdn.microsoft.com/Forums/en-US/csharpgeneral/thread/ad60ec35-fe58-4d76-aa91-8da57e3abeff/
+public void GetRedImage(Image sourceImage)
+{
+
+    using (Bitmap bmp = new Bitmap(sourceImage))
+    using (Bitmap redBmp = new Bitmap(sourceImage.Width, sourceImage.Height))
+    {
+        for (int x = 0; x < bmp.Width; x++)
+        {
+            for (int y = 0; y < bmp.Height; y++)
+            {
+                Color pxl = bmp.GetPixel(x, y);
+                Color redPxl = Color.FromArgb(pxl.R, 0, 0);
+                redBmp.SetPixel(x, y, redPxl);
+            }
+        }
+        redBmp.Save("c:\\myredimage.bmp");
+    }
+}
+
+Drawing lines: 
+http://social.msdn.microsoft.com/Forums/en-US/csharpgeneral/thread/98494ffc-0a92-4d07-a93a-de28c3af2099
+
+Changing the cursor during drag-n-drop:
+http://stackoverflow.com/questions/6175408/is-it-possible-to-change-mouse-cursor-when-handling-drag-from-dragover-event
+
+bugs:
+when the moving line crosses a border, the chunks briefly change size.
+After the moving line enters the player's hand, the num of aces (in a clean game) has changed?
+The list of colours is not updating correctly.
+If you click Player Wins when no cards have been played, there is a delay and then a change in the relevant player's pack.
+1. After a win, the 'cards in play' card list doesn't update until the next card is played.
+2. The card images don't refresh instantly, so you quite often see the previous card played by that player (or no card at all), instead of the current card.
+3. When you click the Undo button, the coloured graphic isn't changed accordingly.
+
+Right-angle triangle calculator:
+http://www.csgnetwork.com/righttricalc.html
+
+scientific calculator:
+http://web2.0calc.com/
+
+Fixing the drag-drop problem:
+1. Fiddle about with the struct in the Tag, to make sure that data really is reset.
+2. Don't reset the image until you are in the Paint handler, at which point just check a global flag which stores the emptied picture box name.
+3. Get the graphics object from the sender and use that
+4. Check for other drag events, eg drag leave.

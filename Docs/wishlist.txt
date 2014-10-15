@@ -1,0 +1,66 @@
+BUGS:
+
+B09. Fix bug (this was from old graphic but could still be issue): If you click Player Wins when no cards have been played, there is a delay and then a change in the relevant player's pack.
+B10. Fix bug: After a win, the 'cards in play' card list doesn't update until the next card is played.
+B29. If you launch the card picker in the middle of a game, you sometimes get an error abhout the wrong num of cards when you click Save.
+B30. If you click Stop when the cards-in-play pile is in the middle of transferring to a winning player, when you click Auto again, the cards stay in play. Maybe just finish off that move but with iPause set to 0?
+B31. Index out of range error for the following game:
+	P1: AAKKoooQQJJoooo... (rest = spuds)
+	P2: AAKKQQJJoooo... (rest = spuds)
+	31a. Also in that game, the winning player had less than 5 upside down cards at the end.
+B32. Loops sometimes overlapping the edge of the circle.
+B33. Loops getting smaller / larger rather than just progressively larger, when num of cards is progressively increasing. This might happen when the adjustment is made to avoid overlap at the edge of the square?
+B34. The pause number is getting lost after card-picker does a save.
+B36. Undo button not working for graphics. 
+B27. CardPicker.CopyCards: Is it correct to create new Card objects here? What will happen re the memory management?
+B28. Use Craig's better randomizer? (http://thargy.com/2012/04/generating-randomness/)
+B29. Improve memory management, use of new, etc
+B30. Fix the problem with an extra line appearing across the bottom of each arc. 
+	I've traced this problem to the petal region, which is created in GraphicsTest::PrepareActualData.
+	Presumably the problem is when innerPath and outerPath are created, 
+	because the beginning or end of the arc doesn't coincide with the beginning/end of the neighbouring arm.
+	Need to look at how arcs are created. Maybe reset starts/ends of arms to be equal to starts/ends of arcs?
+
+FEATURES:
+
+F04. Use bitlocking
+F07. Give the ability to save and load games
+F08a. Store automatically-defined statistics on games
+F08b. Store CUSTOM-defined statistics on games
+F12b. Find a way to have two separate users from a presentation 'audience' play against one another comfortably.
+F13. Use storyboards
+F15. Give visual feedback of what's happening during auto-play (eg how many cards played?)
+F16. Give the ability to auto-play one card at a time
+F17b. Allow multi-player auto-play.
+F18. Allow user to configure the size of pack and number/type of face cards, using input fields
+F19. Make it work on t'internet
+F20. Allow user to change level of difficulty, eg number/type of face cards allowed in each hand
+F21. Get card-picker working for multi-player and other user-configured pack sizes / types
+F23. Store finished game as a multi-digit base 5 (or whatever) number
+F24. Spot recurring patterns in games
+F25. Get rid of dynamic lookups in ReloadGraphicColours - denormalise and store the colours in the cards themselves.
+F26. Make the recalculation of graphic loops more efficient: only recalculate what needs to be recalculated. (eg check if angle has changed, and only reload region colours for added cards rather than all cards?)
+F28. Card picker: As well as dragging/dropping, also allow a simple string to be entered for each player, 26 characters, same format as DisplayAsText. Some validation required, obv. Or could allow anything, to make game even more interesting??
+F35. Create graphics-free text-only work-safe version.
+F37. Find a way of checking for clumping?
+F38. Save good game ideas for demo purposes:
+	slow ones
+	quick ones
+	dramatic ones
+	surprising ones
+		The default!
+		Player1: AAooooooooooooooooooJJQQKK
+		Player2: AAooooooooooooooooooJJQQKK
+	ones that create good patterns:
+		Player1: AAAAoo...oooKKKK
+		Player2: JJJJoo...oooQQQQ
+F39. Give segments outlines
+F40. Use a treelist view for the loading of decks?
+F41. USe a better shuffling algorithm, eg (courtesy of MathsJam): Something like bubble sort? You keep shuffling subsets in reducing size, or something - is somehow recursive? Hmm, can't remember.
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+See "quick tour of the screen" below for instructions on how the game works.
+
+This is an old card game with various names (Strip Jack Naked, Beggar your Neighbour, or as I call it, just “Top Game”), which requires no skill but can be fun to play, and is mathematically v interesting. The two big questions are, 
+1)	Can you design a non-trivial game for which you can predict the winner, and 
+2)	Is it possible to create an infinite game?
+
+The rules: Players take it in turns to play cards. Every time a face card is played, the next player must “pay” the previous player: 4 for an Ace, 3 for a King, 2 for a Queen, 1 for a Jack. If a face card is played during payment, the debt is cancelled and the current player must now be paid by the next player. Once a debt is paid the cards are placed at the bottom of the winner’s hand WITHOUT SHUFFLING. The order of the cards must be preserved at all times. 
+
+If you’re confused about the rules, try using the software to play a game in Auto mode. Before starting, enter a large number via the Set Pause button - for instance, 5000 will pause the game for 5 seconds after each card is played.
+
+The number of possible games is 653,534,134,886,878,200,000. If you played one game per millisecond, it would take 20,780,364,000 years to play them all - ie nearly 21 billion years. The universe is (apparently) 4.5 billion years old.
+
+You might notice “clumping” – face cards tend to be alternately attracted to and then repelled by one another: It was partly this phenomenon, as well as the way the fortunes of the players can ebb and flow, that prompted me to create the more abstract visual representation of a game in progress.
+
+Feel free to break the software if you can, and then email me with bug reports (claresudbery@gmail.com).
+
+Quick tour of the screen:
+•	Top left (“Player 1”, “Player 2”, “Cards in play”): These are three strings representing the cards in each player's hand. "o" means non-face card, the other initials should be self-explanatory. Leftmost cards are those which will be played next.
+•	"Pick cards": Design your own (two-player) game. Pretty self-explanatory. If you click "Spuds" it assigns all the remaining cards for you, so you don't have to manually place every single card - you can confine yourself to face cards.
+•	"Player 1" / "Player 2": Allows you to play manually. No rules are enforced.
+•	"Wins": Allows you to manually move the played cards into the hand of the winning player.
+•	"New Game": Shuffles the cards and redeals them.
+•	"Initial hands": Shows you the configuration the pack was in at the beginning of the current game. This is handy because if you find an interesting game, you can copy/paste these strings and use them as a way of recreating the game (via Pick Cards) at a later date.
+•	Bottom left: This number (653,534,134,886,878,200,000) represents the number of possible games. If you played one game per millisecond, it would take 20,780,364,000 years to play them all - ie nearly 21 billion years. The universe is (apparently) 4.5 billion years old.
+•	"Set Pause": This is the number of milliseconds for which the game will pause after each card, when in Auto mode. The number itself is displayed to the right of the textbox and stored for future use.
+•	"Demo Many": Gives a quick demo of what the display could look like for a multi-player game. Uses rainbow colours for the hell of it (because it's pretty!), so doesn't actually represent cards in a pack.
+•	Top right:
+	o	"Auto": This will play the current game in auto mode.
+	o	"Stop". This will stop auto mode (keep clicking – it can be slow to respond). The cards will be retained, so you can continue playing in manual mode.
+	o	+ / - : This will speed or slow the auto mode (keep clicking – they can be slow to respond). You will see the number next to the "Set Pause" button (bottom left) change accordingly. When it reaches 0, that's the fastest it can go.
+	o	The graphic: 
+		?	The upper left hand loop represents Player 1
+		?	The upper right hand loop represents Player 2
+		?	The bottom loop represents cards in play.
+		?	Every time a player wins a round, there will be a pause as the cards are fed from the cards-in-play loop back into the hand of the winning player.
+		?	Cards move clockwise through a loop, so (for the upper loops) will always leave from the right-hand arm and arrive through the left-hand arm.
+		?	Cards are represented by little chunks of colour: 
+			•	Blue = non-face card
+			•	Yellow = Aces
+			•	Indigo = Kings
+			•	Violet = Queens
+			•	Red = Jacks
+

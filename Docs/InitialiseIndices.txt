@@ -1,0 +1,18 @@
+
+            theHands.ElementAt(0).cardDeck.displayLine.InitialiseParallelograms(51, 26
+            theHands.ElementAt(0).cardDeck.displayLine.InitialiseParallelograms(25, 17
+            theHands.ElementAt(0).cardDeck.displayLine.InitialiseParallelograms(16, 9
+            theHands.ElementAt(0).cardDeck.displayLine.InitialiseParallelograms(8, 0
+            theHands.ElementAt(0).transitionLine.InitialiseParallelograms(0, 25
+            theHands.ElementAt(0).transitionLine.InitialiseParallelograms(26, 34
+            theHands.ElementAt(0).transitionLine.InitialiseParallelograms(35, 42
+            theHands.ElementAt(0).transitionLine.InitialiseParallelograms(43, 51
+            theHands.ElementAt(1).cardDeck.displayLine.InitialiseParallelograms(0, 8
+            theHands.ElementAt(1).cardDeck.displayLine.InitialiseParallelograms(9, 16
+            theHands.ElementAt(1).cardDeck.displayLine.InitialiseParallelograms(17, 25
+            theHands.ElementAt(1).cardDeck.displayLine.InitialiseParallelograms(26, 51
+            theHands.ElementAt(1).transitionLine.InitialiseParallelograms(51, 43
+            theHands.ElementAt(1).transitionLine.InitialiseParallelograms(42, 35
+            theHands.ElementAt(1).transitionLine.InitialiseParallelograms(34, 26
+            theHands.ElementAt(1).transitionLine.InitialiseParallelograms(25, 0
+            cardsInPlay.displayLine.InitialiseParallelograms(0, 51

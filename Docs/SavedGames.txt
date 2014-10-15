@@ -1,0 +1,22 @@
+1. Lasts a while, some good reversals of fortune:
+P1: AAooooooooooooooooooJJQQKK
+P2: AAooooooooooooooooooJJQQKK
+
+2. Interesting because one player starts with all jacks and nothing else, but that player loses. Interesting to watch the jacks (= pink) move between the players:
+P1: oooooooooooooooooooQQQQAAA
+P2: oooooooooooooooJJJJooAKKKK
+
+3. Good reversals of fortune:
+P1: JoQoQKooAoKooooooJooQAoooo
+P2: QooJooooAoJoooAooooKoooooK
+
+4. Lasts a long time:
+P1: KooQoooooooooooJoooJKoJAoJ 
+P2: oooooQoKoQooQKooooAooAooAo
+
+
+Almost-white = spud
+Turquoise = Aces
+Green = Kings
+Dark blue = Queens
+Pink = Jacks
