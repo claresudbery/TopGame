@@ -1,3 +1,5 @@
+(scroll to the bottom for latest notes)
+
 Top Game is a deterministic card game, best played late at night while under the influence.
 
 It involves no skill at all, but can nonetheless be surprisingly dramatic and engaging.
@@ -14,3 +16,4 @@ Note that work on the refactor has already started, but is still at an early sta
 
 See Helpfile.docx (in the Docs folder) for a detailed description of the game, along with instructions on how to use this software and play the game.
 
+15/10/14: I've added the exe for an earlier more polished version of the software - so you don't get rogue buttons appearing on the screen. I've put it in a "Release" folder.
