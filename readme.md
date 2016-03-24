@@ -10,9 +10,11 @@ The number of possible games is 52!/(36!x(4!^4)) = 653,534,134,886,878,200,000. 
 
 !! This is a great example of how NOT to write software. It was written in a hurry, and even I (the author) struggle to understand what the hell is going on when looking at the code. Also the graphics are not at all efficient - and a bit buggy.
 
-However it will hopefully now form a great basis for a massive TDD / MVC / refactoring project - I hope to rewrite the solution as an MVC app, using a fully-fledged TDD approach.
+However it will hopefully now form a great basis for a massive TDD / webapp / refactoring project - I hope to rewrite the solution as a web app, using a fully-fledged TDD approach.
 
 Note that work on the refactor has already started, but is still at an early stage - I am currently trying to create a "golden master" so that I can add tests before refactoring, and ensure that each refactoring step does not break any existing code.
+
+**When I started the Golden Master work, I made a poor data-storage choice. Next time I work on this, that'll be the first thing I change. :)
 
 See Helpfile.docx (in the Docs folder) for a detailed description of the game, along with instructions on how to use this software and play the game.
 
