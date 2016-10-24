@@ -29,7 +29,7 @@ namespace Domain.Models
         [JsonProperty]
         public int Y
         {
-            get { return _actualRectangle.X; }
+            get { return _actualRectangle.Y; }
             set { _actualRectangle.Y = value; }
         }
 
