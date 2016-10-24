@@ -68,6 +68,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="GoldenMasterBuilder.cs" />
+    <Compile Include="GoldenMasterBuilderV2.cs" />
+    <Compile Include="GoldenMasterBuilderV3.cs" />
     <Compile Include="JsonSerialisationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
