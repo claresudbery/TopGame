@@ -332,7 +332,7 @@ namespace Domain.Models
             }
         }
 
-        public void PrepareActualData(double rotationAngle, ICollection<TopGameRegion> goldenMasterRegions = null)
+        public void PrepareActualData(double rotationAngle, ICollection<GoldenMasterRegion> goldenMasterRegions = null)
         {            
             // Need to reinitialise constantSegmentLength, in case it was reset in a previous call.
             double segmentAddition = (_vitalStatistics.numTotalSegments > 2) ? (_vitalStatistics.numTotalSegments - 2) % 3 : 0;
@@ -607,7 +607,7 @@ namespace Domain.Models
                             newTopGameRegion.TopGamePoints.Add(_vitalStatistics.actualOuterArcEnd);
                             if (goldenMasterRegions != null)
                             {
-                                goldenMasterRegions.Add(newTopGameRegion);
+                                goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
                             }
                             else
                             {
@@ -762,7 +762,7 @@ namespace Domain.Models
             }
         }
 
-        private void AddArcRegion(Region petalRegion, TopGamePoint pointA, TopGamePoint pointB, TopGamePoint pointC, ICollection<TopGameRegion> goldenMasterRegions)
+        private void AddArcRegion(Region petalRegion, TopGamePoint pointA, TopGamePoint pointB, TopGamePoint pointC, ICollection<GoldenMasterRegion> goldenMasterRegions)
         {
             using (GraphicsPath tempRegionPath = new GraphicsPath())
             {
@@ -773,7 +773,7 @@ namespace Domain.Models
 
                 if (goldenMasterRegions != null)
                 {
-                    goldenMasterRegions.Add(newTopGameRegion);
+                    goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
                 }
                 else
                 {
@@ -792,7 +792,7 @@ namespace Domain.Models
             }
         }
 
-        private void AddTriangularRegion(TopGamePoint pointA, TopGamePoint pointB, TopGamePoint pointC, ICollection<TopGameRegion> goldenMasterRegions)
+        private void AddTriangularRegion(TopGamePoint pointA, TopGamePoint pointB, TopGamePoint pointC, ICollection<GoldenMasterRegion> goldenMasterRegions)
         {
             using (GraphicsPath tempRegionPath = new GraphicsPath())
             {
@@ -803,7 +803,7 @@ namespace Domain.Models
 
                 if (goldenMasterRegions != null)
                 {
-                    goldenMasterRegions.Add(newTopGameRegion);
+                    goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
                 }
                 else
                 {
@@ -819,7 +819,7 @@ namespace Domain.Models
             }
         }
 
-        private void AddParallelogramRegion(TopGamePoint pointA, TopGamePoint pointB, TopGamePoint pointC, TopGamePoint pointD, ICollection<TopGameRegion> goldenMasterRegions)
+        private void AddParallelogramRegion(TopGamePoint pointA, TopGamePoint pointB, TopGamePoint pointC, TopGamePoint pointD, ICollection<GoldenMasterRegion> goldenMasterRegions)
         {
             using (GraphicsPath tempRegionPath = new GraphicsPath())
             {
@@ -831,7 +831,7 @@ namespace Domain.Models
 
                 if (goldenMasterRegions != null)
                 {
-                    goldenMasterRegions.Add(newTopGameRegion);
+                    goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
                 }
                 else
                 {

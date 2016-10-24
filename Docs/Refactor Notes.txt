@@ -23,4 +23,5 @@ Mongo DB:
 To do:
 	Get doubles rounded to 6 dec places
 	See whether the data is the same if you just copy list of regions directly
-	Add in subregions and list of colours
+	Add in list of colours
+	Find out whether subregions can be recreated using everything in VitalStatistics. If not, add in subregions to golden master.

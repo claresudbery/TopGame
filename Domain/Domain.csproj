@@ -51,6 +51,8 @@
     <Compile Include="GoldenMasterPopulator.cs" />
     <Compile Include="Models\ColouredRegion.cs" />
     <Compile Include="Models\GoldenMasterList.cs" />
+    <Compile Include="Models\GoldenMasterPoint.cs" />
+    <Compile Include="Models\GoldenMasterRegion.cs" />
     <Compile Include="Models\GoldenMasterSinglePass.cs" />
     <Compile Include="Models\OnePlayerGraphicsLoop.cs" />
     <Compile Include="Models\TopGameGraphicsPath.cs" />

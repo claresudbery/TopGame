@@ -13,5 +13,15 @@ namespace Domain.Models
 
         [JsonProperty]
         public IList<TopGamePoint> TopGamePoints { get; set; }
+
+        public GoldenMasterRegion ToGoldenMasterRegion()
+        {
+            var goldenMasterRegion = new GoldenMasterRegion();
+            foreach(var point in TopGamePoints)
+            {
+                goldenMasterRegion.TopGamePoints.Add(new GoldenMasterPoint(point.X, point.Y));
+            }
+            return goldenMasterRegion;
+        }
     }
 }

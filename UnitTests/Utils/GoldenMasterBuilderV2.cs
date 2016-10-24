@@ -21,13 +21,13 @@ namespace UnitTests
             return new GoldenMasterSinglePass
             {
                 NumCardsInLoop = randomNumber++,
-                TopGameRegions = new List<TopGameRegion>
+                TopGameRegions = new List<GoldenMasterRegion>
                 {
-                    new TopGameRegion
+                    new GoldenMasterRegion
                     {
-                        TopGamePoints = new List<TopGamePoint>
+                        TopGamePoints = new List<GoldenMasterPoint>
                         {
-                            new TopGamePoint
+                            new GoldenMasterPoint
                             {
                                 X = randomNumber++,
                                 Y = randomNumber++

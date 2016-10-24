@@ -8,7 +8,7 @@ namespace Domain.Models
     {
         public GoldenMasterSinglePass()
         {
-            TopGameRegions = new List<TopGameRegion>();
+            TopGameRegions = new List<GoldenMasterRegion>();
         }
         
         [JsonProperty]
@@ -21,6 +21,6 @@ namespace Domain.Models
         public VitalStatistics VitalStatistics { get; set; }
 
         [JsonProperty]
-        public IList<TopGameRegion> TopGameRegions { get; set; }
+        public IList<GoldenMasterRegion> TopGameRegions { get; set; }
     }
 }
