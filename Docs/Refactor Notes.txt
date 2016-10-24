@@ -5,7 +5,7 @@ Golden Masters:
 	003: c3bccdf17481809679462db7fd60915d30011a02: Lost track of what I was doing. Regenerated the file to make sure I hadn't changed anythign and forgotten.
 	004: c926496202b08255406564e0ef3ab5d413e4795e: Checked out previous version of code to see what golden master was generated.
 	005: f6c721b4b7aad6a9d86388c733761992643671e7: Bug fixed - GetMaxCentralAngle is now using the correct number of hands in its if statement, rather than always using 3. 
-	006: After creating GoldenMasterRegion and GoldenMasterPoint - trying to work out why order of objects seems to have changed.
+	006: bb7e6dc979a0bb0f08613c9a9858ab6f690f25cf: After creating GoldenMasterRegion and GoldenMasterPoint - trying to work out why order of objects seems to have changed.
 
 Mongo DB:
 	Links:
