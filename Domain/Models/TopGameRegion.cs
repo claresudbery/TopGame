@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace TopGameWindowsApp.Models
+namespace Domain.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class TopGameRegion
@@ -12,6 +12,6 @@ namespace TopGameWindowsApp.Models
         }
 
         [JsonProperty]
-        public virtual ICollection<TopGamePoint> TopGamePoints { get; set; }
+        public IList<TopGamePoint> TopGamePoints { get; set; }
     }
 }

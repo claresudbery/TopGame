@@ -75,9 +75,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TopGameWindowsApp\TopGameWindowsApp.csproj">
-      <Project>{c1602b2c-6ca4-4a33-a35b-d6c32f5ff47d}</Project>
-      <Name>TopGameWindowsApp</Name>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{f973fe15-b767-4529-83ea-d866c4848a62}</Project>
+      <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

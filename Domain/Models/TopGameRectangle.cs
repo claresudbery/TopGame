@@ -1,9 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using Newtonsoft.Json;
 
-namespace TopGameWindowsApp.Models
+namespace Domain.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class TopGameRectangle
@@ -48,7 +46,7 @@ namespace TopGameWindowsApp.Models
             get { return _actualRectangle.Height; }
             set { _actualRectangle.Height = value; }
         }
-
+        
         public Rectangle Rectangle
         {
             get { return _actualRectangle; }

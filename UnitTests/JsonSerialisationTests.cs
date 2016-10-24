@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Domain;
+using Domain.Models;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using TopGameWindowsApp;
-using TopGameWindowsApp.Models;
 using FluentAssertions;
 
 namespace UnitTests
@@ -16,33 +17,30 @@ namespace UnitTests
         public void Will_serialise_all_GoldenMasterSinglePass_data_and_write_to_file()
         {
             // Arrange
-            List<GoldenMasterSinglePass> goldenMasters = BuildSomeGoldenMasters();
-            var systemUnderTest = new OnePlayerGraphicsLoop();
+            GoldenMasterList goldenMasterList = BuildSomeGoldenMasters();
 
             // Act
-            systemUnderTest.WriteResultsToJsonFile(goldenMasters[0]);
-            systemUnderTest.WriteResultsToJsonFile(goldenMasters[1]);
+            TopGameJsonWriter.WriteAllGoldenMastersToJsonFile(goldenMasterList);
 
             // Assert
-            List<GoldenMasterSinglePass> results;
+            GoldenMasterList result;
             using (StreamReader file = File.OpenText(@"c:\Temp\TopGame-GoldenMaster.json"))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                results = (List<GoldenMasterSinglePass>)serializer.Deserialize(file, typeof(List<GoldenMasterSinglePass>));
+                result = (GoldenMasterList)serializer.Deserialize(file, typeof(GoldenMasterList));
             }
-            results.ShouldAllBeEquivalentTo(goldenMasters);
+            result.GoldenMasters.ShouldAllBeEquivalentTo(goldenMasterList.GoldenMasters);
         }
 
-        private List<GoldenMasterSinglePass> BuildSomeGoldenMasters()
+        private GoldenMasterList BuildSomeGoldenMasters()
         {
+            GoldenMasterList goldenMasterList = new GoldenMasterList();
             int randomNumber = 1;
+            
+            goldenMasterList.GoldenMasters.Add(BuildGoldenMaster(ref randomNumber));
+            goldenMasterList.GoldenMasters.Add(BuildGoldenMaster(ref randomNumber));
 
-            List<GoldenMasterSinglePass> goldenMasters = new List<GoldenMasterSinglePass>();
-
-            goldenMasters.Add(BuildGoldenMaster(ref randomNumber));
-            goldenMasters.Add(BuildGoldenMaster(ref randomNumber));
-
-            return goldenMasters;
+            return goldenMasterList;
         }
 
         private GoldenMasterSinglePass BuildGoldenMaster(ref int randomNumber)

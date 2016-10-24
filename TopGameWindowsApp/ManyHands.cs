@@ -6,8 +6,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using Domain;
+using Domain.Models;
 using nsCard;
-using TopGameWindowsApp.Models;
 
 namespace TopGameWindowsApp
 {
@@ -445,27 +446,21 @@ namespace TopGameWindowsApp
 
                 double angleShare = 360 / (allGraphicLoops.Count());
                 double maxCentralAngle = GetMaxCentralAngle(angleShare);
-                
-                var allResults = new List<GoldenMasterSinglePass>();
-                GoldenMasterSinglePass resultsOfThisCall;
 
-                var allStatistics = new List<VitalStatistics>();
-                VitalStatistics calculatedStatistics;
+                var allGoldenMasters = new GoldenMasterList();
 
                 for (int iCount = 1; iCount <= 5; iCount++)
                 {
-                    resultsOfThisCall = new GoldenMasterSinglePass();
-                    allResults.Add(resultsOfThisCall);
-
-                    calculatedStatistics = new VitalStatistics();
-                    allStatistics.Add(calculatedStatistics);
-
                     allGraphicLoops.ElementAt(0).SetNumTotalSegments(iCount);
 
                     // Set all the angles - each hand of cards gets the same proportion of the circle
                     allGraphicLoops.ElementAt(0).SetAngles(maxCentralAngle, angleShare);
-                    allGraphicLoops.ElementAt(0).PopulateGoldenMaster(resultsOfThisCall, ref calculatedStatistics);
+                    GoldenMasterSinglePass resultsOfThisCall = allGraphicLoops.ElementAt(0).PopulateGoldenMaster();
+
+                    allGoldenMasters.GoldenMasters.Add(resultsOfThisCall);
                 }
+
+                TopGameJsonWriter.WriteAllGoldenMastersToJsonFile(allGoldenMasters);
 
                 allGraphicLoops.ElementAt(0).SetNumTotalSegments(previousNumSegments);
 

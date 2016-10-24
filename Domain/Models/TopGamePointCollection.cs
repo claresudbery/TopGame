@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
 using Newtonsoft.Json;
 
-namespace TopGameWindowsApp.Models
+namespace Domain.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class TopGamePointCollection
@@ -15,7 +12,7 @@ namespace TopGameWindowsApp.Models
         }
 
         [JsonProperty]
-        public ICollection<TopGamePoint> Points { get; set; }
+        public IList<TopGamePoint> Points { get; set; }
 
         public void Copy(TopGamePointCollection sourcePointCollection)
         {

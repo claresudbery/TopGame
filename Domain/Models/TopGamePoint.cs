@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using System.Drawing;
 using Newtonsoft.Json;
 
-namespace TopGameWindowsApp.Models
+namespace Domain.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class TopGamePoint

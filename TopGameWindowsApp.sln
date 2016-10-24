@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopGameWindowsApp", "TopGam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{274F1AB1-B0D2-47C2-AB1F-C56E4D082F36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{F973FE15-B767-4529-83EA-D866C4848A62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,14 @@ Global
 		{274F1AB1-B0D2-47C2-AB1F-C56E4D082F36}.Release|Any CPU.Build.0 = Release|Any CPU
 		{274F1AB1-B0D2-47C2-AB1F-C56E4D082F36}.Release|x86.ActiveCfg = Release|Any CPU
 		{274F1AB1-B0D2-47C2-AB1F-C56E4D082F36}.Release|x86.Build.0 = Release|Any CPU
+		{F973FE15-B767-4529-83EA-D866C4848A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F973FE15-B767-4529-83EA-D866C4848A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F973FE15-B767-4529-83EA-D866C4848A62}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F973FE15-B767-4529-83EA-D866C4848A62}.Debug|x86.Build.0 = Debug|Any CPU
+		{F973FE15-B767-4529-83EA-D866C4848A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F973FE15-B767-4529-83EA-D866C4848A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F973FE15-B767-4529-83EA-D866C4848A62}.Release|x86.ActiveCfg = Release|Any CPU
+		{F973FE15-B767-4529-83EA-D866C4848A62}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

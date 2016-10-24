@@ -1,45 +1,12 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace TopGameWindowsApp.Models
+namespace Domain.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class VitalStatistics
     {
         public VitalStatistics()
         {
-            origin = new TopGamePoint();
-
-            relativeInnerPetalSource = new TopGamePoint();
-            relativeArcCentre = new TopGamePoint();
-
-            relativeInnerArcStart = new TopGamePoint();
-            relativeInnerArcEnd = new TopGamePoint();
-
-            relativeOuterArcStart = new TopGamePoint();
-            relativeOuterArcEnd = new TopGamePoint();
-
-            actualInnerPetalSource = new TopGamePoint();
-            actualInnerArcStart = new TopGamePoint();
-            actualInnerArcEnd = new TopGamePoint();
-
-            actualArcCentre = new TopGamePoint();
-            actualOuterArcStart = new TopGamePoint();
-            actualOuterArcEnd = new TopGamePoint();
-
-            outerPath = new TopGameGraphicsPath();
-            innerPath = new TopGameGraphicsPath();
-
-            startArmDivisionStarts = new TopGamePointCollection();
-            startArmDivisionEnds = new TopGamePointCollection();
-            endArmDivisionStarts = new TopGamePointCollection();
-            endArmDivisionEnds = new TopGamePointCollection();
-            arcSpokes = new TopGamePointCollection();
-
-            innerArcSquare = new TopGameRectangle();
-            outerArcSquare = new TopGameRectangle();
         }
 
 
@@ -178,10 +145,10 @@ namespace TopGameWindowsApp.Models
         // ***********************************************************
         
         [JsonProperty]
-        public virtual TopGameGraphicsPath outerPath { get; set; }
+        public TopGameGraphicsPath outerPath { get; set; }
         
         [JsonProperty]
-        public virtual TopGameGraphicsPath innerPath { get; set; }
+        public TopGameGraphicsPath innerPath { get; set; }
 
 
         // ***********************************************************
@@ -189,19 +156,19 @@ namespace TopGameWindowsApp.Models
         // ***********************************************************
         
         [JsonProperty]
-        public virtual TopGamePointCollection startArmDivisionStarts { get; set; }
+        public TopGamePointCollection startArmDivisionStarts { get; set; }
         
         [JsonProperty]
-        public virtual TopGamePointCollection startArmDivisionEnds { get; set; }
+        public TopGamePointCollection startArmDivisionEnds { get; set; }
 
         [JsonProperty]
-        public virtual TopGamePointCollection endArmDivisionStarts { get; set; }
+        public TopGamePointCollection endArmDivisionStarts { get; set; }
         
         [JsonProperty]
-        public virtual TopGamePointCollection endArmDivisionEnds { get; set; }
+        public TopGamePointCollection endArmDivisionEnds { get; set; }
         
         [JsonProperty]
-        public virtual TopGamePointCollection arcSpokes { get; set; }
+        public TopGamePointCollection arcSpokes { get; set; }
 
 
         // ***********************************************************
@@ -209,10 +176,10 @@ namespace TopGameWindowsApp.Models
         // ***********************************************************
         
         [JsonProperty]
-        public virtual TopGameRectangle innerArcSquare { get; set; }
+        public TopGameRectangle innerArcSquare { get; set; }
         
         [JsonProperty]
-        public virtual TopGameRectangle outerArcSquare { get; set; }
+        public TopGameRectangle outerArcSquare { get; set; }
 
 
         public void Copy(VitalStatistics vitalStatisticsSource)

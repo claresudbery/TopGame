@@ -12,10 +12,9 @@ using nsCard;
 using System.Resources;
 using System.Windows.Media;
 using System.Diagnostics;
-using System.IO;
-using Newtonsoft.Json;
+using Domain;
+using Domain.Models;
 using Newtonsoft.Json.Linq;
-using TopGameWindowsApp.Models;
 
 
 namespace TopGameWindowsApp
@@ -1099,28 +1098,22 @@ namespace TopGameWindowsApp
             CalculateCentralAngle(360, 52, false);
         }
 
-        public void PopulateGoldenMaster(GoldenMasterSinglePass resultsOfThisCall, ref VitalStatistics calculatedStatistics)
+        public GoldenMasterSinglePass PopulateGoldenMaster()
         {
+            var resultsOfThisCall = new GoldenMasterSinglePass();
             PrepareActualData(0, resultsOfThisCall.TopGameRegions);
 
             // Don't copy vital statistics until after the call to PrepareActualData
-            if (calculatedStatistics != null)
-            {
-                calculatedStatistics.Copy(_vitalStatistics);
-            }
+            VitalStatistics calculatedStatistics = new VitalStatistics();
+            calculatedStatistics.Copy(_vitalStatistics);
 
             // resultsOfThisCall.TopGameRegions will be populated during the call to PrepareActualData above
             resultsOfThisCall.VitalStatistics = calculatedStatistics;
             resultsOfThisCall.NumTotalSegments = calculatedStatistics.numTotalSegments;
 
-            WriteResultsToJsonFile(resultsOfThisCall);
+            return resultsOfThisCall;
         }
+    }
 
-        public void WriteResultsToJsonFile(GoldenMasterSinglePass results)
-        {
-            var formattedJson = JsonConvert.SerializeObject(results, Formatting.Indented);
-            //File.AppendAllText(@"c:\Temp\TopGame-GoldenMaster.json", formattedJson);
-            File.WriteAllText(@"c:\Temp\TopGame-GoldenMaster.json", formattedJson);
-        }
-    }// end class
+// end class
 }// end namespace

@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing.Drawing2D;
 using Newtonsoft.Json;
 
-namespace TopGameWindowsApp.Models
+namespace Domain.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class TopGameGraphicsPath
@@ -12,7 +10,6 @@ namespace TopGameWindowsApp.Models
         public TopGameGraphicsPath()
         {
             PointsOnLine = new List<TopGamePoint>();
-            ActualPath = new GraphicsPath();
         }
 
         public void AddLine(TopGamePoint pointA, TopGamePoint pointB)
@@ -28,7 +25,7 @@ namespace TopGameWindowsApp.Models
         }
 
         [JsonProperty]
-        public ICollection<TopGamePoint> PointsOnLine { get; set; }
+        public IList<TopGamePoint> PointsOnLine { get; set; }
 
         public GraphicsPath ActualPath { get; set; }
 

@@ -10,7 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using nsCard;
 using System.Resources;
-using TopGameWindowsApp.Models;
+using Domain.Models;
 
 namespace TopGameWindowsApp
 {
@@ -165,71 +165,71 @@ namespace TopGameWindowsApp
 
         private void CheckGoldenMasterData()
         {
-            using (var db = new GoldenMasterDbContext())
-            {
-                var thing = db.CallsToPrepareActualData
-                    .Where(entity => entity.NumTotalSegments == 1)
-                    .Include(e => e.VitalStatistics)
-                    .Include(e => e.VitalStatistics.origin)
-                    .Include(e => e.VitalStatistics.outerPath)
-                    .Include(e => e.VitalStatistics.startArmDivisionStarts)
-                    .Include(e => e.VitalStatistics.innerArcSquare)
-                    .Include(e => e.TopGameRegions)
-                    .ToList();
-                var thing4 = thing.Last().TopGameRegions;
-                if (thing4 != null && thing4.Count > 0)
-                {
-                    int thing10 = thing4.ElementAt(0).TopGamePoints.ElementAt(0).X;
-                }
-                var thing7 = thing.Last().VitalStatistics;
-                double thing13 = thing7.centralAngle;
-                double thing16 = thing13;
+            //using (var db = new GoldenMasterDbContext())
+            //{
+            //    var thing = db.CallsToPrepareActualData
+            //        .Where(entity => entity.NumTotalSegments == 1)
+            //        .Include(e => e.VitalStatistics)
+            //        .Include(e => e.VitalStatistics.origin)
+            //        .Include(e => e.VitalStatistics.outerPath)
+            //        .Include(e => e.VitalStatistics.startArmDivisionStarts)
+            //        .Include(e => e.VitalStatistics.innerArcSquare)
+            //        .Include(e => e.TopGameRegions)
+            //        .ToList();
+            //    var thing4 = thing.Last().TopGameRegions;
+            //    if (thing4 != null && thing4.Count > 0)
+            //    {
+            //        int thing10 = thing4.ElementAt(0).TopGamePoints.ElementAt(0).X;
+            //    }
+            //    var thing7 = thing.Last().VitalStatistics;
+            //    double thing13 = thing7.centralAngle;
+            //    double thing16 = thing13;
 
-                var thing2 = db.CallsToPrepareActualData
-                    .Where(entity => entity.NumTotalSegments == 3)
-                    .Include(e => e.VitalStatistics)
-                    .Include(e => e.VitalStatistics.origin)
-                    .Include(e => e.VitalStatistics.outerPath)
-                    .Include(e => e.VitalStatistics.startArmDivisionStarts)
-                    .Include(e => e.VitalStatistics.innerArcSquare)
-                    .Include(e => e.TopGameRegions)
-                    .ToList();
-                var thing5 = thing2.Last().TopGameRegions;
-                if (thing5 != null && thing5.Count > 0)
-                {
-                    int thing11 = thing5.ElementAt(0).TopGamePoints.ElementAt(0).X;
-                }
-                var thing8 = thing2.Last().VitalStatistics;
-                double thing14 = thing8.centralAngle;
-                var thing22 = thing8.origin;
-                var thing23 = thing8.outerPath;
-                var thing24 = thing8.startArmDivisionStarts;
-                var thing25 = thing8.innerArcSquare;
-                double thing17 = thing14;
+            //    var thing2 = db.CallsToPrepareActualData
+            //        .Where(entity => entity.NumTotalSegments == 3)
+            //        .Include(e => e.VitalStatistics)
+            //        .Include(e => e.VitalStatistics.origin)
+            //        .Include(e => e.VitalStatistics.outerPath)
+            //        .Include(e => e.VitalStatistics.startArmDivisionStarts)
+            //        .Include(e => e.VitalStatistics.innerArcSquare)
+            //        .Include(e => e.TopGameRegions)
+            //        .ToList();
+            //    var thing5 = thing2.Last().TopGameRegions;
+            //    if (thing5 != null && thing5.Count > 0)
+            //    {
+            //        int thing11 = thing5.ElementAt(0).TopGamePoints.ElementAt(0).X;
+            //    }
+            //    var thing8 = thing2.Last().VitalStatistics;
+            //    double thing14 = thing8.centralAngle;
+            //    var thing22 = thing8.origin;
+            //    var thing23 = thing8.outerPath;
+            //    var thing24 = thing8.startArmDivisionStarts;
+            //    var thing25 = thing8.innerArcSquare;
+            //    double thing17 = thing14;
 
-                var thing3 = db.CallsToPrepareActualData
-                    .Where(entity => entity.NumTotalSegments == 5)
-                    .Include(e => e.VitalStatistics)
-                    .Include(e => e.VitalStatistics.origin)
-                    .Include(e => e.VitalStatistics.outerPath.PointsOnLine)
-                    .Include(e => e.VitalStatistics.startArmDivisionStarts.Points)
-                    .Include(e => e.VitalStatistics.innerArcSquare)
-                    .Include(e => e.VitalStatistics.outerArcSquare)
-                    .Include(e => e.TopGameRegions)
-                    .ToList();
-                var thing6 = thing3.Last().TopGameRegions;
-                if (thing6 != null && thing6.Count > 0)
-                {
-                    int thing12 = thing6.ElementAt(0).TopGamePoints.ElementAt(0).X;
-                }
-                var thing9 = thing3.Last().VitalStatistics;
-                double thing15 = thing9.centralAngle;
-                var thing26 = thing9.origin;
-                var thing27 = thing9.outerPath;
-                var thing28 = thing9.startArmDivisionStarts;
-                var thing29 = thing9.outerArcSquare;
-                double thing18 = thing15;
-            }
+            //    var thing3 = db.CallsToPrepareActualData
+            //        .Where(entity => entity.NumTotalSegments == 5)
+            //        .Include(e => e.VitalStatistics)
+            //        .Include(e => e.VitalStatistics.origin)
+            //        .Include(e => e.VitalStatistics.outerPath.PointsOnLine)
+            //        .Include(e => e.VitalStatistics.startArmDivisionStarts.Points)
+            //        .Include(e => e.VitalStatistics.innerArcSquare)
+            //        .Include(e => e.VitalStatistics.outerArcSquare)
+            //        .Include(e => e.TopGameRegions)
+            //        .ToList();
+            //    var thing6 = thing3.Last().TopGameRegions;
+            //    if (thing6 != null && thing6.Count > 0)
+            //    {
+            //        int thing12 = thing6.ElementAt(0).TopGamePoints.ElementAt(0).X;
+            //    }
+            //    var thing9 = thing3.Last().VitalStatistics;
+            //    double thing15 = thing9.centralAngle;
+            //    var thing26 = thing9.origin;
+            //    var thing27 = thing9.outerPath;
+            //    var thing28 = thing9.startArmDivisionStarts;
+            //    var thing29 = thing9.outerArcSquare;
+            //    double thing18 = thing15;
+            //}
         }
 
         public void DisplayAllDeckContents()

@@ -100,12 +100,9 @@
     <Compile Include="CardPicker.Designer.cs">
       <DependentUpon>CardPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\GoldenMasterSinglePass.cs" />
     <Compile Include="OnePlayerGraphicsLoop.cs" />
     <Compile Include="HandOfCards.cs" />
     <Compile Include="ManyHands.cs" />
-    <Compile Include="Models\Class1.cs" />
-    <Compile Include="Models\GoldenMasterDbContext.cs" />
     <Compile Include="PileOfCardImages.cs" />
     <Compile Include="MainGame.cs">
       <SubType>Form</SubType>
@@ -126,13 +123,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TopGameGoldenMaster.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Models\TopGameGraphicsPath.cs" />
-    <Compile Include="Models\TopGamePoint.cs" />
-    <Compile Include="Models\TopGamePointCollection.cs" />
-    <Compile Include="Models\TopGameRectangle.cs" />
-    <Compile Include="Models\TopGameRegion.cs" />
     <Compile Include="VerticalParallelogram.cs" />
-    <Compile Include="Models\VitalStatistics.cs" />
     <EmbeddedResource Include="CardPicker.resx">
       <DependentUpon>CardPicker.cs</DependentUpon>
     </EmbeddedResource>
@@ -254,6 +245,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DatabaseClearDown.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{f973fe15-b767-4529-83ea-d866c4848a62}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
