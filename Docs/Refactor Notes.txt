@@ -1,6 +1,7 @@
 Golden Masters:
 	001: Only 52 sets of data (one for each possible number of cards in the loop) - didn't take account of different numbers of players.
 	002: (52 x 11) sets of data - for each possible number of cards, also had between 2 and 12 players.
+	003: Lost track of what I was doing. Regenerated the file to make sure I hadn't changed anythign and forgotten.
 
 Mongo DB:
 	Links:
