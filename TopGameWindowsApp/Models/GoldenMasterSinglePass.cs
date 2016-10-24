@@ -1,9 +1,15 @@
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace TopGameWindowsApp.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
+    [DataContract]
     public class GoldenMasterSinglePass
     {
+        [DataMember]
+        [JsonProperty("GoldenMasterSinglePassId")]
         public int GoldenMasterSinglePassId { get; set; }
 
         public int NumTotalSegments { get; set; }

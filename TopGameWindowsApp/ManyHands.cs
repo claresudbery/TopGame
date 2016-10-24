@@ -445,29 +445,26 @@ namespace TopGameWindowsApp
 
                 double angleShare = 360 / (allGraphicLoops.Count());
                 double maxCentralAngle = GetMaxCentralAngle(angleShare);
+                
+                var allResults = new List<GoldenMasterSinglePass>();
+                GoldenMasterSinglePass resultsOfThisCall;
 
-                using (var db = new GoldenMasterDbContext())
+                var allStatistics = new List<VitalStatistics>();
+                VitalStatistics calculatedStatistics;
+
+                for (int iCount = 1; iCount <= 5; iCount++)
                 {
-                    var allResults = new List<GoldenMasterSinglePass>();
-                    GoldenMasterSinglePass resultsOfThisCall;
+                    resultsOfThisCall = new GoldenMasterSinglePass();
+                    allResults.Add(resultsOfThisCall);
 
-                    var allStatistics = new List<VitalStatistics>();
-                    VitalStatistics calculatedStatistics;
+                    calculatedStatistics = new VitalStatistics();
+                    allStatistics.Add(calculatedStatistics);
 
-                    for (int iCount = 1; iCount <= 5; iCount++)
-                    {
-                        resultsOfThisCall = new GoldenMasterSinglePass();
-                        allResults.Add(resultsOfThisCall);
+                    allGraphicLoops.ElementAt(0).SetNumTotalSegments(iCount);
 
-                        calculatedStatistics = new VitalStatistics();
-                        allStatistics.Add(calculatedStatistics);
-
-                        allGraphicLoops.ElementAt(0).SetNumTotalSegments(iCount);
-
-                        // Set all the angles - each hand of cards gets the same proportion of the circle
-                        allGraphicLoops.ElementAt(0).SetAngles(maxCentralAngle, angleShare);
-                        allGraphicLoops.ElementAt(0).PopulateGoldenMaster(db, resultsOfThisCall, ref calculatedStatistics);
-                    }
+                    // Set all the angles - each hand of cards gets the same proportion of the circle
+                    allGraphicLoops.ElementAt(0).SetAngles(maxCentralAngle, angleShare);
+                    allGraphicLoops.ElementAt(0).PopulateGoldenMaster(resultsOfThisCall, ref calculatedStatistics);
                 }
 
                 allGraphicLoops.ElementAt(0).SetNumTotalSegments(previousNumSegments);
