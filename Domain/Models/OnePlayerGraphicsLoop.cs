@@ -608,6 +608,7 @@ namespace Domain.Models
                             if (goldenMasterRegions != null)
                             {
                                 goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
+                                graphicsIndependentRegions.Add(newTopGameRegion);
                             }
                             else
                             {
@@ -774,6 +775,7 @@ namespace Domain.Models
                 if (goldenMasterRegions != null)
                 {
                     goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
+                    graphicsIndependentRegions.Add(newTopGameRegion);
                 }
                 else
                 {
@@ -804,6 +806,7 @@ namespace Domain.Models
                 if (goldenMasterRegions != null)
                 {
                     goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
+                    graphicsIndependentRegions.Add(newTopGameRegion);
                 }
                 else
                 {
@@ -832,6 +835,7 @@ namespace Domain.Models
                 if (goldenMasterRegions != null)
                 {
                     goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
+                    graphicsIndependentRegions.Add(newTopGameRegion);
                 }
                 else
                 {
@@ -1092,6 +1096,19 @@ namespace Domain.Models
         {
             var resultsOfThisCall = new GoldenMasterSinglePass();
             PrepareActualData(0, resultsOfThisCall.TopGameRegions);
+
+            foreach (var region in resultsOfThisCall.TopGameRegions)
+            {
+                var otherRegion = graphicsIndependentRegions[resultsOfThisCall.TopGameRegions.IndexOf(region)];
+                foreach (var point in region.TopGamePoints)
+                {
+                    var otherPoint = otherRegion.TopGamePoints[region.TopGamePoints.IndexOf(point)];
+                    if (otherPoint.X != point.X || otherPoint.Y != point.Y)
+                    {
+                        var thing = 1;
+                    }
+                }
+            }
 
             // Don't copy vital statistics until after the call to PrepareActualData
             VitalStatistics calculatedStatistics = new VitalStatistics();
