@@ -5,8 +5,46 @@ namespace Domain.Models
     [JsonObject(MemberSerialization.OptIn)]
     public class VitalStatistics
     {
-        public VitalStatistics()
+        public VitalStatistics(bool initialise = false)
         {
+            origin = new TopGamePoint();
+
+            relativeInnerPetalSource = new TopGamePoint();
+            relativeArcCentre = new TopGamePoint();
+
+            relativeInnerArcStart = new TopGamePoint();
+            relativeInnerArcEnd = new TopGamePoint();
+
+            relativeOuterArcStart = new TopGamePoint();
+            relativeOuterArcEnd = new TopGamePoint();
+
+            actualInnerPetalSource = new TopGamePoint();
+            actualInnerArcStart = new TopGamePoint();
+            actualInnerArcEnd = new TopGamePoint();
+
+            actualArcCentre = new TopGamePoint();
+            actualOuterArcStart = new TopGamePoint();
+            actualOuterArcEnd = new TopGamePoint();
+
+            outerPath = new TopGameGraphicsPath();
+            innerPath = new TopGameGraphicsPath();
+
+            startArmDivisionStarts = new TopGamePointCollection();
+            startArmDivisionEnds = new TopGamePointCollection();
+            endArmDivisionStarts = new TopGamePointCollection();
+            endArmDivisionEnds = new TopGamePointCollection();
+            arcSpokes = new TopGamePointCollection();
+
+            innerArcSquare = new TopGameRectangle();
+            outerArcSquare = new TopGameRectangle();
+
+            if (initialise)
+            {
+                // The json deserialisation tests fail for some reason on the ShouldAllBeEquivalentTo assertion if the GraphicsPath objects are newed up on creation.
+                // So we only new them up in production code.
+                outerPath.Initialise();
+                innerPath.Initialise();
+            }
         }
 
 

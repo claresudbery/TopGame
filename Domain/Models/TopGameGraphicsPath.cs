@@ -12,6 +12,13 @@ namespace Domain.Models
             PointsOnLine = new List<TopGamePoint>();
         }
 
+        public void Initialise()
+        {
+            // The json deserialisation tests fail for some reason on the ShouldAllBeEquivalentTo assertion if the GraphicsPath objects are newed up on creation.
+            // So we only new them up in production code.
+            ActualPath = new GraphicsPath();
+        }
+
         public void AddLine(TopGamePoint pointA, TopGamePoint pointB)
         {
             PointsOnLine.Add(pointA);

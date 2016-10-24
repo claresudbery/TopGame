@@ -29,7 +29,7 @@ namespace TopGameWindowsApp
             return System.Drawing.Color.CornflowerBlue;
         }
 
-        private VitalStatistics _vitalStatistics = new VitalStatistics();
+        private VitalStatistics _vitalStatistics = new VitalStatistics(true);
 
         Region storedPetalRegion;
         //List<GraphicsPath> regionPaths;
