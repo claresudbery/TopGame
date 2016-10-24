@@ -1,7 +1,10 @@
 Golden Masters:
 	001: Only 52 sets of data (one for each possible number of cards in the loop) - didn't take account of different numbers of players.
+	001-new-props: Same as 001, but with NumTotalSegments renamed to NumCardsInLoop, and with new NumPlayersInGame added - so that it can be compared with newer versions.
 	002: (52 x 11) sets of data - for each possible number of cards, also had between 2 and 12 players.
-	003: Lost track of what I was doing. Regenerated the file to make sure I hadn't changed anythign and forgotten.
+	003: c3bccdf17481809679462db7fd60915d30011a02: Lost track of what I was doing. Regenerated the file to make sure I hadn't changed anythign and forgotten.
+	004: c926496202b08255406564e0ef3ab5d413e4795e: Checked out previous version of code to see what golden master was generated.
+	005: Bug fixed - GetMaxCentralAngle is now using the correct number of hands in its if statement, rather than always using 3. 
 
 Mongo DB:
 	Links:
@@ -19,5 +22,4 @@ Mongo DB:
 		
 To do:
 	See whether the data is the same if you just copy list of regions directly
-	See whether the data is the same if you just new up a graphics loop
 	Add in subregions and list of colours

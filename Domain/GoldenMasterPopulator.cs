@@ -15,7 +15,7 @@ namespace Domain
         {
             int previousNumSegments = graphicLoops.ElementAt(0).GetNumTotalSegments();
 
-            var allGoldenMasters = GenerateAllData(graphicLoops);
+            var allGoldenMasters = GenerateAllData();
 
             string fileNameAndPath = ConfigurationManager.AppSettings["golden-master-file"];
             TopGameJsonWriter.WriteToJsonFile(allGoldenMasters, fileNameAndPath);
@@ -23,8 +23,9 @@ namespace Domain
             graphicLoops.ElementAt(0).SetNumTotalSegments(previousNumSegments);
         }
 
-        public static GoldenMasterList GenerateAllData(List<OnePlayerGraphicsLoop> graphicLoops)
+        public static GoldenMasterList GenerateAllData(int maxPlayers = 12)
         {
+            OnePlayerGraphicsLoop graphicLoop = new OnePlayerGraphicsLoop();
             var allGoldenMasters = new GoldenMasterList();
 
             // Graphics loops have three distinguishing features:
@@ -41,16 +42,16 @@ namespace Domain
             //      ...and for each one of those 52, we do 11 versions, for all the possible numbers of players.
             for (int iCardCount = 1; iCardCount <= 52; iCardCount++)
             {
-                graphicLoops.ElementAt(0).SetNumTotalSegments(iCardCount);
+                graphicLoop.SetNumTotalSegments(iCardCount);
 
-                for (int playerCount = 2; playerCount <= 12; playerCount++)
+                for (int playerCount = 2; playerCount <= maxPlayers; playerCount++)
                 {
                     double angleShare = 360 / (playerCount + 1);
                     double maxCentralAngle = OnePlayerGraphicsLoop.GetMaxCentralAngle(angleShare, playerCount + 1);
 
                     // Set all the angles - each hand of cards gets the same proportion of the circle
-                    graphicLoops.ElementAt(0).SetAngles(maxCentralAngle, angleShare);
-                    GoldenMasterSinglePass resultsOfThisCall = graphicLoops.ElementAt(0).PopulateGoldenMaster(playerCount);
+                    graphicLoop.SetAngles(maxCentralAngle, angleShare);
+                    GoldenMasterSinglePass resultsOfThisCall = graphicLoop.PopulateGoldenMaster(playerCount);
 
                     allGoldenMasters.GoldenMasters.Add(resultsOfThisCall);
                 }
@@ -59,9 +60,9 @@ namespace Domain
             return allGoldenMasters;
         }
 
-        public static string GenerateAllDataAsJsonString(List<OnePlayerGraphicsLoop> graphicLoops)
+        public static string GenerateAllDataAsJsonString()
         {
-            var allGoldenMasters = GenerateAllData(graphicLoops);
+            var allGoldenMasters = GenerateAllData();
 
             return JsonConvert.SerializeObject(allGoldenMasters);
         }
