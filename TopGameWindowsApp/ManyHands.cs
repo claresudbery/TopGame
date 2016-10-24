@@ -46,7 +46,7 @@ namespace TopGameWindowsApp
             int maxNumPlayers = 360 / TopGameConstants.MIN_CENTRAL_ANGLE;
             if (numHands > maxNumPlayers)
             {
-                MessageBox.Show("Too many players");
+                MessageBox.Show(string.Format("Too many players - maximum number of players is {0}", maxNumPlayers));
             }
             iAngleCalculationBounceCount = 0;
             iRecursionCount = 0;
@@ -439,7 +439,7 @@ namespace TopGameWindowsApp
         /// <summary>
         /// Use just one of the hands (any will do) to load all possible data, to be stored for golden master purposes
         /// </summary>
-        public void LoadGoldenMasterData()
+        public void PopulateGoldenMaster()
         {
             if (!_goldenMasterPopulated)
             {
@@ -450,7 +450,15 @@ namespace TopGameWindowsApp
 
                 var allGoldenMasters = new GoldenMasterList();
 
-                for (int iCount = 1; iCount <= 5; iCount++)
+                // The main distinguishing feature for each graphic loop is ow many segments it has.
+                // Each segment represents one card.
+                // Its other distinguishing feature is its position on the screen, which is determined by its rotation angle.
+                // But the rotation angle is applied at the very end of OnePlayerGraphicsLoop.PrepareActualData (via OnePlayerGraphicsLoop.RotateByAngle)
+                // ...and doesn't really affect the actual calculations, wich are the meat of what we are trying to record.
+                // So, in order to have a record of all the possible calculated data (for golden master purposes), 
+                // we call OnePlayerGraphicsLoop.PrepareActualData repeatedly (via OnePlayerGraphicsLoop.PopulateGoldenMaster)
+                // - 52 times in fact, for all the possible numbers of segments.
+                for (int iCount = 1; iCount <= 52; iCount++)
                 {
                     allGraphicLoops.ElementAt(0).SetNumTotalSegments(iCount);
 

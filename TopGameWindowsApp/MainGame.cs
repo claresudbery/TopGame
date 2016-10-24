@@ -130,8 +130,7 @@ namespace TopGameWindowsApp
             allHands.AddPlayedImages(InterlockingCardImages.Side.Right, playedRightImages);
 
             // Make a note of all the graphic loop results returned for all possible values of numSegments, so we can unit-test against these expected values.
-            allHands.LoadGoldenMasterData();
-            //CheckGoldenMasterData();
+            allHands.PopulateGoldenMaster();
 
             allHands.ReloadGraphicLoops();
             DisplayAllDeckContents();
