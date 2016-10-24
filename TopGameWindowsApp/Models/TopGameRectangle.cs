@@ -1,19 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
+using Newtonsoft.Json;
 
 namespace TopGameWindowsApp.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class TopGameRectangle
     {
-        // Used by entity framework when inserting records for golden master
-        public int TopGameRectangleId { get; set; }
-
-        //// Used by entity framework to handle the one-to-one relationship
-        //[ForeignKey("VitalStatistics")]
-        //public int VitalStatisticsId { get; set; }
-        //public virtual VitalStatistics VitalStatistics { get; set; }
-
         public TopGameRectangle()
         {
             // Do nothing
@@ -27,24 +21,28 @@ namespace TopGameWindowsApp.Models
             _actualRectangle.Height = height;
         }
 
+        [JsonProperty]
         public int X
         {
             get { return _actualRectangle.X; }
             set { _actualRectangle.X = value; }
         }
 
+        [JsonProperty]
         public int Y
         {
             get { return _actualRectangle.X; }
             set { _actualRectangle.Y = value; }
         }
 
+        [JsonProperty]
         public int Width
         {
             get { return _actualRectangle.Width; }
             set { _actualRectangle.Width = value; }
         }
 
+        [JsonProperty]
         public int Height
         {
             get { return _actualRectangle.Height; }

@@ -1,21 +1,17 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace TopGameWindowsApp.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class TopGameRegion
     {
-        // Used by entity framework when inserting records for golden master
-        public int TopGameRegionId { get; set; }
-        //public virtual GoldenMasterSinglePass GoldenMasterSinglePass { get; set; }
-
         public TopGameRegion()
         {
             TopGamePoints = new List<TopGamePoint>();
         }
 
-        public int GoldenMasterSinglePassId { get; set; }
-        public virtual GoldenMasterSinglePass GoldenMasterSinglePass { get; set; }
-
+        [JsonProperty]
         public virtual ICollection<TopGamePoint> TopGamePoints { get; set; }
     }
 }

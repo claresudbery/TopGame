@@ -86,9 +86,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestProject1">
-      <HintPath>..\..\..\..\..\..\Users\acer\Documents\Visual Studio 2010\Projects\TestProject1\TestProject1\bin\Debug\TestProject1.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Card.cs" />

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using TopGameWindowsApp.Models;
 
 
@@ -1115,13 +1116,11 @@ namespace TopGameWindowsApp
             WriteResultsToJsonFile(resultsOfThisCall);
         }
 
-        static async void WriteResultsToJsonFile(GoldenMasterSinglePass results)
+        public void WriteResultsToJsonFile(GoldenMasterSinglePass results)
         {
-            string json = JsonConvert.SerializeObject(results);
-            
-            string[] lines = json.Split('\n');
-            
-            File.AppendAllLines(@"C:\Temp\TopGame-GoldenMaster.txt", lines);
+            var formattedJson = JsonConvert.SerializeObject(results, Formatting.Indented);
+            //File.AppendAllText(@"c:\Temp\TopGame-GoldenMaster.json", formattedJson);
+            File.WriteAllText(@"c:\Temp\TopGame-GoldenMaster.json", formattedJson);
         }
     }// end class
 }// end namespace

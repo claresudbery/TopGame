@@ -5,23 +5,20 @@ using Newtonsoft.Json;
 namespace TopGameWindowsApp.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    [DataContract]
     public class GoldenMasterSinglePass
     {
-        [DataMember]
-        [JsonProperty("GoldenMasterSinglePassId")]
-        public int GoldenMasterSinglePassId { get; set; }
-
-        public int NumTotalSegments { get; set; }
-
         public GoldenMasterSinglePass()
         {
             TopGameRegions = new List<TopGameRegion>();
         }
-
-        public int VitalStatisticsId { get; set; }
+        
+        [JsonProperty]
+        public int NumTotalSegments { get; set; }
+        
+        [JsonProperty]
         public virtual VitalStatistics VitalStatistics { get; set; }
 
+        [JsonProperty]
         public virtual ICollection<TopGameRegion> TopGameRegions { get; set; }
     }
 }

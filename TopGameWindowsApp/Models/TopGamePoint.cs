@@ -1,22 +1,12 @@
 using System.Collections.Generic;
 using System.Drawing;
+using Newtonsoft.Json;
 
 namespace TopGameWindowsApp.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class TopGamePoint
     {
-        // Used by entity framework when inserting records for golden master
-        public int TopGamePointId { get; set; }
-
-        // This is needed to signal to Entity Framework that there is a many-to-many relationship between TopGamePoint and TopGameRegion
-        public ICollection<TopGameRegion> TopGameRegions { get; set; }
-
-        // This is needed to signal to Entity Framework that there is a many-to-many relationship between TopGamePoint and TopGameGraphicsPath
-        public ICollection<TopGameGraphicsPath> TopGameGraphicsPaths { get; set; }
-
-        // This is needed to signal to Entity Framework that there is a many-to-many relationship between TopGamePoint and TopGamePointCollection
-        public ICollection<TopGamePointCollection> TopGamePointCollections { get; set; }
-
         public TopGamePoint()
         {
             // Do nothing
@@ -28,12 +18,14 @@ namespace TopGameWindowsApp.Models
             _actualPoint.Y = y;
         }
 
+        [JsonProperty]
         public int X
         {
             get { return _actualPoint.X; }
             set { _actualPoint.X = value; }
         }
 
+        [JsonProperty]
         public int Y
         {
             get { return _actualPoint.Y; }

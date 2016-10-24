@@ -1,13 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace TopGameWindowsApp.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class VitalStatistics
     {
-        // Used by entity framework when inserting records for golden master
-        public int VitalStatisticsId { get; set; }
-
         public VitalStatistics()
         {
             origin = new TopGamePoint();
@@ -42,119 +42,178 @@ namespace TopGameWindowsApp.Models
             outerArcSquare = new TopGameRectangle();
         }
 
+
         // ***********************************************************
         // Flags
         // ***********************************************************
+
+        [JsonProperty]
         public bool bMinimumAngleApplied { get; set; }
+
+        [JsonProperty]
         public bool bMaximumAngleApplied { get; set; }
+
 
         // ***********************************************************
         // Lengths
         // ***********************************************************
+
+        [JsonProperty]
         public double originToArcCentre { get; set; }
+
+        [JsonProperty]
         public double centralSpokeLength { get; set; }
+
+        [JsonProperty]
         public double innerArcRadius { get; set; }
+
+        [JsonProperty]
         public double outerArcRadius { get; set; }
+
+        [JsonProperty]
         public double outerArmLength { get; set; }
+
+        [JsonProperty]
         public double innerArmLength { get; set; }
+
+        [JsonProperty]
         public double constantSegmentLength { get; set; }
+
+        [JsonProperty]
         public double constantCentralSegmentLength { get; set; }
+
 
         // ***********************************************************
         // Angles
         // ***********************************************************
+
+        [JsonProperty]
         public double maxCentralAngle { get; set; }
+
+        [JsonProperty]
         public double arcStartAngle { get; set; }
+
+        [JsonProperty]
         public double angleB { get; set; }
+
+        [JsonProperty]
         public double angleC { get; set; }
+
+        [JsonProperty]
         public double constantBottomAngle { get; set; }
+
+        [JsonProperty]
         public double centralAngle { get; set; }
+
+        [JsonProperty]
         public double arcSegmentAngle { get; set; }
+
 
         // ***********************************************************
         // Points
         // ***********************************************************
+
+        [JsonProperty]
         public TopGamePoint origin { get; set; }
 
+        [JsonProperty]
         public TopGamePoint relativeInnerPetalSource { get; set; }
+
+        [JsonProperty]
         public TopGamePoint relativeArcCentre { get; set; }
 
+        [JsonProperty]
         public TopGamePoint relativeInnerArcStart { get; set; }
+
+        [JsonProperty]
         public TopGamePoint relativeInnerArcEnd { get; set; }
 
+        [JsonProperty]
         public TopGamePoint relativeOuterArcStart { get; set; }
+
+        [JsonProperty]
         public TopGamePoint relativeOuterArcEnd { get; set; }
 
+        [JsonProperty]
         public TopGamePoint actualInnerPetalSource { get; set; }
+
+        [JsonProperty]
         public TopGamePoint actualInnerArcStart { get; set; }
+
+        [JsonProperty]
         public TopGamePoint actualInnerArcEnd { get; set; }
 
+        [JsonProperty]
         public TopGamePoint actualArcCentre { get; set; }
+
+        [JsonProperty]
         public TopGamePoint actualOuterArcStart { get; set; }
+
+        [JsonProperty]
         public TopGamePoint actualOuterArcEnd { get; set; }
+
 
         // ***********************************************************
         // Counts
         // ***********************************************************
+
+        [JsonProperty]
         public int numArmSegments { get; set; }
+
+        [JsonProperty]
         public int numArcSegments { get; set; }
+
+        [JsonProperty]
         public int numTotalSegments { get; set; }
+
+        [JsonProperty]
         public int numTotalCardsInGame { get; set; }
+
+        [JsonProperty]
         public int numCardsInPlay { get; set; }
+
 
         // ***********************************************************
         // Paths
         // ***********************************************************
-        //[ForeignKey("outerPath")]
-        public int outerPathId { get; set; }
-        //[Required]
+        
+        [JsonProperty]
         public virtual TopGameGraphicsPath outerPath { get; set; }
-
-        //[ForeignKey("innerPath")]
-        public int innerPathId { get; set; }
-        //[Required]
+        
+        [JsonProperty]
         public virtual TopGameGraphicsPath innerPath { get; set; }
+
 
         // ***********************************************************
         // Divisions
         // ***********************************************************
-        //[ForeignKey("startArmDivisionStarts")]
-        public int startArmDivisionStartsId { get; set; }
-        //[Required]
+        
+        [JsonProperty]
         public virtual TopGamePointCollection startArmDivisionStarts { get; set; }
-
-        //[ForeignKey("startArmDivisionEnds")]
-        public int startArmDivisionEndsId { get; set; }
-        //[Required]
+        
+        [JsonProperty]
         public virtual TopGamePointCollection startArmDivisionEnds { get; set; }
 
-        //[ForeignKey("endArmDivisionStarts")]
-        public int endArmDivisionStartsId { get; set; }
-        //[Required]
+        [JsonProperty]
         public virtual TopGamePointCollection endArmDivisionStarts { get; set; }
-
-        //[ForeignKey("endArmDivisionEnds")]
-        public int endArmDivisionEndsId { get; set; }
-        //[Required]
+        
+        [JsonProperty]
         public virtual TopGamePointCollection endArmDivisionEnds { get; set; }
-
-        //[ForeignKey("arcSpokes")]
-        public int arcSpokesId { get; set; }
-        //[Required]
+        
+        [JsonProperty]
         public virtual TopGamePointCollection arcSpokes { get; set; }
+
 
         // ***********************************************************
         // Squares
         // ***********************************************************
-        //[ForeignKey("innerArcSquare")]
-        public int innerArcSquareId { get; set; }
-        //[Required]
+        
+        [JsonProperty]
         public virtual TopGameRectangle innerArcSquare { get; set; }
-
-        //[ForeignKey("outerArcSquare")]
-        public int outerArcSquareId { get; set; }
-        //[Required]
+        
+        [JsonProperty]
         public virtual TopGameRectangle outerArcSquare { get; set; }
+
 
         public void Copy(VitalStatistics vitalStatisticsSource)
         {

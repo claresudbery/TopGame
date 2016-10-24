@@ -183,7 +183,6 @@ namespace TopGameWindowsApp
                 }
                 var thing7 = thing.Last().VitalStatistics;
                 double thing13 = thing7.centralAngle;
-                double thing19 = thing7.VitalStatisticsId;
                 double thing16 = thing13;
 
                 var thing2 = db.CallsToPrepareActualData
@@ -202,7 +201,6 @@ namespace TopGameWindowsApp
                 }
                 var thing8 = thing2.Last().VitalStatistics;
                 double thing14 = thing8.centralAngle;
-                double thing20 = thing8.VitalStatisticsId;
                 var thing22 = thing8.origin;
                 var thing23 = thing8.outerPath;
                 var thing24 = thing8.startArmDivisionStarts;
@@ -226,7 +224,6 @@ namespace TopGameWindowsApp
                 }
                 var thing9 = thing3.Last().VitalStatistics;
                 double thing15 = thing9.centralAngle;
-                double thing21 = thing9.VitalStatisticsId;
                 var thing26 = thing9.origin;
                 var thing27 = thing9.outerPath;
                 var thing28 = thing9.startArmDivisionStarts;
