@@ -6,25 +6,25 @@ namespace Domain
 {
     public static class TopGameJsonWriter
     {
-        public static void WriteAllGoldenMastersToJsonFile(GoldenMasterList goldenMasterList)
+        public static void WriteToJsonFile(object objectToWrite, string fileNameAndPath)
         {
-            var formattedJson = JsonConvert.SerializeObject(goldenMasterList, Formatting.Indented);
+            var formattedJson = JsonConvert.SerializeObject(objectToWrite, Formatting.Indented);
 
             //File.AppendAllText(@"c:\Temp\TopGame-GoldenMaster.json", formattedJson);
-            File.WriteAllText(@"c:\Temp\TopGame-GoldenMaster.json", formattedJson);
-
-            //foreach (var goldenMaster in goldenMasterList.GoldenMasters)
-            //{
-            //    WriteGoldenMasterToJsonFile(goldenMaster);
-            //}
+            File.WriteAllText(fileNameAndPath, formattedJson);
         }
 
-        private static void WriteGoldenMasterToJsonFile(GoldenMasterSinglePass goldenMaster)
+        public static TObjectType ReadFromJsonFile<TObjectType>(string fileNameAndPath)
         {
-            var formattedJson = JsonConvert.SerializeObject(goldenMaster, Formatting.Indented);
+            TObjectType result;
 
-            //File.AppendAllText(@"c:\Temp\TopGame-GoldenMaster.json", formattedJson);
-            File.WriteAllText(@"c:\Temp\TopGame-GoldenMaster.json", formattedJson);
+            using (StreamReader file = File.OpenText(fileNameAndPath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                result = (TObjectType)serializer.Deserialize(file, typeof(TObjectType));
+            }
+
+            return result;
         }
     }
 }

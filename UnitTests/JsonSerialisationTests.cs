@@ -20,15 +20,10 @@ namespace UnitTests
             GoldenMasterList goldenMasterList = BuildSomeGoldenMasters();
 
             // Act
-            TopGameJsonWriter.WriteAllGoldenMastersToJsonFile(goldenMasterList);
+            TopGameJsonWriter.WriteToJsonFile(goldenMasterList, @"c:\Temp\TopGame-GoldenMaster.json");
 
             // Assert
-            GoldenMasterList result;
-            using (StreamReader file = File.OpenText(@"c:\Temp\TopGame-GoldenMaster.json"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                result = (GoldenMasterList)serializer.Deserialize(file, typeof(GoldenMasterList));
-            }
+            GoldenMasterList result = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(@"c:\Temp\TopGame-GoldenMaster.json");
             result.GoldenMasters.ShouldAllBeEquivalentTo(goldenMasterList.GoldenMasters);
         }
 

@@ -460,7 +460,7 @@ namespace TopGameWindowsApp
                     allGoldenMasters.GoldenMasters.Add(resultsOfThisCall);
                 }
 
-                TopGameJsonWriter.WriteAllGoldenMastersToJsonFile(allGoldenMasters);
+                TopGameJsonWriter.WriteToJsonFile(allGoldenMasters, @"c:\Temp\TopGame-GoldenMaster.json");
 
                 allGraphicLoops.ElementAt(0).SetNumTotalSegments(previousNumSegments);
 
