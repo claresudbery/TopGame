@@ -69,7 +69,6 @@
   <ItemGroup>
     <Compile Include="Card.cs" />
     <Compile Include="CardPickerImages.cs" />
-    <Compile Include="ColouredRegion.cs" />
     <Compile Include="DeckDisplayLine.cs" />
     <Compile Include="DeckOfCards.cs" />
     <Compile Include="DisplayLineRegion.cs" />
@@ -79,7 +78,6 @@
     <Compile Include="CardPicker.Designer.cs">
       <DependentUpon>CardPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="OnePlayerGraphicsLoop.cs" />
     <Compile Include="HandOfCards.cs" />
     <Compile Include="ManyHands.cs" />
     <Compile Include="PileOfCardImages.cs" />
@@ -96,7 +94,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
-    <Compile Include="TopGameConstants.cs" />
     <Compile Include="TopGameGoldenMaster.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using System.Diagnostics;
-using Domain.Models;
+using TopGameWindowsApp;
 
-
-namespace TopGameWindowsApp
+namespace Domain.Models
 {
     /// <summary>
     /// This represents the "loop" visible on screen (looks a bit like a petal) which represents one player's cards (or the cards currently in play)
@@ -1104,6 +1103,19 @@ namespace TopGameWindowsApp
             resultsOfThisCall.NumPlayersInGame = numPlayersInGame;
 
             return resultsOfThisCall;
+        }
+
+        public static double GetMaxCentralAngle(double angleShare, int numHands)
+        {
+            double maxCentralAngle = angleShare;
+            if (numHands == 3)
+            {
+                // If 2 players (so 3 hands, because of cards played), then 120 degrees is too big, so we reduce the max
+                // central angle a bit.
+                maxCentralAngle = maxCentralAngle - 20;
+            }
+
+            return maxCentralAngle;
         }
     }
 

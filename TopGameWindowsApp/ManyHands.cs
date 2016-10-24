@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -29,7 +28,6 @@ namespace TopGameWindowsApp
         private int iAngleCalculationBounceCount;
         private int iRecursionCount;
         private List<OnePlayerGraphicsLoop> allGraphicLoops;
-        private bool _goldenMasterPopulated = false;
 
         public void Dispose()
         {
@@ -436,52 +434,9 @@ namespace TopGameWindowsApp
             }
         }
 
-        /// <summary>
-        /// Use just one of the hands (any will do) to load all possible data, to be stored for golden master purposes
-        /// </summary>
         public void PopulateGoldenMaster()
         {
-            if (!_goldenMasterPopulated)
-            {
-                int previousNumSegments = allGraphicLoops.ElementAt(0).GetNumTotalSegments();
-                var allGoldenMasters = new GoldenMasterList();
-
-                // Graphics loops have three distinguishing features:
-                // The first distinguishing feature is how many segments a graphics loop has.
-                //      Each segment represents one card.
-                // The second distinguishing feature is the loop's position on the screen, which is determined by its rotation angle.
-                //      But the rotation angle is applied at the very end of OnePlayerGraphicsLoop.PrepareActualData (via OnePlayerGraphicsLoop.RotateByAngle)
-                //      ...and doesn't really affect the actual calculations, wich are the meat of what we are trying to record.
-                // The third distinguishing feature is the loop's angle share, which is 360 divided by the number of players.
-                //      The max number of players is 12, and the min is 2.
-                // So, in order to have a record of all the possible calculated data (for golden master purposes), 
-                //      we call OnePlayerGraphicsLoop.PrepareActualData repeatedly (via OnePlayerGraphicsLoop.PopulateGoldenMaster)
-                //      - 52 times, for all the possible numbers of segments...
-                //      ...and for each one of those 52, we do 11 versions, for all the possible numbers of players.
-                for (int iCardCount = 1; iCardCount <= 52; iCardCount++)
-                {
-                    allGraphicLoops.ElementAt(0).SetNumTotalSegments(iCardCount);
-
-                    for (int playerCount = 2; playerCount <= 12; playerCount++)
-                    {
-                        double angleShare = 360 / (playerCount + 1);
-                        double maxCentralAngle = GetMaxCentralAngle(angleShare);
-
-                        // Set all the angles - each hand of cards gets the same proportion of the circle
-                        allGraphicLoops.ElementAt(0).SetAngles(maxCentralAngle, angleShare);
-                        GoldenMasterSinglePass resultsOfThisCall = allGraphicLoops.ElementAt(0).PopulateGoldenMaster(playerCount);
-
-                        allGoldenMasters.GoldenMasters.Add(resultsOfThisCall);
-                    }
-                }
-
-                string fileNameAndPath = ConfigurationManager.AppSettings["golden-master-file"];
-                TopGameJsonWriter.WriteToJsonFile(allGoldenMasters, fileNameAndPath);
-
-                allGraphicLoops.ElementAt(0).SetNumTotalSegments(previousNumSegments);
-
-                _goldenMasterPopulated = true;
-            }
+            GoldenMasterPopulator.PopulateGoldenMaster(allGraphicLoops);
         }
 
         public void ReloadGraphicLoopsWithFixedShareSizes()
@@ -492,7 +447,7 @@ namespace TopGameWindowsApp
             if (IsTotalNumSegmentsCorrect(52))
             {
                 double angleShare = 360 / (allGraphicLoops.Count());
-                double maxCentralAngle = GetMaxCentralAngle(angleShare);
+                double maxCentralAngle = OnePlayerGraphicsLoop.GetMaxCentralAngle(angleShare, allGraphicLoops.Count);
 
                 for (int iCount = 0; iCount < allGraphicLoops.Count(); iCount++)
                 {
@@ -510,19 +465,6 @@ namespace TopGameWindowsApp
                     allGraphicLoops.ElementAt(iCount).LoadNewData(nextRotationAngle);
                 }
             }
-        }
-
-        private double GetMaxCentralAngle(double angleShare)
-        {
-            double maxCentralAngle = angleShare;
-            if ((allGraphicLoops.Count()) == 3)
-            {
-                // If 2 players (so 3 hands, because of cards played), then 120 degrees is too big, so we reduce the max
-                // central angle a bit.
-                maxCentralAngle = maxCentralAngle - 20;
-            }
-
-            return maxCentralAngle;
         }
 
         private void CalculateAnglesWhenEveryoneShares(double numDegreesAvailable,

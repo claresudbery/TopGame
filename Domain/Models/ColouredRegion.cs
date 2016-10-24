@@ -1,6 +1,6 @@
 using System.Drawing.Drawing2D;
 
-namespace TopGameWindowsApp
+namespace Domain.Models
 {
     public class ColouredRegion
     {
