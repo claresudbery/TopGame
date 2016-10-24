@@ -4,7 +4,7 @@ Golden Masters:
 	002: (52 x 11) sets of data - for each possible number of cards, also had between 2 and 12 players.
 	003: c3bccdf17481809679462db7fd60915d30011a02: Lost track of what I was doing. Regenerated the file to make sure I hadn't changed anythign and forgotten.
 	004: c926496202b08255406564e0ef3ab5d413e4795e: Checked out previous version of code to see what golden master was generated.
-	005: Bug fixed - GetMaxCentralAngle is now using the correct number of hands in its if statement, rather than always using 3. 
+	005: f6c721b4b7aad6a9d86388c733761992643671e7: Bug fixed - GetMaxCentralAngle is now using the correct number of hands in its if statement, rather than always using 3. 
 
 Mongo DB:
 	Links:
@@ -21,5 +21,6 @@ Mongo DB:
 			.\mongod.exe
 		
 To do:
+	Fix problem where json strings don't match up.
 	See whether the data is the same if you just copy list of regions directly
 	Add in subregions and list of colours
