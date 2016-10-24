@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using nsCard;
-using System.Resources;
-using System.Windows.Media;
 using System.Diagnostics;
-using Domain;
 using Domain.Models;
-using Newtonsoft.Json.Linq;
 
 
 namespace TopGameWindowsApp
