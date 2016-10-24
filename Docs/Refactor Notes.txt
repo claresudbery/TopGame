@@ -1,3 +1,7 @@
+Golden Masters:
+	001: Only 52 sets of data (one for each possible number of cards in the loop) - didn't take account of different numbers of players.
+	002: (52 x 11) sets of data - for each possible number of cards, also had between 2 and 12 players.
+
 Mongo DB:
 	Links:
 		Installing: https://docs.mongodb.com/getting-started/shell/tutorial/install-mongodb-on-windows/
@@ -12,3 +16,7 @@ Mongo DB:
 			cd "C:\Program Files\MongoDB\Server\3.2\bin"
 			.\mongod.exe
 		
+To do:
+	See whether the data is the same if you just copy list of regions directly
+	See whether the data is the same if you just new up a graphics loop
+	Add in subregions and list of colours

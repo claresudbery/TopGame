@@ -1089,7 +1089,7 @@ namespace TopGameWindowsApp
             CalculateCentralAngle(360, 52, false);
         }
 
-        public GoldenMasterSinglePass PopulateGoldenMaster()
+        public GoldenMasterSinglePass PopulateGoldenMaster(int numPlayersInGame)
         {
             var resultsOfThisCall = new GoldenMasterSinglePass();
             PrepareActualData(0, resultsOfThisCall.TopGameRegions);
@@ -1100,7 +1100,8 @@ namespace TopGameWindowsApp
 
             // resultsOfThisCall.TopGameRegions will be populated during the call to PrepareActualData above
             resultsOfThisCall.VitalStatistics = calculatedStatistics;
-            resultsOfThisCall.NumTotalSegments = calculatedStatistics.numTotalSegments;
+            resultsOfThisCall.NumCardsInLoop = calculatedStatistics.numTotalSegments;
+            resultsOfThisCall.NumPlayersInGame = numPlayersInGame;
 
             return resultsOfThisCall;
         }

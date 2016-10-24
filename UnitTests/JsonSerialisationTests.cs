@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System.Configuration;
+using Domain;
 using Domain.Models;
 using NUnit.Framework;
 using FluentAssertions;
@@ -8,7 +9,7 @@ namespace UnitTests
     [TestFixture]
     public class JsonSerialisationTests
     {
-        private const string JsonFileNameAndPath = @"c:\Temp\TopGame-GoldenMaster-testing.json";
+        private readonly string _jsonFileNameAndPath = ConfigurationManager.AppSettings["json-test-file"];
 
         [Test]
         public void Will_serialise_TopGameRectangle_object_to_file_and_read_back_again()
@@ -17,10 +18,10 @@ namespace UnitTests
             TopGameRectangle sourceRectangle = new TopGameRectangle(x: 8, y: 9, width: 10, height: 11);
 
             // Act
-            TopGameJsonWriter.WriteToJsonFile(sourceRectangle, JsonFileNameAndPath);
+            TopGameJsonWriter.WriteToJsonFile(sourceRectangle, _jsonFileNameAndPath);
 
             // Assert
-            TopGameRectangle result = TopGameJsonWriter.ReadFromJsonFile<TopGameRectangle>(JsonFileNameAndPath);
+            TopGameRectangle result = TopGameJsonWriter.ReadFromJsonFile<TopGameRectangle>(_jsonFileNameAndPath);
             result.ShouldBeEquivalentTo(sourceRectangle);
         }
 
@@ -31,10 +32,10 @@ namespace UnitTests
             GoldenMasterList goldenMasterList = GoldenMasterBuilder.BuildSomeGoldenMasters();
 
             // Act
-            TopGameJsonWriter.WriteToJsonFile(goldenMasterList, JsonFileNameAndPath);
+            TopGameJsonWriter.WriteToJsonFile(goldenMasterList, _jsonFileNameAndPath);
 
             // Assert
-            GoldenMasterList result = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(JsonFileNameAndPath);
+            GoldenMasterList result = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(_jsonFileNameAndPath);
             result.GoldenMasters.ShouldAllBeEquivalentTo(goldenMasterList.GoldenMasters);
         }
 

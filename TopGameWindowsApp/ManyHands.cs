@@ -444,29 +444,35 @@ namespace TopGameWindowsApp
             if (!_goldenMasterPopulated)
             {
                 int previousNumSegments = allGraphicLoops.ElementAt(0).GetNumTotalSegments();
-
-                double angleShare = 360 / (allGraphicLoops.Count());
-                double maxCentralAngle = GetMaxCentralAngle(angleShare);
-
                 var allGoldenMasters = new GoldenMasterList();
 
-                // The main distinguishing feature for each graphic loop is ow many segments it has.
-                // Each segment represents one card.
-                // Its other distinguishing feature is its position on the screen, which is determined by its rotation angle.
-                // But the rotation angle is applied at the very end of OnePlayerGraphicsLoop.PrepareActualData (via OnePlayerGraphicsLoop.RotateByAngle)
-                // ...and doesn't really affect the actual calculations, wich are the meat of what we are trying to record.
+                // Graphics loops have three distinguishing features:
+                // The first distinguishing feature is how many segments a graphics loop has.
+                //      Each segment represents one card.
+                // The second distinguishing feature is the loop's position on the screen, which is determined by its rotation angle.
+                //      But the rotation angle is applied at the very end of OnePlayerGraphicsLoop.PrepareActualData (via OnePlayerGraphicsLoop.RotateByAngle)
+                //      ...and doesn't really affect the actual calculations, wich are the meat of what we are trying to record.
+                // The third distinguishing feature is the loop's angle share, which is 360 divided by the number of players.
+                //      The max number of players is 12, and the min is 2.
                 // So, in order to have a record of all the possible calculated data (for golden master purposes), 
-                // we call OnePlayerGraphicsLoop.PrepareActualData repeatedly (via OnePlayerGraphicsLoop.PopulateGoldenMaster)
-                // - 52 times in fact, for all the possible numbers of segments.
-                for (int iCount = 1; iCount <= 52; iCount++)
+                //      we call OnePlayerGraphicsLoop.PrepareActualData repeatedly (via OnePlayerGraphicsLoop.PopulateGoldenMaster)
+                //      - 52 times, for all the possible numbers of segments...
+                //      ...and for each one of those 52, we do 11 versions, for all the possible numbers of players.
+                for (int iCardCount = 1; iCardCount <= 52; iCardCount++)
                 {
-                    allGraphicLoops.ElementAt(0).SetNumTotalSegments(iCount);
+                    allGraphicLoops.ElementAt(0).SetNumTotalSegments(iCardCount);
 
-                    // Set all the angles - each hand of cards gets the same proportion of the circle
-                    allGraphicLoops.ElementAt(0).SetAngles(maxCentralAngle, angleShare);
-                    GoldenMasterSinglePass resultsOfThisCall = allGraphicLoops.ElementAt(0).PopulateGoldenMaster();
+                    for (int playerCount = 2; playerCount <= 12; playerCount++)
+                    {
+                        double angleShare = 360 / (playerCount + 1);
+                        double maxCentralAngle = GetMaxCentralAngle(angleShare);
 
-                    allGoldenMasters.GoldenMasters.Add(resultsOfThisCall);
+                        // Set all the angles - each hand of cards gets the same proportion of the circle
+                        allGraphicLoops.ElementAt(0).SetAngles(maxCentralAngle, angleShare);
+                        GoldenMasterSinglePass resultsOfThisCall = allGraphicLoops.ElementAt(0).PopulateGoldenMaster(playerCount);
+
+                        allGoldenMasters.GoldenMasters.Add(resultsOfThisCall);
+                    }
                 }
 
                 string fileNameAndPath = ConfigurationManager.AppSettings["golden-master-file"];

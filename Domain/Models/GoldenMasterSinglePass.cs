@@ -12,8 +12,11 @@ namespace Domain.Models
         }
         
         [JsonProperty]
-        public int NumTotalSegments { get; set; }
-        
+        public int NumCardsInLoop { get; set; }
+
+        [JsonProperty]
+        public int NumPlayersInGame { get; set; }
+
         [JsonProperty]
         public VitalStatistics VitalStatistics { get; set; }
 

@@ -52,6 +52,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -65,13 +66,15 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="GoldenMasterBuilder.cs" />
-    <Compile Include="GoldenMasterBuilderV2.cs" />
-    <Compile Include="GoldenMasterBuilderV3.cs" />
+    <Compile Include="Utils\GoldenMasterBuilder.cs" />
+    <Compile Include="Utils\GoldenMasterBuilderV2.cs" />
+    <Compile Include="Utils\GoldenMasterBuilderV3.cs" />
+    <Compile Include="GoldenMasterTests.cs" />
     <Compile Include="JsonSerialisationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
