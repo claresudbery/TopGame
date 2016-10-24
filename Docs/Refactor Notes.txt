@@ -1,7 +1,9 @@
 Mongo DB:
 	Links:
 		Installing: https://docs.mongodb.com/getting-started/shell/tutorial/install-mongodb-on-windows/
-		Using with C#: https://docs.mongodb.com/ecosystem/drivers/csharp/
+		Using with C#: 
+			https://docs.mongodb.com/ecosystem/drivers/csharp/
+			https://docs.mongodb.com/getting-started/csharp/
 	Local:
 		Location: C:\Program Files\MongoDB\Server\3.2
 		Config: C:\Program Files\MongoDB\Server\3.2\mongod.cfg
