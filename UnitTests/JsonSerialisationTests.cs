@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Domain;
 using Domain.Models;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using FluentAssertions;
 
@@ -13,6 +9,8 @@ namespace UnitTests
     [TestFixture]
     public class JsonSerialisationTests
     {
+        private const string JsonFileNameAndPath = @"c:\Temp\TopGame-GoldenMaster-testing.json";
+
         [Test]
         public void Will_serialise_all_GoldenMasterSinglePass_data_and_write_to_file()
         {
@@ -20,10 +18,10 @@ namespace UnitTests
             GoldenMasterList goldenMasterList = BuildSomeGoldenMasters();
 
             // Act
-            TopGameJsonWriter.WriteToJsonFile(goldenMasterList, @"c:\Temp\TopGame-GoldenMaster.json");
+            TopGameJsonWriter.WriteToJsonFile(goldenMasterList, JsonFileNameAndPath);
 
             // Assert
-            GoldenMasterList result = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(@"c:\Temp\TopGame-GoldenMaster.json");
+            GoldenMasterList result = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(JsonFileNameAndPath);
             result.GoldenMasters.ShouldAllBeEquivalentTo(goldenMasterList.GoldenMasters);
         }
 

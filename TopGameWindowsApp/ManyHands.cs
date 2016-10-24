@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -460,7 +461,8 @@ namespace TopGameWindowsApp
                     allGoldenMasters.GoldenMasters.Add(resultsOfThisCall);
                 }
 
-                TopGameJsonWriter.WriteToJsonFile(allGoldenMasters, @"c:\Temp\TopGame-GoldenMaster.json");
+                string fileNameAndPath = ConfigurationManager.AppSettings["golden-master-file"];
+                TopGameJsonWriter.WriteToJsonFile(allGoldenMasters, fileNameAndPath);
 
                 allGraphicLoops.ElementAt(0).SetNumTotalSegments(previousNumSegments);
 
