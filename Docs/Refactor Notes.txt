@@ -21,6 +21,6 @@ Mongo DB:
 			.\mongod.exe
 		
 To do:
-	Fix problem where json strings don't match up.
+	Get doubles rounded to 6 dec places
 	See whether the data is the same if you just copy list of regions directly
 	Add in subregions and list of colours

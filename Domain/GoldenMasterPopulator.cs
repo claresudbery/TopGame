@@ -64,7 +64,7 @@ namespace Domain
         {
             var allGoldenMasters = GenerateAllData();
 
-            return JsonConvert.SerializeObject(allGoldenMasters);
+            return JsonConvert.SerializeObject(allGoldenMasters, Formatting.Indented);
         }
     }
 }

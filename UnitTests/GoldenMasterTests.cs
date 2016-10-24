@@ -20,11 +20,7 @@ namespace UnitTests
             // Arrange
             var topGameAppPath = TestContext.CurrentContext.TestDirectory + @"..\..\..\GoldenMasters\";
             GoldenMasterList storedGoldenMaster = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(topGameAppPath + _currentGoldenMasterFileName);
-            string storedGoldenMasterAsJsonString;
-            using (StreamReader file = File.OpenText(topGameAppPath + _currentGoldenMasterFileName))
-            {
-                storedGoldenMasterAsJsonString = file.ReadToEnd();
-            }
+            string storedGoldenMasterAsJsonString = GetFileContentsAsJsonString(topGameAppPath + _currentGoldenMasterFileName);
 
             // Act
             var latestCalculatedData = GoldenMasterPopulator.GenerateAllData();
@@ -59,17 +55,9 @@ namespace UnitTests
             // Arrange & Act
             var topGameAppPath = TestContext.CurrentContext.TestDirectory + @"..\..\..\GoldenMasters\";
             GoldenMasterList goldenMaster002 = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(topGameAppPath + "TopGame-GoldenMaster-002.json");
-            string goldenMaster002AsJsonString;
-            using (StreamReader file = File.OpenText(topGameAppPath + "TopGame-GoldenMaster-002.json"))
-            {
-                goldenMaster002AsJsonString = file.ReadToEnd();
-            }
+            string goldenMaster002AsJsonString = GetFileContentsAsJsonString(topGameAppPath + "TopGame-GoldenMaster-002.json");
             GoldenMasterList goldenMaster004 = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(topGameAppPath + "TopGame-GoldenMaster-004.json");
-            string goldenMaster004AsJsonString;
-            using (StreamReader file = File.OpenText(topGameAppPath + "TopGame-GoldenMaster-004.json"))
-            {
-                goldenMaster004AsJsonString = file.ReadToEnd();
-            }
+            string goldenMaster004AsJsonString = GetFileContentsAsJsonString(topGameAppPath + "TopGame-GoldenMaster-004.json");
 
             // Assert
             goldenMaster002.GoldenMasters.Count.Equals(goldenMaster004.GoldenMasters.Count);
@@ -77,6 +65,19 @@ namespace UnitTests
             goldenMaster002.GoldenMasters[300].ShouldBeEquivalentTo(goldenMaster004.GoldenMasters[300]);
             goldenMaster002.GoldenMasters[goldenMaster002.GoldenMasters.Count - 1].ShouldBeEquivalentTo(goldenMaster004.GoldenMasters[goldenMaster004.GoldenMasters.Count - 1]);
             Assert.That(goldenMaster002AsJsonString, Is.EqualTo(goldenMaster004AsJsonString));
+        }
+
+        private string GetFileContentsAsJsonString(string fileNameAndPath)
+        {
+            string fileContentsAsJsonString = "";
+
+            using (StreamReader file = File.OpenText(fileNameAndPath))
+            {
+                fileContentsAsJsonString = file.ReadToEnd();
+                fileContentsAsJsonString = fileContentsAsJsonString.Replace("\n", "\r\n");
+            }
+
+            return fileContentsAsJsonString;
         }
     }
 }
