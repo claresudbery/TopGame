@@ -1,4 +1,6 @@
-﻿namespace TopGameWindowsApp
+﻿using Domain.GameModels;
+
+namespace TopGameWindowsApp
 {
     partial class MainGame
     {
@@ -117,7 +119,7 @@
             // 
             // imgPlayer1Played01
             // 
-            this.imgPlayer1Played01.Image = global::TopGameWindowsApp.Resource1.c1;
+            this.imgPlayer1Played01.Image = Resource1.c1;
             this.imgPlayer1Played01.ImageLocation = "";
             this.imgPlayer1Played01.Location = new System.Drawing.Point(198, 177);
             this.imgPlayer1Played01.Name = "imgPlayer1Played01";
@@ -130,7 +132,7 @@
             // 
             // imgPlayer2Played01
             // 
-            this.imgPlayer2Played01.Image = global::TopGameWindowsApp.Resource1.d1;
+            this.imgPlayer2Played01.Image = Resource1.d1;
             this.imgPlayer2Played01.ImageLocation = "";
             this.imgPlayer2Played01.Location = new System.Drawing.Point(215, 169);
             this.imgPlayer2Played01.Name = "imgPlayer2Played01";
@@ -165,7 +167,7 @@
             // 
             // imgPlayer2Deck01
             // 
-            this.imgPlayer2Deck01.Image = global::TopGameWindowsApp.Resource1.b1fv;
+            this.imgPlayer2Deck01.Image = Resource1.b1fv;
             this.imgPlayer2Deck01.ImageLocation = "";
             this.imgPlayer2Deck01.Location = new System.Drawing.Point(395, 101);
             this.imgPlayer2Deck01.Name = "imgPlayer2Deck01";
@@ -178,7 +180,7 @@
             // 
             // imgPlayer1Deck01
             // 
-            this.imgPlayer1Deck01.Image = global::TopGameWindowsApp.Resource1.b1fv;
+            this.imgPlayer1Deck01.Image = Resource1.b1fv;
             this.imgPlayer1Deck01.ImageLocation = "";
             this.imgPlayer1Deck01.Location = new System.Drawing.Point(26, 102);
             this.imgPlayer1Deck01.Name = "imgPlayer1Deck01";
@@ -225,7 +227,7 @@
             // 
             // imgPlayer1Deck02
             // 
-            this.imgPlayer1Deck02.Image = global::TopGameWindowsApp.Resource1.b1fv;
+            this.imgPlayer1Deck02.Image = Resource1.b1fv;
             this.imgPlayer1Deck02.ImageLocation = "";
             this.imgPlayer1Deck02.Location = new System.Drawing.Point(30, 99);
             this.imgPlayer1Deck02.Name = "imgPlayer1Deck02";
@@ -238,7 +240,7 @@
             // 
             // imgPlayer1Deck03
             // 
-            this.imgPlayer1Deck03.Image = global::TopGameWindowsApp.Resource1.b1fv;
+            this.imgPlayer1Deck03.Image = Resource1.b1fv;
             this.imgPlayer1Deck03.ImageLocation = "";
             this.imgPlayer1Deck03.Location = new System.Drawing.Point(34, 95);
             this.imgPlayer1Deck03.Name = "imgPlayer1Deck03";
@@ -251,7 +253,7 @@
             // 
             // imgPlayer1Deck04
             // 
-            this.imgPlayer1Deck04.Image = global::TopGameWindowsApp.Resource1.b1fv;
+            this.imgPlayer1Deck04.Image = Resource1.b1fv;
             this.imgPlayer1Deck04.ImageLocation = "";
             this.imgPlayer1Deck04.Location = new System.Drawing.Point(38, 92);
             this.imgPlayer1Deck04.Name = "imgPlayer1Deck04";
@@ -264,7 +266,7 @@
             // 
             // imgPlayer1Deck05
             // 
-            this.imgPlayer1Deck05.Image = global::TopGameWindowsApp.Resource1.b1fv;
+            this.imgPlayer1Deck05.Image = Resource1.b1fv;
             this.imgPlayer1Deck05.ImageLocation = "";
             this.imgPlayer1Deck05.Location = new System.Drawing.Point(42, 89);
             this.imgPlayer1Deck05.Name = "imgPlayer1Deck05";
@@ -277,7 +279,7 @@
             // 
             // imgPlayer2Deck02
             // 
-            this.imgPlayer2Deck02.Image = global::TopGameWindowsApp.Resource1.b1fv;
+            this.imgPlayer2Deck02.Image = Resource1.b1fv;
             this.imgPlayer2Deck02.ImageLocation = "";
             this.imgPlayer2Deck02.Location = new System.Drawing.Point(399, 98);
             this.imgPlayer2Deck02.Name = "imgPlayer2Deck02";
@@ -290,7 +292,7 @@
             // 
             // imgPlayer2Deck03
             // 
-            this.imgPlayer2Deck03.Image = global::TopGameWindowsApp.Resource1.b1fv;
+            this.imgPlayer2Deck03.Image = Resource1.b1fv;
             this.imgPlayer2Deck03.ImageLocation = "";
             this.imgPlayer2Deck03.Location = new System.Drawing.Point(403, 95);
             this.imgPlayer2Deck03.Name = "imgPlayer2Deck03";
@@ -303,7 +305,7 @@
             // 
             // imgPlayer2Deck04
             // 
-            this.imgPlayer2Deck04.Image = global::TopGameWindowsApp.Resource1.b1fv;
+            this.imgPlayer2Deck04.Image = Resource1.b1fv;
             this.imgPlayer2Deck04.ImageLocation = "";
             this.imgPlayer2Deck04.Location = new System.Drawing.Point(407, 92);
             this.imgPlayer2Deck04.Name = "imgPlayer2Deck04";
@@ -316,7 +318,7 @@
             // 
             // imgPlayer2Deck05
             // 
-            this.imgPlayer2Deck05.Image = global::TopGameWindowsApp.Resource1.b1fv;
+            this.imgPlayer2Deck05.Image = Resource1.b1fv;
             this.imgPlayer2Deck05.ImageLocation = "";
             this.imgPlayer2Deck05.Location = new System.Drawing.Point(411, 89);
             this.imgPlayer2Deck05.Name = "imgPlayer2Deck05";
@@ -329,7 +331,7 @@
             // 
             // imgPlayer1Played02
             // 
-            this.imgPlayer1Played02.Image = global::TopGameWindowsApp.Resource1.c2;
+            this.imgPlayer1Played02.Image = Resource1.c2;
             this.imgPlayer1Played02.ImageLocation = "";
             this.imgPlayer1Played02.Location = new System.Drawing.Point(189, 174);
             this.imgPlayer1Played02.Name = "imgPlayer1Played02";
@@ -342,7 +344,7 @@
             // 
             // imgPlayer2Played02
             // 
-            this.imgPlayer2Played02.Image = global::TopGameWindowsApp.Resource1.d2;
+            this.imgPlayer2Played02.Image = Resource1.d2;
             this.imgPlayer2Played02.ImageLocation = "";
             this.imgPlayer2Played02.Location = new System.Drawing.Point(222, 166);
             this.imgPlayer2Played02.Name = "imgPlayer2Played02";
@@ -355,7 +357,7 @@
             // 
             // imgPlayer1Played03
             // 
-            this.imgPlayer1Played03.Image = global::TopGameWindowsApp.Resource1.c3;
+            this.imgPlayer1Played03.Image = Resource1.c3;
             this.imgPlayer1Played03.ImageLocation = "";
             this.imgPlayer1Played03.Location = new System.Drawing.Point(180, 171);
             this.imgPlayer1Played03.Name = "imgPlayer1Played03";
@@ -368,7 +370,7 @@
             // 
             // imgPlayer1Played04
             // 
-            this.imgPlayer1Played04.Image = global::TopGameWindowsApp.Resource1.c4;
+            this.imgPlayer1Played04.Image = Resource1.c4;
             this.imgPlayer1Played04.ImageLocation = "";
             this.imgPlayer1Played04.Location = new System.Drawing.Point(172, 168);
             this.imgPlayer1Played04.Name = "imgPlayer1Played04";
@@ -381,7 +383,7 @@
             // 
             // imgPlayer2Played03
             // 
-            this.imgPlayer2Played03.Image = global::TopGameWindowsApp.Resource1.d3;
+            this.imgPlayer2Played03.Image = Resource1.d3;
             this.imgPlayer2Played03.ImageLocation = "";
             this.imgPlayer2Played03.Location = new System.Drawing.Point(229, 163);
             this.imgPlayer2Played03.Name = "imgPlayer2Played03";
@@ -394,7 +396,7 @@
             // 
             // imgPlayer2Played04
             // 
-            this.imgPlayer2Played04.Image = global::TopGameWindowsApp.Resource1.d4;
+            this.imgPlayer2Played04.Image = Resource1.d4;
             this.imgPlayer2Played04.ImageLocation = "";
             this.imgPlayer2Played04.Location = new System.Drawing.Point(236, 160);
             this.imgPlayer2Played04.Name = "imgPlayer2Played04";

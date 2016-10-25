@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TopGameWindowsApp {
+namespace Domain.GameModels {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace TopGameWindowsApp {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource1 {
+    public class Resource1 {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace TopGameWindowsApp {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TopGameWindowsApp.Resource1", typeof(Resource1).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Domain.GameModels.Resource1", typeof(Resource1).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace TopGameWindowsApp {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b1fv {
+        public static System.Drawing.Bitmap b1fv {
             get {
                 object obj = ResourceManager.GetObject("b1fv", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b1pb {
+        public static System.Drawing.Bitmap b1pb {
             get {
                 object obj = ResourceManager.GetObject("b1pb", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b1pl {
+        public static System.Drawing.Bitmap b1pl {
             get {
                 object obj = ResourceManager.GetObject("b1pl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +93,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b1pr {
+        public static System.Drawing.Bitmap b1pr {
             get {
                 object obj = ResourceManager.GetObject("b1pr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b1pt {
+        public static System.Drawing.Bitmap b1pt {
             get {
                 object obj = ResourceManager.GetObject("b1pt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b2fh {
+        public static System.Drawing.Bitmap b2fh {
             get {
                 object obj = ResourceManager.GetObject("b2fh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +123,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b2fv {
+        public static System.Drawing.Bitmap b2fv {
             get {
                 object obj = ResourceManager.GetObject("b2fv", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +133,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b2pb {
+        public static System.Drawing.Bitmap b2pb {
             get {
                 object obj = ResourceManager.GetObject("b2pb", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +143,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b2pl {
+        public static System.Drawing.Bitmap b2pl {
             get {
                 object obj = ResourceManager.GetObject("b2pl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +153,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b2pr {
+        public static System.Drawing.Bitmap b2pr {
             get {
                 object obj = ResourceManager.GetObject("b2pr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +163,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b2pt {
+        public static System.Drawing.Bitmap b2pt {
             get {
                 object obj = ResourceManager.GetObject("b2pt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +173,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c1 {
+        public static System.Drawing.Bitmap c1 {
             get {
                 object obj = ResourceManager.GetObject("c1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +183,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c10 {
+        public static System.Drawing.Bitmap c10 {
             get {
                 object obj = ResourceManager.GetObject("c10", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -193,7 +193,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c2 {
+        public static System.Drawing.Bitmap c2 {
             get {
                 object obj = ResourceManager.GetObject("c2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -203,7 +203,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c3 {
+        public static System.Drawing.Bitmap c3 {
             get {
                 object obj = ResourceManager.GetObject("c3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -213,7 +213,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c4 {
+        public static System.Drawing.Bitmap c4 {
             get {
                 object obj = ResourceManager.GetObject("c4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -223,7 +223,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c5 {
+        public static System.Drawing.Bitmap c5 {
             get {
                 object obj = ResourceManager.GetObject("c5", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -233,7 +233,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c6 {
+        public static System.Drawing.Bitmap c6 {
             get {
                 object obj = ResourceManager.GetObject("c6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -243,7 +243,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c7 {
+        public static System.Drawing.Bitmap c7 {
             get {
                 object obj = ResourceManager.GetObject("c7", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -253,7 +253,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c8 {
+        public static System.Drawing.Bitmap c8 {
             get {
                 object obj = ResourceManager.GetObject("c8", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -263,7 +263,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c9 {
+        public static System.Drawing.Bitmap c9 {
             get {
                 object obj = ResourceManager.GetObject("c9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -273,7 +273,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] cards_gif {
+        public static byte[] cards_gif {
             get {
                 object obj = ResourceManager.GetObject("cards_gif", resourceCulture);
                 return ((byte[])(obj));
@@ -283,7 +283,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cj {
+        public static System.Drawing.Bitmap cj {
             get {
                 object obj = ResourceManager.GetObject("cj", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -293,7 +293,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ck {
+        public static System.Drawing.Bitmap ck {
             get {
                 object obj = ResourceManager.GetObject("ck", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -303,7 +303,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cq {
+        public static System.Drawing.Bitmap cq {
             get {
                 object obj = ResourceManager.GetObject("cq", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -313,7 +313,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap d1 {
+        public static System.Drawing.Bitmap d1 {
             get {
                 object obj = ResourceManager.GetObject("d1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -323,7 +323,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap d10 {
+        public static System.Drawing.Bitmap d10 {
             get {
                 object obj = ResourceManager.GetObject("d10", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -333,7 +333,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap d2 {
+        public static System.Drawing.Bitmap d2 {
             get {
                 object obj = ResourceManager.GetObject("d2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -343,7 +343,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap d3 {
+        public static System.Drawing.Bitmap d3 {
             get {
                 object obj = ResourceManager.GetObject("d3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -353,7 +353,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap d4 {
+        public static System.Drawing.Bitmap d4 {
             get {
                 object obj = ResourceManager.GetObject("d4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -363,7 +363,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap d5 {
+        public static System.Drawing.Bitmap d5 {
             get {
                 object obj = ResourceManager.GetObject("d5", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -373,7 +373,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap d6 {
+        public static System.Drawing.Bitmap d6 {
             get {
                 object obj = ResourceManager.GetObject("d6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -383,7 +383,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap d7 {
+        public static System.Drawing.Bitmap d7 {
             get {
                 object obj = ResourceManager.GetObject("d7", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -393,7 +393,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap d8 {
+        public static System.Drawing.Bitmap d8 {
             get {
                 object obj = ResourceManager.GetObject("d8", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -403,7 +403,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap d9 {
+        public static System.Drawing.Bitmap d9 {
             get {
                 object obj = ResourceManager.GetObject("d9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -413,7 +413,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dj {
+        public static System.Drawing.Bitmap dj {
             get {
                 object obj = ResourceManager.GetObject("dj", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -423,7 +423,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dk {
+        public static System.Drawing.Bitmap dk {
             get {
                 object obj = ResourceManager.GetObject("dk", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -433,7 +433,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dq {
+        public static System.Drawing.Bitmap dq {
             get {
                 object obj = ResourceManager.GetObject("dq", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -443,7 +443,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ec {
+        public static System.Drawing.Bitmap ec {
             get {
                 object obj = ResourceManager.GetObject("ec", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -453,7 +453,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap h1 {
+        public static System.Drawing.Bitmap h1 {
             get {
                 object obj = ResourceManager.GetObject("h1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -463,7 +463,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap h10 {
+        public static System.Drawing.Bitmap h10 {
             get {
                 object obj = ResourceManager.GetObject("h10", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -473,7 +473,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap h2 {
+        public static System.Drawing.Bitmap h2 {
             get {
                 object obj = ResourceManager.GetObject("h2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -483,7 +483,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap h3 {
+        public static System.Drawing.Bitmap h3 {
             get {
                 object obj = ResourceManager.GetObject("h3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -493,7 +493,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap h4 {
+        public static System.Drawing.Bitmap h4 {
             get {
                 object obj = ResourceManager.GetObject("h4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -503,7 +503,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap h5 {
+        public static System.Drawing.Bitmap h5 {
             get {
                 object obj = ResourceManager.GetObject("h5", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -513,7 +513,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap h6 {
+        public static System.Drawing.Bitmap h6 {
             get {
                 object obj = ResourceManager.GetObject("h6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -523,7 +523,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap h7 {
+        public static System.Drawing.Bitmap h7 {
             get {
                 object obj = ResourceManager.GetObject("h7", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -533,7 +533,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap h8 {
+        public static System.Drawing.Bitmap h8 {
             get {
                 object obj = ResourceManager.GetObject("h8", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -543,7 +543,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap h9 {
+        public static System.Drawing.Bitmap h9 {
             get {
                 object obj = ResourceManager.GetObject("h9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -553,7 +553,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hj {
+        public static System.Drawing.Bitmap hj {
             get {
                 object obj = ResourceManager.GetObject("hj", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -563,7 +563,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hk {
+        public static System.Drawing.Bitmap hk {
             get {
                 object obj = ResourceManager.GetObject("hk", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -573,7 +573,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hq {
+        public static System.Drawing.Bitmap hq {
             get {
                 object obj = ResourceManager.GetObject("hq", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -599,7 +599,7 @@ namespace TopGameWindowsApp {
         ///&lt;/TD&gt;
         ///&lt; [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string index {
+        public static string index {
             get {
                 return ResourceManager.GetString("index", resourceCulture);
             }
@@ -608,7 +608,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap jb {
+        public static System.Drawing.Bitmap jb {
             get {
                 object obj = ResourceManager.GetObject("jb", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -618,7 +618,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap jr {
+        public static System.Drawing.Bitmap jr {
             get {
                 object obj = ResourceManager.GetObject("jr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -628,7 +628,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap s1 {
+        public static System.Drawing.Bitmap s1 {
             get {
                 object obj = ResourceManager.GetObject("s1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -638,7 +638,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap s10 {
+        public static System.Drawing.Bitmap s10 {
             get {
                 object obj = ResourceManager.GetObject("s10", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -648,7 +648,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap s2 {
+        public static System.Drawing.Bitmap s2 {
             get {
                 object obj = ResourceManager.GetObject("s2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -658,7 +658,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap s3 {
+        public static System.Drawing.Bitmap s3 {
             get {
                 object obj = ResourceManager.GetObject("s3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -668,7 +668,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap s4 {
+        public static System.Drawing.Bitmap s4 {
             get {
                 object obj = ResourceManager.GetObject("s4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -678,7 +678,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap s5 {
+        public static System.Drawing.Bitmap s5 {
             get {
                 object obj = ResourceManager.GetObject("s5", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -688,7 +688,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap s6 {
+        public static System.Drawing.Bitmap s6 {
             get {
                 object obj = ResourceManager.GetObject("s6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -698,7 +698,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap s7 {
+        public static System.Drawing.Bitmap s7 {
             get {
                 object obj = ResourceManager.GetObject("s7", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -708,7 +708,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap s8 {
+        public static System.Drawing.Bitmap s8 {
             get {
                 object obj = ResourceManager.GetObject("s8", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -718,7 +718,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap s9 {
+        public static System.Drawing.Bitmap s9 {
             get {
                 object obj = ResourceManager.GetObject("s9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -728,7 +728,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sj {
+        public static System.Drawing.Bitmap sj {
             get {
                 object obj = ResourceManager.GetObject("sj", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -738,7 +738,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sk {
+        public static System.Drawing.Bitmap sk {
             get {
                 object obj = ResourceManager.GetObject("sk", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -748,7 +748,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sq {
+        public static System.Drawing.Bitmap sq {
             get {
                 object obj = ResourceManager.GetObject("sq", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -758,7 +758,7 @@ namespace TopGameWindowsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap xx {
+        public static System.Drawing.Bitmap xx {
             get {
                 object obj = ResourceManager.GetObject("xx", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

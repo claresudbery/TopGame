@@ -48,9 +48,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameModels\Card.cs" />
+    <Compile Include="GameModels\DeckDisplayLine.cs" />
+    <Compile Include="GameModels\DeckOfCards.cs" />
+    <Compile Include="GameModels\DisplayLineRegion.cs" />
+    <Compile Include="GameModels\GoldenMaster\GoldenMasterGameData.cs" />
+    <Compile Include="GameModels\GoldenMaster\GoldenMasterTurnInfo.cs" />
+    <Compile Include="GameModels\HandOfCards.cs" />
+    <Compile Include="GameModels\IGamePlayer.cs" />
+    <Compile Include="GameModels\InterlockingCardImages.cs" />
+    <Compile Include="GameModels\ManyHands.cs" />
+    <Compile Include="GameModels\PileOfCardImages.cs" />
+    <Compile Include="GameModels\RelevancyCriteria.cs" />
+    <Compile Include="GameModels\Resource1.Designer.cs">
+      <DependentUpon>Resource1.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GameModels\VerticalParallelogram.cs" />
     <Compile Include="GoldenMasterPopulator.cs" />
     <Compile Include="GraphicModels\ColouredRegion.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterArcRegion.cs" />
+    <Compile Include="GameModels\GoldenMaster\GoldenMasterGameDataList.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterLine.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterGraphicsPath.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterGraphicList.cs" />
@@ -80,7 +99,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GameModels\GoldenMaster\" />
+    <EmbeddedResource Include="GameModels\Resource1.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

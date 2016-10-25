@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using nsCard;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TopGameWindowsApp
+namespace Domain.GameModels
 {
     public class HandOfCards
     {
@@ -27,7 +23,7 @@ namespace TopGameWindowsApp
             //transitionLine = new DeckDisplayLine(DeckDisplayLine.LoadStyle.BottomLoader);
         }
 
-        public void ShuntAll(ref Bitmap bmpDisplayLines, DeckOfCards cardsWon, ref MainGame mainForm)
+        public void ShuntAll(ref Bitmap bmpDisplayLines, DeckOfCards cardsWon, ref IGamePlayer mainForm)
         {
             /*DeckDisplayLine.ShuntInfo playedPileShuntInfo = new DeckDisplayLine.ShuntInfo(false, false);
             DeckDisplayLine.ShuntInfo transitionShuntInfo = new DeckDisplayLine.ShuntInfo(false, false);
@@ -159,7 +155,7 @@ namespace TopGameWindowsApp
             }
         }
 
-        public void PlayerWins(ref Bitmap bmpDisplayLines, ref DeckOfCards cardsWon, ref MainGame mainForm)
+        public void PlayerWins(ref Bitmap bmpDisplayLines, ref DeckOfCards cardsWon, ref IGamePlayer mainForm)
         {
             int iPreviousCardCount = cardDeck.Count();
 

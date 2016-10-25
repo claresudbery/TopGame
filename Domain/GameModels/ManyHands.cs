@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
-using Domain;
-using Domain.Models;
-using nsCard;
+using Domain.GameModels.GoldenMaster;
+using Domain.GraphicModels;
+using TopGameWindowsApp;
 
-namespace TopGameWindowsApp
+namespace Domain.GameModels
 {
     public class ManyHands
     {
@@ -15,16 +15,18 @@ namespace TopGameWindowsApp
         private DeckOfCards cardsInPlay;
         private InterlockingCardImages playedImages;
         private DeckOfCards mainDeck;
-        private MainGame mainForm;
+        private IGamePlayer mainForm;
         private Bitmap bmpDisplayLines;
         private int iNumCardsToPay = 0;
         private int iNumCardsPlayedSinceFaceCard = 0;
         private bool bFaceCardPlayed = false;
         private int iCurrentAutoPlayer = 0;
-        private MainGame.RelevancyCriteria currentRelevancyCriteria;
+        private RelevancyCriteria currentRelevancyCriteria;
         private int iAngleCalculationBounceCount;
         private int iRecursionCount;
         private List<OnePlayerGraphicsLoop> allGraphicLoops;
+        private bool _recordingGoldenMaster = false;
+        private GoldenMasterGameData _goldenMasterData = new GoldenMasterGameData();
 
         public void Dispose()
         {
@@ -36,7 +38,7 @@ namespace TopGameWindowsApp
             }
         }
 
-        public ManyHands(int numHands, MainGame form, ref Bitmap bmpDisplay)
+        public ManyHands(int numHands, IGamePlayer form, ref Bitmap bmpDisplay)
         {
             int maxNumPlayers = 360 / TopGameConstants.MIN_CENTRAL_ANGLE;
             if (numHands > maxNumPlayers)
@@ -45,7 +47,7 @@ namespace TopGameWindowsApp
             }
             iAngleCalculationBounceCount = 0;
             iRecursionCount = 0;
-            currentRelevancyCriteria = MainGame.RelevancyCriteria.LookingForNeither;
+            currentRelevancyCriteria = RelevancyCriteria.LookingForNeither;
             allGraphicLoops = new List<OnePlayerGraphicsLoop>();
 
             bmpDisplayLines = bmpDisplay;
@@ -365,6 +367,8 @@ namespace TopGameWindowsApp
                 // PlayCard will take charge of changing the region colours for the hand
                 theHands.ElementAt(iHandIndex).PlayCard(ref bmpDisplayLines);
 
+                NoteGoldenMasterTurnInfo(iHandIndex);
+
                 // ReloadGraphicLoops calculates all the new data for the graphic loops.
                 ReloadGraphicLoops();
 
@@ -373,6 +377,39 @@ namespace TopGameWindowsApp
             }
 
             return cardPlayed;
+        }
+
+        public GoldenMasterGameData GenerateGoldenMasterGameData()
+        {
+            _recordingGoldenMaster = true;
+
+            _goldenMasterData.Clear();
+
+            mainDeck.Clear();
+            mainDeck.LoadFullPack();
+            _goldenMasterData.StartDeck = mainDeck.GetDeckContents();
+
+            DealCards();
+            cardsInPlay.Clear();
+            AutoPlay();
+
+            _recordingGoldenMaster = false;
+
+            return _goldenMasterData;
+        }
+
+        private void NoteGoldenMasterTurnInfo(int iPlayerIndex)
+        {
+            if (_recordingGoldenMaster)
+            {
+                var turnInfo = new GoldenMasterTurnInfo();
+
+                turnInfo.CardsInPlay = cardsInPlay.GetDeckContents();
+                turnInfo.NewPlayerHand = theHands[iPlayerIndex].cardDeck.GetDeckContents();
+                turnInfo.PlayerIndex = iPlayerIndex;
+
+                _goldenMasterData.Turns.Add(turnInfo);
+            }
         }
 
         private bool IsTotalNumSegmentsCorrect(int correctNumSegments)
@@ -418,7 +455,7 @@ namespace TopGameWindowsApp
                 }
 
                 iRecursionCount = 0;
-                currentRelevancyCriteria = MainGame.RelevancyCriteria.LookingForNeither;
+                currentRelevancyCriteria = RelevancyCriteria.LookingForNeither;
                 iAngleCalculationBounceCount = 0;
                 CalculateAnglesWhenEveryoneShares(360, 52, ref filteredGraphicList, ref filteredGraphicList, false);
 
@@ -512,19 +549,19 @@ namespace TopGameWindowsApp
                             }
                             else
                             {
-                                MainGame.RelevancyCriteria newRelevancyCriteria = MainGame.RelevancyCriteria.LookingForMinimums;
+                                RelevancyCriteria newRelevancyCriteria = RelevancyCriteria.LookingForMinimums;
                                 if (runningAngleTotal > numDegreesAvailable)
                                 {
                                     // The minimum angle values must have taken us over numDegreesAvailable. We'll need to recalculate the other angles.
-                                    newRelevancyCriteria = MainGame.RelevancyCriteria.LookingForMinimums;
+                                    newRelevancyCriteria = RelevancyCriteria.LookingForMinimums;
                                 }
                                 else if (runningAngleTotal < numDegreesAvailable)
                                 {
                                     // The maximum angle values must have taken us under numDegreesAvailable. We'll need to recalculate the other angles.
-                                    newRelevancyCriteria = MainGame.RelevancyCriteria.LookingForMaximums;
+                                    newRelevancyCriteria = RelevancyCriteria.LookingForMaximums;
                                 }
 
-                                if ((newRelevancyCriteria != currentRelevancyCriteria) && (currentRelevancyCriteria != MainGame.RelevancyCriteria.LookingForNeither))
+                                if ((newRelevancyCriteria != currentRelevancyCriteria) && (currentRelevancyCriteria != RelevancyCriteria.LookingForNeither))
                                 {
                                     // We're bouncing back and forth between minimums and maximums. This can lead to an infinite loop, so we need to keep an eye on it.
                                     iAngleCalculationBounceCount++;
@@ -534,7 +571,7 @@ namespace TopGameWindowsApp
                                     {
                                         // To stop the bouncing, we remove both minimums and maximums from the angle-recalculation list,
                                         // and also set bSuppressMinAndMaxOnNextCall to make sure that no new mins or maxes are created.
-                                        newRelevancyCriteria = MainGame.RelevancyCriteria.LookingForBoth;
+                                        newRelevancyCriteria = RelevancyCriteria.LookingForBoth;
                                         bSuppressMinAndMaxOnNextCall = true;
                                     }
                                 }
@@ -593,23 +630,23 @@ namespace TopGameWindowsApp
             }
         }
 
-        private bool IsGraphicRelevant(MainGame.RelevancyCriteria relevancyCriteria, ref List<OnePlayerGraphicsLoop> graphics, int iGraphicIndex)
+        private bool IsGraphicRelevant(RelevancyCriteria relevancyCriteria, ref List<OnePlayerGraphicsLoop> graphics, int iGraphicIndex)
         {
             bool bRelevant = false;
 
             switch (relevancyCriteria)
             {
-                case MainGame.RelevancyCriteria.LookingForMinimums:
+                case RelevancyCriteria.LookingForMinimums:
                     {
                         bRelevant = graphics.ElementAt(iGraphicIndex).IsMinimumAngleApplied();
                     }
                     break;
-                case MainGame.RelevancyCriteria.LookingForMaximums:
+                case RelevancyCriteria.LookingForMaximums:
                     {
                         bRelevant = graphics.ElementAt(iGraphicIndex).IsMaximumAngleApplied();
                     }
                     break;
-                case MainGame.RelevancyCriteria.LookingForBoth:
+                case RelevancyCriteria.LookingForBoth:
                     {
                         bRelevant = graphics.ElementAt(iGraphicIndex).IsMinimumAngleApplied()
                                     || graphics.ElementAt(iGraphicIndex).IsMaximumAngleApplied();
@@ -1066,5 +1103,7 @@ namespace TopGameWindowsApp
         {
             return theHands.Count();
         }// end function
-    }// end class
+    }
+
+// end class
 }// end namespace

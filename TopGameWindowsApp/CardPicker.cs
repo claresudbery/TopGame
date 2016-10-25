@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Resources;
-using nsCard;
+using Domain.GameModels;
 
 namespace TopGameWindowsApp
 {

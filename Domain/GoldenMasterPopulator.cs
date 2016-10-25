@@ -1,22 +1,49 @@
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.Linq;
+using Domain.GameModels;
+using Domain.GameModels.GoldenMaster;
 using Domain.GraphicModels;
 using Domain.GraphicModels.GoldenMaster;
 using Newtonsoft.Json;
+using TopGameWindowsApp;
 
 namespace Domain
 {
     public static class GoldenMasterPopulator
     {
-        /// <summary>
-        /// Use just one of the hands (any will do) to load all possible data, to be stored for golden master purposes
-        /// </summary>
+        public static void PopulateGoldenMasterGame()
+        {
+            var allGoldenMasters = GenerateAllGameData();
+
+            string fileNameAndPath = ConfigurationManager.AppSettings["golden-master-game-file"];
+            TopGameJsonWriter.WriteToJsonFile(allGoldenMasters, fileNameAndPath);
+        }
+
+        public static GoldenMasterGameDataList GenerateAllGameData(int maxPlayers = 12)
+        {
+            var allGoldenMasters = new GoldenMasterGameDataList();
+            
+            for (int playerCount = 2; playerCount <= maxPlayers; playerCount++)
+            {
+                var bmpDisplayLines = new Bitmap(750, 750, System.Drawing.Imaging.PixelFormat.Format16bppRgb565);
+    
+                ManyHands allHands = new ManyHands(playerCount, null, ref bmpDisplayLines);
+
+                GoldenMasterGameData resultsOfThisCall = allHands.GenerateGoldenMasterGameData();
+
+                allGoldenMasters.GoldenMasters.Add(resultsOfThisCall);
+            }
+
+            return allGoldenMasters;
+        }
+
         public static void PopulateGraphicGoldenMaster()
         {
             var allGoldenMasters = GenerateAllGraphicData();
 
-            string fileNameAndPath = ConfigurationManager.AppSettings["golden-master-file"];
+            string fileNameAndPath = ConfigurationManager.AppSettings["golden-master-graphics-file"];
             TopGameJsonWriter.WriteToJsonFile(allGoldenMasters, fileNameAndPath);
         }
 
@@ -56,7 +83,7 @@ namespace Domain
             return allGoldenMasters;
         }
 
-        public static string GenerateAllDataAsJsonString()
+        public static string GenerateAllGraphicDataAsJsonString()
         {
             var allGoldenMasters = GenerateAllGraphicData();
 

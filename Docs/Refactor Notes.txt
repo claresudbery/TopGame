@@ -27,6 +27,7 @@ Mongo DB:
 			.\mongod.exe
 		
 To do:
+	Get rid of bmpDisplayLines in ManyHands and HandOfCards
 	Check we deal with the fact that angles may change depending on what share of the pack you have?
 	
 **************************************

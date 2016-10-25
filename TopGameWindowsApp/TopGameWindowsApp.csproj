@@ -67,20 +67,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Card.cs" />
     <Compile Include="CardPickerImages.cs" />
-    <Compile Include="DeckDisplayLine.cs" />
-    <Compile Include="DeckOfCards.cs" />
-    <Compile Include="DisplayLineRegion.cs" />
     <Compile Include="CardPicker.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CardPicker.Designer.cs">
       <DependentUpon>CardPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="HandOfCards.cs" />
-    <Compile Include="ManyHands.cs" />
-    <Compile Include="PileOfCardImages.cs" />
     <Compile Include="MainGame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,17 +82,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource1.resx</DependentUpon>
-    </Compile>
     <Compile Include="TopGameGoldenMaster.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TopGameGoldenMaster.xsd</DependentUpon>
     </Compile>
-    <Compile Include="VerticalParallelogram.cs" />
     <EmbeddedResource Include="CardPicker.resx">
       <DependentUpon>CardPicker.cs</DependentUpon>
     </EmbeddedResource>
@@ -116,10 +103,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Resource1.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>

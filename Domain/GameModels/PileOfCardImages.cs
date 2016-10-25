@@ -1,67 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Resources;
+using System.Windows.Forms;
 
-namespace TopGameWindowsApp
+namespace Domain.GameModels
 {
-    public class InterlockingCardImages
-    {
-        public PileOfCardImages leftPile;
-        public PileOfCardImages rightPile;
-        private Side lastSidePlayed;
-
-        public enum Side
-        {
-            Left
-            , Right
-            , Neither
-        }
-
-        public InterlockingCardImages()
-        {
-            leftPile = new PileOfCardImages();
-            rightPile = new PileOfCardImages();
-            lastSidePlayed = Side.Neither;
-        }
-
-        public void Reset()
-        {
-            leftPile.Reset();
-            rightPile.Reset();
-        }
-
-        public void PlayCard(string newImage, Side sidePlayed)
-        {
-            PileOfCardImages imagesToPlay = leftPile;
-            bool bReset = false;
-            if (lastSidePlayed != sidePlayed)
-            {
-                lastSidePlayed = sidePlayed;
-                bReset = true;
-            }
-            if (sidePlayed == Side.Right)
-            {
-                imagesToPlay = rightPile;
-            }
-            imagesToPlay.PlayCard(newImage, bReset);
-        }
-
-        public void UnPlayCard(Side sidePlayed)
-        {
-            PileOfCardImages imagesToPlay = leftPile;
-            bool bReset = false;
-            if (sidePlayed == Side.Right)
-            {
-                imagesToPlay = rightPile;
-            }
-            imagesToPlay.UnPlayCard();
-        }
-    }
-
     public class PileOfCardImages
     {
         private List<PictureBox> cardImages;

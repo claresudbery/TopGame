@@ -6,19 +6,13 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Resources;
 using Domain;
+using Domain.GameModels;
 using Domain.GraphicModels;
 
 namespace TopGameWindowsApp
 {
-    public partial class MainGame : Form
+    public partial class MainGame : Form, IGamePlayer
     {
-        public enum RelevancyCriteria
-        {
-            LookingForMinimums
-            , LookingForMaximums
-            , LookingForBoth
-            , LookingForNeither
-        }
         public ManyHands allHands;
         List<PictureBox> player1HandImages;
         List<PictureBox> player2HandImages;
@@ -26,9 +20,9 @@ namespace TopGameWindowsApp
         List<PictureBox> playedRightImages;
         private Bitmap bmpDisplayLines;
         private int iTestCount;
-        public bool bStop;
-        public int iPauseSize;
-        public int iStoredPauseSize;
+        public bool bStop { get; set; }
+        public int iPauseSize { get; set; }
+        public int iStoredPauseSize { get; set; }
         private int iCurrentRegion;
         private int iCurrentPlayerGraphic;
         private int iColourCycler;
@@ -912,5 +906,7 @@ namespace TopGameWindowsApp
         {
             MessageBox.Show("oi");
         }// end function
-    }// end class
+    }
+
+// end class
 }// end namespace

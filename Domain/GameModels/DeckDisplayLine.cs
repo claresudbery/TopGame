@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using nsCard;
-using System.Windows.Forms;
+using System.Linq;
 
-namespace TopGameWindowsApp
+namespace Domain.GameModels
 {
     public class DeckDisplayLine
     {
