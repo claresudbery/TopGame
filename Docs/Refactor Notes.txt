@@ -11,7 +11,8 @@ Golden Masters:
 	Graphics-009: 5ec15a758a5b1e7f2e5397010bb34d546cfd266e: Added the concept of mini petal regions
 	Graphics-010: d5e6b61af797148257b393ba9c783419a348c543: Added golden-master arc regions
 	Graphics-011: 53a7071a4f829cf0061403c48ffe957bf97aa9a7: Added golden-master straight-edged regions
-	Game-001: First attempt to store game data. Storing all moves for 2 to 12 players, using unshuffled deck each time.
+	Game-001: 7535145f77fed9c8847ded8885be042d399a0bde: First attempt to store game data. Storing all moves for 2 to 12 players, using unshuffled deck each time.
+	Game-002: Added player start hands and num players.
 	
 Mongo DB:
 	Links:

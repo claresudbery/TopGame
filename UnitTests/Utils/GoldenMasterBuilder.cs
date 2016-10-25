@@ -325,6 +325,12 @@ namespace UnitTests
                     new GoldenMasterGameData
                     {
                         StartDeck = "StartDeck.01",
+                        NumPlayers = 1,
+                        PlayerStartHands = new List<string>
+                        {
+                            "Player01.01",
+                            "Player02.01"
+                        },
                         Turns = new List<GoldenMasterTurnInfo>
                         {
                             new GoldenMasterTurnInfo
@@ -344,6 +350,12 @@ namespace UnitTests
                     new GoldenMasterGameData
                     {
                         StartDeck = "StartDeck.02",
+                        NumPlayers = 2,
+                        PlayerStartHands = new List<string>
+                        {
+                            "Player01.02",
+                            "Player02.02"
+                        },
                         Turns = new List<GoldenMasterTurnInfo>
                         {
                             new GoldenMasterTurnInfo

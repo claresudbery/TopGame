@@ -382,6 +382,12 @@ namespace Domain.GameModels
             _goldenMasterData.StartDeck = mainDeck.GetDeckContents();
 
             DealCards();
+            _goldenMasterData.NumPlayers = theHands.Count;
+            foreach (var hand in theHands)
+            {
+                _goldenMasterData.PlayerStartHands.Add(hand.GetDeckContents());
+            }
+
             cardsInPlay.Clear();
             AutoPlay();
 
