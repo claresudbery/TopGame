@@ -16,7 +16,6 @@ namespace Domain.GameModels
         private InterlockingCardImages playedImages;
         private DeckOfCards mainDeck;
         private IGamePlayer mainForm;
-        private Bitmap bmpDisplayLines;
         private int iNumCardsToPay = 0;
         private int iNumCardsPlayedSinceFaceCard = 0;
         private bool bFaceCardPlayed = false;
@@ -38,7 +37,7 @@ namespace Domain.GameModels
             }
         }
 
-        public ManyHands(int numHands, IGamePlayer form, ref Bitmap bmpDisplay)
+        public ManyHands(int numHands, IGamePlayer form)
         {
             int maxNumPlayers = 360 / TopGameConstants.MIN_CENTRAL_ANGLE;
             if (numHands > maxNumPlayers)
@@ -49,8 +48,6 @@ namespace Domain.GameModels
             iRecursionCount = 0;
             currentRelevancyCriteria = RelevancyCriteria.LookingForNeither;
             allGraphicLoops = new List<OnePlayerGraphicsLoop>();
-
-            bmpDisplayLines = bmpDisplay;
 
             mainDeck = new DeckOfCards(DeckDisplayLine.LoadStyle.TopLoader);
             mainDeck.LoadFullPack();
@@ -267,11 +264,6 @@ namespace Domain.GameModels
                     bCardsLeft = (iCardCount < mainDeck.Count());
                 }
             }
-
-            for (int iPlayerCount = 0; iPlayerCount < theHands.Count(); iPlayerCount++)
-            {
-                theHands.ElementAt(iPlayerCount).LoadDisplayLine(ref bmpDisplayLines);
-            }
         }
 
         public void InitialiseAllImages()
@@ -361,11 +353,8 @@ namespace Domain.GameModels
                 // AddCard will add a new region to represent the new card, and change the colour of all the regions to match their corresponding cards.
                 cardsInPlay.AddCard(cardPlayed);
 
-                // displayLine.ReloadColours changes the colour of each region, and redisplays accordingly. It has the side-effect of adding / removing cards, by creating / replacing empty regions.
-                //cardsInPlay.displayLine.ReloadColours(ref bmpDisplayLines, cardsInPlay);
-
                 // PlayCard will take charge of changing the region colours for the hand
-                theHands.ElementAt(iHandIndex).PlayCard(ref bmpDisplayLines);
+                theHands.ElementAt(iHandIndex).PlayCard();
 
                 NoteGoldenMasterTurnInfo(iHandIndex);
 
@@ -678,7 +667,6 @@ namespace Domain.GameModels
         public void PlayerWins(int iHandIndex)
         {
             playedImages.Reset();
-            //theHands.ElementAt(iHandIndex).PlayerWins(ref bmpDisplayLines, ref cardsInPlay, ref mainForm);
 
             // Have to store num cards in local variable, because it will change as we remove cards.
             int iNumCards = cardsInPlay.Count();
@@ -898,11 +886,6 @@ namespace Domain.GameModels
                         break;
                 }
             }*/
-        }
-
-        private void LoadManyColours(DeckDisplayLine displayLine, int iStartIndex, int iEndIndex, DisplayLineRegion.RegionColour colour)
-        {
-            displayLine.LoadManyColours(ref bmpDisplayLines, iStartIndex, iEndIndex, colour);
         }
 
         public void AutoPlay()

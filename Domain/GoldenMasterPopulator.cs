@@ -27,9 +27,7 @@ namespace Domain
             
             for (int playerCount = 2; playerCount <= maxPlayers; playerCount++)
             {
-                var bmpDisplayLines = new Bitmap(750, 750, System.Drawing.Imaging.PixelFormat.Format16bppRgb565);
-    
-                ManyHands allHands = new ManyHands(playerCount, null, ref bmpDisplayLines);
+                ManyHands allHands = new ManyHands(playerCount, null);
 
                 GoldenMasterGameData resultsOfThisCall = allHands.GenerateGoldenMasterGameData();
 

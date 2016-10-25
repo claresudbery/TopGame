@@ -23,32 +23,6 @@ namespace Domain.GameModels
             //transitionLine = new DeckDisplayLine(DeckDisplayLine.LoadStyle.BottomLoader);
         }
 
-        public void ShuntAll(ref Bitmap bmpDisplayLines, DeckOfCards cardsWon, ref IGamePlayer mainForm)
-        {
-            /*DeckDisplayLine.ShuntInfo playedPileShuntInfo = new DeckDisplayLine.ShuntInfo(false, false);
-            DeckDisplayLine.ShuntInfo transitionShuntInfo = new DeckDisplayLine.ShuntInfo(false, false);
-            bool bMyCardsShunted = false;
-
-            cardsWon.displayLine.PrepareForShunt();
-            transitionLine.PrepareForShunt();
-            cardDeck.displayLine.PrepareForShuntIntoExisting();
-
-            while (!playedPileShuntInfo.bShuntFinished || !transitionShuntInfo.bShuntFinished || !bMyCardsShunted)
-            {
-                System.Threading.Thread.Sleep(30);
-                playedPileShuntInfo = cardsWon.displayLine.Shunt(ref bmpDisplayLines, cardsWon);
-                if (playedPileShuntInfo.bCardsNowLeaving)
-                {
-                    transitionShuntInfo = transitionLine.Shunt(ref bmpDisplayLines, cardsWon);
-                    if (transitionShuntInfo.bCardsNowLeaving)
-                    {
-                        bMyCardsShunted = cardDeck.displayLine.ShuntIntoExisting(ref bmpDisplayLines, cardsWon);
-                    }
-                }
-                mainForm.DisplayAllDeckContents();
-            }*/
-        }
-
         public void ClearDeck()
         {
             cardDeck.Clear();
@@ -118,7 +92,7 @@ namespace Domain.GameModels
             cardDeck.RemoveTopCard();
         }
 
-        public void PlayCard(ref Bitmap bmpDisplayLines)
+        public void PlayCard()
         {
             // No need to remove the graphic segment or reload the colours: this is done as part of RemoveTopCard.
             // The loop will be redisplayed as a result of the ManyHands calls to DisplayAllDeckContents and ReloadGraphicLoops, in the calling routine.
@@ -127,15 +101,6 @@ namespace Domain.GameModels
             {
                 cardImages.HideCard();
             }
-
-            // displayLine.ReloadColours changes the colour of each region, and redisplays accordingly. It has the side-effect of adding / removing cards, by creating / replacing empty regions.
-            //cardDeck.displayLine.ReloadColours(ref bmpDisplayLines, cardDeck);
-        }
-
-        public void LoadDisplayLine(ref Bitmap bmpDisplayLines)
-        {
-            // displayLine.ReloadColours changes the colour of each region, and redisplays accordingly. It has the side-effect of adding / removing cards, by creating / replacing empty regions.
-            //cardDeck.displayLine.ReloadColours(ref bmpDisplayLines, cardDeck);
         }
 
         public void RedisplayImages(int iPreviousCardCount)
@@ -155,7 +120,7 @@ namespace Domain.GameModels
             }
         }
 
-        public void PlayerWins(ref Bitmap bmpDisplayLines, ref DeckOfCards cardsWon, ref IGamePlayer mainForm)
+        public void PlayerWins(ref DeckOfCards cardsWon, ref IGamePlayer mainForm)
         {
             int iPreviousCardCount = cardDeck.Count();
 
@@ -166,8 +131,6 @@ namespace Domain.GameModels
 
             // If we were down to the last few cards in the hand, we need to increase the number displayed in the pile.
             RedisplayImages(iPreviousCardCount);
-
-            ShuntAll(ref bmpDisplayLines, cardsWon, ref mainForm);
         }
 
         public void AfterPlayerWins(int iPreviousCardCount)

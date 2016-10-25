@@ -18,7 +18,6 @@ namespace TopGameWindowsApp
         List<PictureBox> player2HandImages;
         List<PictureBox> playedLeftImages;
         List<PictureBox> playedRightImages;
-        private Bitmap bmpDisplayLines;
         private int iTestCount;
         public bool bStop { get; set; }
         public int iPauseSize { get; set; }
@@ -38,7 +37,6 @@ namespace TopGameWindowsApp
 
         public void DisposeAll()
         {
-            bmpDisplayLines.Dispose();
             _testGraphicsLoop.Dispose();
             for (int iCount = 0; iCount < playerGraphics.Count(); iCount++)
             {
@@ -63,8 +61,7 @@ namespace TopGameWindowsApp
             iPauseSize = 0;
             iStoredPauseSize = 60;
             iTestCount = 1;
-            bmpDisplayLines = new Bitmap(750, 750, System.Drawing.Imaging.PixelFormat.Format16bppRgb565);// ("c:\\_working\\DisplayLines.bmp");
-            allHands = new ManyHands(2, this, ref bmpDisplayLines);
+            allHands = new ManyHands(2, this);
             allHands.DealCards();
 
             InitializeComponent();
