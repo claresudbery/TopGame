@@ -28,7 +28,12 @@ namespace UnitTests
             GoldenMasterGraphicList latestCalculatedData = GoldenMasterPopulator.GenerateAllGraphicData();
 
             // Assert
-            latestCalculatedData.ShouldBeEquivalentTo(storedGraphicGoldenMaster);
+            latestCalculatedData.GoldenMasters.Count.Equals(storedGraphicGoldenMaster.GoldenMasters.Count);
+            foreach (var storedGoldenMaster in storedGraphicGoldenMaster.GoldenMasters)
+            {
+                int currentIndex = storedGraphicGoldenMaster.GoldenMasters.IndexOf(storedGoldenMaster);
+                latestCalculatedData.GoldenMasters[currentIndex].ShouldBeEquivalentTo(storedGoldenMaster);
+            }
         }
 
         [Test]
