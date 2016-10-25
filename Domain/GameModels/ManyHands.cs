@@ -347,7 +347,10 @@ namespace Domain.GameModels
             if (theHands.ElementAt(iHandIndex).NumCards() > 0)
             {
                 InterlockingCardImages.Side correctSide = (iHandIndex == 0) ? InterlockingCardImages.Side.Left : InterlockingCardImages.Side.Right;
-                playedImages.PlayCard(theHands.ElementAt(iHandIndex).GetTopCardImageName(), correctSide);
+                if (!_recordingGoldenMaster)
+                {
+                    playedImages.PlayCard(theHands.ElementAt(iHandIndex).GetTopCardImageName(), correctSide);
+                }
                 cardPlayed = theHands.ElementAt(iHandIndex).GetTopCard();
 
                 // AddCard will add a new region to represent the new card, and change the colour of all the regions to match their corresponding cards.

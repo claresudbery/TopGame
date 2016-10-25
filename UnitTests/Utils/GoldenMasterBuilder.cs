@@ -1,22 +1,23 @@
 using System.Collections.Generic;
+using Domain.GameModels.GoldenMaster;
 using Domain.GraphicModels.GoldenMaster;
 
 namespace UnitTests
 {
     public static class GoldenMasterBuilder
     {
-        public static GoldenMasterGraphicList BuildSomeGoldenMasters()
+        public static GoldenMasterGraphicList BuildSomeGraphicGoldenMasters()
         {
             GoldenMasterGraphicList goldenMasterGraphicList = new GoldenMasterGraphicList();
             int randomNumber = 1;
 
-            goldenMasterGraphicList.GoldenMasters.Add(BuildGoldenMaster(ref randomNumber));
-            goldenMasterGraphicList.GoldenMasters.Add(BuildGoldenMaster(ref randomNumber));
+            goldenMasterGraphicList.GoldenMasters.Add(BuildGraphicGoldenMaster(ref randomNumber));
+            goldenMasterGraphicList.GoldenMasters.Add(BuildGraphicGoldenMaster(ref randomNumber));
 
             return goldenMasterGraphicList;
         }
 
-        private static GoldenMasterSingleGraphicPass BuildGoldenMaster(ref int randomNumber)
+        private static GoldenMasterSingleGraphicPass BuildGraphicGoldenMaster(ref int randomNumber)
         {
             return new GoldenMasterSingleGraphicPass
             {
@@ -310,6 +311,54 @@ namespace UnitTests
                         Y = randomNumber++,
                         Width = randomNumber++,
                         Height = randomNumber
+                    }
+                }
+            };
+        }
+
+        public static GoldenMasterGameDataList BuildSomeGameDataGoldenMasters()
+        {
+            return new GoldenMasterGameDataList
+            {
+                GoldenMasters = new List<GoldenMasterGameData>
+                {
+                    new GoldenMasterGameData
+                    {
+                        StartDeck = "StartDeck.01",
+                        Turns = new List<GoldenMasterTurnInfo>
+                        {
+                            new GoldenMasterTurnInfo
+                            {
+                                CardsInPlay = "CardsInPlay.01.01",
+                                NewPlayerHand = "NewPlayerHand.01.01",
+                                PlayerIndex = 11
+                            },
+                            new GoldenMasterTurnInfo
+                            {
+                                CardsInPlay = "CardsInPlay.01.02",
+                                NewPlayerHand = "NewPlayerHand.01.02",
+                                PlayerIndex = 12
+                            }
+                        }
+                    },
+                    new GoldenMasterGameData
+                    {
+                        StartDeck = "StartDeck.02",
+                        Turns = new List<GoldenMasterTurnInfo>
+                        {
+                            new GoldenMasterTurnInfo
+                            {
+                                CardsInPlay = "CardsInPlay.02.01",
+                                NewPlayerHand = "NewPlayerHand.02.01",
+                                PlayerIndex = 21
+                            },
+                            new GoldenMasterTurnInfo
+                            {
+                                CardsInPlay = "CardsInPlay.02.02",
+                                NewPlayerHand = "NewPlayerHand.02.02",
+                                PlayerIndex = 22
+                            }
+                        }
                     }
                 }
             };

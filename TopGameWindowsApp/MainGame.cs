@@ -126,6 +126,10 @@ namespace TopGameWindowsApp
             // and all possible numbers of players, so we can unit-test against these expected values.
             GoldenMasterPopulator.PopulateGraphicGoldenMaster();
 
+            // Make a note of all the game data results returned for all possible numbers of players per game, using the same unshuffled deck each time,
+            // so we can unit-test against these expected values.
+            GoldenMasterPopulator.PopulateGoldenMasterGame();
+
             allHands.ReloadGraphicLoops();
             DisplayAllDeckContents();
             InitialisePlayerDisplay();

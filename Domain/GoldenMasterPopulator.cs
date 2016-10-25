@@ -7,6 +7,7 @@ using Domain.GameModels.GoldenMaster;
 using Domain.GraphicModels;
 using Domain.GraphicModels.GoldenMaster;
 using Newtonsoft.Json;
+using Rhino.Mocks;
 using TopGameWindowsApp;
 
 namespace Domain
@@ -27,7 +28,8 @@ namespace Domain
             
             for (int playerCount = 2; playerCount <= maxPlayers; playerCount++)
             {
-                ManyHands allHands = new ManyHands(playerCount, null);
+                IGamePlayer mockMainGame = MockRepository.GenerateMock<IGamePlayer>();
+                ManyHands allHands = new ManyHands(playerCount, mockMainGame);
 
                 GoldenMasterGameData resultsOfThisCall = allHands.GenerateGoldenMasterGameData();
 

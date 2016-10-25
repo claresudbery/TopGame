@@ -5,18 +5,18 @@ namespace UnitTests
 {
     public static class GoldenMasterBuilderV2
     {
-        public static GoldenMasterGraphicList BuildSomeGoldenMastersV2()
+        public static GoldenMasterGraphicList BuildSomeGraphicGoldenMastersV2()
         {
             GoldenMasterGraphicList goldenMasterGraphicList = new GoldenMasterGraphicList();
             int randomNumber = 1;
 
-            goldenMasterGraphicList.GoldenMasters.Add(BuildGoldenMasterV2(ref randomNumber));
-            goldenMasterGraphicList.GoldenMasters.Add(BuildGoldenMasterV2(ref randomNumber));
+            goldenMasterGraphicList.GoldenMasters.Add(BuildGraphicGoldenMasterV2(ref randomNumber));
+            goldenMasterGraphicList.GoldenMasters.Add(BuildGraphicGoldenMasterV2(ref randomNumber));
 
             return goldenMasterGraphicList;
         }
 
-        private static GoldenMasterSingleGraphicPass BuildGoldenMasterV2(ref int randomNumber)
+        private static GoldenMasterSingleGraphicPass BuildGraphicGoldenMasterV2(ref int randomNumber)
         {
             return new GoldenMasterSingleGraphicPass
             {
