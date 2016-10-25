@@ -5,7 +5,7 @@ Golden Masters:
 	003: c3bccdf17481809679462db7fd60915d30011a02: Lost track of what I was doing. Regenerated the file to make sure I hadn't changed anythign and forgotten.
 	004: c926496202b08255406564e0ef3ab5d413e4795e: Checked out previous version of code to see what golden master was generated.
 	005: f6c721b4b7aad6a9d86388c733761992643671e7: Bug fixed - GetMaxCentralAngle is now using the correct number of hands in its if statement, rather than always using 3. 
-	006: bb7e6dc979a0bb0f08613c9a9858ab6f690f25cf: After creating GoldenMasterRegion and GoldenMasterPoint - trying to work out why order of objects seems to have changed.
+	006: After creating GoldenMasterRegion and GoldenMasterPoint - trying to work out why order of objects seems to have changed.
 
 Mongo DB:
 	Links:
@@ -26,3 +26,110 @@ To do:
 	See whether the data is the same if you just copy list of regions directly
 	Add in list of colours
 	Find out whether subregions can be recreated using everything in VitalStatistics. If not, add in subregions to golden master.
+	
+2 cards in loop, 2 players in game:
+	latest code - at time of building object:
+		AddTriangularRegion
+			origin: 215,215
+			startArmDivisionStarts: 201,215
+			actualInnerPetalSource: 202,219
+		AddTriangularRegion
+			origin: 215,215
+			endArmDivisionStarts: 203,222
+			actualInnerPetalSource: 202,219
+	original code - at time of building object:
+		AddTriangularRegion
+			origin: 215,215
+			startArmDivisionStarts: 201,215
+			actualInnerPetalSource: 202,219
+		AddTriangularRegion
+			origin: 215,215
+			endArmDivisionStarts: 203,222
+			actualInnerPetalSource: 202,219
+	original code - allGoldenMasters.GoldenMasters[11].TopGameRegions[0].TopGamePoints[2].Y - later:
+		2,3: 223
+		2,4: 224
+		
+
+	**************
+	before the bug:
+	**************
+	"endArmDivisionEnds": {
+          "Points": [
+            {
+              "X": 211,
+              "Y": 223
+            }
+			...
+      "TopGameRegions": [
+        {
+          "TopGamePoints": [
+            {
+              "X": 215,
+              "Y": 215
+            },
+            {
+              "X": 201,
+              "Y": 215
+            },
+            {
+              "X": 211,
+              "Y": 223
+            }
+          ]
+        },
+        {
+          "TopGamePoints": [
+            {
+              "X": 215,
+              "Y": 215
+            },
+            {
+              "X": 203,
+              "Y": 222
+            },
+            {
+              "X": 211,
+              "Y": 223
+            }
+	**************
+	after the bug:
+	**************
+        "endArmDivisionEnds": {
+          "Points": [
+            {
+              "X": 211,
+              "Y": 223
+            }
+			...
+      "TopGameRegions": [
+        {
+          "TopGamePoints": [
+            {
+              "X": 215,
+              "Y": 215
+            },
+            {
+              "X": 201,
+              "Y": 215
+            },
+            {
+              "X": 202,
+              "Y": 219
+            }
+          ]
+        },
+        {
+          "TopGamePoints": [
+            {
+              "X": 215,
+              "Y": 215
+            },
+            {
+              "X": 203,
+              "Y": 222
+            },
+            {
+              "X": 202,
+              "Y": 219
+            }
