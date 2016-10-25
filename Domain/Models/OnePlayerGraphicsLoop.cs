@@ -956,7 +956,7 @@ namespace Domain.Models
             CalculateCentralAngle(360, 52, false);
         }
 
-        public GoldenMasterSinglePass PopulateGoldenMaster(int numPlayersInGame)
+        public GoldenMasterSinglePass GenerateGoldenMasterData(int numPlayersInGame)
         {
             var resultsOfThisCall = new GoldenMasterSinglePass();
             PrepareActualData(0, resultsOfThisCall);
@@ -965,7 +965,7 @@ namespace Domain.Models
             GoldenMasterVitalStatistics calculatedStatistics = new GoldenMasterVitalStatistics();
             calculatedStatistics.Copy(_vitalStatistics);
 
-            // resultsOfThisCall.TopGameRegions will be populated during the call to PrepareActualData above
+            // All the collections of regions will be populated during the call to PrepareActualData above
             resultsOfThisCall.VitalStatistics = calculatedStatistics;
             resultsOfThisCall.NumCardsInLoop = calculatedStatistics.numTotalSegments;
             resultsOfThisCall.NumPlayersInGame = numPlayersInGame;

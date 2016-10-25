@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Resources;
+using Domain;
 using Domain.Models;
 
 namespace TopGameWindowsApp
@@ -130,8 +131,9 @@ namespace TopGameWindowsApp
             playedRightImages.Add(imgPlayer2Played04);
             allHands.AddPlayedImages(InterlockingCardImages.Side.Right, playedRightImages);
 
-            // Make a note of all the graphic loop results returned for all possible values of numSegments, so we can unit-test against these expected values.
-            allHands.PopulateGoldenMaster();
+            // Make a note of all the graphic loop results returned for all possible numbers of cards per loop, 
+            // and all possible numbers of players, so we can unit-test against these expected values.
+            GoldenMasterPopulator.PopulateGoldenMaster();
 
             allHands.ReloadGraphicLoops();
             DisplayAllDeckContents();

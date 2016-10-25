@@ -12,16 +12,12 @@ namespace Domain
         /// <summary>
         /// Use just one of the hands (any will do) to load all possible data, to be stored for golden master purposes
         /// </summary>
-        public static void PopulateGoldenMaster(List<OnePlayerGraphicsLoop> graphicLoops)
+        public static void PopulateGoldenMaster()
         {
-            int previousNumSegments = graphicLoops.ElementAt(0).GetNumTotalSegments();
-
             var allGoldenMasters = GenerateAllData();
 
             string fileNameAndPath = ConfigurationManager.AppSettings["golden-master-file"];
             TopGameJsonWriter.WriteToJsonFile(allGoldenMasters, fileNameAndPath);
-
-            graphicLoops.ElementAt(0).SetNumTotalSegments(previousNumSegments);
         }
 
         public static GoldenMasterList GenerateAllData(int maxPlayers = 12)
@@ -51,7 +47,7 @@ namespace Domain
 
                     // Set all the angles - each hand of cards gets the same proportion of the circle
                     graphicLoop.SetAngles(maxCentralAngle, angleShare);
-                    GoldenMasterSinglePass resultsOfThisCall = graphicLoop.PopulateGoldenMaster(playerCount);
+                    GoldenMasterSinglePass resultsOfThisCall = graphicLoop.GenerateGoldenMasterData(playerCount);
 
                     allGoldenMasters.GoldenMasters.Add(resultsOfThisCall);
                 }

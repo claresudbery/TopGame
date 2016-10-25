@@ -27,11 +27,7 @@ Mongo DB:
 			.\mongod.exe
 		
 To do:
-	Is it ok that GoldenMAsterGraphicsPath doesn't have the ActualPath member that TopGameGraphicsPath has?
 	Check we deal with the fact that angles may change depending on what share of the pack you have?
-	Add in list of colours
-	Find out whether subregions can be recreated using everything in VitalStatistics. If not, add in subregions to golden master.
-	Get rid of commented-out code
 	
 **************************************
 WORKING OUT WHAT KIND OF DATA TO STORE FOR REGIONS

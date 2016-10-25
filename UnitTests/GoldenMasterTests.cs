@@ -21,11 +21,9 @@ namespace UnitTests
             // Arrange
             var topGameAppPath = TestContext.CurrentContext.TestDirectory + @"..\..\..\GoldenMasters\";
             GoldenMasterList storedGoldenMaster = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(topGameAppPath + _currentGoldenMasterFileName);
-            string storedGoldenMasterAsJsonString = GetFileContentsAsJsonString(topGameAppPath + _currentGoldenMasterFileName);
 
             // Act
             var latestCalculatedData = GoldenMasterPopulator.GenerateAllData();
-            var latestCalculatedDataAsJsonString = GoldenMasterPopulator.GenerateAllDataAsJsonString();
 
             // Assert
             latestCalculatedData.ShouldBeEquivalentTo(storedGoldenMaster);
