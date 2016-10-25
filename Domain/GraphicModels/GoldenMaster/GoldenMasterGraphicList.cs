@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Domain.Models.GoldenMaster
+namespace Domain.GraphicModels.GoldenMaster
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class GoldenMasterList
+    public class GoldenMasterGraphicList
     {
-        public GoldenMasterList()
+        public GoldenMasterGraphicList()
         {
-            GoldenMasters = new List<GoldenMasterSinglePass>();
+            GoldenMasters = new List<GoldenMasterSingleGraphicPass>();
         }
 
         // There is one GoldenMasterSinglePass object for each possible graphics loop.
@@ -17,6 +17,6 @@ namespace Domain.Models.GoldenMaster
         // There is one segment per card, so there are 52 possible numbers of segments.
         // Therefore there should be (52 x 11) GoldenMasterSinglePass objects in the GoldenMasters collection.
         [JsonProperty]
-        public List<GoldenMasterSinglePass> GoldenMasters { get; set; }
+        public List<GoldenMasterSingleGraphicPass> GoldenMasters { get; set; }
     }
 }

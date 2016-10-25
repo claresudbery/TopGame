@@ -1,5 +1,4 @@
 using System.IO;
-using Domain.Models;
 using Newtonsoft.Json;
 
 namespace Domain

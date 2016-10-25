@@ -49,28 +49,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GoldenMasterPopulator.cs" />
-    <Compile Include="Models\ColouredRegion.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterArcRegion.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterLine.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterGraphicsPath.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterList.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterPoint.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterPointCollection.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterRectangle.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterRegion.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterSinglePass.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterStraightEdgedRegion.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterVitalStatistics.cs" />
-    <Compile Include="Models\OnePlayerGraphicsLoop.cs" />
-    <Compile Include="Models\GoldenMaster\GoldenMasterArcPath.cs" />
-    <Compile Include="Models\TopGameArcPath.cs" />
-    <Compile Include="Models\TopGameGraphicsPath.cs" />
-    <Compile Include="Models\TopGameLine.cs" />
-    <Compile Include="Models\TopGamePoint.cs" />
-    <Compile Include="Models\TopGamePointCollection.cs" />
-    <Compile Include="Models\TopGameRectangle.cs" />
-    <Compile Include="Models\TopGameRegion.cs" />
-    <Compile Include="Models\VitalStatistics.cs" />
+    <Compile Include="GraphicModels\ColouredRegion.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterArcRegion.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterLine.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterGraphicsPath.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterGraphicList.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterPoint.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterPointCollection.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterRectangle.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterRegion.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterSingleGraphicPass.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterStraightEdgedRegion.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterVitalGraphicStatistics.cs" />
+    <Compile Include="GraphicModels\OnePlayerGraphicsLoop.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterArcPath.cs" />
+    <Compile Include="GraphicModels\TopGameArcPath.cs" />
+    <Compile Include="GraphicModels\TopGameGraphicsPath.cs" />
+    <Compile Include="GraphicModels\TopGameLine.cs" />
+    <Compile Include="GraphicModels\TopGamePoint.cs" />
+    <Compile Include="GraphicModels\TopGamePointCollection.cs" />
+    <Compile Include="GraphicModels\TopGameRectangle.cs" />
+    <Compile Include="GraphicModels\TopGameRegion.cs" />
+    <Compile Include="GraphicModels\VitalStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TopGameConstants.cs" />
     <Compile Include="TopGameJsonWriter.cs" />
@@ -78,6 +78,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GameModels\GoldenMaster\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

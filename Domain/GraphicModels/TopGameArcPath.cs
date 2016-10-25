@@ -1,6 +1,6 @@
-using Domain.Models.GoldenMaster;
+using Domain.GraphicModels.GoldenMaster;
 
-namespace Domain.Models
+namespace Domain.GraphicModels
 {
     public class TopGameArcPath
     {

@@ -1,6 +1,6 @@
 using System.Drawing.Drawing2D;
 
-namespace Domain.Models
+namespace Domain.GraphicModels
 {
     public class ColouredRegion
     {

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Domain.Models.GoldenMaster;
-using Newtonsoft.Json;
+using Domain.GraphicModels.GoldenMaster;
 
-namespace Domain.Models
+namespace Domain.GraphicModels
 {
     public class TopGameRegion
     {

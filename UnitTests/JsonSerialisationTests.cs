@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using Domain;
-using Domain.Models;
-using Domain.Models.GoldenMaster;
+using Domain.GraphicModels;
+using Domain.GraphicModels.GoldenMaster;
 using NUnit.Framework;
 using FluentAssertions;
 
@@ -30,25 +30,25 @@ namespace UnitTests
         public void Will_serialise_GoldenMasterSinglePass_object_to_file_and_read_back_again()
         {
             // Arrange
-            GoldenMasterList goldenMasterList = GoldenMasterBuilder.BuildSomeGoldenMasters();
+            GoldenMasterGraphicList goldenMasterGraphicList = GoldenMasterBuilder.BuildSomeGoldenMasters();
 
             // Act
-            TopGameJsonWriter.WriteToJsonFile(goldenMasterList, _jsonFileNameAndPath);
+            TopGameJsonWriter.WriteToJsonFile(goldenMasterGraphicList, _jsonFileNameAndPath);
 
             // Assert
-            GoldenMasterList result = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(_jsonFileNameAndPath);
-            result.GoldenMasters.ShouldAllBeEquivalentTo(goldenMasterList.GoldenMasters);
+            GoldenMasterGraphicList result = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterGraphicList>(_jsonFileNameAndPath);
+            result.GoldenMasters.ShouldAllBeEquivalentTo(goldenMasterGraphicList.GoldenMasters);
         }
 
         [Test]
         public void These_tests_can_identify_badly_deserialised_data()
         {
             // Arrange & Act
-            GoldenMasterList goldenMasterList1 = GoldenMasterBuilderV2.BuildSomeGoldenMastersV2();
-            GoldenMasterList goldenMasterList2 = GoldenMasterBuilderV3.BuildSomeGoldenMastersV3();
+            GoldenMasterGraphicList goldenMasterGraphicList1 = GoldenMasterBuilderV2.BuildSomeGoldenMastersV2();
+            GoldenMasterGraphicList goldenMasterGraphicList2 = GoldenMasterBuilderV3.BuildSomeGoldenMastersV3();
 
             // Assert
-            goldenMasterList1.GoldenMasters.ShouldAllBeEquivalentTo(goldenMasterList2.GoldenMasters);
+            goldenMasterGraphicList1.GoldenMasters.ShouldAllBeEquivalentTo(goldenMasterGraphicList2.GoldenMasters);
         }
     }
 }

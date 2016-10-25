@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
-using Newtonsoft.Json;
 
-namespace Domain.Models
+namespace Domain.GraphicModels
 {
     public class TopGameGraphicsPath
     {

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using Domain.Models;
-using Domain.Models.GoldenMaster;
+using Domain.GraphicModels;
+using Domain.GraphicModels.GoldenMaster;
 using Newtonsoft.Json;
 
 namespace Domain
@@ -12,17 +12,17 @@ namespace Domain
         /// <summary>
         /// Use just one of the hands (any will do) to load all possible data, to be stored for golden master purposes
         /// </summary>
-        public static void PopulateGoldenMaster()
+        public static void PopulateGraphicGoldenMaster()
         {
-            var allGoldenMasters = GenerateAllData();
+            var allGoldenMasters = GenerateAllGraphicData();
 
             string fileNameAndPath = ConfigurationManager.AppSettings["golden-master-file"];
             TopGameJsonWriter.WriteToJsonFile(allGoldenMasters, fileNameAndPath);
         }
 
-        public static GoldenMasterList GenerateAllData(int maxPlayers = 12)
+        public static GoldenMasterGraphicList GenerateAllGraphicData(int maxPlayers = 12)
         {
-            var allGoldenMasters = new GoldenMasterList();
+            var allGoldenMasters = new GoldenMasterGraphicList();
 
             // Graphics loops have three distinguishing features:
             // The first distinguishing feature is how many segments a graphics loop has.
@@ -47,7 +47,7 @@ namespace Domain
 
                     // Set all the angles - each hand of cards gets the same proportion of the circle
                     graphicLoop.SetAngles(maxCentralAngle, angleShare);
-                    GoldenMasterSinglePass resultsOfThisCall = graphicLoop.GenerateGoldenMasterData(playerCount);
+                    GoldenMasterSingleGraphicPass resultsOfThisCall = graphicLoop.GenerateGoldenMasterData(playerCount);
 
                     allGoldenMasters.GoldenMasters.Add(resultsOfThisCall);
                 }
@@ -58,7 +58,7 @@ namespace Domain
 
         public static string GenerateAllDataAsJsonString()
         {
-            var allGoldenMasters = GenerateAllData();
+            var allGoldenMasters = GenerateAllGraphicData();
 
             return JsonConvert.SerializeObject(allGoldenMasters, Formatting.Indented);
         }

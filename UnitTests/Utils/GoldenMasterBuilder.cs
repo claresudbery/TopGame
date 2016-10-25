@@ -1,25 +1,24 @@
 using System.Collections.Generic;
-using Domain.Models;
-using Domain.Models.GoldenMaster;
+using Domain.GraphicModels.GoldenMaster;
 
 namespace UnitTests
 {
     public static class GoldenMasterBuilder
     {
-        public static GoldenMasterList BuildSomeGoldenMasters()
+        public static GoldenMasterGraphicList BuildSomeGoldenMasters()
         {
-            GoldenMasterList goldenMasterList = new GoldenMasterList();
+            GoldenMasterGraphicList goldenMasterGraphicList = new GoldenMasterGraphicList();
             int randomNumber = 1;
 
-            goldenMasterList.GoldenMasters.Add(BuildGoldenMaster(ref randomNumber));
-            goldenMasterList.GoldenMasters.Add(BuildGoldenMaster(ref randomNumber));
+            goldenMasterGraphicList.GoldenMasters.Add(BuildGoldenMaster(ref randomNumber));
+            goldenMasterGraphicList.GoldenMasters.Add(BuildGoldenMaster(ref randomNumber));
 
-            return goldenMasterList;
+            return goldenMasterGraphicList;
         }
 
-        private static GoldenMasterSinglePass BuildGoldenMaster(ref int randomNumber)
+        private static GoldenMasterSingleGraphicPass BuildGoldenMaster(ref int randomNumber)
         {
-            return new GoldenMasterSinglePass
+            return new GoldenMasterSingleGraphicPass
             {
                 NumCardsInLoop = randomNumber++,
                 MiniPetalRegions = new List<GoldenMasterGraphicsPath>
@@ -87,7 +86,7 @@ namespace UnitTests
                         }
                     }
                 },
-                VitalStatistics = new GoldenMasterVitalStatistics
+                VitalGraphicStatistics = new GoldenMasterVitalGraphicStatistics
                 {
                     angleB = randomNumber++,
                     angleC = randomNumber++,

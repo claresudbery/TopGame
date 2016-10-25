@@ -5,10 +5,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using Domain.Models.GoldenMaster;
+using Domain.GraphicModels.GoldenMaster;
 using TopGameWindowsApp;
 
-namespace Domain.Models
+namespace Domain.GraphicModels
 {
     /// <summary>
     /// This represents the "loop" visible on screen (looks a bit like a petal) which represents one player's cards (or the cards currently in play)
@@ -305,7 +305,7 @@ namespace Domain.Models
 
         public void PrepareActualData(
             double rotationAngle,
-            GoldenMasterSinglePass goldenMasterData = null)
+            GoldenMasterSingleGraphicPass goldenMasterData = null)
         {            
             // Need to reinitialise constantSegmentLength, in case it was reset in a previous call.
             double segmentAddition = (_vitalStatistics.numTotalSegments > 2) ? (_vitalStatistics.numTotalSegments - 2) % 3 : 0;
@@ -651,7 +651,7 @@ namespace Domain.Models
             TopGamePoint pointA, 
             TopGamePoint pointB, 
             TopGamePoint pointC, 
-            GoldenMasterSinglePass goldenMasterData)
+            GoldenMasterSingleGraphicPass goldenMasterData)
         {
             TopGameGraphicsPath tempRegionPath = new TopGameGraphicsPath();
             tempRegionPath.AddLine(pointA, pointB);
@@ -676,7 +676,7 @@ namespace Domain.Models
             TopGamePoint pointA, 
             TopGamePoint pointB, 
             TopGamePoint pointC, 
-            GoldenMasterSinglePass goldenMasterData)
+            GoldenMasterSingleGraphicPass goldenMasterData)
         {
             TopGameGraphicsPath tempRegionPath = new TopGameGraphicsPath();
             tempRegionPath.AddLine(pointA, pointB);
@@ -698,7 +698,7 @@ namespace Domain.Models
             TopGamePoint pointB, 
             TopGamePoint pointC, 
             TopGamePoint pointD, 
-            GoldenMasterSinglePass goldenMasterData)
+            GoldenMasterSingleGraphicPass goldenMasterData)
         {
             TopGameGraphicsPath tempRegionPath = new TopGameGraphicsPath();
             tempRegionPath.AddLine(pointA, pointB);
@@ -956,18 +956,18 @@ namespace Domain.Models
             CalculateCentralAngle(360, 52, false);
         }
 
-        public GoldenMasterSinglePass GenerateGoldenMasterData(int numPlayersInGame)
+        public GoldenMasterSingleGraphicPass GenerateGoldenMasterData(int numPlayersInGame)
         {
-            var resultsOfThisCall = new GoldenMasterSinglePass();
+            var resultsOfThisCall = new GoldenMasterSingleGraphicPass();
             PrepareActualData(0, resultsOfThisCall);
 
             // Don't copy vital statistics until after the call to PrepareActualData
-            GoldenMasterVitalStatistics calculatedStatistics = new GoldenMasterVitalStatistics();
-            calculatedStatistics.Copy(_vitalStatistics);
+            GoldenMasterVitalGraphicStatistics calculatedGraphicStatistics = new GoldenMasterVitalGraphicStatistics();
+            calculatedGraphicStatistics.Copy(_vitalStatistics);
 
             // All the collections of regions will be populated during the call to PrepareActualData above
-            resultsOfThisCall.VitalStatistics = calculatedStatistics;
-            resultsOfThisCall.NumCardsInLoop = calculatedStatistics.numTotalSegments;
+            resultsOfThisCall.VitalGraphicStatistics = calculatedGraphicStatistics;
+            resultsOfThisCall.NumCardsInLoop = calculatedGraphicStatistics.numTotalSegments;
             resultsOfThisCall.NumPlayersInGame = numPlayersInGame;
 
             return resultsOfThisCall;

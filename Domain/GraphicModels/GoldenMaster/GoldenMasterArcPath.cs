@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Domain.Models.GoldenMaster
+namespace Domain.GraphicModels.GoldenMaster
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterArcPath

@@ -1,6 +1,4 @@
-using Newtonsoft.Json;
-
-namespace Domain.Models
+namespace Domain.GraphicModels
 {
     public class VitalStatistics
     {

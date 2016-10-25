@@ -1,11 +1,11 @@
 using Newtonsoft.Json;
 
-namespace Domain.Models.GoldenMaster
+namespace Domain.GraphicModels.GoldenMaster
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class GoldenMasterVitalStatistics
+    public class GoldenMasterVitalGraphicStatistics
     {
-        public GoldenMasterVitalStatistics(bool initialise = false)
+        public GoldenMasterVitalGraphicStatistics(bool initialise = false)
         {
             origin = new GoldenMasterPoint();
 

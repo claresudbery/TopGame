@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Domain.Models.GoldenMaster
+namespace Domain.GraphicModels.GoldenMaster
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class GoldenMasterSinglePass
+    public class GoldenMasterSingleGraphicPass
     {
-        public GoldenMasterSinglePass()
+        public GoldenMasterSingleGraphicPass()
         {
             MiniPetalRegions = new List<GoldenMasterGraphicsPath>();
             ArcRegions = new List<GoldenMasterArcRegion>();
@@ -20,7 +20,7 @@ namespace Domain.Models.GoldenMaster
         public int NumPlayersInGame { get; set; }
 
         [JsonProperty]
-        public GoldenMasterVitalStatistics VitalStatistics { get; set; }
+        public GoldenMasterVitalGraphicStatistics VitalGraphicStatistics { get; set; }
 
         [JsonProperty]
         public IList<GoldenMasterGraphicsPath> MiniPetalRegions { get; set; }

@@ -2,8 +2,7 @@
 using System.Configuration;
 using System.IO;
 using Domain;
-using Domain.Models;
-using Domain.Models.GoldenMaster;
+using Domain.GraphicModels.GoldenMaster;
 using NUnit.Framework;
 using FluentAssertions;
 using Newtonsoft.Json;
@@ -20,13 +19,13 @@ namespace UnitTests
         {
             // Arrange
             var topGameAppPath = TestContext.CurrentContext.TestDirectory + @"..\..\..\GoldenMasters\";
-            GoldenMasterList storedGoldenMaster = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(topGameAppPath + _currentGoldenMasterFileName);
+            GoldenMasterGraphicList storedGoldenMasterGraphic = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterGraphicList>(topGameAppPath + _currentGoldenMasterFileName);
 
             // Act
-            var latestCalculatedData = GoldenMasterPopulator.GenerateAllData();
+            var latestCalculatedData = GoldenMasterPopulator.GenerateAllGraphicData();
 
             // Assert
-            latestCalculatedData.ShouldBeEquivalentTo(storedGoldenMaster);
+            latestCalculatedData.ShouldBeEquivalentTo(storedGoldenMasterGraphic);
         }
 
         private string GetFileContentsAsJsonString(string fileNameAndPath)
