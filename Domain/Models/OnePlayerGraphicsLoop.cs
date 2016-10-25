@@ -22,7 +22,7 @@ namespace Domain.Models
 
         private VitalStatistics _vitalStatistics = new VitalStatistics(true);
 
-        Region storedPetalRegion;
+        Region storedPetalRegion; // just for debug purposes: see what the petal region looks like.
         List<Region> subRegions;
         List<ColouredRegion> regionColours;
 
@@ -389,7 +389,7 @@ namespace Domain.Models
                 _vitalStatistics.outerArcSquare.Width = (int)Math.Round(_vitalStatistics.outerArcRadius * 2, 0, MidpointRounding.AwayFromZero);
                 _vitalStatistics.outerArcSquare.Height = (int)Math.Round(_vitalStatistics.outerArcRadius * 2, 0, MidpointRounding.AwayFromZero);
 
-                _vitalStatistics.outerPath.ActualPath.AddArc(_vitalStatistics.outerArcSquare.Rectangle, (float)_vitalStatistics.arcStartAngle, (float)180);
+                _vitalStatistics.outerPath.AddArcPath(_vitalStatistics.outerArcSquare, (float)_vitalStatistics.arcStartAngle, (float)180);
             }
             else
             {
@@ -408,7 +408,7 @@ namespace Domain.Models
                 _vitalStatistics.innerArcSquare.Width = (int)Math.Round(_vitalStatistics.innerArcRadius * 2, 0, MidpointRounding.AwayFromZero);
                 _vitalStatistics.innerArcSquare.Height = (int)Math.Round(_vitalStatistics.innerArcRadius * 2, 0, MidpointRounding.AwayFromZero);
 
-                _vitalStatistics.innerPath.ActualPath.AddArc(_vitalStatistics.innerArcSquare.Rectangle, (float)_vitalStatistics.arcStartAngle, (float)180);
+                _vitalStatistics.innerPath.AddArcPath(_vitalStatistics.innerArcSquare, (float)_vitalStatistics.arcStartAngle, (float)180);
                 _vitalStatistics.innerPath.AddLine(_vitalStatistics.actualInnerArcEnd, _vitalStatistics.actualInnerPetalSource);
             }
 

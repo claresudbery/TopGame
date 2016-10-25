@@ -126,23 +126,69 @@ namespace UnitTests
                     numCardsInPlay = randomNumber++,
                     outerPath = new GoldenMasterGraphicsPath
                     {
-                        PointsOnLine = new List<GoldenMasterPoint>
+                        Lines = new List<GoldenMasterLine>
                         {
-                            new GoldenMasterPoint
+                            new GoldenMasterLine
                             {
-                                X = randomNumber++,
-                                Y = randomNumber++
+                                Start = new GoldenMasterPoint
+                                {
+                                    X = randomNumber++,
+                                    Y = randomNumber++
+                                },
+                                End = new GoldenMasterPoint
+                                {
+                                    X = randomNumber++,
+                                    Y = randomNumber++
+                                }
+                            }
+                        },
+                        ArcPaths = new List<GoldenMasterArcPath>
+                        {
+                            new GoldenMasterArcPath
+                            {
+                                Rectangle = new GoldenMasterRectangle
+                                {
+                                    X = randomNumber++,
+                                    Y = randomNumber++,
+                                    Width = randomNumber++,
+                                    Height = randomNumber++
+                                },
+                                StartAngle = randomNumber++,
+                                SweepAngle = randomNumber++
                             }
                         }
                     },
                     innerPath = new GoldenMasterGraphicsPath
                     {
-                        PointsOnLine = new List<GoldenMasterPoint>
+                        Lines = new List<GoldenMasterLine>
                         {
-                            new GoldenMasterPoint
+                            new GoldenMasterLine
                             {
-                                X = randomNumber++,
-                                Y = randomNumber++
+                                Start = new GoldenMasterPoint
+                                {
+                                    X = randomNumber++,
+                                    Y = randomNumber++
+                                },
+                                End = new GoldenMasterPoint
+                                {
+                                    X = randomNumber++,
+                                    Y = randomNumber++
+                                }
+                            }
+                        },
+                        ArcPaths = new List<GoldenMasterArcPath>
+                        {
+                            new GoldenMasterArcPath
+                            {
+                                Rectangle = new GoldenMasterRectangle
+                                {
+                                    X = randomNumber++,
+                                    Y = randomNumber++,
+                                    Width = randomNumber++,
+                                    Height = randomNumber++
+                                },
+                                StartAngle = randomNumber++,
+                                SweepAngle = randomNumber++
                             }
                         }
                     },

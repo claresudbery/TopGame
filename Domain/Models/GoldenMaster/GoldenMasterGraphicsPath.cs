@@ -8,18 +8,28 @@ namespace Domain.Models.GoldenMaster
     {
         public GoldenMasterGraphicsPath()
         {
-            PointsOnLine = new List<GoldenMasterPoint>();
+            Lines = new List<GoldenMasterLine>();
+            ArcPaths = new List<GoldenMasterArcPath>();
         }
 
         [JsonProperty]
-        public IList<GoldenMasterPoint> PointsOnLine { get; set; }
+        public IList<GoldenMasterLine> Lines { get; set; }
+
+        [JsonProperty]
+        public IList<GoldenMasterArcPath> ArcPaths { get; set; }
 
         public void Copy(TopGameGraphicsPath sourcePath)
         {
-            PointsOnLine.Clear();
-            foreach (var point in sourcePath.PointsOnLine)
+            Lines.Clear();
+            foreach (var line in sourcePath.Lines)
             {
-                PointsOnLine.Add(point.ToGoldenMasterPoint());
+                Lines.Add(line.ToGoldenMasterLine());
+            }
+
+            ArcPaths.Clear();
+            foreach (var arcPath in sourcePath.ArcPaths)
+            {
+                ArcPaths.Add(arcPath.ToGoldenMasterArcPath());
             }
         }
     }

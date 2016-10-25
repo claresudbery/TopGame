@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="GoldenMasterPopulator.cs" />
     <Compile Include="Models\ColouredRegion.cs" />
+    <Compile Include="Models\GoldenMaster\GoldenMasterLine.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterGraphicsPath.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterList.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterPoint.cs" />
@@ -59,7 +60,10 @@
     <Compile Include="Models\GoldenMaster\GoldenMasterSinglePass.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterVitalStatistics.cs" />
     <Compile Include="Models\OnePlayerGraphicsLoop.cs" />
+    <Compile Include="Models\GoldenMaster\GoldenMasterArcPath.cs" />
+    <Compile Include="Models\TopGameArcPath.cs" />
     <Compile Include="Models\TopGameGraphicsPath.cs" />
+    <Compile Include="Models\TopGameLine.cs" />
     <Compile Include="Models\TopGamePoint.cs" />
     <Compile Include="Models\TopGamePointCollection.cs" />
     <Compile Include="Models\TopGameRectangle.cs" />

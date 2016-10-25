@@ -7,6 +7,7 @@ Golden Masters:
 	005: f6c721b4b7aad6a9d86388c733761992643671e7: Bug fixed - GetMaxCentralAngle is now using the correct number of hands in its if statement, rather than always using 3. 
 	006: bb7e6dc979a0bb0f08613c9a9858ab6f690f25cf: After creating GoldenMasterRegion and GoldenMasterPoint - trying to work out why data has changed.
 	007: 122301258787400c24908ac3f9f5cd2f62355a8c: Bug fixed: where each new golden master pass was referencing the same underlying data, which was changing each time.
+	008: GraphicsPath objects now store lines and arcs instead of points
 	
 Mongo DB:
 	Links:
@@ -29,6 +30,77 @@ To do:
 	Find out whether subregions can be recreated using everything in VitalStatistics. If not, add in subregions to golden master.
 	Get rid of commented-out code
 	
+**************************************
+WORKING OUT WHAT KIND OF DATA TO STORE FOR REGIONS
+**************************************
+	
+**************************************
+This is basically its own mini petal - it's what happens if there are only two cards
+**************************************
+using (GraphicsPath tempRegionPath = new GraphicsPath())
+{
+	// the division is the arc itself.
+	tempRegionPath.AddArc(_vitalStatistics.outerArcSquare.Rectangle, (float)_vitalStatistics.arcStartAngle, (float)180);
+	tempRegionPath.AddLine(_vitalStatistics.actualOuterArcStart.Point, _vitalStatistics.actualOuterArcEnd.Point);
+	subRegions.Add(new Region(tempRegionPath));
+	
+	
+**************************************
+ARC REGION
+**************************************
+_vitalStatistics.outerPath.AddLine(_vitalStatistics.origin, _vitalStatistics.actualOuterArcStart);
+_vitalStatistics.outerPath.ActualPath.AddArc(_vitalStatistics.outerArcSquare.Rectangle, (float)_vitalStatistics.arcStartAngle, (float)180);
+_vitalStatistics.innerPath.AddLine(_vitalStatistics.actualInnerPetalSource, _vitalStatistics.actualInnerArcStart);
+_vitalStatistics.innerPath.ActualPath.AddArc(_vitalStatistics.innerArcSquare.Rectangle, (float)_vitalStatistics.arcStartAngle, (float)180);
+
+using (Region petalRegion = new Region(_vitalStatistics.outerPath.ActualPath))
+{
+	if (_vitalStatistics.innerArmLength > 0)
+	{
+		petalRegion.Exclude(_vitalStatistics.innerPath.ActualPath);
+	}
+	using (GraphicsPath tempRegionPath = new GraphicsPath())
+	{
+		tempRegionPath.AddLine(pointA.Point, pointB.Point);
+		tempRegionPath.AddLine(pointB.Point, pointC.Point);
+		tempRegionPath.AddLine(pointC.Point, pointA.Point);
+
+		using (Region tempRegion = new Region(petalRegion.Clone().GetRegionData()))
+		{
+			tempRegion.Intersect(tempRegionPath);
+			subRegions.Add(new Region(tempRegion.GetRegionData()));
+		}
+
+	
+**************************************
+TRIANGLE REGION
+**************************************
+using (GraphicsPath tempRegionPath = new GraphicsPath())
+{
+	tempRegionPath.AddLine(pointA.Point, pointB.Point);
+	tempRegionPath.AddLine(pointB.Point, pointC.Point);
+	tempRegionPath.AddLine(pointC.Point, pointA.Point);
+
+	subRegions.Add(new Region(tempRegionPath));
+	
+	
+**************************************
+PARALLELOGRAM REGION
+**************************************
+using (GraphicsPath tempRegionPath = new GraphicsPath())
+{
+	tempRegionPath.AddLine(pointA.Point, pointB.Point);
+	tempRegionPath.AddLine(pointB.Point, pointC.Point);
+	tempRegionPath.AddLine(pointC.Point, pointD.Point);
+	tempRegionPath.AddLine(pointD.Point, pointA.Point);
+
+	subRegions.Add(new Region(tempRegionPath));
+
+	
+	
+*******************************************
+bug fixing
+*******************************************
 2 cards in loop, 2 players in game:
 	latest code - at time of building object:
 		AddTriangularRegion
@@ -50,8 +122,7 @@ To do:
 			actualInnerPetalSource: 202,219
 	original code - allGoldenMasters.GoldenMasters[11].TopGameRegions[0].TopGamePoints[2].Y - later:
 		2,3: 223
-		2,4: 224
-		
+		2,4: 224		
 
 	**************
 	before the bug:

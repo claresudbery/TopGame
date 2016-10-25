@@ -8,7 +8,8 @@ namespace Domain.Models
     {
         public TopGameGraphicsPath()
         {
-            PointsOnLine = new List<TopGamePoint>();
+            Lines = new List<TopGameLine>();
+            ArcPaths = new List<TopGameArcPath>();
         }
 
         public void Initialise()
@@ -20,17 +21,26 @@ namespace Domain.Models
 
         public void AddLine(TopGamePoint pointA, TopGamePoint pointB)
         {
-            PointsOnLine.Add(pointA);
+            Lines.Add(new TopGameLine(pointA, pointB));
             ActualPath.AddLine(pointA.Point, pointB.Point);
+        }
+
+        public void AddArcPath(TopGameRectangle rectangle, float startAngle, float sweepAngle)
+        {
+            ArcPaths.Add(new TopGameArcPath(rectangle, startAngle, sweepAngle));
+            ActualPath.AddArc(rectangle.Rectangle, startAngle, sweepAngle);
         }
 
         public void Reset()
         {
-            PointsOnLine.Clear();
+            Lines.Clear();
+            ArcPaths.Clear();
             ActualPath.Reset();
         }
         
-        public IList<TopGamePoint> PointsOnLine { get; set; }
+        public IList<TopGameLine> Lines { get; set; }
+
+        public IList<TopGameArcPath> ArcPaths { get; set; }
 
         public GraphicsPath ActualPath { get; set; }
 
@@ -40,10 +50,16 @@ namespace Domain.Models
         /// <param name="sourcePath"></param>
         public void Copy(TopGameGraphicsPath sourcePath)
         {
-            PointsOnLine.Clear();
-            foreach (var point in sourcePath.PointsOnLine)
+            Lines.Clear();
+            foreach (var point in sourcePath.Lines)
             {
-                PointsOnLine.Add(point);
+                Lines.Add(point);
+            }
+
+            ArcPaths.Clear();
+            foreach (var arcPath in sourcePath.ArcPaths)
+            {
+                ArcPaths.Add(arcPath);
             }
         }
     }
