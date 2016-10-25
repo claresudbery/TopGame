@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Domain.Models
+namespace Domain.Models.GoldenMaster
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterPoint

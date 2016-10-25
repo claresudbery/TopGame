@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Domain.Models;
+using Domain.Models.GoldenMaster;
 using Newtonsoft.Json;
 
 namespace Domain

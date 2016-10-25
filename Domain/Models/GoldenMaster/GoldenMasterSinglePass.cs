@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Domain.Models
+namespace Domain.Models.GoldenMaster
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterSinglePass
@@ -18,7 +18,7 @@ namespace Domain.Models
         public int NumPlayersInGame { get; set; }
 
         [JsonProperty]
-        public VitalStatistics VitalStatistics { get; set; }
+        public GoldenMasterVitalStatistics VitalStatistics { get; set; }
 
         [JsonProperty]
         public IList<GoldenMasterRegion> TopGameRegions { get; set; }

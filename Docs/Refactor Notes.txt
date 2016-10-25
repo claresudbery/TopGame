@@ -6,7 +6,7 @@ Golden Masters:
 	004: c926496202b08255406564e0ef3ab5d413e4795e: Checked out previous version of code to see what golden master was generated.
 	005: f6c721b4b7aad6a9d86388c733761992643671e7: Bug fixed - GetMaxCentralAngle is now using the correct number of hands in its if statement, rather than always using 3. 
 	006: bb7e6dc979a0bb0f08613c9a9858ab6f690f25cf: After creating GoldenMasterRegion and GoldenMasterPoint - trying to work out why data has changed.
-	007: Bug fixed: where each new golden master pass was referencing the same underlying data, which was changing each time.
+	007: 122301258787400c24908ac3f9f5cd2f62355a8c: Bug fixed: where each new golden master pass was referencing the same underlying data, which was changing each time.
 	
 Mongo DB:
 	Links:
@@ -23,6 +23,8 @@ Mongo DB:
 			.\mongod.exe
 		
 To do:
+	Is it ok that GoldenMAsterGraphicsPath doesn't have the ActualPath member that TopGameGraphicsPath has?
+	Remove Json decorators from classes which are no longer getting serialised
 	Get doubles rounded to 6 dec places
 	Check we deal with the fact that angles may change depending on what share of the pack you have?
 	See whether the data is the same if you just copy list of regions directly

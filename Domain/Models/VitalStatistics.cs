@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 
 namespace Domain.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class VitalStatistics
     {
         public VitalStatistics(bool initialise = false)
@@ -51,11 +50,9 @@ namespace Domain.Models
         // ***********************************************************
         // Flags
         // ***********************************************************
-
-        [JsonProperty]
+        
         public bool bMinimumAngleApplied { get; set; }
 
-        [JsonProperty]
         public bool bMaximumAngleApplied { get; set; }
 
 
@@ -63,28 +60,20 @@ namespace Domain.Models
         // Lengths
         // ***********************************************************
 
-        [JsonProperty]
         public double originToArcCentre { get; set; }
 
-        [JsonProperty]
         public double centralSpokeLength { get; set; }
 
-        [JsonProperty]
         public double innerArcRadius { get; set; }
 
-        [JsonProperty]
         public double outerArcRadius { get; set; }
 
-        [JsonProperty]
         public double outerArmLength { get; set; }
 
-        [JsonProperty]
         public double innerArmLength { get; set; }
 
-        [JsonProperty]
         public double constantSegmentLength { get; set; }
 
-        [JsonProperty]
         public double constantCentralSegmentLength { get; set; }
 
 
@@ -92,25 +81,18 @@ namespace Domain.Models
         // Angles
         // ***********************************************************
 
-        [JsonProperty]
         public double maxCentralAngle { get; set; }
 
-        [JsonProperty]
         public double arcStartAngle { get; set; }
 
-        [JsonProperty]
         public double angleB { get; set; }
 
-        [JsonProperty]
         public double angleC { get; set; }
 
-        [JsonProperty]
         public double constantBottomAngle { get; set; }
 
-        [JsonProperty]
         public double centralAngle { get; set; }
 
-        [JsonProperty]
         public double arcSegmentAngle { get; set; }
 
 
@@ -118,43 +100,30 @@ namespace Domain.Models
         // Points
         // ***********************************************************
 
-        [JsonProperty]
         public TopGamePoint origin { get; set; }
 
-        [JsonProperty]
         public TopGamePoint relativeInnerPetalSource { get; set; }
 
-        [JsonProperty]
         public TopGamePoint relativeArcCentre { get; set; }
 
-        [JsonProperty]
         public TopGamePoint relativeInnerArcStart { get; set; }
 
-        [JsonProperty]
         public TopGamePoint relativeInnerArcEnd { get; set; }
 
-        [JsonProperty]
         public TopGamePoint relativeOuterArcStart { get; set; }
 
-        [JsonProperty]
         public TopGamePoint relativeOuterArcEnd { get; set; }
 
-        [JsonProperty]
         public TopGamePoint actualInnerPetalSource { get; set; }
 
-        [JsonProperty]
         public TopGamePoint actualInnerArcStart { get; set; }
 
-        [JsonProperty]
         public TopGamePoint actualInnerArcEnd { get; set; }
 
-        [JsonProperty]
         public TopGamePoint actualArcCentre { get; set; }
 
-        [JsonProperty]
         public TopGamePoint actualOuterArcStart { get; set; }
 
-        [JsonProperty]
         public TopGamePoint actualOuterArcEnd { get; set; }
 
 
@@ -162,19 +131,14 @@ namespace Domain.Models
         // Counts
         // ***********************************************************
 
-        [JsonProperty]
         public int numArmSegments { get; set; }
 
-        [JsonProperty]
         public int numArcSegments { get; set; }
 
-        [JsonProperty]
         public int numTotalSegments { get; set; }
 
-        [JsonProperty]
         public int numTotalCardsInGame { get; set; }
 
-        [JsonProperty]
         public int numCardsInPlay { get; set; }
 
 
@@ -182,10 +146,8 @@ namespace Domain.Models
         // Paths
         // ***********************************************************
         
-        [JsonProperty]
         public TopGameGraphicsPath outerPath { get; set; }
         
-        [JsonProperty]
         public TopGameGraphicsPath innerPath { get; set; }
 
 
@@ -193,19 +155,14 @@ namespace Domain.Models
         // Divisions
         // ***********************************************************
         
-        [JsonProperty]
         public TopGamePointCollection startArmDivisionStarts { get; set; }
         
-        [JsonProperty]
         public TopGamePointCollection startArmDivisionEnds { get; set; }
 
-        [JsonProperty]
         public TopGamePointCollection endArmDivisionStarts { get; set; }
         
-        [JsonProperty]
         public TopGamePointCollection endArmDivisionEnds { get; set; }
         
-        [JsonProperty]
         public TopGamePointCollection arcSpokes { get; set; }
 
 
@@ -213,10 +170,8 @@ namespace Domain.Models
         // Squares
         // ***********************************************************
         
-        [JsonProperty]
         public TopGameRectangle innerArcSquare { get; set; }
         
-        [JsonProperty]
         public TopGameRectangle outerArcSquare { get; set; }
 
 

@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Domain.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class TopGameGraphicsPath
     {
         public TopGameGraphicsPath()
@@ -30,8 +29,7 @@ namespace Domain.Models
             PointsOnLine.Clear();
             ActualPath.Reset();
         }
-
-        [JsonProperty]
+        
         public IList<TopGamePoint> PointsOnLine { get; set; }
 
         public GraphicsPath ActualPath { get; set; }

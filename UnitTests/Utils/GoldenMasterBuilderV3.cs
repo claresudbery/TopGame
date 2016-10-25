@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Domain.Models;
+using Domain.Models.GoldenMaster;
 
 namespace UnitTests
 {
@@ -35,7 +36,7 @@ namespace UnitTests
                         }
                     }
                 },
-                VitalStatistics = new VitalStatistics
+                VitalStatistics = new GoldenMasterVitalStatistics
                 {
                     angleB = randomNumber++,
                     angleC = randomNumber++,
@@ -53,67 +54,67 @@ namespace UnitTests
                     centralAngle = randomNumber++,
                     bMinimumAngleApplied = true,
                     bMaximumAngleApplied = false,
-                    origin = new TopGamePoint
+                    origin = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeInnerPetalSource = new TopGamePoint
+                    relativeInnerPetalSource = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeArcCentre = new TopGamePoint
+                    relativeArcCentre = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeInnerArcStart = new TopGamePoint
+                    relativeInnerArcStart = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeInnerArcEnd = new TopGamePoint
+                    relativeInnerArcEnd = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeOuterArcStart = new TopGamePoint
+                    relativeOuterArcStart = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeOuterArcEnd = new TopGamePoint
+                    relativeOuterArcEnd = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualArcCentre = new TopGamePoint
+                    actualArcCentre = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualInnerArcEnd = new TopGamePoint
+                    actualInnerArcEnd = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualInnerArcStart = new TopGamePoint
+                    actualInnerArcStart = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualInnerPetalSource = new TopGamePoint
+                    actualInnerPetalSource = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualOuterArcEnd = new TopGamePoint
+                    actualOuterArcEnd = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualOuterArcStart = new TopGamePoint
+                    actualOuterArcStart = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
@@ -123,91 +124,91 @@ namespace UnitTests
                     numTotalSegments = randomNumber++,
                     numTotalCardsInGame = randomNumber++,
                     numCardsInPlay = randomNumber++,
-                    outerPath = new TopGameGraphicsPath
+                    outerPath = new GoldenMasterGraphicsPath
                     {
-                        PointsOnLine = new List<TopGamePoint>
+                        PointsOnLine = new List<GoldenMasterPoint>
                         {
-                            new TopGamePoint
+                            new GoldenMasterPoint
                             {
                                 X = randomNumber++,
                                 Y = randomNumber++
                             }
                         }
                     },
-                    innerPath = new TopGameGraphicsPath
+                    innerPath = new GoldenMasterGraphicsPath
                     {
-                        PointsOnLine = new List<TopGamePoint>
+                        PointsOnLine = new List<GoldenMasterPoint>
                         {
-                            new TopGamePoint
+                            new GoldenMasterPoint
                             {
                                 X = randomNumber++,
                                 Y = randomNumber++
                             }
                         }
                     },
-                    startArmDivisionStarts = new TopGamePointCollection
+                    startArmDivisionStarts = new GoldenMasterPointCollection
                     {
-                        Points = new List<TopGamePoint>
+                        Points = new List<GoldenMasterPoint>
                         {
-                            new TopGamePoint
+                            new GoldenMasterPoint
                             {
                                 X = randomNumber++,
                                 Y = randomNumber++
                             }
                         }
                     },
-                    startArmDivisionEnds = new TopGamePointCollection
+                    startArmDivisionEnds = new GoldenMasterPointCollection
                     {
-                        Points = new List<TopGamePoint>
+                        Points = new List<GoldenMasterPoint>
                         {
-                            new TopGamePoint
+                            new GoldenMasterPoint
                             {
                                 X = randomNumber++,
                                 Y = randomNumber++
                             }
                         }
                     },
-                    endArmDivisionStarts = new TopGamePointCollection
+                    endArmDivisionStarts = new GoldenMasterPointCollection
                     {
-                        Points = new List<TopGamePoint>
+                        Points = new List<GoldenMasterPoint>
                         {
-                            new TopGamePoint
+                            new GoldenMasterPoint
                             {
                                 X = randomNumber++,
                                 Y = randomNumber++
                             }
                         }
                     },
-                    endArmDivisionEnds = new TopGamePointCollection
+                    endArmDivisionEnds = new GoldenMasterPointCollection
                     {
-                        Points = new List<TopGamePoint>
+                        Points = new List<GoldenMasterPoint>
                         {
-                            new TopGamePoint
+                            new GoldenMasterPoint
                             {
                                 X = randomNumber++,
                                 Y = randomNumber++
                             }
                         }
                     },
-                    arcSpokes = new TopGamePointCollection
+                    arcSpokes = new GoldenMasterPointCollection
                     {
-                        Points = new List<TopGamePoint>
+                        Points = new List<GoldenMasterPoint>
                         {
-                            new TopGamePoint
+                            new GoldenMasterPoint
                             {
                                 X = randomNumber++,
                                 Y = randomNumber++
                             }
                         }
                     },
-                    innerArcSquare = new TopGameRectangle
+                    innerArcSquare = new GoldenMasterRectangle
                     {
                         X = randomNumber++,
                         Y = randomNumber++,
                         Width = randomNumber++,
                         Height = randomNumber++
                     },
-                    outerArcSquare = new TopGameRectangle
+                    outerArcSquare = new GoldenMasterRectangle
                     {
                         X = randomNumber++,
                         Y = randomNumber++,

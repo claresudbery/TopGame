@@ -1,17 +1,16 @@
 using System.Collections.Generic;
+using Domain.Models.GoldenMaster;
 using Newtonsoft.Json;
 
 namespace Domain.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class TopGameRegion
     {
         public TopGameRegion()
         {
             TopGamePoints = new List<TopGamePoint>();
         }
-
-        [JsonProperty]
+        
         public IList<TopGamePoint> TopGamePoints { get; set; }
 
         public GoldenMasterRegion ToGoldenMasterRegion()
@@ -19,7 +18,7 @@ namespace Domain.Models
             var goldenMasterRegion = new GoldenMasterRegion();
             foreach(var point in TopGamePoints)
             {
-                goldenMasterRegion.TopGamePoints.Add(new GoldenMasterPoint(point.X, point.Y));
+                goldenMasterRegion.TopGamePoints.Add(point.ToGoldenMasterPoint());
             }
             return goldenMasterRegion;
         }

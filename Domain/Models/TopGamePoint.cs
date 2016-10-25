@@ -1,9 +1,9 @@
 using System.Drawing;
+using Domain.Models.GoldenMaster;
 using Newtonsoft.Json;
 
 namespace Domain.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class TopGamePoint
     {
         public TopGamePoint()
@@ -16,15 +16,13 @@ namespace Domain.Models
             _actualPoint.X = x;
             _actualPoint.Y = y;
         }
-
-        [JsonProperty]
+        
         public int X
         {
             get { return _actualPoint.X; }
             set { _actualPoint.X = value; }
         }
-
-        [JsonProperty]
+        
         public int Y
         {
             get { return _actualPoint.Y; }
@@ -37,5 +35,10 @@ namespace Domain.Models
         }
 
         private Point _actualPoint = new Point();
+
+        public GoldenMasterPoint ToGoldenMasterPoint()
+        {
+            return new GoldenMasterPoint(X, Y);
+        }
     }
 }

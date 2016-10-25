@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Domain.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class TopGameRectangle
     {
         public TopGameRectangle()
@@ -18,29 +17,25 @@ namespace Domain.Models
             _actualRectangle.Width = width;
             _actualRectangle.Height = height;
         }
-
-        [JsonProperty]
+        
         public int X
         {
             get { return _actualRectangle.X; }
             set { _actualRectangle.X = value; }
         }
-
-        [JsonProperty]
+        
         public int Y
         {
             get { return _actualRectangle.Y; }
             set { _actualRectangle.Y = value; }
         }
-
-        [JsonProperty]
+        
         public int Width
         {
             get { return _actualRectangle.Width; }
             set { _actualRectangle.Width = value; }
         }
-
-        [JsonProperty]
+        
         public int Height
         {
             get { return _actualRectangle.Height; }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Domain.Models
+namespace Domain.Models.GoldenMaster
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterList

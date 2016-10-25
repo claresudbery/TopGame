@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using Domain;
 using Domain.Models;
+using Domain.Models.GoldenMaster;
 using NUnit.Framework;
 using FluentAssertions;
 

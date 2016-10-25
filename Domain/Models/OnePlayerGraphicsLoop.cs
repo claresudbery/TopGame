@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
+using Domain.Models.GoldenMaster;
 using TopGameWindowsApp;
 
 namespace Domain.Models
@@ -1091,7 +1092,7 @@ namespace Domain.Models
             PrepareActualData(0, resultsOfThisCall);
 
             // Don't copy vital statistics until after the call to PrepareActualData
-            VitalStatistics calculatedStatistics = new VitalStatistics();
+            GoldenMasterVitalStatistics calculatedStatistics = new GoldenMasterVitalStatistics();
             calculatedStatistics.Copy(_vitalStatistics);
 
             // resultsOfThisCall.TopGameRegions will be populated during the call to PrepareActualData above
