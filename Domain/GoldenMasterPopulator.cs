@@ -25,7 +25,6 @@ namespace Domain
 
         public static GoldenMasterList GenerateAllData(int maxPlayers = 12)
         {
-            OnePlayerGraphicsLoop graphicLoop = new OnePlayerGraphicsLoop();
             var allGoldenMasters = new GoldenMasterList();
 
             // Graphics loops have three distinguishing features:
@@ -42,10 +41,10 @@ namespace Domain
             //      ...and for each one of those 52, we do 11 versions, for all the possible numbers of players.
             for (int iCardCount = 1; iCardCount <= 52; iCardCount++)
             {
-                graphicLoop.SetNumTotalSegments(iCardCount);
-
                 for (int playerCount = 2; playerCount <= maxPlayers; playerCount++)
                 {
+                    OnePlayerGraphicsLoop graphicLoop = new OnePlayerGraphicsLoop();
+                    graphicLoop.SetNumTotalSegments(iCardCount);
                     double angleShare = 360 / (playerCount + 1);
                     double maxCentralAngle = OnePlayerGraphicsLoop.GetMaxCentralAngle(angleShare, playerCount + 1);
 

@@ -19,14 +19,11 @@ namespace Domain.Models
             return System.Drawing.Color.CornflowerBlue;
         }
 
-        List<TopGameRegion> _topGameRegions;
-
         private VitalStatistics _vitalStatistics = new VitalStatistics(true);
 
         Region storedPetalRegion;
         //List<GraphicsPath> regionPaths;
         List<Region> subRegions;
-        List<TopGameRegion> graphicsIndependentRegions;
         List<ColouredRegion> regionColours;
 
         public void Dispose()
@@ -39,7 +36,6 @@ namespace Domain.Models
 
         private void DisposeRegions()
         {
-            graphicsIndependentRegions.Clear();
             for (int iCount = subRegions.Count() - 1; iCount >= 0; iCount--)
             {
                 subRegions.ElementAt(iCount).Dispose();
@@ -72,8 +68,7 @@ namespace Domain.Models
             _vitalStatistics.bMinimumAngleApplied = false;
             _vitalStatistics.bMaximumAngleApplied = false;
             CalculateCentralAngle(360, _vitalStatistics.numTotalCardsInGame, false);
-
-            graphicsIndependentRegions = new List<TopGameRegion>();
+            
             subRegions = new List<Region>();
             //regionPaths = new List<GraphicsPath>();
             regionColours = new List<ColouredRegion>();
@@ -335,8 +330,8 @@ namespace Domain.Models
         }
 
         public void PrepareActualData(
-            double rotationAngle, 
-            ICollection<GoldenMasterRegion> goldenMasterRegions = null)
+            double rotationAngle,
+            GoldenMasterSinglePass goldenMasterData = null)
         {            
             // Need to reinitialise constantSegmentLength, in case it was reset in a previous call.
             double segmentAddition = (_vitalStatistics.numTotalSegments > 2) ? (_vitalStatistics.numTotalSegments - 2) % 3 : 0;
@@ -517,7 +512,7 @@ namespace Domain.Models
                 }
 
                 // Create sub-regions
-                DisposeRegions(); // Note that this also clears graphicsIndependentRegions
+                DisposeRegions(); 
                 DisposeRegionPaths();
                 Debug.Assert(subRegions.Count() == 0, "There are some subregions left after disposing of them!");
 
@@ -536,7 +531,7 @@ namespace Domain.Models
                         _vitalStatistics.origin,
                         _vitalStatistics.startArmDivisionStarts.Points.ElementAt(0),
                         _vitalStatistics.actualInnerPetalSource,
-                                goldenMasterRegions);
+                                goldenMasterData);
                 }
                 else
                 {
@@ -545,7 +540,7 @@ namespace Domain.Models
                         _vitalStatistics.origin,
                         _vitalStatistics.startArmDivisionStarts.Points.ElementAt(0),
                         _vitalStatistics.endArmDivisionStarts.Points.ElementAt(0),
-                                goldenMasterRegions);
+                                goldenMasterData);
                     //tempRegionPath.AddLine(_vitalStatistics.origin, _vitalStatistics.startArmDivisionStarts.ElementAt(0));
                     //tempRegionPath.AddLine(_vitalStatistics.startArmDivisionStarts.ElementAt(0), _vitalStatistics.endArmDivisionStarts.ElementAt(0));
                     //tempRegionPath.AddLine(_vitalStatistics.endArmDivisionStarts.ElementAt(0), _vitalStatistics.origin);
@@ -565,7 +560,7 @@ namespace Domain.Models
                                 _vitalStatistics.startArmDivisionEnds.Points.ElementAt(iCount),
                                 _vitalStatistics.startArmDivisionEnds.Points.ElementAt(iCount + 1),
                                 _vitalStatistics.startArmDivisionStarts.Points.ElementAt(iCount + 1),
-                                goldenMasterRegions
+                                goldenMasterData
                                 );
                             //tempRegionPath.Reset();
                             //tempRegionPath.AddLine(_vitalStatistics.startArmDivisionStarts.ElementAt(iCount), _vitalStatistics.startArmDivisionEnds.ElementAt(iCount));
@@ -582,7 +577,7 @@ namespace Domain.Models
                         _vitalStatistics.startArmDivisionEnds.Points.ElementAt(_vitalStatistics.numArmSegments - 1),
                         _vitalStatistics.actualInnerArcStart,
                         _vitalStatistics.actualOuterArcStart,
-                                goldenMasterRegions
+                                goldenMasterData
                         );
                     //tempRegionPath.Reset();
                     //tempRegionPath.AddLine(_vitalStatistics.startArmDivisionStarts.ElementAt(_vitalStatistics.numArmSegments - 1), _vitalStatistics.startArmDivisionEnds.ElementAt(_vitalStatistics.numArmSegments - 1));
@@ -609,13 +604,9 @@ namespace Domain.Models
                             var newTopGameRegion = new TopGameRegion();
                             newTopGameRegion.TopGamePoints.Add(_vitalStatistics.actualOuterArcStart);
                             newTopGameRegion.TopGamePoints.Add(_vitalStatistics.actualOuterArcEnd);
-                            if (goldenMasterRegions != null)
+                            if (goldenMasterData != null)
                             {
-                                goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
-                            }
-                            else
-                            {
-                                graphicsIndependentRegions.Add(newTopGameRegion);
+                                goldenMasterData.TopGameRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
                             }
                         }
                     }
@@ -627,7 +618,7 @@ namespace Domain.Models
                             _vitalStatistics.actualArcCentre, 
                             _vitalStatistics.actualOuterArcStart,
                             _vitalStatistics.arcSpokes.Points.ElementAt(0),
-                                goldenMasterRegions);
+                                goldenMasterData);
                         //tempRegionPath.Reset();
                         //tempRegionPath.AddLine(_vitalStatistics.actualArcCentre, _vitalStatistics.actualOuterArcStart);
                         //tempRegionPath.AddLine(_vitalStatistics.actualOuterArcStart, _vitalStatistics.arcSpokes.ElementAt(0));
@@ -646,7 +637,7 @@ namespace Domain.Models
                                 _vitalStatistics.actualArcCentre,
                                 MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.arcSpokes.Points.ElementAt(iCount - 1), 1.5),
                                 MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.arcSpokes.Points.ElementAt(iCount), 1.5),
-                                goldenMasterRegions);
+                                goldenMasterData);
                             //tempRegionPath.Reset();
                             //tempRegionPath.AddLine(_vitalStatistics.actualArcCentre, MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.arcSpokes.ElementAt(iCount - 1), 1.5));
                             //tempRegionPath.AddLine(MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.arcSpokes.ElementAt(iCount - 1), 1.5), MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.arcSpokes.ElementAt(iCount), 1.5));
@@ -664,7 +655,7 @@ namespace Domain.Models
                             _vitalStatistics.actualArcCentre,
                             MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.arcSpokes.Points.ElementAt(_vitalStatistics.arcSpokes.Points.Count() - 1), 1.5),
                             MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.actualOuterArcEnd, 1.5),
-                                goldenMasterRegions);
+                                goldenMasterData);
                         //tempRegionPath.Reset();
                         //tempRegionPath.AddLine(_vitalStatistics.actualArcCentre, MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.arcSpokes.ElementAt(_vitalStatistics.arcSpokes.Count() - 1), 1.5));
                         //tempRegionPath.AddLine(MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.arcSpokes.ElementAt(_vitalStatistics.arcSpokes.Count() - 1), 1.5), MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.actualOuterArcEnd, 1.5));
@@ -685,7 +676,7 @@ namespace Domain.Models
                         _vitalStatistics.endArmDivisionEnds.Points.ElementAt(_vitalStatistics.numArmSegments - 1),
                         _vitalStatistics.actualInnerArcEnd,
                         _vitalStatistics.actualOuterArcEnd,
-                                goldenMasterRegions
+                                goldenMasterData
                         );
                     //tempRegionPath.Reset();
                     //tempRegionPath.AddLine(_vitalStatistics.endArmDivisionStarts.ElementAt(_vitalStatistics.numArmSegments - 1), _vitalStatistics.endArmDivisionEnds.ElementAt(_vitalStatistics.numArmSegments - 1));
@@ -704,7 +695,7 @@ namespace Domain.Models
                                 _vitalStatistics.endArmDivisionEnds.Points.ElementAt(iCount),
                                 _vitalStatistics.endArmDivisionEnds.Points.ElementAt(iCount - 1),
                                 _vitalStatistics.endArmDivisionStarts.Points.ElementAt(iCount - 1),
-                                goldenMasterRegions
+                                goldenMasterData
                                 );
                             //tempRegionPath.Reset();
                             //tempRegionPath.AddLine(_vitalStatistics.endArmDivisionStarts.ElementAt(iCount), _vitalStatistics.endArmDivisionEnds.ElementAt(iCount));
@@ -726,7 +717,7 @@ namespace Domain.Models
                         _vitalStatistics.origin,
                         _vitalStatistics.endArmDivisionStarts.Points.ElementAt(0),
                         _vitalStatistics.actualInnerPetalSource,
-                                goldenMasterRegions
+                                goldenMasterData
                         );
                     //tempRegionPath.Reset();
                     //tempRegionPath.AddLine(_vitalStatistics.origin, _vitalStatistics.endArmDivisionStarts.ElementAt(0));
@@ -771,7 +762,7 @@ namespace Domain.Models
             TopGamePoint pointA, 
             TopGamePoint pointB, 
             TopGamePoint pointC, 
-            ICollection<GoldenMasterRegion> goldenMasterRegions)
+            GoldenMasterSinglePass goldenMasterData)
         {
             using (GraphicsPath tempRegionPath = new GraphicsPath())
             {
@@ -780,13 +771,9 @@ namespace Domain.Models
                 newTopGameRegion.TopGamePoints.Add(pointB);
                 newTopGameRegion.TopGamePoints.Add(pointC);
 
-                if (goldenMasterRegions != null)
+                if (goldenMasterData != null)
                 {
-                    goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
-                }
-                else
-                {
-                    graphicsIndependentRegions.Add(newTopGameRegion);
+                    goldenMasterData.TopGameRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
                 }
 
                 tempRegionPath.AddLine(pointA.Point, pointB.Point);
@@ -805,7 +792,7 @@ namespace Domain.Models
             TopGamePoint pointA, 
             TopGamePoint pointB, 
             TopGamePoint pointC, 
-            ICollection<GoldenMasterRegion> goldenMasterRegions)
+            GoldenMasterSinglePass goldenMasterData)
         {
             using (GraphicsPath tempRegionPath = new GraphicsPath())
             {
@@ -814,13 +801,9 @@ namespace Domain.Models
                 newTopGameRegion.TopGamePoints.Add(pointB);
                 newTopGameRegion.TopGamePoints.Add(pointC);
 
-                if (goldenMasterRegions != null)
+                if (goldenMasterData != null)
                 {
-                    goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
-                }
-                else
-                {
-                    graphicsIndependentRegions.Add(newTopGameRegion);
+                    goldenMasterData.TopGameRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
                 }
 
                 tempRegionPath.AddLine(pointA.Point, pointB.Point);
@@ -837,7 +820,7 @@ namespace Domain.Models
             TopGamePoint pointB, 
             TopGamePoint pointC, 
             TopGamePoint pointD, 
-            ICollection<GoldenMasterRegion> goldenMasterRegions)
+            GoldenMasterSinglePass goldenMasterData)
         {
             using (GraphicsPath tempRegionPath = new GraphicsPath())
             {
@@ -847,13 +830,9 @@ namespace Domain.Models
                 newTopGameRegion.TopGamePoints.Add(pointC);
                 newTopGameRegion.TopGamePoints.Add(pointD);
 
-                if (goldenMasterRegions != null)
+                if (goldenMasterData != null)
                 {
-                    goldenMasterRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
-                }
-                else
-                {
-                    graphicsIndependentRegions.Add(newTopGameRegion);
+                    goldenMasterData.TopGameRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
                 }
 
                 tempRegionPath.AddLine(pointA.Point, pointB.Point);
@@ -1109,8 +1088,7 @@ namespace Domain.Models
         public GoldenMasterSinglePass PopulateGoldenMaster(int numPlayersInGame)
         {
             var resultsOfThisCall = new GoldenMasterSinglePass();
-            _topGameRegions = new List<TopGameRegion>() ;
-            PrepareActualData(0, resultsOfThisCall.TopGameRegions);
+            PrepareActualData(0, resultsOfThisCall);
 
             // Don't copy vital statistics until after the call to PrepareActualData
             VitalStatistics calculatedStatistics = new VitalStatistics();
