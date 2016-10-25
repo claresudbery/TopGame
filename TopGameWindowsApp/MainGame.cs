@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Resources;
 using Domain;
-using Domain.Models;
+using Domain.GraphicModels;
 
 namespace TopGameWindowsApp
 {
@@ -133,7 +133,7 @@ namespace TopGameWindowsApp
 
             // Make a note of all the graphic loop results returned for all possible numbers of cards per loop, 
             // and all possible numbers of players, so we can unit-test against these expected values.
-            GoldenMasterPopulator.PopulateGoldenMaster();
+            GoldenMasterPopulator.PopulateGraphicGoldenMaster();
 
             allHands.ReloadGraphicLoops();
             DisplayAllDeckContents();

@@ -10,7 +10,7 @@ namespace UnitTests
     [TestFixture]
     public class JsonSerialisationTests
     {
-        private readonly string _jsonFileNameAndPath = ConfigurationManager.AppSettings["json-test-file"];
+        private readonly string _jsonFileNameAndPath = ConfigurationManager.AppSettings["json-graphics-test-file"];
 
         [Test]
         public void Will_serialise_TopGameRectangle_object_to_file_and_read_back_again()
@@ -27,7 +27,7 @@ namespace UnitTests
         }
 
         [Test]
-        public void Will_serialise_GoldenMasterSinglePass_object_to_file_and_read_back_again()
+        public void Will_serialise_GoldenMasterGraphicList_object_to_file_and_read_back_again()
         {
             // Arrange
             GoldenMasterGraphicList goldenMasterGraphicList = GoldenMasterBuilder.BuildSomeGoldenMasters();

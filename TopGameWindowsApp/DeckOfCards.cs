@@ -6,7 +6,7 @@ using nsCard;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
-using Domain.Models;
+using Domain.GraphicModels;
 
 namespace TopGameWindowsApp
 {

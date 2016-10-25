@@ -1,16 +1,16 @@
 Golden Masters:
-	001: Only 52 sets of data (one for each possible number of cards in the loop) - didn't take account of different numbers of players.
-	001-new-props: Same as 001, but with NumTotalSegments renamed to NumCardsInLoop, and with new NumPlayersInGame added - so that it can be compared with newer versions.
-	002: (52 x 11) sets of data - for each possible number of cards, also had between 2 and 12 players.
-	003: c3bccdf17481809679462db7fd60915d30011a02: Lost track of what I was doing. Regenerated the file to make sure I hadn't changed anythign and forgotten.
-	004: c926496202b08255406564e0ef3ab5d413e4795e: Checked out previous version of code to see what golden master was generated.
-	005: f6c721b4b7aad6a9d86388c733761992643671e7: Bug fixed - GetMaxCentralAngle is now using the correct number of hands in its if statement, rather than always using 3. 
-	006: bb7e6dc979a0bb0f08613c9a9858ab6f690f25cf: After creating GoldenMasterRegion and GoldenMasterPoint - trying to work out why data has changed.
-	007: 122301258787400c24908ac3f9f5cd2f62355a8c: Bug fixed: where each new golden master pass was referencing the same underlying data, which was changing each time.
-	008: 34f6256eeb44ce5ab5354b4fa279d4678201fa6f: GraphicsPath objects now store lines and arcs instead of points
-	009: 5ec15a758a5b1e7f2e5397010bb34d546cfd266e: Added the concept of mini petal regions
-	010: d5e6b61af797148257b393ba9c783419a348c543: Added golden-master arc regions
-	011: 53a7071a4f829cf0061403c48ffe957bf97aa9a7: Added golden-master straight-edged regions
+	Graphics-001: Only 52 sets of data (one for each possible number of cards in the loop) - didn't take account of different numbers of players.
+	Graphics-001-new-props: Same as 001, but with NumTotalSegments renamed to NumCardsInLoop, and with new NumPlayersInGame added - so that it can be compared with newer versions.
+	Graphics-002: (52 x 11) sets of data - for each possible number of cards, also had between 2 and 12 players.
+	Graphics-003: c3bccdf17481809679462db7fd60915d30011a02: Lost track of what I was doing. Regenerated the file to make sure I hadn't changed anythign and forgotten.
+	Graphics-004: c926496202b08255406564e0ef3ab5d413e4795e: Checked out previous version of code to see what golden master was generated.
+	Graphics-005: f6c721b4b7aad6a9d86388c733761992643671e7: Bug fixed - GetMaxCentralAngle is now using the correct number of hands in its if statement, rather than always using 3. 
+	Graphics-006: bb7e6dc979a0bb0f08613c9a9858ab6f690f25cf: After creating GoldenMasterRegion and GoldenMasterPoint - trying to work out why data has changed.
+	Graphics-007: 122301258787400c24908ac3f9f5cd2f62355a8c: Bug fixed: where each new golden master pass was referencing the same underlying data, which was changing each time.
+	Graphics-008: 34f6256eeb44ce5ab5354b4fa279d4678201fa6f: GraphicsPath objects now store lines and arcs instead of points
+	Graphics-009: 5ec15a758a5b1e7f2e5397010bb34d546cfd266e: Added the concept of mini petal regions
+	Graphics-010: d5e6b61af797148257b393ba9c783419a348c543: Added golden-master arc regions
+	Graphics-011: 53a7071a4f829cf0061403c48ffe957bf97aa9a7: Added golden-master straight-edged regions
 	
 Mongo DB:
 	Links:
