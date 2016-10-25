@@ -22,5 +22,22 @@ namespace Domain.GameModels.GoldenMaster
         {
             Turns.Clear();
         }
+
+        public void LoadCards(DeckOfCards mainDeck)
+        {
+            Clear();
+            mainDeck.Clear();
+            mainDeck.LoadFullPack();
+            StartDeck = mainDeck.GetDeckContents();
+        }
+
+        public void LoadHands(List<HandOfCards> theHands)
+        {
+            NumPlayers = theHands.Count;
+            foreach (var hand in theHands)
+            {
+                PlayerStartHands.Add(hand.GetDeckContents());
+            }
+        }
     }
 }

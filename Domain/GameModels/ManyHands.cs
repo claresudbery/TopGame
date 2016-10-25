@@ -375,25 +375,19 @@ namespace Domain.GameModels
         {
             _recordingGoldenMaster = true;
 
-            _goldenMasterData.Clear();
-
-            mainDeck.Clear();
-            mainDeck.LoadFullPack();
-            _goldenMasterData.StartDeck = mainDeck.GetDeckContents();
-
-            DealCards();
-            _goldenMasterData.NumPlayers = theHands.Count;
-            foreach (var hand in theHands)
-            {
-                _goldenMasterData.PlayerStartHands.Add(hand.GetDeckContents());
-            }
-
-            cardsInPlay.Clear();
+            InitialiseGoldenMasterData();
             AutoPlay();
 
             _recordingGoldenMaster = false;
-
             return _goldenMasterData;
+        }
+
+        private void InitialiseGoldenMasterData()
+        {
+            cardsInPlay.Clear();
+            DealCards();
+            _goldenMasterData.LoadCards(mainDeck);
+            _goldenMasterData.LoadHands(theHands);
         }
 
         private void NoteGoldenMasterTurnInfo(int iPlayerIndex)
