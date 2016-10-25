@@ -35,21 +35,6 @@ namespace UnitTests
         }
 
         [Test]
-        public void When_max_players_is_two_then_generated_data_should_be_the_same_as_version_001_with_new_properties()
-        {
-            // Arrange & Act
-            var topGameAppPath = TestContext.CurrentContext.TestDirectory + @"..\..\..\GoldenMasters\";
-            GoldenMasterList goldenMaster001 = TopGameJsonWriter.ReadFromJsonFile<GoldenMasterList>(topGameAppPath + "TopGame-GoldenMaster-001-new-props.json");
-
-            // Act
-            var latestCalculatedData = GoldenMasterPopulator.GenerateAllData(2);
-
-            // Assert
-            latestCalculatedData.GoldenMasters.Count.Equals(goldenMaster001.GoldenMasters.Count);
-            latestCalculatedData.ShouldBeEquivalentTo(goldenMaster001);
-        }
-
-        [Test]
         public void Version_002_should_be_the_same_as_version_004()
         {
             // Arrange & Act
