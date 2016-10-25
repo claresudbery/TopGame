@@ -24,12 +24,10 @@ Mongo DB:
 		
 To do:
 	Is it ok that GoldenMAsterGraphicsPath doesn't have the ActualPath member that TopGameGraphicsPath has?
-	Remove Json decorators from classes which are no longer getting serialised
-	Get doubles rounded to 6 dec places
 	Check we deal with the fact that angles may change depending on what share of the pack you have?
-	See whether the data is the same if you just copy list of regions directly
 	Add in list of colours
 	Find out whether subregions can be recreated using everything in VitalStatistics. If not, add in subregions to golden master.
+	Get rid of commented-out code
 	
 2 cards in loop, 2 players in game:
 	latest code - at time of building object:
