@@ -11,7 +11,7 @@ Golden Masters:
 	Graphics-009: 5ec15a758a5b1e7f2e5397010bb34d546cfd266e: Added the concept of mini petal regions
 	Graphics-010: d5e6b61af797148257b393ba9c783419a348c543: Added golden-master arc regions
 	Graphics-011: 53a7071a4f829cf0061403c48ffe957bf97aa9a7: Added golden-master straight-edged regions
-	Graphics-012: Regenerated to take account of renamed properties on golden master classes.
+	Graphics-012: d2febc927be89761dc04d21b0b3b2a09fcc90dca: Regenerated to take account of renamed properties on golden master classes.
 	Game-001: 7535145f77fed9c8847ded8885be042d399a0bde: First attempt to store game data. Storing all moves for 2 to 12 players, using unshuffled deck each time.
 	Game-002: 6d241618fcaff0daa36a943684c44c01d6f531d0: Added player start hands and num players.
 	
@@ -30,7 +30,9 @@ Mongo DB:
 			.\mongod.exe
 		
 To do:
-	Get rid of bmpDisplayLines in ManyHands and HandOfCards
+	The latest tests (All_arc_regions_should_start_and_end_at_the_same_point and All_straight_edged_regions_should_start_and_end_at_the_same_point) 
+		...are invalid! We are storing corners, not start / end... so the first and last will not be the same.
+		But what we can do is test whether neighbouring regions share the same corners at their border - I think this is where the bug lies.
 	Check we deal with the fact that angles may change depending on what share of the pack you have?
 	
 **************************************

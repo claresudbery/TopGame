@@ -70,6 +70,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="GraphicDataTests.cs" />
+    <Compile Include="TestCheckResult.cs" />
     <Compile Include="Utils\GoldenMasterBuilder.cs" />
     <Compile Include="Utils\GoldenMasterBuilderV2.cs" />
     <Compile Include="Utils\GoldenMasterBuilderV3.cs" />
