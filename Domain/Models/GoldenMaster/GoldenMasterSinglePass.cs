@@ -8,9 +8,9 @@ namespace Domain.Models.GoldenMaster
     {
         public GoldenMasterSinglePass()
         {
-            TopGameRegions = new List<GoldenMasterRegion>();
             MiniPetalRegions = new List<GoldenMasterGraphicsPath>();
             ArcRegions = new List<GoldenMasterArcRegion>();
+            StraightEdgedRegions = new List<GoldenMasterStraightEdgedRegion>();
         }
         
         [JsonProperty]
@@ -23,12 +23,12 @@ namespace Domain.Models.GoldenMaster
         public GoldenMasterVitalStatistics VitalStatistics { get; set; }
 
         [JsonProperty]
-        public IList<GoldenMasterRegion> TopGameRegions { get; set; }
-
-        [JsonProperty]
         public IList<GoldenMasterGraphicsPath> MiniPetalRegions { get; set; }
 
         [JsonProperty]
         public IList<GoldenMasterArcRegion> ArcRegions { get; set; }
+
+        [JsonProperty]
+        public IList<GoldenMasterStraightEdgedRegion> StraightEdgedRegions { get; set; }
     }
 }

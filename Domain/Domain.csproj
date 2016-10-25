@@ -59,6 +59,7 @@
     <Compile Include="Models\GoldenMaster\GoldenMasterRectangle.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterRegion.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterSinglePass.cs" />
+    <Compile Include="Models\GoldenMaster\GoldenMasterStraightEdgedRegion.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterVitalStatistics.cs" />
     <Compile Include="Models\OnePlayerGraphicsLoop.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterArcPath.cs" />

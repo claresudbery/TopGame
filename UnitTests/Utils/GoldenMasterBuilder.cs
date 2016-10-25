@@ -22,11 +22,62 @@ namespace UnitTests
             return new GoldenMasterSinglePass
             {
                 NumCardsInLoop = randomNumber++,
-                TopGameRegions = new List<GoldenMasterRegion>
+                MiniPetalRegions = new List<GoldenMasterGraphicsPath>
                 {
-                    new GoldenMasterRegion
+                    new GoldenMasterGraphicsPath 
                     {
-                        TopGamePoints = new List<GoldenMasterPoint>
+                        Lines = new List<GoldenMasterLine>
+                        {
+                            new GoldenMasterLine
+                            {
+                                Start = new GoldenMasterPoint
+                                {
+                                    X = randomNumber++,
+                                    Y = randomNumber++
+                                },
+                                End = new GoldenMasterPoint
+                                {
+                                    X = randomNumber++,
+                                    Y = randomNumber++
+                                }
+                            }
+                        },
+                        ArcPaths = new List<GoldenMasterArcPath>
+                        {
+                            new GoldenMasterArcPath
+                            {
+                                Rectangle = new GoldenMasterRectangle
+                                {
+                                    X = randomNumber++,
+                                    Y = randomNumber++,
+                                    Width = randomNumber++,
+                                    Height = randomNumber++
+                                },
+                                StartAngle = randomNumber++,
+                                SweepAngle = randomNumber++
+                            }
+                        }
+                    }
+                },
+                ArcRegions = new List<GoldenMasterArcRegion>
+                {
+                    new GoldenMasterArcRegion
+                    {
+                        Corners = new List<GoldenMasterPoint>
+                        {
+                            new GoldenMasterPoint
+                            {
+                                X = randomNumber++,
+                                Y = randomNumber++
+                            }
+                        }
+                    }
+                },
+                StraightEdgedRegions = new List<GoldenMasterStraightEdgedRegion>
+                {
+                    new GoldenMasterStraightEdgedRegion
+                    {
+                        Corners = new List<GoldenMasterPoint>
                         {
                             new GoldenMasterPoint
                             {

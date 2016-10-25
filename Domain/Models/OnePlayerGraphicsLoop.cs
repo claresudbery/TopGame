@@ -678,23 +678,18 @@ namespace Domain.Models
             TopGamePoint pointC, 
             GoldenMasterSinglePass goldenMasterData)
         {
-            using (GraphicsPath tempRegionPath = new GraphicsPath())
+            TopGameGraphicsPath tempRegionPath = new TopGameGraphicsPath();
+            tempRegionPath.AddLine(pointA, pointB);
+            tempRegionPath.AddLine(pointB, pointC);
+            tempRegionPath.AddLine(pointC, pointA);
+
+            subRegions.Add(new Region(tempRegionPath.ActualPath));
+
+            if (goldenMasterData != null)
             {
-                var newTopGameRegion = new TopGameRegion();
-                newTopGameRegion.TopGamePoints.Add(pointA);
-                newTopGameRegion.TopGamePoints.Add(pointB);
-                newTopGameRegion.TopGamePoints.Add(pointC);
-
-                if (goldenMasterData != null)
-                {
-                    goldenMasterData.TopGameRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
-                }
-
-                tempRegionPath.AddLine(pointA.Point, pointB.Point);
-                tempRegionPath.AddLine(pointB.Point, pointC.Point);
-                tempRegionPath.AddLine(pointC.Point, pointA.Point);
-
-                subRegions.Add(new Region(tempRegionPath));
+                var straightEdgedRegion = new GoldenMasterStraightEdgedRegion();
+                straightEdgedRegion.Copy(tempRegionPath);
+                goldenMasterData.StraightEdgedRegions.Add(straightEdgedRegion);
             }
         }
 
@@ -705,25 +700,19 @@ namespace Domain.Models
             TopGamePoint pointD, 
             GoldenMasterSinglePass goldenMasterData)
         {
-            using (GraphicsPath tempRegionPath = new GraphicsPath())
+            TopGameGraphicsPath tempRegionPath = new TopGameGraphicsPath();
+            tempRegionPath.AddLine(pointA, pointB);
+            tempRegionPath.AddLine(pointB, pointC);
+            tempRegionPath.AddLine(pointC, pointD);
+            tempRegionPath.AddLine(pointD, pointA);
+
+            subRegions.Add(new Region(tempRegionPath.ActualPath));
+
+            if (goldenMasterData != null)
             {
-                var newTopGameRegion = new TopGameRegion();
-                newTopGameRegion.TopGamePoints.Add(pointA);
-                newTopGameRegion.TopGamePoints.Add(pointB);
-                newTopGameRegion.TopGamePoints.Add(pointC);
-                newTopGameRegion.TopGamePoints.Add(pointD);
-
-                if (goldenMasterData != null)
-                {
-                    goldenMasterData.TopGameRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
-                }
-
-                tempRegionPath.AddLine(pointA.Point, pointB.Point);
-                tempRegionPath.AddLine(pointB.Point, pointC.Point);
-                tempRegionPath.AddLine(pointC.Point, pointD.Point);
-                tempRegionPath.AddLine(pointD.Point, pointA.Point);
-
-                subRegions.Add(new Region(tempRegionPath));
+                var straightEdgedRegion = new GoldenMasterStraightEdgedRegion();
+                straightEdgedRegion.Copy(tempRegionPath);
+                goldenMasterData.StraightEdgedRegions.Add(straightEdgedRegion);
             }
         }
 
