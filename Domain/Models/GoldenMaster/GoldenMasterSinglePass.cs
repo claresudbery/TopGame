@@ -9,6 +9,7 @@ namespace Domain.Models.GoldenMaster
         public GoldenMasterSinglePass()
         {
             TopGameRegions = new List<GoldenMasterRegion>();
+            MiniPetalRegions = new List<GoldenMasterGraphicsPath>();
         }
         
         [JsonProperty]
@@ -22,5 +23,8 @@ namespace Domain.Models.GoldenMaster
 
         [JsonProperty]
         public IList<GoldenMasterRegion> TopGameRegions { get; set; }
+
+        [JsonProperty]
+        public IList<GoldenMasterGraphicsPath> MiniPetalRegions { get; set; }
     }
 }

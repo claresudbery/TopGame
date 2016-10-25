@@ -7,7 +7,8 @@ Golden Masters:
 	005: f6c721b4b7aad6a9d86388c733761992643671e7: Bug fixed - GetMaxCentralAngle is now using the correct number of hands in its if statement, rather than always using 3. 
 	006: bb7e6dc979a0bb0f08613c9a9858ab6f690f25cf: After creating GoldenMasterRegion and GoldenMasterPoint - trying to work out why data has changed.
 	007: 122301258787400c24908ac3f9f5cd2f62355a8c: Bug fixed: where each new golden master pass was referencing the same underlying data, which was changing each time.
-	008: GraphicsPath objects now store lines and arcs instead of points
+	008: 34f6256eeb44ce5ab5354b4fa279d4678201fa6f: GraphicsPath objects now store lines and arcs instead of points
+	009: Added the concept of mini petal regions
 	
 Mongo DB:
 	Links:

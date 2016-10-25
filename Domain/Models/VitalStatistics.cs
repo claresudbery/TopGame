@@ -4,7 +4,7 @@ namespace Domain.Models
 {
     public class VitalStatistics
     {
-        public VitalStatistics(bool initialise = false)
+        public VitalStatistics()
         {
             origin = new TopGamePoint();
 
@@ -36,14 +36,6 @@ namespace Domain.Models
 
             innerArcSquare = new TopGameRectangle();
             outerArcSquare = new TopGameRectangle();
-
-            if (initialise)
-            {
-                // The json deserialisation tests fail for some reason on the ShouldAllBeEquivalentTo assertion if the GraphicsPath objects are newed up on creation.
-                // So we only new them up in production code.
-                outerPath.Initialise();
-                innerPath.Initialise();
-            }
         }
 
 

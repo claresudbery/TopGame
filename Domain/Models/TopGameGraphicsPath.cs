@@ -10,12 +10,6 @@ namespace Domain.Models
         {
             Lines = new List<TopGameLine>();
             ArcPaths = new List<TopGameArcPath>();
-        }
-
-        public void Initialise()
-        {
-            // The json deserialisation tests fail for some reason on the ShouldAllBeEquivalentTo assertion if the GraphicsPath objects are newed up on creation.
-            // So we only new them up in production code.
             ActualPath = new GraphicsPath();
         }
 

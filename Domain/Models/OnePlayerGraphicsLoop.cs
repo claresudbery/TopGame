@@ -20,7 +20,7 @@ namespace Domain.Models
             return System.Drawing.Color.CornflowerBlue;
         }
 
-        private VitalStatistics _vitalStatistics = new VitalStatistics(true);
+        private VitalStatistics _vitalStatistics = new VitalStatistics();
 
         Region storedPetalRegion; // just for debug purposes: see what the petal region looks like.
         List<Region> subRegions;
@@ -533,20 +533,17 @@ namespace Domain.Models
                 {
                     if (_vitalStatistics.arcSpokes.Points.Count() == 0)
                     {
-                        using (GraphicsPath tempRegionPath = new GraphicsPath())
-                        {
-                            // the division is the arc itself.
-                            tempRegionPath.AddArc(_vitalStatistics.outerArcSquare.Rectangle, (float)_vitalStatistics.arcStartAngle, (float)180);
-                            tempRegionPath.AddLine(_vitalStatistics.actualOuterArcStart.Point, _vitalStatistics.actualOuterArcEnd.Point);
-                            subRegions.Add(new Region(tempRegionPath));
+                        // the division is the arc itself.
+                        TopGameGraphicsPath tempRegionPath = new TopGameGraphicsPath();
+                        tempRegionPath.AddArcPath(_vitalStatistics.outerArcSquare, (float)_vitalStatistics.arcStartAngle, (float)180);
+                        tempRegionPath.AddLine(_vitalStatistics.actualOuterArcStart, _vitalStatistics.actualOuterArcEnd);
+                        subRegions.Add(new Region(tempRegionPath.ActualPath));
 
-                            var newTopGameRegion = new TopGameRegion();
-                            newTopGameRegion.TopGamePoints.Add(_vitalStatistics.actualOuterArcStart);
-                            newTopGameRegion.TopGamePoints.Add(_vitalStatistics.actualOuterArcEnd);
-                            if (goldenMasterData != null)
-                            {
-                                goldenMasterData.TopGameRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
-                            }
+                        if (goldenMasterData != null)
+                        {
+                            var miniPetalRegion = new GoldenMasterGraphicsPath();
+                            miniPetalRegion.Copy(tempRegionPath);
+                            goldenMasterData.MiniPetalRegions.Add(miniPetalRegion);
                         }
                     }
                     else
