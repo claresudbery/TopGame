@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="GoldenMasterPopulator.cs" />
     <Compile Include="Models\ColouredRegion.cs" />
+    <Compile Include="Models\GoldenMaster\GoldenMasterArcRegion.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterLine.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterGraphicsPath.cs" />
     <Compile Include="Models\GoldenMaster\GoldenMasterList.cs" />

@@ -653,27 +653,22 @@ namespace Domain.Models
             TopGamePoint pointC, 
             GoldenMasterSinglePass goldenMasterData)
         {
-            using (GraphicsPath tempRegionPath = new GraphicsPath())
+            TopGameGraphicsPath tempRegionPath = new TopGameGraphicsPath();
+            tempRegionPath.AddLine(pointA, pointB);
+            tempRegionPath.AddLine(pointB, pointC);
+            tempRegionPath.AddLine(pointC, pointA);
+
+            using (Region tempRegion = new Region(petalRegion.Clone().GetRegionData()))
             {
-                var newTopGameRegion = new TopGameRegion();
-                newTopGameRegion.TopGamePoints.Add(pointA);
-                newTopGameRegion.TopGamePoints.Add(pointB);
-                newTopGameRegion.TopGamePoints.Add(pointC);
+                tempRegion.Intersect(tempRegionPath.ActualPath);
+                subRegions.Add(new Region(tempRegion.GetRegionData()));
+            }
 
-                if (goldenMasterData != null)
-                {
-                    goldenMasterData.TopGameRegions.Add(newTopGameRegion.ToGoldenMasterRegion());
-                }
-
-                tempRegionPath.AddLine(pointA.Point, pointB.Point);
-                tempRegionPath.AddLine(pointB.Point, pointC.Point);
-                tempRegionPath.AddLine(pointC.Point, pointA.Point);
-
-                using (Region tempRegion = new Region(petalRegion.Clone().GetRegionData()))
-                {
-                    tempRegion.Intersect(tempRegionPath);
-                    subRegions.Add(new Region(tempRegion.GetRegionData()));
-                }
+            if (goldenMasterData != null)
+            {
+                var arcRegion = new GoldenMasterArcRegion();
+                arcRegion.Copy(tempRegionPath);
+                goldenMasterData.ArcRegions.Add(arcRegion);
             }
         }
 

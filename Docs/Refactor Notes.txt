@@ -9,6 +9,7 @@ Golden Masters:
 	007: 122301258787400c24908ac3f9f5cd2f62355a8c: Bug fixed: where each new golden master pass was referencing the same underlying data, which was changing each time.
 	008: 34f6256eeb44ce5ab5354b4fa279d4678201fa6f: GraphicsPath objects now store lines and arcs instead of points
 	009: Added the concept of mini petal regions
+	010: Added golden-master arc regions
 	
 Mongo DB:
 	Links:

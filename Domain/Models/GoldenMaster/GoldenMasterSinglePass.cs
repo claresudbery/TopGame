@@ -10,6 +10,7 @@ namespace Domain.Models.GoldenMaster
         {
             TopGameRegions = new List<GoldenMasterRegion>();
             MiniPetalRegions = new List<GoldenMasterGraphicsPath>();
+            ArcRegions = new List<GoldenMasterArcRegion>();
         }
         
         [JsonProperty]
@@ -26,5 +27,8 @@ namespace Domain.Models.GoldenMaster
 
         [JsonProperty]
         public IList<GoldenMasterGraphicsPath> MiniPetalRegions { get; set; }
+
+        [JsonProperty]
+        public IList<GoldenMasterArcRegion> ArcRegions { get; set; }
     }
 }
