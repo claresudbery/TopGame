@@ -10,7 +10,7 @@ Golden Masters:
 	008: 34f6256eeb44ce5ab5354b4fa279d4678201fa6f: GraphicsPath objects now store lines and arcs instead of points
 	009: 5ec15a758a5b1e7f2e5397010bb34d546cfd266e: Added the concept of mini petal regions
 	010: d5e6b61af797148257b393ba9c783419a348c543: Added golden-master arc regions
-	011: Added golden-master straight-edged regions
+	011: 53a7071a4f829cf0061403c48ffe957bf97aa9a7: Added golden-master straight-edged regions
 	
 Mongo DB:
 	Links:
