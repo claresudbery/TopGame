@@ -8,10 +8,18 @@ namespace Domain.GraphicModels.GoldenMaster
     {
         public GoldenMasterRegion()
         {
-            TopGamePoints = new List<GoldenMasterPoint>();
+            Corners = new List<GoldenMasterPoint>();
         }
 
         [JsonProperty]
-        public IList<GoldenMasterPoint> TopGamePoints { get; set; }
+        public IList<GoldenMasterPoint> Corners { get; set; }
+
+        public void Copy(TopGameGraphicsPath sourcePath)
+        {
+            foreach (var line in sourcePath.Lines)
+            {
+                Corners.Add(line.Start.ToGoldenMasterPoint());
+            }
+        }
     }
 }
