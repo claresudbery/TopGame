@@ -22,7 +22,7 @@ namespace UnitTests
             return new GoldenMasterSingleGraphicPass
             {
                 NumCardsInLoop = randomNumber++,
-                MiniPetalRegions = new List<GoldenMasterMiniPetalRegion>
+                Regions = new List<GoldenMasterRegion>
                 {
                     new GoldenMasterMiniPetalRegion
                     {
@@ -68,10 +68,7 @@ namespace UnitTests
                                 }
                             }
                         }
-                    }
-                },
-                ArcRegions = new List<GoldenMasterArcRegion>
-                {
+                    },
                     new GoldenMasterArcRegion
                     {
                         Corners = new List<GoldenMasterPoint>
@@ -82,10 +79,7 @@ namespace UnitTests
                                 Y = randomNumber++
                             }
                         }
-                    }
-                },
-                StraightEdgedRegions = new List<GoldenMasterStraightEdgedRegion>
-                {
+                    },
                     new GoldenMasterStraightEdgedRegion
                     {
                         Corners = new List<GoldenMasterPoint>

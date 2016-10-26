@@ -543,7 +543,7 @@ namespace Domain.GraphicModels
                         {
                             var miniPetalRegion = new GoldenMasterMiniPetalRegion();
                             miniPetalRegion.Copy(tempRegionPath);
-                            goldenMasterData.MiniPetalRegions.Add(miniPetalRegion);
+                            goldenMasterData.Regions.Add(miniPetalRegion);
                         }
                     }
                     else
@@ -668,7 +668,7 @@ namespace Domain.GraphicModels
             {
                 var arcRegion = new GoldenMasterArcRegion();
                 arcRegion.Copy(tempRegionPath);
-                goldenMasterData.ArcRegions.Add(arcRegion);
+                goldenMasterData.Regions.Add(arcRegion);
             }
         }
 
@@ -689,7 +689,7 @@ namespace Domain.GraphicModels
             {
                 var straightEdgedRegion = new GoldenMasterStraightEdgedRegion();
                 straightEdgedRegion.Copy(tempRegionPath);
-                goldenMasterData.StraightEdgedRegions.Add(straightEdgedRegion);
+                goldenMasterData.Regions.Add(straightEdgedRegion);
             }
         }
 
@@ -712,7 +712,7 @@ namespace Domain.GraphicModels
             {
                 var straightEdgedRegion = new GoldenMasterStraightEdgedRegion();
                 straightEdgedRegion.Copy(tempRegionPath);
-                goldenMasterData.StraightEdgedRegions.Add(straightEdgedRegion);
+                goldenMasterData.Regions.Add(straightEdgedRegion);
             }
         }
 
