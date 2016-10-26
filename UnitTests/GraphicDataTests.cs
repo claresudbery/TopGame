@@ -15,13 +15,13 @@ namespace UnitTests
     public class GraphicDataTests
     {
         [Test]
-        public void All_arc_regions_should_start_and_end_at_the_same_point()
+        public void All_adjacent_regions_should_share_two_points()
         {
             // Arrange & Act
             var goldenMasters = GoldenMasterPopulator.GenerateAllGraphicData().GoldenMasters;
 
             // Assert
-            List<TestCheckResult> results = CheckArcRegionsForStartAndEnd(goldenMasters);
+            List<TestCheckResult> results = CheckRegionsForAdjacentSides(goldenMasters);
             bool allAssertionsAreTrue = results.All(assertion => assertion.Result == true);
             string errorMessage = results.Any(assertion => assertion.Result == false)
                 ? AllErrorMessagesCommaSeparated(results)
@@ -30,82 +30,50 @@ namespace UnitTests
             Assert.IsTrue(allAssertionsAreTrue, errorMessage);
         }
 
-        [Test]
-        public void All_straight_edged_regions_should_start_and_end_at_the_same_point()
-        {
-            // Arrange & Act
-            var goldenMasters = GoldenMasterPopulator.GenerateAllGraphicData().GoldenMasters;
-
-            // Assert
-            List<TestCheckResult> results = CheckStraightEdgedRegionsForStartAndEnd(goldenMasters);
-            bool allAssertionsAreTrue = results.All(assertion => assertion.Result == true);
-            string errorMessage = results.Any(assertion => assertion.Result == false)
-                ? AllErrorMessagesCommaSeparated(results)
-                : "";
-
-            Assert.IsTrue(allAssertionsAreTrue, errorMessage);
-        }
-
-        private List<TestCheckResult> CheckStraightEdgedRegionsForStartAndEnd(List<GoldenMasterSingleGraphicPass> goldenMasters)
+        private List<TestCheckResult> CheckRegionsForAdjacentSides(List<GoldenMasterSingleGraphicPass> goldenMasters)
         {
             var results = new List<TestCheckResult>();
 
-            //foreach (var goldenMaster in goldenMasters)
-            //{
-            //    var straightEdgedRegions = goldenMaster.StraightEdgedRegions;
+            foreach (var goldenMaster in goldenMasters)
+            {
+                var regions = goldenMaster.Regions;
 
-            //    foreach (var straightEdgedRegion in straightEdgedRegions)
-            //    {
-            //        results = CheckStartAndEnd(results, straightEdgedRegion.Corners, goldenMaster, straightEdgedRegions.IndexOf(straightEdgedRegion), "straight-edged");
-            //    }
-            //}
+                for (int index = 0; index < (regions.Count - 1); index++)
+                {
+                    results = LookForAdjacentSides(
+                        results,
+                        regions[index].Corners,
+                        regions[index + 1].Corners,
+                        goldenMaster, 
+                        index);
+                }
+            }
 
             return results;
         }
 
-        private List<TestCheckResult> CheckArcRegionsForStartAndEnd(List<GoldenMasterSingleGraphicPass> goldenMasters)
-        {
-            var results = new List<TestCheckResult>();
-
-            //foreach (var goldenMaster in goldenMasters)
-            //{
-            //    var arcRegions = goldenMaster.ArcRegions;
-
-            //    foreach (var arcRegion in arcRegions)
-            //    {
-            //        results = CheckStartAndEnd(results, arcRegion.Corners, goldenMaster, arcRegions.IndexOf(arcRegion), "arc");
-            //    }
-            //}
-
-            return results;
-        }
-
-        private List<TestCheckResult> CheckStartAndEnd(
-            List<TestCheckResult> results, 
-            IList<GoldenMasterPoint> corners,
+        private List<TestCheckResult> LookForAdjacentSides(
+            List<TestCheckResult> results,
+            IList<GoldenMasterPoint> currentCorners,
+            IList<GoldenMasterPoint> nextCorners,
             GoldenMasterSingleGraphicPass goldenMaster,
-            int regionIndex,
-            string regionType)
+            int regionIndex)
         {
             List<TestCheckResult> latestResults = results;
             string errorMessage = string.Empty;
-            int numCorners = corners.Count;
-            bool startAndEndAreTheSame = corners[0].X == corners[numCorners - 1].X
-                                         && corners[0].Y == corners[numCorners - 1].Y;
-            //if (!startAndEndAreTheSame)
-            //{
+            var sharedPoints = currentCorners.Intersect(nextCorners);
+            bool adjacentSides = sharedPoints.Count() == 2;
+
+            if (!adjacentSides)
+            {
                 errorMessage =
-                    string.Format("For {0} players and {1} cards, the {2} region at index {3} starts at [{4}, {5}] but ends at [{6}, {7}]",
-                        goldenMaster.NumPlayersInGame,
-                        goldenMaster.NumCardsInLoop,
-                        regionType,
-                        regionIndex,
-                        corners[0].X,
-                        corners[0].Y,
-                        corners[1].X,
-                        corners[1].Y);
-            //}
-            latestResults.Add(new TestCheckResult { Result = startAndEndAreTheSame, ErrorMessage = errorMessage });
+                string.Format("{0} players {1} cards: Regions {2} and {3} not adjacent",
+                    goldenMaster.NumPlayersInGame,
+                    goldenMaster.NumCardsInLoop,
+                    regionIndex,
+                    regionIndex + 1);
+            }
+            latestResults.Add(new TestCheckResult { Result = adjacentSides, ErrorMessage = errorMessage });
 
             return latestResults;
         }

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Domain.GraphicModels.GoldenMaster
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public abstract class GoldenMasterRegion
+    public class GoldenMasterRegion
     {
         protected GoldenMasterRegion()
         {
