@@ -77,6 +77,7 @@
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterLine.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterGraphicsPath.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterGraphicList.cs" />
+    <Compile Include="GraphicModels\GoldenMaster\GoldenMasterMiniPetalRegion.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterPoint.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterPointCollection.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterRectangle.cs" />

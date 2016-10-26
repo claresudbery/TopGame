@@ -541,7 +541,7 @@ namespace Domain.GraphicModels
 
                         if (goldenMasterData != null)
                         {
-                            var miniPetalRegion = new GoldenMasterGraphicsPath();
+                            var miniPetalRegion = new GoldenMasterMiniPetalRegion();
                             miniPetalRegion.Copy(tempRegionPath);
                             goldenMasterData.MiniPetalRegions.Add(miniPetalRegion);
                         }

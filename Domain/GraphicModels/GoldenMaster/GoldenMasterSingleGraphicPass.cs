@@ -8,7 +8,7 @@ namespace Domain.GraphicModels.GoldenMaster
     {
         public GoldenMasterSingleGraphicPass()
         {
-            MiniPetalRegions = new List<GoldenMasterGraphicsPath>();
+            MiniPetalRegions = new List<GoldenMasterMiniPetalRegion>();
             ArcRegions = new List<GoldenMasterArcRegion>();
             StraightEdgedRegions = new List<GoldenMasterStraightEdgedRegion>();
         }
@@ -23,7 +23,7 @@ namespace Domain.GraphicModels.GoldenMaster
         public GoldenMasterVitalGraphicStatistics VitalGraphicStatistics { get; set; }
 
         [JsonProperty]
-        public IList<GoldenMasterGraphicsPath> MiniPetalRegions { get; set; }
+        public IList<GoldenMasterMiniPetalRegion> MiniPetalRegions { get; set; }
 
         [JsonProperty]
         public IList<GoldenMasterArcRegion> ArcRegions { get; set; }

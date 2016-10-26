@@ -14,7 +14,7 @@ namespace Domain.GraphicModels.GoldenMaster
         [JsonProperty]
         public IList<GoldenMasterPoint> Corners { get; set; }
 
-        public void Copy(TopGameGraphicsPath sourcePath)
+        public virtual void Copy(TopGameGraphicsPath sourcePath)
         {
             foreach (var line in sourcePath.Lines)
             {
