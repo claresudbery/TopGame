@@ -13,7 +13,7 @@ Golden Masters:
 	Graphics-011: 53a7071a4f829cf0061403c48ffe957bf97aa9a7: Added golden-master straight-edged regions
 	Graphics-012: d2febc927be89761dc04d21b0b3b2a09fcc90dca: Regenerated to take account of renamed properties on golden master classes.
 	Graphics-013: 30be24b2d48d566cbb2d7679fe3334aaec3ef66f: New MiniPetalRegion class, with its own Corners collection.
-	Graphics-014: All regions now in one Regions collection.
+	Graphics-014: c3749aec440d8f7d831a5874da5d1ba5162ed7a6: All regions now in one Regions collection.
 	Game-001: 7535145f77fed9c8847ded8885be042d399a0bde: First attempt to store game data. Storing all moves for 2 to 12 players, using unshuffled deck each time.
 	Game-002: 6d241618fcaff0daa36a943684c44c01d6f531d0: Added player start hands and num players.
 	
