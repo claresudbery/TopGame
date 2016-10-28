@@ -32,19 +32,14 @@ Mongo DB:
 			.\mongod.exe
 		
 To do:
-	The latest tests (All_arc_regions_should_start_and_end_at_the_same_point and All_straight_edged_regions_should_start_and_end_at_the_same_point) 
-		...are invalid! We are storing corners, not start / end... so the first and last will not be the same.
-		But what we can do is test whether neighbouring regions share the same corners at their border - I think this is where the bug lies.
-		To test this, we can:
-			Create a new MiniPetalRegion class, which has two properties:
-				RegionNumber
-				GoldenMasterGraphicsPath
-			Add RegionNumber property to the following classes:
-				GoldenMasterArcRegion
-				GoldenMasterStraightEdgedRegion
-			Luckily regions are created in order, so we can note region number every time we add a new one, and increment a regionNumber counter at that point
-			Finally we can cycle through all the regions via region number, and check their neighbouring edges.
-			This way, region numbers will only be stored in golden master data - we might possibly want to put a wrapper class around Region, or this might not be necessary.
+	The colour-leak problems are (I think) caused by the fact that the lines drawn from actualArcCentre to actualOuterArcStart and actualOuterArcEnd
+		don't quite line up with the lines which mark the ends of the petal region.
+		NB the petal region is a petal border, ie it's the whole curved bit with a hole in the middle
+		(but not including the straight arms).
+		Because those lines don't quite match up, you get leakage (I think).
+	The reasons the neighbouring parallelograms and arcs don't share corners are
+		1) the arcs all use actualArcCentre as one of their corners
+		2) the arcs use MoveAlongLineByFraction on actualOuterArcStart and actualOuterArcEnd, which means they don's share those points with the parallelograms.
 	Check we deal with the fact that angles may change depending on what share of the pack you have?
 	
 **************************************

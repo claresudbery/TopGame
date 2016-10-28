@@ -551,9 +551,9 @@ namespace Domain.GraphicModels
                         // 1st arc division
                         AddArcRegion(
                             petalRegion, 
-                            _vitalStatistics.actualArcCentre, 
-                            _vitalStatistics.actualOuterArcStart,
-                            _vitalStatistics.arcSpokes.Points.ElementAt(0),
+                            _vitalStatistics.actualArcCentre,
+                            MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.actualOuterArcStart, 1.5),
+                            MoveAlongLineByFraction(_vitalStatistics.actualArcCentre, _vitalStatistics.arcSpokes.Points.ElementAt(0), 1.5),
                                 goldenMasterData);
 
                         // middle arc divisions

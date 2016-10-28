@@ -61,18 +61,49 @@ namespace UnitTests
         {
             List<TestCheckResult> latestResults = results;
             string errorMessage = string.Empty;
-            var sharedPoints = currentCorners.Intersect(nextCorners);
+            var sharedPoints = currentCorners.Intersect(nextCorners, new GoldenMasterPointEqualityComparer());
             bool adjacentSides = sharedPoints.Count() == 2;
 
             if (!adjacentSides)
             {
-                errorMessage =
-                string.Format("{0} players {1} cards: Regions {2} and {3} not adjacent",
-                    goldenMaster.NumPlayersInGame,
-                    goldenMaster.NumCardsInLoop,
-                    regionIndex,
-                    regionIndex + 1);
+                //if (goldenMaster.NumCardsInLoop == 14 && goldenMaster.NumPlayersInGame == 2)
+                //{
+                    errorMessage =
+                    string.Format("{0} players {1} cards: Regions {2} and {3} not adjacent",
+                        goldenMaster.NumPlayersInGame,
+                        goldenMaster.NumCardsInLoop,
+                        regionIndex,
+                        regionIndex + 1);
+                    //string.Format("Region {0}: ", regionIndex);
+                    //foreach (var corner in currentCorners)
+                    //{
+                    //    errorMessage = errorMessage + string.Format("[{0}, {1}] ",
+                    //        corner.X, corner.Y);
+                    //}
+                //}
+                //else
+                //{
+                //    adjacentSides = true;
+                //}
             }
+
+
+            //if (goldenMaster.NumCardsInLoop == 14 && goldenMaster.NumPlayersInGame == 2)
+            //{
+            //    errorMessage =
+            //    string.Format("Region {0}: ", regionIndex);
+            //    foreach (var corner in currentCorners)
+            //    {
+            //        errorMessage = errorMessage + string.Format("[{0}, {1}] ",
+            //            corner.X, corner.Y);
+            //    }
+            //    adjacentSides = false;
+            //}
+            //else
+            //{
+            //    adjacentSides = true;
+            //}
+
             latestResults.Add(new TestCheckResult { Result = adjacentSides, ErrorMessage = errorMessage });
 
             return latestResults;
@@ -82,7 +113,7 @@ namespace UnitTests
         {
             return assertions.Where(assertion => assertion.Result == false)
                 .Select(assertion => assertion.ErrorMessage)
-                .Aggregate((working, next) => working + ", " + next);
+                .Aggregate((working, next) => working + "\n" + next);
         }
     }
 }
