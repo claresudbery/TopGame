@@ -1,0 +1,533 @@
+
+    {
+      "NumCardsInLoop": 14,
+      "NumPlayersInGame": 2,
+      "VitalGraphicStatistics": {
+        "MinimumAngleApplied": false,
+        "MaximumAngleApplied": false,
+        "OriginToArcCentre": 46.882771937624227,
+        "CentralSpokeLength": 9.3765543875248465,
+        "InnerArcRadius": 42.335767916557479,
+        "OuterArcRadius": 52.919709895696847,
+        "OuterArmLength": 70.7,
+        "InnerArmLength": 56.56,
+        "ConstantSegmentLength": 14.14,
+        "ConstantCentralSegmentLength": 14.14,
+        "MaxCentralAngle": 100.0,
+        "ArcStartAngle": 108.46153846153845,
+        "AngleB": 30.0,
+        "AngleC": 41.53846153846154,
+        "ConstantBottomAngle": 120.0,
+        "CentralAngle": 96.92307692307692,
+        "ArcSegmentAngle": 45.0,
+        "Origin": {
+          "X": 215,
+          "Y": 215
+        },
+        "RelativeInnerPetalSource": {
+          "X": -9,
+          "Y": -3
+        },
+        "RelativeArcCentre": {
+          "X": -44,
+          "Y": -15
+        },
+        "RelativeInnerArcStart": {
+          "X": -22,
+          "Y": -52
+        },
+        "RelativeInnerArcEnd": {
+          "X": -49,
+          "Y": 28
+        },
+        "RelativeOuterArcStart": {
+          "X": -28,
+          "Y": -65
+        },
+        "RelativeOuterArcEnd": {
+          "X": -61,
+          "Y": 35
+        },
+        "ActualInnerPetalSource": {
+          "X": 206,
+          "Y": 212
+        },
+        "ActualInnerArcStart": {
+          "X": 184,
+          "Y": 160
+        },
+        "ActualInnerArcEnd": {
+          "X": 157,
+          "Y": 240
+        },
+        "ActualArcCentre": {
+          "X": 171,
+          "Y": 200
+        },
+        "ActualOuterArcStart": {
+          "X": 187,
+          "Y": 150
+        },
+        "ActualOuterArcEnd": {
+          "X": 154,
+          "Y": 250
+        },
+        "NumArmSegments": 4,
+        "NumArcSegments": 4,
+        "NumTotalSegments": 14,
+        "NumTotalCardsInGame": 52,
+        "NumCardsInPlay": 0,
+        "OuterPath": {
+          "Lines": [
+            {
+              "Start": {
+                "X": 215,
+                "Y": 215
+              },
+              "End": {
+                "X": 187,
+                "Y": 150
+              }
+            },
+            {
+              "Start": {
+                "X": 154,
+                "Y": 250
+              },
+              "End": {
+                "X": 215,
+                "Y": 215
+              }
+            }
+          ],
+          "ArcPaths": [
+            {
+              "Rectangle": {
+                "X": 118,
+                "Y": 147,
+                "Width": 106,
+                "Height": 106
+              },
+              "StartAngle": 108.46154,
+              "SweepAngle": 180.0
+            }
+          ]
+        },
+        "InnerPath": {
+          "Lines": [
+            {
+              "Start": {
+                "X": 206,
+                "Y": 212
+              },
+              "End": {
+                "X": 184,
+                "Y": 160
+              }
+            },
+            {
+              "Start": {
+                "X": 157,
+                "Y": 240
+              },
+              "End": {
+                "X": 206,
+                "Y": 212
+              }
+            }
+          ],
+          "ArcPaths": [
+            {
+              "Rectangle": {
+                "X": 129,
+                "Y": 158,
+                "Width": 85,
+                "Height": 85
+              },
+              "StartAngle": 108.46154,
+              "SweepAngle": 180.0
+            }
+          ]
+        },
+        "StartArmDivisionStarts": {
+          "Points": [
+            {
+              "X": 209,
+              "Y": 202
+            },
+            {
+              "X": 204,
+              "Y": 189
+            },
+            {
+              "X": 198,
+              "Y": 176
+            },
+            {
+              "X": 193,
+              "Y": 163
+            }
+          ]
+        },
+        "StartArmDivisionEnds": {
+          "Points": [
+            {
+              "X": 206,
+              "Y": 212
+            },
+            {
+              "X": 200,
+              "Y": 199
+            },
+            {
+              "X": 195,
+              "Y": 186
+            },
+            {
+              "X": 189,
+              "Y": 173
+            }
+          ]
+        },
+        "EndArmDivisionStarts": {
+          "Points": [
+            {
+              "X": 203,
+              "Y": 222
+            },
+            {
+              "X": 191,
+              "Y": 229
+            },
+            {
+              "X": 178,
+              "Y": 236
+            },
+            {
+              "X": 166,
+              "Y": 243
+            }
+          ]
+        },
+        "EndArmDivisionEnds": {
+          "Points": [
+            {
+              "X": 206,
+              "Y": 212
+            },
+            {
+              "X": 194,
+              "Y": 219
+            },
+            {
+              "X": 181,
+              "Y": 226
+            },
+            {
+              "X": 169,
+              "Y": 233
+            }
+          ]
+        },
+        "ArcSpokes": {
+          "Points": [
+            {
+              "X": 147,
+              "Y": 153
+            },
+            {
+              "X": 121,
+              "Y": 184
+            },
+            {
+              "X": 123,
+              "Y": 223
+            }
+          ]
+        },
+        "InnerArcSquare": {
+          "X": 129,
+          "Y": 158,
+          "Width": 85,
+          "Height": 85
+        },
+        "OuterArcSquare": {
+          "X": 118,
+          "Y": 147,
+          "Width": 106,
+          "Height": 106
+        }
+      },
+      "Regions": [
+        {
+          "Type": "StraightEdged",
+          "Corners": [
+            {
+              "X": 215,
+              "Y": 215
+            },
+            {
+              "X": 209,
+              "Y": 202
+            },
+            {
+              "X": 206,
+              "Y": 212
+            }
+          ]
+        },
+        {
+          "Type": "StraightEdged",
+          "Corners": [
+            {
+              "X": 209,
+              "Y": 202
+            },
+            {
+              "X": 206,
+              "Y": 212
+            },
+            {
+              "X": 200,
+              "Y": 199
+            },
+            {
+              "X": 204,
+              "Y": 189
+            }
+          ]
+        },
+        {
+          "Type": "StraightEdged",
+          "Corners": [
+            {
+              "X": 204,
+              "Y": 189
+            },
+            {
+              "X": 200,
+              "Y": 199
+            },
+            {
+              "X": 195,
+              "Y": 186
+            },
+            {
+              "X": 198,
+              "Y": 176
+            }
+          ]
+        },
+        {
+          "Type": "StraightEdged",
+          "Corners": [
+            {
+              "X": 198,
+              "Y": 176
+            },
+            {
+              "X": 195,
+              "Y": 186
+            },
+            {
+              "X": 189,
+              "Y": 173
+            },
+            {
+              "X": 193,
+              "Y": 163
+            }
+          ]
+        },
+        {
+          "Type": "StraightEdged",
+          "Corners": [
+            {
+              "X": 193,
+              "Y": 163
+            },
+            {
+              "X": 189,
+              "Y": 173
+            },
+            {
+              "X": 184,
+              "Y": 160
+            },
+            {
+              "X": 187,
+              "Y": 150
+            }
+          ]
+        },
+        {
+          "Type": "Arc",
+          "Corners": [
+            {
+              "X": 171,
+              "Y": 200
+            },
+            {
+              "X": 195,
+              "Y": 125
+            },
+            {
+              "X": 135,
+              "Y": 129
+            }
+          ]
+        },
+        {
+          "Type": "Arc",
+          "Corners": [
+            {
+              "X": 171,
+              "Y": 200
+            },
+            {
+              "X": 135,
+              "Y": 129
+            },
+            {
+              "X": 96,
+              "Y": 176
+            }
+          ]
+        },
+        {
+          "Type": "Arc",
+          "Corners": [
+            {
+              "X": 171,
+              "Y": 200
+            },
+            {
+              "X": 96,
+              "Y": 176
+            },
+            {
+              "X": 99,
+              "Y": 235
+            }
+          ]
+        },
+        {
+          "Type": "Arc",
+          "Corners": [
+            {
+              "X": 171,
+              "Y": 200
+            },
+            {
+              "X": 99,
+              "Y": 235
+            },
+            {
+              "X": 145,
+              "Y": 275
+            }
+          ]
+        },
+        {
+          "Type": "StraightEdged",
+          "Corners": [
+            {
+              "X": 166,
+              "Y": 243
+            },
+            {
+              "X": 169,
+              "Y": 233
+            },
+            {
+              "X": 157,
+              "Y": 240
+            },
+            {
+              "X": 154,
+              "Y": 250
+            }
+          ]
+        },
+        {
+          "Type": "StraightEdged",
+          "Corners": [
+            {
+              "X": 166,
+              "Y": 243
+            },
+            {
+              "X": 169,
+              "Y": 233
+            },
+            {
+              "X": 181,
+              "Y": 226
+            },
+            {
+              "X": 178,
+              "Y": 236
+            }
+          ]
+        },
+        {
+          "Type": "StraightEdged",
+          "Corners": [
+            {
+              "X": 178,
+              "Y": 236
+            },
+            {
+              "X": 181,
+              "Y": 226
+            },
+            {
+              "X": 194,
+              "Y": 219
+            },
+            {
+              "X": 191,
+              "Y": 229
+            }
+          ]
+        },
+        {
+          "Type": "StraightEdged",
+          "Corners": [
+            {
+              "X": 191,
+              "Y": 229
+            },
+            {
+              "X": 194,
+              "Y": 219
+            },
+            {
+              "X": 206,
+              "Y": 212
+            },
+            {
+              "X": 203,
+              "Y": 222
+            }
+          ]
+        },
+        {
+          "Type": "StraightEdged",
+          "Corners": [
+            {
+              "X": 215,
+              "Y": 215
+            },
+            {
+              "X": 203,
+              "Y": 222
+            },
+            {
+              "X": 206,
+              "Y": 212
+            }
+          ]
+        }
+      ]
+    },

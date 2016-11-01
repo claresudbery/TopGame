@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
+using Domain.Extensions;
 using Domain.GraphicModels.GoldenMaster;
 using TopGameWindowsApp;
 
@@ -47,8 +48,8 @@ namespace Domain.GraphicModels
             _vitalStatistics.ConstantBottomAngle = 90;
             _vitalStatistics.Origin.X = 215; // 430; // 500, 360
             _vitalStatistics.Origin.Y = 215; // 430; // 400, 360
-            _vitalStatistics.ConstantSegmentLength = TopGameConstants.CONSTANT_SEGMENT_LENGTH;
-            _vitalStatistics.ConstantCentralSegmentLength = TopGameConstants.CONSTANT_SEGMENT_LENGTH;
+            _vitalStatistics.ConstantSegmentLength = TopGameConstants.ConstantSegmentLength;
+            _vitalStatistics.ConstantCentralSegmentLength = TopGameConstants.ConstantSegmentLength;
             _vitalStatistics.NumTotalCardsInGame = 52;
             _vitalStatistics.NumTotalSegments = 0;
             _vitalStatistics.NumCardsInPlay = 0;
@@ -280,9 +281,9 @@ namespace Domain.GraphicModels
             _vitalStatistics.CentralAngle = ((double)_vitalStatistics.NumTotalSegments / (double)numCardsBeingShared) * numDegreesAvailable;
             if ((_vitalStatistics.CentralAngle > 0) && !bSuppressMinAndMax)
             {
-                if (_vitalStatistics.CentralAngle < TopGameConstants.MIN_CENTRAL_ANGLE)
+                if (_vitalStatistics.CentralAngle < TopGameConstants.MinCentralAngle)
                 {
-                    _vitalStatistics.CentralAngle = TopGameConstants.MIN_CENTRAL_ANGLE;
+                    _vitalStatistics.CentralAngle = TopGameConstants.MinCentralAngle;
                     _vitalStatistics.MinimumAngleApplied = true;
                 }
                 if (_vitalStatistics.CentralAngle > _vitalStatistics.MaxCentralAngle)
@@ -306,31 +307,15 @@ namespace Domain.GraphicModels
         public void PrepareActualData(
             double rotationAngle,
             GoldenMasterSingleGraphicPass goldenMasterData = null)
-        {            
-            // Need to reinitialise ConstantSegmentLength, in case it was reset in a previous call.
-            double segmentAddition = (_vitalStatistics.NumTotalSegments > 2) ? (_vitalStatistics.NumTotalSegments - 2) % 3 : 0;
-            _vitalStatistics.ConstantSegmentLength = TopGameConstants.CONSTANT_SEGMENT_LENGTH + (0.7 * segmentAddition);
+        {
+            _vitalStatistics.NumArmSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3() : 0;
+            _vitalStatistics.NumArcSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3PlusLeftovers() : 0;
 
-            _vitalStatistics.NumArmSegments = (_vitalStatistics.NumTotalSegments > 1) ? (_vitalStatistics.NumTotalSegments - 2) / 3 : 0;
-            _vitalStatistics.NumArcSegments = (_vitalStatistics.NumTotalSegments > 2) ? _vitalStatistics.NumArmSegments + (_vitalStatistics.NumTotalSegments - 2) % 3 : 0;
+            CalculateConstantSegmentLength();
 
-            // STARTS ****central segment length change STARTS
             _vitalStatistics.CentralSpokeLength = GetAdjacentSide(_vitalStatistics.ConstantSegmentLength, _vitalStatistics.CentralAngle / 2);
+
             _vitalStatistics.OuterArmLength = (_vitalStatistics.NumArmSegments + 1) * _vitalStatistics.ConstantSegmentLength;
-            // ENDS ****central segment length change ENDS
-
-            if (_vitalStatistics.OuterArmLength > (_vitalStatistics.Origin.Y - 70))
-            {
-                // Arms are getting too big - won't fit in frame. 
-                // So just stop at this max value and change ConstantSegmentLength proportionately.
-                _vitalStatistics.ConstantSegmentLength = ((_vitalStatistics.Origin.Y - 70) / _vitalStatistics.NumArmSegments) - (0.7 * 2) + (0.7 * segmentAddition);
-
-                // So now we'll get a new outer arm length, etc
-                _vitalStatistics.CentralSpokeLength = GetAdjacentSide(_vitalStatistics.ConstantSegmentLength, _vitalStatistics.CentralAngle / 2);
-                _vitalStatistics.OuterArmLength = (_vitalStatistics.NumArmSegments + 1) * _vitalStatistics.ConstantSegmentLength;
-            }
-
-            // (inner arm not affected by central segment length)
             _vitalStatistics.InnerArmLength = _vitalStatistics.NumArmSegments * _vitalStatistics.ConstantSegmentLength;
 
             _vitalStatistics.InnerArcRadius = (_vitalStatistics.InnerArmLength > 0) ? GetOppositeSide(_vitalStatistics.InnerArmLength, _vitalStatistics.CentralAngle / 2) : 0;
@@ -624,6 +609,50 @@ namespace Domain.GraphicModels
             {
                 RotateByAngle(rotationAngle);
             }
+        }
+
+        private void CalculateConstantSegmentLength()
+        {
+            _vitalStatistics.ConstantSegmentLength = TopGameConstants.ConstantSegmentLength;
+            GrowSegmentLengthByALittleToAccountForExtraArcSegments();
+
+            double potentialOuterArmLength = (_vitalStatistics.NumArmSegments + 1) * _vitalStatistics.ConstantSegmentLength;
+            if (potentialOuterArmLength > MaximumArmLengthWhichFitsInFrame())
+            {
+                _vitalStatistics.ConstantSegmentLength = MaximumArmLengthWhichFitsInFrame() / _vitalStatistics.NumArmSegments;
+                ShrinkSegmentLengthByALittleToAccountForExtraArcSegments();
+            }
+        }
+
+        private void GrowSegmentLengthByALittleToAccountForExtraArcSegments()
+        {
+            double segmentAddition = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().LeftoverAfterDividedBy3() : 0;
+            _vitalStatistics.ConstantSegmentLength = _vitalStatistics.ConstantSegmentLength + (TopGameConstants.SegmentGrowthRatio * segmentAddition);
+        }
+
+        private void ShrinkSegmentLengthByALittleToAccountForExtraArcSegments()
+        {
+            double segmentAddition = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().LeftoverAfterDividedBy3() : 0;
+
+            //_vitalStatistics.ConstantSegmentLength = _vitalStatistics.ConstantSegmentLength 
+            //  - (TopGameConstants.SegmentGrowthRatio * (2 - segmentAddition));
+            _vitalStatistics.ConstantSegmentLength = _vitalStatistics.ConstantSegmentLength
+                - (TopGameConstants.SegmentGrowthRatio * 2) + (TopGameConstants.SegmentGrowthRatio * segmentAddition);
+        }
+
+        private int MaximumArmLengthWhichFitsInFrame()
+        {
+            return _vitalStatistics.Origin.Y - 70;
+        }
+
+        private bool ArcWillExist()
+        {
+            return _vitalStatistics.NumTotalSegments > 2;
+        }
+
+        private int NumSegmentsContainedInArmsAndArc()
+        {
+            return _vitalStatistics.NumTotalSegments - 2;
         }
 
         private void ClearAllArmDivisions()

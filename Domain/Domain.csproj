@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="GameModels\Card.cs" />
     <Compile Include="GameModels\DeckDisplayLine.cs" />
     <Compile Include="GameModels\DeckOfCards.cs" />

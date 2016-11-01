@@ -1,0 +1,92 @@
+(184,160)(157,240)(171,200)(187,150)(154,250)
+
+
+"ActualInnerArcStart":
+184	160
+"ActualInnerArcEnd":
+157	240
+"ActualArcCentre":
+171	200
+"ActualOuterArcStart":
+187	150
+"ActualOuterArcEnd":
+154	250
+
+"Origin":
+215	215
+
+"StartArmDivisionStarts" (4):
+209	202
+204	189
+198	176
+193	163
+
+"StartArmDivisionEnds" (4):
+206	212
+200	199
+195	186
+189	173
+
+"EndArmDivisionStarts" (4): 
+203	222
+191	229
+178	236
+166	243
+
+"EndArmDivisionEnds" (4): 
+206	212
+194	219
+181	226
+169	233
+
+"ArcSpokes" (3): 
+147	153
+121	184
+123	223
+
+
+
+      "NumCardsInLoop": 3,
+      "NumPlayersInGame": 2,
+        "OuterArmLength": 14.84,
+        "ConstantSegmentLength": 14.84,
+		
+      "NumCardsInLoop": 4,
+      "NumPlayersInGame": 2,
+        "OuterArmLength": 15.540000000000001,
+        "ConstantSegmentLength": 15.540000000000001,
+		
+      "NumCardsInLoop": 5,
+      "NumPlayersInGame": 2,
+        "OuterArmLength": 28.28,
+        "ConstantSegmentLength": 14.14,
+		
+      "NumCardsInLoop": 6,
+      "NumPlayersInGame": 2,
+        "OuterArmLength": 29.68,
+        "ConstantSegmentLength": 14.84,
+		
+      "NumCardsInLoop": 7,
+      "NumPlayersInGame": 2,
+        "OuterArmLength": 31.080000000000002,
+        "ConstantSegmentLength": 15.540000000000001,
+		
+      "NumCardsInLoop": 8,
+      "NumPlayersInGame": 2,
+        "OuterArmLength": 42.42,
+        "ConstantSegmentLength": 14.14,
+		
+      "NumCardsInLoop": 9,
+      "NumPlayersInGame": 2,
+        "OuterArmLength": 44.519999999999996,
+        "ConstantSegmentLength": 14.84,
+		
+      "NumCardsInLoop": 10,
+      "NumPlayersInGame": 2,
+        "OuterArmLength": 46.620000000000005,
+        "ConstantSegmentLength": 15.540000000000001,
+		
+      "NumCardsInLoop": 11,
+      "NumPlayersInGame": 2,
+        "OuterArmLength": 56.56,
+        "ConstantSegmentLength": 14.14,

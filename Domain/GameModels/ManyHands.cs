@@ -39,7 +39,7 @@ namespace Domain.GameModels
 
         public ManyHands(int numHands, IGamePlayer form)
         {
-            int maxNumPlayers = 360 / TopGameConstants.MIN_CENTRAL_ANGLE;
+            int maxNumPlayers = 360 / TopGameConstants.MinCentralAngle;
             if (numHands > maxNumPlayers)
             {
                 MessageBox.Show(string.Format("Too many players - maximum number of players is {0}", maxNumPlayers));
@@ -505,7 +505,7 @@ namespace Domain.GameModels
             // Leave room for an extra 5 recursive iterations (before we give up and walk away with our heads hung in shame), just so we can debug and see what the hell's going on.
             if (iRecursionCount <= 20)
             {
-                int maxNumPlayers = 360 / TopGameConstants.MIN_CENTRAL_ANGLE;
+                int maxNumPlayers = 360 / TopGameConstants.MinCentralAngle;
                 double runningAngleTotal = 0;
                 double finalPlayerAngle = 0;
                 bool bSuppressMinAndMaxOnNextCall = false;
@@ -1061,7 +1061,7 @@ namespace Domain.GameModels
 
         public void DisplayGraphicLoops(PaintEventArgs e)
         {
-            int maxNumPlayers = 360 / TopGameConstants.MIN_CENTRAL_ANGLE;
+            int maxNumPlayers = 360 / TopGameConstants.MinCentralAngle;
             if ((theHands.Count() + 1) > maxNumPlayers)
             {
                 MessageBox.Show("Too many players");

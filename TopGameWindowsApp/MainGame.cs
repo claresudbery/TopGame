@@ -435,7 +435,7 @@ namespace TopGameWindowsApp
             currentGraphic09.SetNumTotalSegments(8);
             playerGraphics.Add(currentGraphic09);
 
-            int maxNumPlayers = 360 / TopGameConstants.MIN_CENTRAL_ANGLE;
+            int maxNumPlayers = 360 / TopGameConstants.MinCentralAngle;
             if (playerGraphics.Count() > maxNumPlayers)
             {
                 MessageBox.Show("Too many players");
@@ -507,7 +507,7 @@ namespace TopGameWindowsApp
             // Leave room for an extra 5 recursive iterations (before we give up and walk away with our heads hung in shame), just so we can debug and see what the hell's going on.
             if (iRecursionCount <= 20)
             {
-                int maxNumPlayers = 360 / TopGameConstants.MIN_CENTRAL_ANGLE;
+                int maxNumPlayers = 360 / TopGameConstants.MinCentralAngle;
                 double runningAngleTotal = 0;
                 double finalPlayerAngle = 0;
                 bool bSuppressMinAndMaxOnNextCall = false;
