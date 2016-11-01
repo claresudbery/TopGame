@@ -8,6 +8,7 @@ using Domain.GraphicModels.GoldenMaster;
 using NUnit.Framework;
 using FluentAssertions;
 using Newtonsoft.Json;
+using UnitTests.Utils;
 
 namespace UnitTests
 {

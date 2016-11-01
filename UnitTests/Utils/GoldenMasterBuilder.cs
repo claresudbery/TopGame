@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Domain.GameModels.GoldenMaster;
 using Domain.GraphicModels.GoldenMaster;
 
-namespace UnitTests
+namespace UnitTests.Utils
 {
     public static class GoldenMasterBuilder
     {

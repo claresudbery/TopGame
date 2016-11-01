@@ -70,9 +70,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="GoldenMasterPointEqualityComparer.cs" />
+    <Compile Include="Utils\GoldenMasterPointEqualityComparer.cs" />
     <Compile Include="GraphicDataTests.cs" />
-    <Compile Include="TestCheckResult.cs" />
+    <Compile Include="Utils\TestCheckResult.cs" />
     <Compile Include="Utils\GoldenMasterBuilder.cs" />
     <Compile Include="Utils\GoldenMasterBuilderV2.cs" />
     <Compile Include="Utils\GoldenMasterBuilderV3.cs" />

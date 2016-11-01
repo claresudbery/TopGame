@@ -6,6 +6,7 @@ using Domain.GraphicModels;
 using Domain.GraphicModels.GoldenMaster;
 using NUnit.Framework;
 using FluentAssertions;
+using UnitTests.Utils;
 
 namespace UnitTests
 {
