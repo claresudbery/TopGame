@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 
 namespace Domain.GraphicModels.GoldenMaster
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterArcPath
     {
         public GoldenMasterArcPath()
@@ -17,13 +16,10 @@ namespace Domain.GraphicModels.GoldenMaster
             SweepAngle = sweepAngle;
         }
 
-        [JsonProperty]
         public GoldenMasterRectangle Rectangle { get; set; }
 
-        [JsonProperty]
         public float StartAngle { get; set; }
 
-        [JsonProperty]
         public float SweepAngle { get; set; }
     }
 }

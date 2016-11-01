@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 
 namespace Domain.GraphicModels.GoldenMaster
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterRectangle
     {
         public GoldenMasterRectangle()
@@ -10,16 +9,12 @@ namespace Domain.GraphicModels.GoldenMaster
             // Do nothing
         }
 
-        [JsonProperty]
         public int X { get; set; }
 
-        [JsonProperty]
         public int Y { get; set; }
 
-        [JsonProperty]
         public int Width { get; set; }
 
-        [JsonProperty]
         public int Height { get; set; }
 
         public void Copy(TopGameRectangle sourceRectangle)

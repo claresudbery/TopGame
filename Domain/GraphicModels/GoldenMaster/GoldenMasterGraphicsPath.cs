@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Domain.GraphicModels.GoldenMaster
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterGraphicsPath
     {
         public GoldenMasterGraphicsPath()
@@ -12,10 +11,8 @@ namespace Domain.GraphicModels.GoldenMaster
             ArcPaths = new List<GoldenMasterArcPath>();
         }
 
-        [JsonProperty]
         public IList<GoldenMasterLine> Lines { get; set; }
 
-        [JsonProperty]
         public IList<GoldenMasterArcPath> ArcPaths { get; set; }
 
         public void Copy(TopGameGraphicsPath sourcePath)

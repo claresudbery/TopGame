@@ -15,9 +15,11 @@ Golden Masters:
 	Graphics-013: 30be24b2d48d566cbb2d7679fe3334aaec3ef66f: New MiniPetalRegion class, with its own Corners collection.
 	Graphics-014: c3749aec440d8f7d831a5874da5d1ba5162ed7a6: All regions now in one Regions collection.
 	Graphics-015: abc355b5624b4a017fc583ca3eaff7116fd3eb84: Contains bug fix to make all arc regions use the "move along line" logic
-	Graphics-016: All regions now have a type description, and all mini-petal regions have two corners (instead of only one)
+	Graphics-016: 3900aec538143a000df55552e285226e9143cb16: All regions now have a type description, and all mini-petal regions have two corners (instead of only one)
+	Graphics-017: No longer using json deserialisation decorators in the golden master model objects.
 	Game-001: 7535145f77fed9c8847ded8885be042d399a0bde: First attempt to store game data. Storing all moves for 2 to 12 players, using unshuffled deck each time.
 	Game-002: 6d241618fcaff0daa36a943684c44c01d6f531d0: Added player start hands and num players.
+	Game-003: No longer using json deserialisation decorators in the golden master model objects.
 	
 Mongo DB:
 	Links:

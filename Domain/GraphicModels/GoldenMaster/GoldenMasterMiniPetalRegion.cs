@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 
 namespace Domain.GraphicModels.GoldenMaster
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterMiniPetalRegion : GoldenMasterRegion
     {
         public GoldenMasterMiniPetalRegion()
@@ -11,7 +10,6 @@ namespace Domain.GraphicModels.GoldenMaster
             Type = "MiniPetal";
         }
 
-        [JsonProperty]
         public GoldenMasterGraphicsPath GraphicsPath { get; set; }
 
         public virtual void Copy(TopGameGraphicsPath sourcePath)

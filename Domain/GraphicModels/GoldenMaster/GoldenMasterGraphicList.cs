@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Domain.GraphicModels.GoldenMaster
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterGraphicList
     {
         public GoldenMasterGraphicList()
@@ -16,7 +15,6 @@ namespace Domain.GraphicModels.GoldenMaster
         // Therefore there are eleven graphics loops for each possible number of segments.
         // There is one segment per card, so there are 52 possible numbers of segments.
         // Therefore there should be (52 x 11) GoldenMasterSinglePass objects in the GoldenMasters collection.
-        [JsonProperty]
         public List<GoldenMasterSingleGraphicPass> GoldenMasters { get; set; }
     }
 }

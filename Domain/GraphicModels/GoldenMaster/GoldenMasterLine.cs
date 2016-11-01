@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 
 namespace Domain.GraphicModels.GoldenMaster
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterLine
     {
         public GoldenMasterLine()
@@ -15,10 +14,8 @@ namespace Domain.GraphicModels.GoldenMaster
             End = new GoldenMasterPoint(end.X, end.Y);
         }
 
-        [JsonProperty]
         public GoldenMasterPoint Start { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint End { get; set; }
     }
 }

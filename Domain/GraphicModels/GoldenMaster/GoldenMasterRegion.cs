@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Domain.GraphicModels.GoldenMaster
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterRegion
     {
         protected GoldenMasterRegion()
@@ -11,10 +10,8 @@ namespace Domain.GraphicModels.GoldenMaster
             Corners = new List<GoldenMasterPoint>();
         }
 
-        [JsonProperty]
         public string Type { get; set; }
 
-        [JsonProperty]
         public IList<GoldenMasterPoint> Corners { get; set; }
 
         public virtual void Copy(TopGameGraphicsPath sourcePath)

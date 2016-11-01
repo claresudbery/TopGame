@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Domain.GraphicModels.GoldenMaster
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterPointCollection
     {
         public GoldenMasterPointCollection()
@@ -11,7 +10,6 @@ namespace Domain.GraphicModels.GoldenMaster
             Points = new List<GoldenMasterPoint>();
         }
 
-        [JsonProperty]
         public IList<GoldenMasterPoint> Points { get; set; }
 
         public void Copy(TopGamePointCollection sourcePointCollection)

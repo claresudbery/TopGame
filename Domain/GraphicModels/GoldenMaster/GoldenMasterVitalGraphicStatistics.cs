@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 
 namespace Domain.GraphicModels.GoldenMaster
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterVitalGraphicStatistics
     {
         public GoldenMasterVitalGraphicStatistics(bool initialise = false)
@@ -44,10 +43,8 @@ namespace Domain.GraphicModels.GoldenMaster
         // Flags
         // ***********************************************************
 
-        [JsonProperty]
         public bool bMinimumAngleApplied { get; set; }
 
-        [JsonProperty]
         public bool bMaximumAngleApplied { get; set; }
 
 
@@ -55,28 +52,20 @@ namespace Domain.GraphicModels.GoldenMaster
         // Lengths
         // ***********************************************************
 
-        [JsonProperty]
         public double originToArcCentre { get; set; }
 
-        [JsonProperty]
         public double centralSpokeLength { get; set; }
 
-        [JsonProperty]
         public double innerArcRadius { get; set; }
 
-        [JsonProperty]
         public double outerArcRadius { get; set; }
 
-        [JsonProperty]
         public double outerArmLength { get; set; }
 
-        [JsonProperty]
         public double innerArmLength { get; set; }
 
-        [JsonProperty]
         public double constantSegmentLength { get; set; }
 
-        [JsonProperty]
         public double constantCentralSegmentLength { get; set; }
 
 
@@ -84,25 +73,18 @@ namespace Domain.GraphicModels.GoldenMaster
         // Angles
         // ***********************************************************
 
-        [JsonProperty]
         public double maxCentralAngle { get; set; }
 
-        [JsonProperty]
         public double arcStartAngle { get; set; }
 
-        [JsonProperty]
         public double angleB { get; set; }
 
-        [JsonProperty]
         public double angleC { get; set; }
 
-        [JsonProperty]
         public double constantBottomAngle { get; set; }
 
-        [JsonProperty]
         public double centralAngle { get; set; }
 
-        [JsonProperty]
         public double arcSegmentAngle { get; set; }
 
 
@@ -110,43 +92,30 @@ namespace Domain.GraphicModels.GoldenMaster
         // Points
         // ***********************************************************
 
-        [JsonProperty]
         public GoldenMasterPoint origin { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint relativeInnerPetalSource { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint relativeArcCentre { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint relativeInnerArcStart { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint relativeInnerArcEnd { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint relativeOuterArcStart { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint relativeOuterArcEnd { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint actualInnerPetalSource { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint actualInnerArcStart { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint actualInnerArcEnd { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint actualArcCentre { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint actualOuterArcStart { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPoint actualOuterArcEnd { get; set; }
 
 
@@ -154,19 +123,14 @@ namespace Domain.GraphicModels.GoldenMaster
         // Counts
         // ***********************************************************
 
-        [JsonProperty]
         public int numArmSegments { get; set; }
 
-        [JsonProperty]
         public int numArcSegments { get; set; }
 
-        [JsonProperty]
         public int numTotalSegments { get; set; }
 
-        [JsonProperty]
         public int numTotalCardsInGame { get; set; }
 
-        [JsonProperty]
         public int numCardsInPlay { get; set; }
 
 
@@ -174,10 +138,8 @@ namespace Domain.GraphicModels.GoldenMaster
         // Paths
         // ***********************************************************
 
-        [JsonProperty]
         public GoldenMasterGraphicsPath outerPath { get; set; }
 
-        [JsonProperty]
         public GoldenMasterGraphicsPath innerPath { get; set; }
 
 
@@ -185,19 +147,14 @@ namespace Domain.GraphicModels.GoldenMaster
         // Divisions
         // ***********************************************************
 
-        [JsonProperty]
         public GoldenMasterPointCollection startArmDivisionStarts { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPointCollection startArmDivisionEnds { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPointCollection endArmDivisionStarts { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPointCollection endArmDivisionEnds { get; set; }
 
-        [JsonProperty]
         public GoldenMasterPointCollection arcSpokes { get; set; }
 
 
@@ -205,10 +162,8 @@ namespace Domain.GraphicModels.GoldenMaster
         // Squares
         // ***********************************************************
 
-        [JsonProperty]
         public GoldenMasterRectangle innerArcSquare { get; set; }
 
-        [JsonProperty]
         public GoldenMasterRectangle outerArcSquare { get; set; }
 
 
