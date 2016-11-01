@@ -8,5 +8,9 @@ namespace Domain.GraphicModels.GoldenMaster
     [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterArcRegion : GoldenMasterRegion
     {
+        public GoldenMasterArcRegion()
+        {
+            Type = "Arc";
+        }
     }
 }

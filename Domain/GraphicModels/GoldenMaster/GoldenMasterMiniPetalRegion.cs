@@ -8,6 +8,7 @@ namespace Domain.GraphicModels.GoldenMaster
         public GoldenMasterMiniPetalRegion()
         {
             GraphicsPath = new GoldenMasterGraphicsPath();
+            Type = "MiniPetal";
         }
 
         [JsonProperty]
@@ -15,7 +16,9 @@ namespace Domain.GraphicModels.GoldenMaster
 
         public virtual void Copy(TopGameGraphicsPath sourcePath)
         {
-            base.Copy(sourcePath);
+            Corners.Add(sourcePath.Lines[0].Start.ToGoldenMasterPoint());
+            Corners.Add(sourcePath.Lines[0].End.ToGoldenMasterPoint());
+
             GraphicsPath.Copy(sourcePath);
         }
     }

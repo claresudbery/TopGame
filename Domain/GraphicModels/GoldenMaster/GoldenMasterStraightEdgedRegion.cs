@@ -8,5 +8,9 @@ namespace Domain.GraphicModels.GoldenMaster
     [JsonObject(MemberSerialization.OptIn)]
     public class GoldenMasterStraightEdgedRegion : GoldenMasterRegion
     {
+        public GoldenMasterStraightEdgedRegion()
+        {
+            Type = "StraightEdged";
+        }
     }
 }
