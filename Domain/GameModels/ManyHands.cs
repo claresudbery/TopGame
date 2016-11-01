@@ -462,9 +462,9 @@ namespace Domain.GameModels
 
         public void ReloadGraphicLoopsWithFixedShareSizes()
         {
-            // NB the graphic loops will already have had their numTotalSegments reset,
+            // NB the graphic loops will already have had their NumTotalSegments reset,
             // because they are all members of an associated HandOfCards object,
-            // which will have changed numTotalSegments in routines like PlayCard.
+            // which will have changed NumTotalSegments in routines like PlayCard.
             if (IsTotalNumSegmentsCorrect(52))
             {
                 double angleShare = 360 / (allGraphicLoops.Count());

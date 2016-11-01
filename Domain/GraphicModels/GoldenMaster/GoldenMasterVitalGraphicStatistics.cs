@@ -6,36 +6,36 @@ namespace Domain.GraphicModels.GoldenMaster
     {
         public GoldenMasterVitalGraphicStatistics(bool initialise = false)
         {
-            origin = new GoldenMasterPoint();
+            Origin = new GoldenMasterPoint();
 
-            relativeInnerPetalSource = new GoldenMasterPoint();
-            relativeArcCentre = new GoldenMasterPoint();
+            RelativeInnerPetalSource = new GoldenMasterPoint();
+            RelativeArcCentre = new GoldenMasterPoint();
 
-            relativeInnerArcStart = new GoldenMasterPoint();
-            relativeInnerArcEnd = new GoldenMasterPoint();
+            RelativeInnerArcStart = new GoldenMasterPoint();
+            RelativeInnerArcEnd = new GoldenMasterPoint();
 
-            relativeOuterArcStart = new GoldenMasterPoint();
-            relativeOuterArcEnd = new GoldenMasterPoint();
+            RelativeOuterArcStart = new GoldenMasterPoint();
+            RelativeOuterArcEnd = new GoldenMasterPoint();
 
-            actualInnerPetalSource = new GoldenMasterPoint();
-            actualInnerArcStart = new GoldenMasterPoint();
-            actualInnerArcEnd = new GoldenMasterPoint();
+            ActualInnerPetalSource = new GoldenMasterPoint();
+            ActualInnerArcStart = new GoldenMasterPoint();
+            ActualInnerArcEnd = new GoldenMasterPoint();
 
-            actualArcCentre = new GoldenMasterPoint();
-            actualOuterArcStart = new GoldenMasterPoint();
-            actualOuterArcEnd = new GoldenMasterPoint();
+            ActualArcCentre = new GoldenMasterPoint();
+            ActualOuterArcStart = new GoldenMasterPoint();
+            ActualOuterArcEnd = new GoldenMasterPoint();
 
-            outerPath = new GoldenMasterGraphicsPath();
-            innerPath = new GoldenMasterGraphicsPath();
+            OuterPath = new GoldenMasterGraphicsPath();
+            InnerPath = new GoldenMasterGraphicsPath();
 
-            startArmDivisionStarts = new GoldenMasterPointCollection();
-            startArmDivisionEnds = new GoldenMasterPointCollection();
-            endArmDivisionStarts = new GoldenMasterPointCollection();
-            endArmDivisionEnds = new GoldenMasterPointCollection();
-            arcSpokes = new GoldenMasterPointCollection();
+            StartArmDivisionStarts = new GoldenMasterPointCollection();
+            StartArmDivisionEnds = new GoldenMasterPointCollection();
+            EndArmDivisionStarts = new GoldenMasterPointCollection();
+            EndArmDivisionEnds = new GoldenMasterPointCollection();
+            ArcSpokes = new GoldenMasterPointCollection();
 
-            innerArcSquare = new GoldenMasterRectangle();
-            outerArcSquare = new GoldenMasterRectangle();
+            InnerArcSquare = new GoldenMasterRectangle();
+            OuterArcSquare = new GoldenMasterRectangle();
         }
 
 
@@ -43,185 +43,185 @@ namespace Domain.GraphicModels.GoldenMaster
         // Flags
         // ***********************************************************
 
-        public bool bMinimumAngleApplied { get; set; }
+        public bool MinimumAngleApplied { get; set; }
 
-        public bool bMaximumAngleApplied { get; set; }
+        public bool MaximumAngleApplied { get; set; }
 
 
         // ***********************************************************
         // Lengths
         // ***********************************************************
 
-        public double originToArcCentre { get; set; }
+        public double OriginToArcCentre { get; set; }
 
-        public double centralSpokeLength { get; set; }
+        public double CentralSpokeLength { get; set; }
 
-        public double innerArcRadius { get; set; }
+        public double InnerArcRadius { get; set; }
 
-        public double outerArcRadius { get; set; }
+        public double OuterArcRadius { get; set; }
 
-        public double outerArmLength { get; set; }
+        public double OuterArmLength { get; set; }
 
-        public double innerArmLength { get; set; }
+        public double InnerArmLength { get; set; }
 
-        public double constantSegmentLength { get; set; }
+        public double ConstantSegmentLength { get; set; }
 
-        public double constantCentralSegmentLength { get; set; }
+        public double ConstantCentralSegmentLength { get; set; }
 
 
         // ***********************************************************
         // Angles
         // ***********************************************************
 
-        public double maxCentralAngle { get; set; }
+        public double MaxCentralAngle { get; set; }
 
-        public double arcStartAngle { get; set; }
+        public double ArcStartAngle { get; set; }
 
-        public double angleB { get; set; }
+        public double AngleB { get; set; }
 
-        public double angleC { get; set; }
+        public double AngleC { get; set; }
 
-        public double constantBottomAngle { get; set; }
+        public double ConstantBottomAngle { get; set; }
 
-        public double centralAngle { get; set; }
+        public double CentralAngle { get; set; }
 
-        public double arcSegmentAngle { get; set; }
+        public double ArcSegmentAngle { get; set; }
 
 
         // ***********************************************************
         // Points
         // ***********************************************************
 
-        public GoldenMasterPoint origin { get; set; }
+        public GoldenMasterPoint Origin { get; set; }
 
-        public GoldenMasterPoint relativeInnerPetalSource { get; set; }
+        public GoldenMasterPoint RelativeInnerPetalSource { get; set; }
 
-        public GoldenMasterPoint relativeArcCentre { get; set; }
+        public GoldenMasterPoint RelativeArcCentre { get; set; }
 
-        public GoldenMasterPoint relativeInnerArcStart { get; set; }
+        public GoldenMasterPoint RelativeInnerArcStart { get; set; }
 
-        public GoldenMasterPoint relativeInnerArcEnd { get; set; }
+        public GoldenMasterPoint RelativeInnerArcEnd { get; set; }
 
-        public GoldenMasterPoint relativeOuterArcStart { get; set; }
+        public GoldenMasterPoint RelativeOuterArcStart { get; set; }
 
-        public GoldenMasterPoint relativeOuterArcEnd { get; set; }
+        public GoldenMasterPoint RelativeOuterArcEnd { get; set; }
 
-        public GoldenMasterPoint actualInnerPetalSource { get; set; }
+        public GoldenMasterPoint ActualInnerPetalSource { get; set; }
 
-        public GoldenMasterPoint actualInnerArcStart { get; set; }
+        public GoldenMasterPoint ActualInnerArcStart { get; set; }
 
-        public GoldenMasterPoint actualInnerArcEnd { get; set; }
+        public GoldenMasterPoint ActualInnerArcEnd { get; set; }
 
-        public GoldenMasterPoint actualArcCentre { get; set; }
+        public GoldenMasterPoint ActualArcCentre { get; set; }
 
-        public GoldenMasterPoint actualOuterArcStart { get; set; }
+        public GoldenMasterPoint ActualOuterArcStart { get; set; }
 
-        public GoldenMasterPoint actualOuterArcEnd { get; set; }
+        public GoldenMasterPoint ActualOuterArcEnd { get; set; }
 
 
         // ***********************************************************
         // Counts
         // ***********************************************************
 
-        public int numArmSegments { get; set; }
+        public int NumArmSegments { get; set; }
 
-        public int numArcSegments { get; set; }
+        public int NumArcSegments { get; set; }
 
-        public int numTotalSegments { get; set; }
+        public int NumTotalSegments { get; set; }
 
-        public int numTotalCardsInGame { get; set; }
+        public int NumTotalCardsInGame { get; set; }
 
-        public int numCardsInPlay { get; set; }
+        public int NumCardsInPlay { get; set; }
 
 
         // ***********************************************************
         // Paths
         // ***********************************************************
 
-        public GoldenMasterGraphicsPath outerPath { get; set; }
+        public GoldenMasterGraphicsPath OuterPath { get; set; }
 
-        public GoldenMasterGraphicsPath innerPath { get; set; }
+        public GoldenMasterGraphicsPath InnerPath { get; set; }
 
 
         // ***********************************************************
         // Divisions
         // ***********************************************************
 
-        public GoldenMasterPointCollection startArmDivisionStarts { get; set; }
+        public GoldenMasterPointCollection StartArmDivisionStarts { get; set; }
 
-        public GoldenMasterPointCollection startArmDivisionEnds { get; set; }
+        public GoldenMasterPointCollection StartArmDivisionEnds { get; set; }
 
-        public GoldenMasterPointCollection endArmDivisionStarts { get; set; }
+        public GoldenMasterPointCollection EndArmDivisionStarts { get; set; }
 
-        public GoldenMasterPointCollection endArmDivisionEnds { get; set; }
+        public GoldenMasterPointCollection EndArmDivisionEnds { get; set; }
 
-        public GoldenMasterPointCollection arcSpokes { get; set; }
+        public GoldenMasterPointCollection ArcSpokes { get; set; }
 
 
         // ***********************************************************
         // Squares
         // ***********************************************************
 
-        public GoldenMasterRectangle innerArcSquare { get; set; }
+        public GoldenMasterRectangle InnerArcSquare { get; set; }
 
-        public GoldenMasterRectangle outerArcSquare { get; set; }
+        public GoldenMasterRectangle OuterArcSquare { get; set; }
 
 
         public void Copy(VitalStatistics vitalStatisticsSource)
         {
-            origin = vitalStatisticsSource.origin.ToGoldenMasterPoint();
+            Origin = vitalStatisticsSource.Origin.ToGoldenMasterPoint();
 
-            relativeInnerPetalSource = vitalStatisticsSource.relativeInnerPetalSource.ToGoldenMasterPoint();
-            relativeArcCentre = vitalStatisticsSource.relativeArcCentre.ToGoldenMasterPoint();
+            RelativeInnerPetalSource = vitalStatisticsSource.RelativeInnerPetalSource.ToGoldenMasterPoint();
+            RelativeArcCentre = vitalStatisticsSource.RelativeArcCentre.ToGoldenMasterPoint();
 
-            relativeInnerArcStart = vitalStatisticsSource.relativeInnerArcStart.ToGoldenMasterPoint();
-            relativeInnerArcEnd = vitalStatisticsSource.relativeInnerArcEnd.ToGoldenMasterPoint();
+            RelativeInnerArcStart = vitalStatisticsSource.RelativeInnerArcStart.ToGoldenMasterPoint();
+            RelativeInnerArcEnd = vitalStatisticsSource.RelativeInnerArcEnd.ToGoldenMasterPoint();
 
-            relativeOuterArcStart = vitalStatisticsSource.relativeOuterArcStart.ToGoldenMasterPoint();
-            relativeOuterArcEnd = vitalStatisticsSource.relativeOuterArcEnd.ToGoldenMasterPoint();
+            RelativeOuterArcStart = vitalStatisticsSource.RelativeOuterArcStart.ToGoldenMasterPoint();
+            RelativeOuterArcEnd = vitalStatisticsSource.RelativeOuterArcEnd.ToGoldenMasterPoint();
 
-            actualInnerPetalSource = vitalStatisticsSource.actualInnerPetalSource.ToGoldenMasterPoint();
-            actualInnerArcStart = vitalStatisticsSource.actualInnerArcStart.ToGoldenMasterPoint();
-            actualInnerArcEnd = vitalStatisticsSource.actualInnerArcEnd.ToGoldenMasterPoint();
+            ActualInnerPetalSource = vitalStatisticsSource.ActualInnerPetalSource.ToGoldenMasterPoint();
+            ActualInnerArcStart = vitalStatisticsSource.ActualInnerArcStart.ToGoldenMasterPoint();
+            ActualInnerArcEnd = vitalStatisticsSource.ActualInnerArcEnd.ToGoldenMasterPoint();
 
-            actualArcCentre = vitalStatisticsSource.actualArcCentre.ToGoldenMasterPoint();
-            actualOuterArcStart = vitalStatisticsSource.actualOuterArcStart.ToGoldenMasterPoint();
-            actualOuterArcEnd = vitalStatisticsSource.actualOuterArcEnd.ToGoldenMasterPoint();
+            ActualArcCentre = vitalStatisticsSource.ActualArcCentre.ToGoldenMasterPoint();
+            ActualOuterArcStart = vitalStatisticsSource.ActualOuterArcStart.ToGoldenMasterPoint();
+            ActualOuterArcEnd = vitalStatisticsSource.ActualOuterArcEnd.ToGoldenMasterPoint();
 
-            outerPath.Copy(vitalStatisticsSource.outerPath);
-            innerPath.Copy(vitalStatisticsSource.innerPath);
+            OuterPath.Copy(vitalStatisticsSource.OuterPath);
+            InnerPath.Copy(vitalStatisticsSource.InnerPath);
 
-            startArmDivisionStarts.Copy(vitalStatisticsSource.startArmDivisionStarts);
-            startArmDivisionEnds.Copy(vitalStatisticsSource.startArmDivisionEnds);
-            endArmDivisionStarts.Copy(vitalStatisticsSource.endArmDivisionStarts);
-            endArmDivisionEnds.Copy(vitalStatisticsSource.endArmDivisionEnds);
-            arcSpokes.Copy(vitalStatisticsSource.arcSpokes);
+            StartArmDivisionStarts.Copy(vitalStatisticsSource.StartArmDivisionStarts);
+            StartArmDivisionEnds.Copy(vitalStatisticsSource.StartArmDivisionEnds);
+            EndArmDivisionStarts.Copy(vitalStatisticsSource.EndArmDivisionStarts);
+            EndArmDivisionEnds.Copy(vitalStatisticsSource.EndArmDivisionEnds);
+            ArcSpokes.Copy(vitalStatisticsSource.ArcSpokes);
 
-            innerArcSquare.Copy(vitalStatisticsSource.innerArcSquare);
-            outerArcSquare.Copy(vitalStatisticsSource.outerArcSquare);
+            InnerArcSquare.Copy(vitalStatisticsSource.InnerArcSquare);
+            OuterArcSquare.Copy(vitalStatisticsSource.OuterArcSquare);
 
-            maxCentralAngle = vitalStatisticsSource.maxCentralAngle;
-            bMinimumAngleApplied = vitalStatisticsSource.bMinimumAngleApplied;
-            bMaximumAngleApplied = vitalStatisticsSource.bMaximumAngleApplied;
-            originToArcCentre = vitalStatisticsSource.originToArcCentre;
-            centralSpokeLength = vitalStatisticsSource.centralSpokeLength;
-            innerArcRadius = vitalStatisticsSource.innerArcRadius;
-            outerArcRadius = vitalStatisticsSource.outerArcRadius;
-            outerArmLength = vitalStatisticsSource.outerArmLength;
-            innerArmLength = vitalStatisticsSource.innerArmLength;
-            constantSegmentLength = vitalStatisticsSource.constantSegmentLength;
-            constantCentralSegmentLength = vitalStatisticsSource.constantCentralSegmentLength;
-            arcStartAngle = vitalStatisticsSource.arcStartAngle;
-            angleB = vitalStatisticsSource.angleB;
-            angleC = vitalStatisticsSource.angleC;
-            constantBottomAngle = vitalStatisticsSource.constantBottomAngle;
-            centralAngle = vitalStatisticsSource.centralAngle;
-            arcSegmentAngle = vitalStatisticsSource.arcSegmentAngle;
-            numArmSegments = vitalStatisticsSource.numArmSegments;
-            numArcSegments = vitalStatisticsSource.numArcSegments;
-            numTotalSegments = vitalStatisticsSource.numTotalSegments;
-            numTotalCardsInGame = vitalStatisticsSource.numTotalCardsInGame;
-            numCardsInPlay = vitalStatisticsSource.numCardsInPlay;
+            MaxCentralAngle = vitalStatisticsSource.MaxCentralAngle;
+            MinimumAngleApplied = vitalStatisticsSource.MinimumAngleApplied;
+            MaximumAngleApplied = vitalStatisticsSource.MaximumAngleApplied;
+            OriginToArcCentre = vitalStatisticsSource.OriginToArcCentre;
+            CentralSpokeLength = vitalStatisticsSource.CentralSpokeLength;
+            InnerArcRadius = vitalStatisticsSource.InnerArcRadius;
+            OuterArcRadius = vitalStatisticsSource.OuterArcRadius;
+            OuterArmLength = vitalStatisticsSource.OuterArmLength;
+            InnerArmLength = vitalStatisticsSource.InnerArmLength;
+            ConstantSegmentLength = vitalStatisticsSource.ConstantSegmentLength;
+            ConstantCentralSegmentLength = vitalStatisticsSource.ConstantCentralSegmentLength;
+            ArcStartAngle = vitalStatisticsSource.ArcStartAngle;
+            AngleB = vitalStatisticsSource.AngleB;
+            AngleC = vitalStatisticsSource.AngleC;
+            ConstantBottomAngle = vitalStatisticsSource.ConstantBottomAngle;
+            CentralAngle = vitalStatisticsSource.CentralAngle;
+            ArcSegmentAngle = vitalStatisticsSource.ArcSegmentAngle;
+            NumArmSegments = vitalStatisticsSource.NumArmSegments;
+            NumArcSegments = vitalStatisticsSource.NumArcSegments;
+            NumTotalSegments = vitalStatisticsSource.NumTotalSegments;
+            NumTotalCardsInGame = vitalStatisticsSource.NumTotalCardsInGame;
+            NumCardsInPlay = vitalStatisticsSource.NumCardsInPlay;
         }
     }
 }

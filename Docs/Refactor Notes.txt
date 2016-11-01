@@ -17,6 +17,7 @@ Golden Masters:
 	Graphics-015: abc355b5624b4a017fc583ca3eaff7116fd3eb84: Contains bug fix to make all arc regions use the "move along line" logic
 	Graphics-016: 3900aec538143a000df55552e285226e9143cb16: All regions now have a type description, and all mini-petal regions have two corners (instead of only one)
 	Graphics-017: 8d00925a572eb6470ed82179bff49022734885b1: No longer using json deserialisation decorators in the golden master model objects.
+	Graphics-018: Renamed a load of variables.
 	Game-001: 7535145f77fed9c8847ded8885be042d399a0bde: First attempt to store game data. Storing all moves for 2 to 12 players, using unshuffled deck each time.
 	Game-002: 6d241618fcaff0daa36a943684c44c01d6f531d0: Added player start hands and num players.
 	Game-003: 8d00925a572eb6470ed82179bff49022734885b1: No longer using json deserialisation decorators in the golden master model objects.
@@ -39,12 +40,11 @@ To do:
 	Use interfaces instead of inheritance for GoldenMasterRegion and its descendants?
 	The colour-leak problems are (I think) caused by the fact that the lines drawn from actualArcCentre to actualOuterArcStart and actualOuterArcEnd
 		don't quite line up with the lines which mark the ends of the petal region.
-		NB the petal region is a petal border, ie it's the whole curved bit with a hole in the middle
-		(but not including the straight arms).
+		NB the petal region is a petal border, ie it's the whole curved bit with a hole in the middle (but not including the straight arms).
 		Because those lines don't quite match up, you get leakage (I think).
 	The reasons the neighbouring parallelograms and arcs don't share corners are
 		1) the arcs all use actualArcCentre as one of their corners
-		2) the arcs use MoveAlongLineByFraction on actualOuterArcStart and actualOuterArcEnd, which means they don's share those points with the parallelograms.
+		2) the arcs use MoveAlongLineByFraction on actualOuterArcStart and actualOuterArcEnd, which means they don't share those points with the parallelograms.
 	
 **************************************
 WORKING OUT WHAT KIND OF DATA TO STORE FOR REGIONS

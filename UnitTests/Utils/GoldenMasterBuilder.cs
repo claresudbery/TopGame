@@ -94,93 +94,93 @@ namespace UnitTests.Utils
                 },
                 VitalGraphicStatistics = new GoldenMasterVitalGraphicStatistics
                 {
-                    angleB = randomNumber++,
-                    angleC = randomNumber++,
-                    arcSegmentAngle = randomNumber++,
-                    originToArcCentre = randomNumber++,
-                    centralSpokeLength = randomNumber++,
-                    innerArcRadius = randomNumber++,
-                    outerArcRadius = randomNumber++,
-                    outerArmLength = randomNumber++,
-                    innerArmLength = randomNumber++,
-                    constantSegmentLength = randomNumber++,
-                    maxCentralAngle = randomNumber++,
-                    arcStartAngle = randomNumber++,
-                    constantBottomAngle = randomNumber++,
-                    centralAngle = randomNumber++,
-                    bMinimumAngleApplied = true,
-                    bMaximumAngleApplied = false,
-                    origin = new GoldenMasterPoint
+                    AngleB = randomNumber++,
+                    AngleC = randomNumber++,
+                    ArcSegmentAngle = randomNumber++,
+                    OriginToArcCentre = randomNumber++,
+                    CentralSpokeLength = randomNumber++,
+                    InnerArcRadius = randomNumber++,
+                    OuterArcRadius = randomNumber++,
+                    OuterArmLength = randomNumber++,
+                    InnerArmLength = randomNumber++,
+                    ConstantSegmentLength = randomNumber++,
+                    MaxCentralAngle = randomNumber++,
+                    ArcStartAngle = randomNumber++,
+                    ConstantBottomAngle = randomNumber++,
+                    CentralAngle = randomNumber++,
+                    MinimumAngleApplied = true,
+                    MaximumAngleApplied = false,
+                    Origin = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeInnerPetalSource = new GoldenMasterPoint
+                    RelativeInnerPetalSource = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeArcCentre = new GoldenMasterPoint
+                    RelativeArcCentre = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeInnerArcStart = new GoldenMasterPoint
+                    RelativeInnerArcStart = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeInnerArcEnd = new GoldenMasterPoint
+                    RelativeInnerArcEnd = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeOuterArcStart = new GoldenMasterPoint
+                    RelativeOuterArcStart = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    relativeOuterArcEnd = new GoldenMasterPoint
+                    RelativeOuterArcEnd = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualArcCentre = new GoldenMasterPoint
+                    ActualArcCentre = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualInnerArcEnd = new GoldenMasterPoint
+                    ActualInnerArcEnd = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualInnerArcStart = new GoldenMasterPoint
+                    ActualInnerArcStart = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualInnerPetalSource = new GoldenMasterPoint
+                    ActualInnerPetalSource = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualOuterArcEnd = new GoldenMasterPoint
+                    ActualOuterArcEnd = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    actualOuterArcStart = new GoldenMasterPoint
+                    ActualOuterArcStart = new GoldenMasterPoint
                     {
                         X = randomNumber++,
                         Y = randomNumber++
                     },
-                    numArmSegments = randomNumber++,
-                    numArcSegments = randomNumber++,
-                    numTotalSegments = randomNumber++,
-                    numTotalCardsInGame = randomNumber++,
-                    numCardsInPlay = randomNumber++,
-                    outerPath = new GoldenMasterGraphicsPath
+                    NumArmSegments = randomNumber++,
+                    NumArcSegments = randomNumber++,
+                    NumTotalSegments = randomNumber++,
+                    NumTotalCardsInGame = randomNumber++,
+                    NumCardsInPlay = randomNumber++,
+                    OuterPath = new GoldenMasterGraphicsPath
                     {
                         Lines = new List<GoldenMasterLine>
                         {
@@ -214,7 +214,7 @@ namespace UnitTests.Utils
                             }
                         }
                     },
-                    innerPath = new GoldenMasterGraphicsPath
+                    InnerPath = new GoldenMasterGraphicsPath
                     {
                         Lines = new List<GoldenMasterLine>
                         {
@@ -248,7 +248,7 @@ namespace UnitTests.Utils
                             }
                         }
                     },
-                    startArmDivisionStarts = new GoldenMasterPointCollection
+                    StartArmDivisionStarts = new GoldenMasterPointCollection
                     {
                         Points = new List<GoldenMasterPoint>
                         {
@@ -259,7 +259,7 @@ namespace UnitTests.Utils
                             }
                         }
                     },
-                    startArmDivisionEnds = new GoldenMasterPointCollection
+                    StartArmDivisionEnds = new GoldenMasterPointCollection
                     {
                         Points = new List<GoldenMasterPoint>
                         {
@@ -270,7 +270,7 @@ namespace UnitTests.Utils
                             }
                         }
                     },
-                    endArmDivisionStarts = new GoldenMasterPointCollection
+                    EndArmDivisionStarts = new GoldenMasterPointCollection
                     {
                         Points = new List<GoldenMasterPoint>
                         {
@@ -281,7 +281,7 @@ namespace UnitTests.Utils
                             }
                         }
                     },
-                    endArmDivisionEnds = new GoldenMasterPointCollection
+                    EndArmDivisionEnds = new GoldenMasterPointCollection
                     {
                         Points = new List<GoldenMasterPoint>
                         {
@@ -292,7 +292,7 @@ namespace UnitTests.Utils
                             }
                         }
                     },
-                    arcSpokes = new GoldenMasterPointCollection
+                    ArcSpokes = new GoldenMasterPointCollection
                     {
                         Points = new List<GoldenMasterPoint>
                         {
@@ -303,14 +303,14 @@ namespace UnitTests.Utils
                             }
                         }
                     },
-                    innerArcSquare = new GoldenMasterRectangle
+                    InnerArcSquare = new GoldenMasterRectangle
                     {
                         X = randomNumber++,
                         Y = randomNumber++,
                         Width = randomNumber++,
                         Height = randomNumber++
                     },
-                    outerArcSquare = new GoldenMasterRectangle
+                    OuterArcSquare = new GoldenMasterRectangle
                     {
                         X = randomNumber++,
                         Y = randomNumber++,
