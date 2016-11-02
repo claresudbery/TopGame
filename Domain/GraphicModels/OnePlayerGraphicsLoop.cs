@@ -577,6 +577,52 @@ namespace Domain.GraphicModels
         {
             Region petalRegion = null;
 
+            MakeObsoleteOuterAndInnerPath();
+            
+            TopGameGraphicsPath petalPath = new TopGameGraphicsPath();
+
+
+            if (_vitalStatistics.NumArcSegments > 0)
+            {
+                // !! The y coordinate of the enclosing rectangle represents the TOP of the shape, not the bottom
+                _vitalStatistics.OuterArcSquare.X = _vitalStatistics.ActualArcCentre.X - (int)Math.Round(_vitalStatistics.OuterArcRadius, 0, MidpointRounding.AwayFromZero);
+                _vitalStatistics.OuterArcSquare.Y = _vitalStatistics.ActualArcCentre.Y - (int)Math.Round(_vitalStatistics.OuterArcRadius, 0, MidpointRounding.AwayFromZero);
+                _vitalStatistics.OuterArcSquare.Width = (int)Math.Round(_vitalStatistics.OuterArcRadius * 2, 0, MidpointRounding.AwayFromZero);
+                _vitalStatistics.OuterArcSquare.Height = (int)Math.Round(_vitalStatistics.OuterArcRadius * 2, 0, MidpointRounding.AwayFromZero);
+                
+                // See AddArcPath for explanation of how arcs are drawn.
+                petalPath.AddArcPath(_vitalStatistics.OuterArcSquare, (float)_vitalStatistics.ArcStartAngle, (float)180);
+            }
+
+            if (_vitalStatistics.InnerArmLength <= 0)
+            {
+                // We have to go from start to end instead of from start to end, because the outer arc gets drawn from end to start!
+                petalPath.AddLine(_vitalStatistics.ActualOuterArcStart, _vitalStatistics.ActualOuterArcEnd);
+            }
+            else
+            {
+                petalPath.AddLine(_vitalStatistics.ActualOuterArcStart, _vitalStatistics.ActualInnerArcStart);
+
+                // !! The y coordinate of the enclosing rectangle represents the TOP of the shape, not the bottom
+                _vitalStatistics.InnerArcSquare.X = _vitalStatistics.ActualArcCentre.X - (int)Math.Round(_vitalStatistics.InnerArcRadius, 0, MidpointRounding.AwayFromZero);
+                _vitalStatistics.InnerArcSquare.Y = _vitalStatistics.ActualArcCentre.Y - (int)Math.Round(_vitalStatistics.InnerArcRadius, 0, MidpointRounding.AwayFromZero);
+                _vitalStatistics.InnerArcSquare.Width = (int)Math.Round(_vitalStatistics.InnerArcRadius * 2, 0, MidpointRounding.AwayFromZero);
+                _vitalStatistics.InnerArcSquare.Height = (int)Math.Round(_vitalStatistics.InnerArcRadius * 2, 0, MidpointRounding.AwayFromZero);
+
+                // See AddArcPath for explanation of how arcs are drawn.
+                petalPath.AddArcPath(_vitalStatistics.InnerArcSquare, (float)_vitalStatistics.ArcStartAngle + 180, (float)-180);
+                petalPath.AddLine(_vitalStatistics.ActualInnerArcEnd, _vitalStatistics.ActualOuterArcEnd);
+            }
+
+            // Create petal region 
+            petalRegion = new Region(petalPath.ActualPath);
+            storedPetalRegion = new Region(petalPath.ActualPath);
+
+            return petalRegion;
+        }
+
+        private void MakeObsoleteOuterAndInnerPath()
+        {
             _vitalStatistics.OuterPath.Reset();
             // We have to go from end to start instead of from start to end, because the arc gets drawn that way round.
             _vitalStatistics.OuterPath.AddLine(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcEnd);
@@ -587,7 +633,7 @@ namespace Domain.GraphicModels
                 _vitalStatistics.OuterArcSquare.Y = _vitalStatistics.ActualArcCentre.Y - (int)Math.Round(_vitalStatistics.OuterArcRadius, 0, MidpointRounding.AwayFromZero);
                 _vitalStatistics.OuterArcSquare.Width = (int)Math.Round(_vitalStatistics.OuterArcRadius * 2, 0, MidpointRounding.AwayFromZero);
                 _vitalStatistics.OuterArcSquare.Height = (int)Math.Round(_vitalStatistics.OuterArcRadius * 2, 0, MidpointRounding.AwayFromZero);
-                
+
                 // See AddArcPath for explanation of how arcs are drawn.
                 _vitalStatistics.OuterPath.AddArcPath(_vitalStatistics.OuterArcSquare, (float)_vitalStatistics.ArcStartAngle, (float)180);
             }
@@ -613,18 +659,6 @@ namespace Domain.GraphicModels
                 _vitalStatistics.InnerPath.AddArcPath(_vitalStatistics.InnerArcSquare, (float)_vitalStatistics.ArcStartAngle, (float)180);
                 _vitalStatistics.InnerPath.AddLine(_vitalStatistics.ActualInnerArcStart, _vitalStatistics.ActualInnerPetalSource);
             }
-
-            // Create petal region 
-            petalRegion = new Region(_vitalStatistics.OuterPath.ActualPath);
-
-            storedPetalRegion = new Region(_vitalStatistics.OuterPath.ActualPath);
-            if (_vitalStatistics.InnerArmLength > 0)
-            {
-                storedPetalRegion.Exclude(_vitalStatistics.InnerPath.ActualPath);
-                petalRegion.Exclude(_vitalStatistics.InnerPath.ActualPath);
-            }
-
-            return petalRegion;
         }
 
         private void CalculateArmSegmentLength()
