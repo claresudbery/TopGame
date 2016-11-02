@@ -1,8 +1,10 @@
+using TopGameWindowsApp;
+
 namespace Domain.GraphicModels
 {
-    public class VitalStatistics
+    public class TopGameGraphicsData
     {
-        public VitalStatistics()
+        public TopGameGraphicsData()
         {
             Origin = new TopGamePoint();
 
@@ -34,6 +36,50 @@ namespace Domain.GraphicModels
 
             InnerArcSquare = new TopGameRectangle();
             OuterArcSquare = new TopGameRectangle();
+
+            InitialiseValues();
+        }
+
+        private void InitialiseValues()
+        {
+            InitialiseValuesFromConstants();
+
+            MinimumAngleApplied = false;
+            MaximumAngleApplied = false;
+
+            CalculateCentralAngle(TopGameConstants.AnglesInCircle, NumTotalCardsInGame, false);
+        }
+
+        public double CalculateCentralAngle(double numDegreesAvailable, int numCardsBeingShared, bool bSuppressMinAndMax)
+        {
+            MinimumAngleApplied = false;
+            MaximumAngleApplied = false;
+            CentralAngle = ((double)NumTotalSegments / (double)numCardsBeingShared) * numDegreesAvailable;
+            if ((CentralAngle > 0) && !bSuppressMinAndMax)
+            {
+                if (CentralAngle < TopGameConstants.MinCentralAngle)
+                {
+                    CentralAngle = TopGameConstants.MinCentralAngle;
+                    MinimumAngleApplied = true;
+                }
+                if (CentralAngle > MaxCentralAngle)
+                {
+                    CentralAngle = MaxCentralAngle;
+                    MaximumAngleApplied = true;
+                }
+            }
+
+            return CentralAngle;
+        }
+
+        private void InitialiseValuesFromConstants()
+        {
+            Origin.X = TopGameConstants.OriginX;
+            Origin.Y = TopGameConstants.OriginY;
+            ArmSegmentLength = TopGameConstants.ConstantSegmentLength;
+            NumTotalCardsInGame = TopGameConstants.NumCardsInStandardPack;
+            // Defunct:
+            ConstantCentralSegmentLength = TopGameConstants.ConstantSegmentLength;
         }
 
 
@@ -170,61 +216,67 @@ namespace Domain.GraphicModels
         public double AngleC { get; set; }
 
 
-        public void Copy(VitalStatistics vitalStatisticsSource)
+        public void Copy(TopGameGraphicsData topGameGraphicsDataSource)
         {
-            Origin = vitalStatisticsSource.Origin;
+            Origin = topGameGraphicsDataSource.Origin;
 
-            RelativeInnerPetalSource = vitalStatisticsSource.RelativeInnerPetalSource;
-            RelativeArcCentre = vitalStatisticsSource.RelativeArcCentre;
+            RelativeInnerPetalSource = topGameGraphicsDataSource.RelativeInnerPetalSource;
+            RelativeArcCentre = topGameGraphicsDataSource.RelativeArcCentre;
 
-            RelativeInnerArcStart = vitalStatisticsSource.RelativeInnerArcStart;
-            RelativeInnerArcEnd = vitalStatisticsSource.RelativeInnerArcEnd;
+            RelativeInnerArcStart = topGameGraphicsDataSource.RelativeInnerArcStart;
+            RelativeInnerArcEnd = topGameGraphicsDataSource.RelativeInnerArcEnd;
 
-            RelativeOuterArcStart = vitalStatisticsSource.RelativeOuterArcStart;
-            RelativeOuterArcEnd = vitalStatisticsSource.RelativeOuterArcEnd;
+            RelativeOuterArcStart = topGameGraphicsDataSource.RelativeOuterArcStart;
+            RelativeOuterArcEnd = topGameGraphicsDataSource.RelativeOuterArcEnd;
 
-            ActualInnerPetalSource = vitalStatisticsSource.ActualInnerPetalSource;
-            ActualInnerArcStart = vitalStatisticsSource.ActualInnerArcStart;
-            ActualInnerArcEnd = vitalStatisticsSource.ActualInnerArcEnd;
+            ActualInnerPetalSource = topGameGraphicsDataSource.ActualInnerPetalSource;
+            ActualInnerArcStart = topGameGraphicsDataSource.ActualInnerArcStart;
+            ActualInnerArcEnd = topGameGraphicsDataSource.ActualInnerArcEnd;
 
-            ActualArcCentre = vitalStatisticsSource.ActualArcCentre;
-            ActualOuterArcStart = vitalStatisticsSource.ActualOuterArcStart;
-            ActualOuterArcEnd = vitalStatisticsSource.ActualOuterArcEnd;
+            ActualArcCentre = topGameGraphicsDataSource.ActualArcCentre;
+            ActualOuterArcStart = topGameGraphicsDataSource.ActualOuterArcStart;
+            ActualOuterArcEnd = topGameGraphicsDataSource.ActualOuterArcEnd;
 
-            OuterPath.Copy(vitalStatisticsSource.OuterPath);
-            InnerPath.Copy(vitalStatisticsSource.InnerPath);
+            OuterPath.Copy(topGameGraphicsDataSource.OuterPath);
+            InnerPath.Copy(topGameGraphicsDataSource.InnerPath);
 
-            StartArmDivisionStarts.Copy(vitalStatisticsSource.StartArmDivisionStarts);
-            StartArmDivisionEnds.Copy(vitalStatisticsSource.StartArmDivisionEnds);
-            EndArmDivisionStarts.Copy(vitalStatisticsSource.EndArmDivisionStarts);
-            EndArmDivisionEnds.Copy(vitalStatisticsSource.EndArmDivisionEnds);
-            ArcSpokes.Copy(vitalStatisticsSource.ArcSpokes);
+            StartArmDivisionStarts.Copy(topGameGraphicsDataSource.StartArmDivisionStarts);
+            StartArmDivisionEnds.Copy(topGameGraphicsDataSource.StartArmDivisionEnds);
+            EndArmDivisionStarts.Copy(topGameGraphicsDataSource.EndArmDivisionStarts);
+            EndArmDivisionEnds.Copy(topGameGraphicsDataSource.EndArmDivisionEnds);
+            ArcSpokes.Copy(topGameGraphicsDataSource.ArcSpokes);
 
-            InnerArcSquare.Copy(vitalStatisticsSource.InnerArcSquare);
-            OuterArcSquare.Copy(vitalStatisticsSource.OuterArcSquare);
+            InnerArcSquare.Copy(topGameGraphicsDataSource.InnerArcSquare);
+            OuterArcSquare.Copy(topGameGraphicsDataSource.OuterArcSquare);
 
-            MaxCentralAngle = vitalStatisticsSource.MaxCentralAngle;
-            MinimumAngleApplied = vitalStatisticsSource.MinimumAngleApplied;
-            MaximumAngleApplied = vitalStatisticsSource.MaximumAngleApplied;
-            OriginToArcCentre = vitalStatisticsSource.OriginToArcCentre;
-            CentralSpokeLength = vitalStatisticsSource.CentralSpokeLength;
-            InnerArcRadius = vitalStatisticsSource.InnerArcRadius;
-            OuterArcRadius = vitalStatisticsSource.OuterArcRadius;
-            OuterArmLength = vitalStatisticsSource.OuterArmLength;
-            InnerArmLength = vitalStatisticsSource.InnerArmLength;
-            ArmSegmentLength = vitalStatisticsSource.ArmSegmentLength;
-            ConstantCentralSegmentLength = vitalStatisticsSource.ConstantCentralSegmentLength;
-            ArcStartAngle = vitalStatisticsSource.ArcStartAngle;
-            AngleB = vitalStatisticsSource.AngleB;
-            AngleC = vitalStatisticsSource.AngleC;
-            TotalAngleShare = vitalStatisticsSource.TotalAngleShare;
-            CentralAngle = vitalStatisticsSource.CentralAngle;
-            ArcSegmentAngle = vitalStatisticsSource.ArcSegmentAngle;
-            NumArmSegments = vitalStatisticsSource.NumArmSegments;
-            NumArcSegments = vitalStatisticsSource.NumArcSegments;
-            NumTotalSegments = vitalStatisticsSource.NumTotalSegments;
-            NumTotalCardsInGame = vitalStatisticsSource.NumTotalCardsInGame;
-            NumCardsInPlay = vitalStatisticsSource.NumCardsInPlay;
+            MaxCentralAngle = topGameGraphicsDataSource.MaxCentralAngle;
+            MinimumAngleApplied = topGameGraphicsDataSource.MinimumAngleApplied;
+            MaximumAngleApplied = topGameGraphicsDataSource.MaximumAngleApplied;
+            OriginToArcCentre = topGameGraphicsDataSource.OriginToArcCentre;
+            CentralSpokeLength = topGameGraphicsDataSource.CentralSpokeLength;
+            InnerArcRadius = topGameGraphicsDataSource.InnerArcRadius;
+            OuterArcRadius = topGameGraphicsDataSource.OuterArcRadius;
+            OuterArmLength = topGameGraphicsDataSource.OuterArmLength;
+            InnerArmLength = topGameGraphicsDataSource.InnerArmLength;
+            ArmSegmentLength = topGameGraphicsDataSource.ArmSegmentLength;
+            ConstantCentralSegmentLength = topGameGraphicsDataSource.ConstantCentralSegmentLength;
+            ArcStartAngle = topGameGraphicsDataSource.ArcStartAngle;
+            AngleB = topGameGraphicsDataSource.AngleB;
+            AngleC = topGameGraphicsDataSource.AngleC;
+            TotalAngleShare = topGameGraphicsDataSource.TotalAngleShare;
+            CentralAngle = topGameGraphicsDataSource.CentralAngle;
+            ArcSegmentAngle = topGameGraphicsDataSource.ArcSegmentAngle;
+            NumArmSegments = topGameGraphicsDataSource.NumArmSegments;
+            NumArcSegments = topGameGraphicsDataSource.NumArcSegments;
+            NumTotalSegments = topGameGraphicsDataSource.NumTotalSegments;
+            NumTotalCardsInGame = topGameGraphicsDataSource.NumTotalCardsInGame;
+            NumCardsInPlay = topGameGraphicsDataSource.NumCardsInPlay;
+        }
+
+        public void Dispose()
+        {
+            OuterPath.ActualPath.Dispose();
+            InnerPath.ActualPath.Dispose();
         }
     }
 }

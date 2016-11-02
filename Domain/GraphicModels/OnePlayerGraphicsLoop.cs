@@ -21,7 +21,7 @@ namespace Domain.GraphicModels
             return System.Drawing.Color.CornflowerBlue;
         }
 
-        private VitalStatistics _vitalStatistics = new VitalStatistics();
+        private readonly TopGameGraphicsData _topGameGraphicsData = new TopGameGraphicsData();
 
         Region storedPetalRegion; // just for debug purposes: see what the petal region looks like.
         List<Region> subRegions;
@@ -29,8 +29,7 @@ namespace Domain.GraphicModels
 
         public void Dispose()
         {
-            _vitalStatistics.OuterPath.ActualPath.Dispose();
-            _vitalStatistics.InnerPath.ActualPath.Dispose();
+            _topGameGraphicsData.Dispose();
             DisposeRegions();
         }
 
@@ -45,20 +44,6 @@ namespace Domain.GraphicModels
 
         public OnePlayerGraphicsLoop()
         {
-            // Defunct:
-            _vitalStatistics.ConstantCentralSegmentLength = TopGameConstants.ConstantSegmentLength;
-
-            _vitalStatistics.Origin.X = 215; // 430; // 500, 360
-            _vitalStatistics.Origin.Y = 215; // 430; // 400, 360
-            _vitalStatistics.ArmSegmentLength = TopGameConstants.ConstantSegmentLength;
-            _vitalStatistics.NumTotalCardsInGame = 52;
-            _vitalStatistics.NumTotalSegments = 0;
-            _vitalStatistics.NumCardsInPlay = 0;
-            _vitalStatistics.MaxCentralAngle = 170;
-            _vitalStatistics.MinimumAngleApplied = false;
-            _vitalStatistics.MaximumAngleApplied = false;
-            CalculateCentralAngle(360, _vitalStatistics.NumTotalCardsInGame, false);
-            
             subRegions = new List<Region>();
             regionColours = new List<ColouredRegion>();
         }
@@ -67,7 +52,7 @@ namespace Domain.GraphicModels
         {
             using (Matrix rotateMatrix = new Matrix())
             {
-                rotateMatrix.RotateAt((float)rotationAngle, _vitalStatistics.Origin.Point);
+                rotateMatrix.RotateAt((float)rotationAngle, _topGameGraphicsData.Origin.Point);
                 for (int iCount = 0; iCount < subRegions.Count(); iCount++)
                 {
                     subRegions.ElementAt(iCount).Transform(rotateMatrix);
@@ -77,34 +62,34 @@ namespace Domain.GraphicModels
 
         public void Clear()
         {
-            _vitalStatistics.NumTotalSegments = 0;
-            _vitalStatistics.CentralAngle = 0;
+            _topGameGraphicsData.NumTotalSegments = 0;
+            _topGameGraphicsData.CentralAngle = 0;
             DisposeRegions();
-            _vitalStatistics.OuterPath.Reset();
-            _vitalStatistics.InnerPath.Reset();
+            _topGameGraphicsData.OuterPath.Reset();
+            _topGameGraphicsData.InnerPath.Reset();
             ClearAllArmDivisions();
-            if (_vitalStatistics.ArcSpokes.Points.Any())
+            if (_topGameGraphicsData.ArcSpokes.Points.Any())
             {
-                _vitalStatistics.ArcSpokes.Points.Clear(); 
+                _topGameGraphicsData.ArcSpokes.Points.Clear(); 
             }
             regionColours.Clear();
         }
 
         public void RemoveTopSegment()
         {
-            _vitalStatistics.NumTotalSegments--;
+            _topGameGraphicsData.NumTotalSegments--;
             regionColours.RemoveAt(0);
         }
 
         public void RemoveBottomSegment()
         {
-            _vitalStatistics.NumTotalSegments--;
+            _topGameGraphicsData.NumTotalSegments--;
             regionColours.RemoveAt(regionColours.Count() - 1);
         }
 
         public void AddSegment()
         {
-            _vitalStatistics.NumTotalSegments++;
+            _topGameGraphicsData.NumTotalSegments++;
             regionColours.Add(new ColouredRegion());
         }
 
@@ -119,27 +104,27 @@ namespace Domain.GraphicModels
 
         public int GetNumTotalSegments()
         {
-            return _vitalStatistics.NumTotalSegments;
+            return _topGameGraphicsData.NumTotalSegments;
         }
 
         public void SetMaxCentralAngle(double newMax)
         {
-            _vitalStatistics.MaxCentralAngle = newMax;
+            _topGameGraphicsData.MaxCentralAngle = newMax;
         }
 
         public void SetConstantBottomAngle(double newBottom)
         {
-            _vitalStatistics.TotalAngleShare = newBottom;
+            _topGameGraphicsData.TotalAngleShare = newBottom;
         }
 
         public void SetCentralAngle(double newAngle)
         {
-            _vitalStatistics.CentralAngle = newAngle;
+            _topGameGraphicsData.CentralAngle = newAngle;
         }
 
         public double GetCentralAngle()
         {
-            return _vitalStatistics.CentralAngle;
+            return _topGameGraphicsData.CentralAngle;
         }
 
         public int NumRegions()
@@ -149,19 +134,19 @@ namespace Domain.GraphicModels
 
         public bool IsMinimumAngleApplied()
         {
-            return _vitalStatistics.MinimumAngleApplied;
+            return _topGameGraphicsData.MinimumAngleApplied;
         }
 
         public bool IsMaximumAngleApplied()
         {
-            return _vitalStatistics.MaximumAngleApplied;
+            return _topGameGraphicsData.MaximumAngleApplied;
         }
 
         // This one displays rainbow colours
         // If iRegionIndex is -1, all regions are displayed - otherwise just the region indicated by iRegionIndex.
         public void Display(int iRegionIndex, int iColourCycler, PaintEventArgs e, bool bClearGraphics)
         {
-            if (_vitalStatistics.NumTotalSegments > 0)
+            if (_topGameGraphicsData.NumTotalSegments > 0)
             {
                 int iRegionCount = (iRegionIndex == -1) ? subRegions.Count() : iRegionIndex + 1;
                 int iRegionStart = (iRegionIndex == -1) ? 0 : iRegionIndex;
@@ -229,7 +214,7 @@ namespace Domain.GraphicModels
                 //e.Graphics.FillRegion(myBrush, storedPetalRegion);
 
                 System.Drawing.Pen myPen = new System.Drawing.Pen(System.Drawing.Color.Black, 1);
-                e.Graphics.DrawPath(myPen, _vitalStatistics.OuterPath.ActualPath);
+                e.Graphics.DrawPath(myPen, _topGameGraphicsData.OuterPath.ActualPath);
 
                 //System.Drawing.Pen myOtherPen = new System.Drawing.Pen(System.Drawing.Color.Red, 1);
                 //e.Graphics.DrawPath(myOtherPen, _vitalStatistics.InnerPath.ActualPath);
@@ -239,7 +224,7 @@ namespace Domain.GraphicModels
         // This one displays stored colours
         public void Display(int iRegionIndex, PaintEventArgs e)
         {
-            if (_vitalStatistics.NumTotalSegments > 0)
+            if (_topGameGraphicsData.NumTotalSegments > 0)
             {
                 int iRegionCount = (iRegionIndex == -1) ? subRegions.Count() : iRegionIndex + 1;
                 int iRegionStart = (iRegionIndex == -1) ? 0 : iRegionIndex;
@@ -264,38 +249,21 @@ namespace Domain.GraphicModels
             using (GraphicsPath tempRegionPath = new GraphicsPath())
             {
                 // end-arm central region
-                tempRegionPath.AddLine(_vitalStatistics.Origin.Point, _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(0).Point);
-                tempRegionPath.AddLine(_vitalStatistics.EndArmDivisionStarts.Points.ElementAt(0).Point, _vitalStatistics.ActualInnerPetalSource.Point);
-                tempRegionPath.AddLine(_vitalStatistics.ActualInnerPetalSource.Point, _vitalStatistics.Origin.Point);
+                tempRegionPath.AddLine(_topGameGraphicsData.Origin.Point, _topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(0).Point);
+                tempRegionPath.AddLine(_topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(0).Point, _topGameGraphicsData.ActualInnerPetalSource.Point);
+                tempRegionPath.AddLine(_topGameGraphicsData.ActualInnerPetalSource.Point, _topGameGraphicsData.Origin.Point);
                 e.Graphics.FillRegion(myBrush, subRegions.ElementAt(subRegions.Count() - 1));
             }
         }
 
         public double CalculateCentralAngle(double numDegreesAvailable, int numCardsBeingShared, bool bSuppressMinAndMax)
         {
-            _vitalStatistics.MinimumAngleApplied = false;
-            _vitalStatistics.MaximumAngleApplied = false;
-            _vitalStatistics.CentralAngle = ((double)_vitalStatistics.NumTotalSegments / (double)numCardsBeingShared) * numDegreesAvailable;
-            if ((_vitalStatistics.CentralAngle > 0) && !bSuppressMinAndMax)
-            {
-                if (_vitalStatistics.CentralAngle < TopGameConstants.MinCentralAngle)
-                {
-                    _vitalStatistics.CentralAngle = TopGameConstants.MinCentralAngle;
-                    _vitalStatistics.MinimumAngleApplied = true;
-                }
-                if (_vitalStatistics.CentralAngle > _vitalStatistics.MaxCentralAngle)
-                {
-                    _vitalStatistics.CentralAngle = _vitalStatistics.MaxCentralAngle;
-                    _vitalStatistics.MaximumAngleApplied = true;
-                }
-            }
-
-            return _vitalStatistics.CentralAngle;
+            return _topGameGraphicsData.CalculateCentralAngle(numDegreesAvailable, numCardsBeingShared, bSuppressMinAndMax);
         }
 
         public void LoadNewData(double rotationAngle)
         {
-            if (_vitalStatistics.NumTotalSegments > 0)
+            if (_topGameGraphicsData.NumTotalSegments > 0)
             {
                 PrepareActualData(rotationAngle);
             }
@@ -313,7 +281,7 @@ namespace Domain.GraphicModels
             CalculateArmDivisions();
             AddSubRegions(goldenMasterData);
 
-            Debug.Assert(_vitalStatistics.NumTotalSegments == subRegions.Count(), "Region count", "Number of regions is not num total segments");
+            Debug.Assert(_topGameGraphicsData.NumTotalSegments == subRegions.Count(), "Region count", "Number of regions is not num total segments");
 
             if (rotationAngle > 0)
             {
@@ -324,27 +292,27 @@ namespace Domain.GraphicModels
         private void CalculateGlobalValues()
         {
             // Arms
-            _vitalStatistics.NumArmSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3() : 0;
+            _topGameGraphicsData.NumArmSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3() : 0;
             CalculateArmSegmentLength();
-            _vitalStatistics.OuterArmLength = (_vitalStatistics.NumArmSegments + 1) * _vitalStatistics.ArmSegmentLength;
-            _vitalStatistics.InnerArmLength = _vitalStatistics.NumArmSegments * _vitalStatistics.ArmSegmentLength;
+            _topGameGraphicsData.OuterArmLength = (_topGameGraphicsData.NumArmSegments + 1) * _topGameGraphicsData.ArmSegmentLength;
+            _topGameGraphicsData.InnerArmLength = _topGameGraphicsData.NumArmSegments * _topGameGraphicsData.ArmSegmentLength;
 
             // Central triangle(s)
-            _vitalStatistics.CentralSpokeLength = GetAdjacentSide(_vitalStatistics.ArmSegmentLength, _vitalStatistics.CentralAngle / 2);
+            _topGameGraphicsData.CentralSpokeLength = GetAdjacentSide(_topGameGraphicsData.ArmSegmentLength, _topGameGraphicsData.CentralAngle / 2);
 
             // Inner petal source
-            _vitalStatistics.ActualInnerPetalSource.PopulateFromLengthTopAngleAndStartPoint(
-                _vitalStatistics.CentralSpokeLength,
-                _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2,
-                _vitalStatistics.Origin,
-                _vitalStatistics.RelativeInnerPetalSource);
+            _topGameGraphicsData.ActualInnerPetalSource.PopulateFromLengthTopAngleAndStartPoint(
+                _topGameGraphicsData.CentralSpokeLength,
+                _topGameGraphicsData.TotalAngleShare / 2 + _topGameGraphicsData.CentralAngle / 2,
+                _topGameGraphicsData.Origin,
+                _topGameGraphicsData.RelativeInnerPetalSource);
         }
 
         private void CalculateObsoleteAngleAAndAngleB()
         {
             // AngleB and AngleC are now not used - only here so as not to break golden master
-            _vitalStatistics.AngleB = 90 - _vitalStatistics.TotalAngleShare / 2; // ConstantBottomAngle = angleShare, ie 360 / num hands
-            _vitalStatistics.AngleC = 90 - _vitalStatistics.CentralAngle / 2; // was previously expressed as (180 - _vitalStatistics.CentralAngle) / 2
+            _topGameGraphicsData.AngleB = 90 - _topGameGraphicsData.TotalAngleShare / 2; // ConstantBottomAngle = angleShare, ie 360 / num hands
+            _topGameGraphicsData.AngleC = 90 - _topGameGraphicsData.CentralAngle / 2; // was previously expressed as (180 - _vitalStatistics.CentralAngle) / 2
         }
 
         // The sub-regions are all the areas that get coloured in: Each region represents an individual card.
@@ -367,13 +335,13 @@ namespace Domain.GraphicModels
         {
             // End with the central region of the end-arm - this is the triangular bit that goes from the centre out to the end of the parallel-lines part of the arm
             // (apart from the central triangle, all the regions in the end-arm are parallelograms)
-            if (_vitalStatistics.NumTotalSegments > 1)
+            if (_topGameGraphicsData.NumTotalSegments > 1)
             {
                 // end-arm central region
                 AddTriangularRegion(
-                    _vitalStatistics.Origin,
-                    _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(0),
-                    _vitalStatistics.ActualInnerPetalSource,
+                    _topGameGraphicsData.Origin,
+                    _topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(0),
+                    _topGameGraphicsData.ActualInnerPetalSource,
                             goldenMasterData
                     );
             }
@@ -381,26 +349,26 @@ namespace Domain.GraphicModels
 
         private void AddEndArmSegments(GoldenMasterSingleGraphicPass goldenMasterData)
         {
-            if (_vitalStatistics.NumArmSegments > 0)
+            if (_topGameGraphicsData.NumArmSegments > 0)
             {
                 // all the divisions of the end arm (in reverse)
                 AddParallelogramRegion(
-                    _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
-                    _vitalStatistics.EndArmDivisionEnds.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
-                    _vitalStatistics.ActualInnerArcEnd,
-                    _vitalStatistics.ActualOuterArcEnd,
+                    _topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(_topGameGraphicsData.NumArmSegments - 1),
+                    _topGameGraphicsData.EndArmDivisionEnds.Points.ElementAt(_topGameGraphicsData.NumArmSegments - 1),
+                    _topGameGraphicsData.ActualInnerArcEnd,
+                    _topGameGraphicsData.ActualOuterArcEnd,
                             goldenMasterData
                     );
 
-                if (_vitalStatistics.NumArmSegments > 1)
+                if (_topGameGraphicsData.NumArmSegments > 1)
                 {
-                    for (int iCount = _vitalStatistics.NumArmSegments - 1; iCount > 0; iCount--)
+                    for (int iCount = _topGameGraphicsData.NumArmSegments - 1; iCount > 0; iCount--)
                     {
                         AddParallelogramRegion(
-                            _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(iCount),
-                            _vitalStatistics.EndArmDivisionEnds.Points.ElementAt(iCount),
-                            _vitalStatistics.EndArmDivisionEnds.Points.ElementAt(iCount - 1),
-                            _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(iCount - 1),
+                            _topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(iCount),
+                            _topGameGraphicsData.EndArmDivisionEnds.Points.ElementAt(iCount),
+                            _topGameGraphicsData.EndArmDivisionEnds.Points.ElementAt(iCount - 1),
+                            _topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(iCount - 1),
                             goldenMasterData
                             );
                     }
@@ -413,15 +381,15 @@ namespace Domain.GraphicModels
             Region petalRegion = MakePetalRegion();
 
             // the divisions of the arc (sounds biblical!)
-            if (_vitalStatistics.NumArcSegments > 0)
+            if (_topGameGraphicsData.NumArcSegments > 0)
             {
-                if (_vitalStatistics.ArcSpokes.Points.Count() == 0)
+                if (_topGameGraphicsData.ArcSpokes.Points.Count() == 0)
                 {
                     // the division is the arc itself.
                     TopGameGraphicsPath tempRegionPath = new TopGameGraphicsPath();
                     // See AddArcPath for explanation of how arcs are drawn.
-                    tempRegionPath.AddArcPath(_vitalStatistics.OuterArcSquare, (float)_vitalStatistics.ArcStartAngle, (float)180);
-                    tempRegionPath.AddLine(_vitalStatistics.ActualOuterArcStart, _vitalStatistics.ActualOuterArcEnd);
+                    tempRegionPath.AddArcPath(_topGameGraphicsData.OuterArcSquare, (float)_topGameGraphicsData.ArcStartAngle, (float)180);
+                    tempRegionPath.AddLine(_topGameGraphicsData.ActualOuterArcStart, _topGameGraphicsData.ActualOuterArcEnd);
                     subRegions.Add(new Region(tempRegionPath.ActualPath));
 
                     if (goldenMasterData != null)
@@ -436,28 +404,28 @@ namespace Domain.GraphicModels
                     // 1st arc division
                     AddArcRegion(
                         petalRegion,
-                        _vitalStatistics.ActualArcCentre,
-                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ActualOuterArcStart, 1.5),
-                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(0), 1.5),
+                        _topGameGraphicsData.ActualArcCentre,
+                        MoveAlongLineByFraction(_topGameGraphicsData.ActualArcCentre, _topGameGraphicsData.ActualOuterArcStart, 1.5),
+                        MoveAlongLineByFraction(_topGameGraphicsData.ActualArcCentre, _topGameGraphicsData.ArcSpokes.Points.ElementAt(0), 1.5),
                             goldenMasterData);
 
                     // middle arc divisions
-                    for (int iCount = 1; iCount < _vitalStatistics.ArcSpokes.Points.Count(); iCount++)
+                    for (int iCount = 1; iCount < _topGameGraphicsData.ArcSpokes.Points.Count(); iCount++)
                     {
                         AddArcRegion(
                             petalRegion,
-                            _vitalStatistics.ActualArcCentre,
-                            MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(iCount - 1), 1.5),
-                            MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(iCount), 1.5),
+                            _topGameGraphicsData.ActualArcCentre,
+                            MoveAlongLineByFraction(_topGameGraphicsData.ActualArcCentre, _topGameGraphicsData.ArcSpokes.Points.ElementAt(iCount - 1), 1.5),
+                            MoveAlongLineByFraction(_topGameGraphicsData.ActualArcCentre, _topGameGraphicsData.ArcSpokes.Points.ElementAt(iCount), 1.5),
                             goldenMasterData);
                     }
 
                     // last arc division
                     AddArcRegion(
                         petalRegion,
-                        _vitalStatistics.ActualArcCentre,
-                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(_vitalStatistics.ArcSpokes.Points.Count() - 1), 1.5),
-                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ActualOuterArcEnd, 1.5),
+                        _topGameGraphicsData.ActualArcCentre,
+                        MoveAlongLineByFraction(_topGameGraphicsData.ActualArcCentre, _topGameGraphicsData.ArcSpokes.Points.ElementAt(_topGameGraphicsData.ArcSpokes.Points.Count() - 1), 1.5),
+                        MoveAlongLineByFraction(_topGameGraphicsData.ActualArcCentre, _topGameGraphicsData.ActualOuterArcEnd, 1.5),
                             goldenMasterData);
                 }
             }
@@ -465,18 +433,18 @@ namespace Domain.GraphicModels
 
         private void AddStartArmSegments(GoldenMasterSingleGraphicPass goldenMasterData)
         {
-            if (_vitalStatistics.NumArmSegments > 0)
+            if (_topGameGraphicsData.NumArmSegments > 0)
             {
                 // all the divisions of the start arm
-                if (_vitalStatistics.NumArmSegments > 1)
+                if (_topGameGraphicsData.NumArmSegments > 1)
                 {
-                    for (int iCount = 0; iCount < _vitalStatistics.NumArmSegments - 1; iCount++)
+                    for (int iCount = 0; iCount < _topGameGraphicsData.NumArmSegments - 1; iCount++)
                     {
                         AddParallelogramRegion(
-                            _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(iCount),
-                            _vitalStatistics.StartArmDivisionEnds.Points.ElementAt(iCount),
-                            _vitalStatistics.StartArmDivisionEnds.Points.ElementAt(iCount + 1),
-                            _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(iCount + 1),
+                            _topGameGraphicsData.StartArmDivisionStarts.Points.ElementAt(iCount),
+                            _topGameGraphicsData.StartArmDivisionEnds.Points.ElementAt(iCount),
+                            _topGameGraphicsData.StartArmDivisionEnds.Points.ElementAt(iCount + 1),
+                            _topGameGraphicsData.StartArmDivisionStarts.Points.ElementAt(iCount + 1),
                             goldenMasterData
                             );
                     }
@@ -484,10 +452,10 @@ namespace Domain.GraphicModels
 
                 // the last one hooks up to the arc.
                 AddParallelogramRegion(
-                    _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
-                    _vitalStatistics.StartArmDivisionEnds.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
-                    _vitalStatistics.ActualInnerArcStart,
-                    _vitalStatistics.ActualOuterArcStart,
+                    _topGameGraphicsData.StartArmDivisionStarts.Points.ElementAt(_topGameGraphicsData.NumArmSegments - 1),
+                    _topGameGraphicsData.StartArmDivisionEnds.Points.ElementAt(_topGameGraphicsData.NumArmSegments - 1),
+                    _topGameGraphicsData.ActualInnerArcStart,
+                    _topGameGraphicsData.ActualOuterArcStart,
                     goldenMasterData
                     );
             }
@@ -496,22 +464,22 @@ namespace Domain.GraphicModels
         private void AddStartArmCentralRegion(GoldenMasterSingleGraphicPass goldenMasterData)
         {// Start with the central region of the start-arm - this is the triangular bit that goes from the centre out to the start of the parallel-lines part of the arm
             // (after the central triangle, all the regions in the start-arm are parallelograms)
-            if (_vitalStatistics.NumTotalSegments > 1)
+            if (_topGameGraphicsData.NumTotalSegments > 1)
             {
                 // start-arm central region
                 AddTriangularRegion(
-                    _vitalStatistics.Origin,
-                    _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(0),
-                    _vitalStatistics.ActualInnerPetalSource,
+                    _topGameGraphicsData.Origin,
+                    _topGameGraphicsData.StartArmDivisionStarts.Points.ElementAt(0),
+                    _topGameGraphicsData.ActualInnerPetalSource,
                             goldenMasterData);
             }
             else
             {
                 // just one central region
                 AddTriangularRegion(
-                    _vitalStatistics.Origin,
-                    _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(0),
-                    _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(0),
+                    _topGameGraphicsData.Origin,
+                    _topGameGraphicsData.StartArmDivisionStarts.Points.ElementAt(0),
+                    _topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(0),
                             goldenMasterData);
             }
         }
@@ -519,16 +487,16 @@ namespace Domain.GraphicModels
         private void CalculateArcSpokeCoordinates()
         {
             // Create NumArcSegments divisions of the arc
-            _vitalStatistics.ArcSpokes.Points.Clear();
-            if (_vitalStatistics.NumArcSegments > 1)
+            _topGameGraphicsData.ArcSpokes.Points.Clear();
+            if (_topGameGraphicsData.NumArcSegments > 1)
             {
-                TopGamePoint currentArcSpoke = GetEndPointOfRotatedLine(_vitalStatistics.OuterArcRadius, _vitalStatistics.ActualArcCentre, _vitalStatistics.ActualOuterArcStart, _vitalStatistics.ArcSegmentAngle);
-                _vitalStatistics.ArcSpokes.Points.Add(currentArcSpoke);
+                TopGamePoint currentArcSpoke = GetEndPointOfRotatedLine(_topGameGraphicsData.OuterArcRadius, _topGameGraphicsData.ActualArcCentre, _topGameGraphicsData.ActualOuterArcStart, _topGameGraphicsData.ArcSegmentAngle);
+                _topGameGraphicsData.ArcSpokes.Points.Add(currentArcSpoke);
                 TopGamePoint previousArcSpoke = currentArcSpoke;
-                for (int iCount = 1; iCount < _vitalStatistics.NumArcSegments - 1; iCount++)
+                for (int iCount = 1; iCount < _topGameGraphicsData.NumArcSegments - 1; iCount++)
                 {
-                    currentArcSpoke = GetEndPointOfRotatedLine(_vitalStatistics.OuterArcRadius, _vitalStatistics.ActualArcCentre, previousArcSpoke, _vitalStatistics.ArcSegmentAngle);
-                    _vitalStatistics.ArcSpokes.Points.Add(currentArcSpoke);
+                    currentArcSpoke = GetEndPointOfRotatedLine(_topGameGraphicsData.OuterArcRadius, _topGameGraphicsData.ActualArcCentre, previousArcSpoke, _topGameGraphicsData.ArcSegmentAngle);
+                    _topGameGraphicsData.ArcSpokes.Points.Add(currentArcSpoke);
                     previousArcSpoke = currentArcSpoke;
                 }
             }
@@ -540,72 +508,72 @@ namespace Domain.GraphicModels
             ClearAllArmDivisions();
 
             // Always create the first division, even if the arms have no segments.
-            double fractionalMultiplier = 1.0 / ((double)_vitalStatistics.NumArmSegments + 1.0);
+            double fractionalMultiplier = 1.0 / ((double)_topGameGraphicsData.NumArmSegments + 1.0);
 
-            _vitalStatistics.StartArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcStart, fractionalMultiplier));
-            _vitalStatistics.EndArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcEnd, fractionalMultiplier));
+            _topGameGraphicsData.StartArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_topGameGraphicsData.Origin, _topGameGraphicsData.ActualOuterArcStart, fractionalMultiplier));
+            _topGameGraphicsData.EndArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_topGameGraphicsData.Origin, _topGameGraphicsData.ActualOuterArcEnd, fractionalMultiplier));
 
-            _vitalStatistics.StartArmDivisionEnds.Points.Add(_vitalStatistics.ActualInnerPetalSource);
-            _vitalStatistics.EndArmDivisionEnds.Points.Add(_vitalStatistics.ActualInnerPetalSource);
+            _topGameGraphicsData.StartArmDivisionEnds.Points.Add(_topGameGraphicsData.ActualInnerPetalSource);
+            _topGameGraphicsData.EndArmDivisionEnds.Points.Add(_topGameGraphicsData.ActualInnerPetalSource);
 
             // now create the rest, if necessary
-            if (_vitalStatistics.NumArmSegments > 1) // If there's only one, there's no dividers necessary
+            if (_topGameGraphicsData.NumArmSegments > 1) // If there's only one, there's no dividers necessary
             {
-                for (int iCount = 2; iCount <= _vitalStatistics.NumArmSegments; iCount++)
+                for (int iCount = 2; iCount <= _topGameGraphicsData.NumArmSegments; iCount++)
                 {
-                    double outerFractionalMultiplier = (double)(iCount) / ((double)_vitalStatistics.NumArmSegments + 1.0); // eg 4 segments: 2/5, 3/5, 4/5
-                    _vitalStatistics.StartArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcStart, outerFractionalMultiplier));
-                    _vitalStatistics.EndArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcEnd, outerFractionalMultiplier));
+                    double outerFractionalMultiplier = (double)(iCount) / ((double)_topGameGraphicsData.NumArmSegments + 1.0); // eg 4 segments: 2/5, 3/5, 4/5
+                    _topGameGraphicsData.StartArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_topGameGraphicsData.Origin, _topGameGraphicsData.ActualOuterArcStart, outerFractionalMultiplier));
+                    _topGameGraphicsData.EndArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_topGameGraphicsData.Origin, _topGameGraphicsData.ActualOuterArcEnd, outerFractionalMultiplier));
 
-                    double innerFractionalMultiplier = ((double)(iCount) - 1.0) / (double)(_vitalStatistics.NumArmSegments); // eg 4 segments: 1/4, 2/4, 3/4
-                    _vitalStatistics.StartArmDivisionEnds.Points.Add(MoveAlongLineByFraction(_vitalStatistics.ActualInnerPetalSource, _vitalStatistics.ActualInnerArcStart, innerFractionalMultiplier));
-                    _vitalStatistics.EndArmDivisionEnds.Points.Add(MoveAlongLineByFraction(_vitalStatistics.ActualInnerPetalSource, _vitalStatistics.ActualInnerArcEnd, innerFractionalMultiplier));
+                    double innerFractionalMultiplier = ((double)(iCount) - 1.0) / (double)(_topGameGraphicsData.NumArmSegments); // eg 4 segments: 1/4, 2/4, 3/4
+                    _topGameGraphicsData.StartArmDivisionEnds.Points.Add(MoveAlongLineByFraction(_topGameGraphicsData.ActualInnerPetalSource, _topGameGraphicsData.ActualInnerArcStart, innerFractionalMultiplier));
+                    _topGameGraphicsData.EndArmDivisionEnds.Points.Add(MoveAlongLineByFraction(_topGameGraphicsData.ActualInnerPetalSource, _topGameGraphicsData.ActualInnerArcEnd, innerFractionalMultiplier));
                 }
             }
         }
 
         private void CalculateArcCoordinates()
         {
-            _vitalStatistics.NumArcSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3PlusLeftovers() : 0;
-            _vitalStatistics.ArcSegmentAngle = (_vitalStatistics.NumArcSegments > 0) ? 180 / _vitalStatistics.NumArcSegments : 0;
-            _vitalStatistics.ArcStartAngle = _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2; // was previously expressed as 180 - (_vitalStatistics.AngleB + _vitalStatistics.AngleC)
-            _vitalStatistics.OriginToArcCentre = GetAdjacentSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.OuterArcRadius = GetOppositeSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.InnerArcRadius = (_vitalStatistics.InnerArmLength > 0) ? GetOppositeSide(_vitalStatistics.InnerArmLength, _vitalStatistics.CentralAngle / 2) : 0;
+            _topGameGraphicsData.NumArcSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3PlusLeftovers() : 0;
+            _topGameGraphicsData.ArcSegmentAngle = (_topGameGraphicsData.NumArcSegments > 0) ? 180 / _topGameGraphicsData.NumArcSegments : 0;
+            _topGameGraphicsData.ArcStartAngle = _topGameGraphicsData.TotalAngleShare / 2 + _topGameGraphicsData.CentralAngle / 2; // was previously expressed as 180 - (_vitalStatistics.AngleB + _vitalStatistics.AngleC)
+            _topGameGraphicsData.OriginToArcCentre = GetAdjacentSide(_topGameGraphicsData.OuterArmLength, _topGameGraphicsData.CentralAngle / 2);
+            _topGameGraphicsData.OuterArcRadius = GetOppositeSide(_topGameGraphicsData.OuterArmLength, _topGameGraphicsData.CentralAngle / 2);
+            _topGameGraphicsData.InnerArcRadius = (_topGameGraphicsData.InnerArmLength > 0) ? GetOppositeSide(_topGameGraphicsData.InnerArmLength, _topGameGraphicsData.CentralAngle / 2) : 0;
 
-            _vitalStatistics.ActualArcCentre.PopulateFromLengthTopAngleAndStartPoint(
-                _vitalStatistics.OriginToArcCentre,
-                _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2,
-                _vitalStatistics.Origin,
-                _vitalStatistics.RelativeArcCentre);
+            _topGameGraphicsData.ActualArcCentre.PopulateFromLengthTopAngleAndStartPoint(
+                _topGameGraphicsData.OriginToArcCentre,
+                _topGameGraphicsData.TotalAngleShare / 2 + _topGameGraphicsData.CentralAngle / 2,
+                _topGameGraphicsData.Origin,
+                _topGameGraphicsData.RelativeArcCentre);
 
-            if (_vitalStatistics.InnerArmLength > 0)
+            if (_topGameGraphicsData.InnerArmLength > 0)
             {
                 // !! Caution !! The inner arc values are relative to the inner petal source, NOT to the Origin!
-                _vitalStatistics.ActualInnerArcStart.PopulateFromLengthTopAngleAndStartPoint(
-                    _vitalStatistics.InnerArmLength,
-                    _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle,
-                    _vitalStatistics.ActualInnerPetalSource,
-                    _vitalStatistics.RelativeInnerArcStart);
+                _topGameGraphicsData.ActualInnerArcStart.PopulateFromLengthTopAngleAndStartPoint(
+                    _topGameGraphicsData.InnerArmLength,
+                    _topGameGraphicsData.TotalAngleShare / 2 + _topGameGraphicsData.CentralAngle,
+                    _topGameGraphicsData.ActualInnerPetalSource,
+                    _topGameGraphicsData.RelativeInnerArcStart);
 
-                _vitalStatistics.ActualInnerArcEnd.PopulateFromLengthTopAngleAndStartPoint(
-                    _vitalStatistics.InnerArmLength,
-                    _vitalStatistics.TotalAngleShare / 2,
-                    _vitalStatistics.ActualInnerPetalSource,
-                    _vitalStatistics.RelativeInnerArcEnd);
+                _topGameGraphicsData.ActualInnerArcEnd.PopulateFromLengthTopAngleAndStartPoint(
+                    _topGameGraphicsData.InnerArmLength,
+                    _topGameGraphicsData.TotalAngleShare / 2,
+                    _topGameGraphicsData.ActualInnerPetalSource,
+                    _topGameGraphicsData.RelativeInnerArcEnd);
             }
 
-            _vitalStatistics.ActualOuterArcStart.PopulateFromLengthTopAngleAndStartPoint(
-                _vitalStatistics.OuterArmLength,
-                _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle,
-                _vitalStatistics.Origin,
-                _vitalStatistics.RelativeOuterArcStart);
+            _topGameGraphicsData.ActualOuterArcStart.PopulateFromLengthTopAngleAndStartPoint(
+                _topGameGraphicsData.OuterArmLength,
+                _topGameGraphicsData.TotalAngleShare / 2 + _topGameGraphicsData.CentralAngle,
+                _topGameGraphicsData.Origin,
+                _topGameGraphicsData.RelativeOuterArcStart);
 
-            _vitalStatistics.ActualOuterArcEnd.PopulateFromLengthTopAngleAndStartPoint(
-                _vitalStatistics.OuterArmLength,
-                _vitalStatistics.TotalAngleShare / 2,
-                _vitalStatistics.Origin,
-                _vitalStatistics.RelativeOuterArcEnd);
+            _topGameGraphicsData.ActualOuterArcEnd.PopulateFromLengthTopAngleAndStartPoint(
+                _topGameGraphicsData.OuterArmLength,
+                _topGameGraphicsData.TotalAngleShare / 2,
+                _topGameGraphicsData.Origin,
+                _topGameGraphicsData.RelativeOuterArcEnd);
 
             CalculateArcSpokeCoordinates();
         }
@@ -628,29 +596,29 @@ namespace Domain.GraphicModels
         {
             TopGameGraphicsPath petalPath = new TopGameGraphicsPath();
 
-            if (_vitalStatistics.NumArcSegments > 0)
+            if (_topGameGraphicsData.NumArcSegments > 0)
             {
                 petalPath.AddForwardCircularArc(
-                    _vitalStatistics.ActualArcCentre,
-                    _vitalStatistics.OuterArcRadius,
-                    _vitalStatistics.ArcStartAngle);
+                    _topGameGraphicsData.ActualArcCentre,
+                    _topGameGraphicsData.OuterArcRadius,
+                    _topGameGraphicsData.ArcStartAngle);
             }
 
-            if (_vitalStatistics.InnerArmLength <= 0)
+            if (_topGameGraphicsData.InnerArmLength <= 0)
             {
                 // We have to go from start to end instead of from end to start, because the outer arc gets drawn from end to start!
-                petalPath.AddLine(_vitalStatistics.ActualOuterArcStart, _vitalStatistics.ActualOuterArcEnd);
+                petalPath.AddLine(_topGameGraphicsData.ActualOuterArcStart, _topGameGraphicsData.ActualOuterArcEnd);
             }
             else
             {
-                petalPath.AddLine(_vitalStatistics.ActualOuterArcStart, _vitalStatistics.ActualInnerArcStart);
+                petalPath.AddLine(_topGameGraphicsData.ActualOuterArcStart, _topGameGraphicsData.ActualInnerArcStart);
 
                 petalPath.AddBackwardCircularArc(
-                    _vitalStatistics.ActualArcCentre,
-                    _vitalStatistics.InnerArcRadius,
-                    _vitalStatistics.ArcStartAngle);
+                    _topGameGraphicsData.ActualArcCentre,
+                    _topGameGraphicsData.InnerArcRadius,
+                    _topGameGraphicsData.ArcStartAngle);
 
-                petalPath.AddLine(_vitalStatistics.ActualInnerArcEnd, _vitalStatistics.ActualOuterArcEnd);
+                petalPath.AddLine(_topGameGraphicsData.ActualInnerArcEnd, _topGameGraphicsData.ActualOuterArcEnd);
             }
 
             return petalPath;
@@ -658,53 +626,53 @@ namespace Domain.GraphicModels
 
         private void MakeObsoleteOuterAndInnerPath()
         {
-            _vitalStatistics.OuterPath.Reset();
+            _topGameGraphicsData.OuterPath.Reset();
             // We have to go from end to start instead of from start to end, because the arc gets drawn that way round.
-            _vitalStatistics.OuterPath.AddLine(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcEnd);
-            if (_vitalStatistics.NumArcSegments > 0)
+            _topGameGraphicsData.OuterPath.AddLine(_topGameGraphicsData.Origin, _topGameGraphicsData.ActualOuterArcEnd);
+            if (_topGameGraphicsData.NumArcSegments > 0)
             {
                 // !! The y coordinate of the enclosing rectangle represents the TOP of the shape, not the bottom
-                _vitalStatistics.OuterArcSquare.X = _vitalStatistics.ActualArcCentre.X - (int)Math.Round(_vitalStatistics.OuterArcRadius, 0, MidpointRounding.AwayFromZero);
-                _vitalStatistics.OuterArcSquare.Y = _vitalStatistics.ActualArcCentre.Y - (int)Math.Round(_vitalStatistics.OuterArcRadius, 0, MidpointRounding.AwayFromZero);
-                _vitalStatistics.OuterArcSquare.Width = (int)Math.Round(_vitalStatistics.OuterArcRadius * 2, 0, MidpointRounding.AwayFromZero);
-                _vitalStatistics.OuterArcSquare.Height = (int)Math.Round(_vitalStatistics.OuterArcRadius * 2, 0, MidpointRounding.AwayFromZero);
+                _topGameGraphicsData.OuterArcSquare.X = _topGameGraphicsData.ActualArcCentre.X - (int)Math.Round(_topGameGraphicsData.OuterArcRadius, 0, MidpointRounding.AwayFromZero);
+                _topGameGraphicsData.OuterArcSquare.Y = _topGameGraphicsData.ActualArcCentre.Y - (int)Math.Round(_topGameGraphicsData.OuterArcRadius, 0, MidpointRounding.AwayFromZero);
+                _topGameGraphicsData.OuterArcSquare.Width = (int)Math.Round(_topGameGraphicsData.OuterArcRadius * 2, 0, MidpointRounding.AwayFromZero);
+                _topGameGraphicsData.OuterArcSquare.Height = (int)Math.Round(_topGameGraphicsData.OuterArcRadius * 2, 0, MidpointRounding.AwayFromZero);
 
                 // See AddArcPath for explanation of how arcs are drawn.
-                _vitalStatistics.OuterPath.AddArcPath(_vitalStatistics.OuterArcSquare, (float)_vitalStatistics.ArcStartAngle, (float)180);
+                _topGameGraphicsData.OuterPath.AddArcPath(_topGameGraphicsData.OuterArcSquare, (float)_topGameGraphicsData.ArcStartAngle, (float)180);
             }
             else
             {
-                _vitalStatistics.OuterPath.AddLine(_vitalStatistics.ActualOuterArcStart, _vitalStatistics.ActualOuterArcEnd);
+                _topGameGraphicsData.OuterPath.AddLine(_topGameGraphicsData.ActualOuterArcStart, _topGameGraphicsData.ActualOuterArcEnd);
             }
-            _vitalStatistics.OuterPath.AddLine(_vitalStatistics.ActualOuterArcStart, _vitalStatistics.Origin);
+            _topGameGraphicsData.OuterPath.AddLine(_topGameGraphicsData.ActualOuterArcStart, _topGameGraphicsData.Origin);
 
-            if (_vitalStatistics.InnerArmLength > 0)
+            if (_topGameGraphicsData.InnerArmLength > 0)
             {
-                _vitalStatistics.InnerPath.Reset();
+                _topGameGraphicsData.InnerPath.Reset();
                 // We have to go from end to start instead of from start to end, because the arc gets drawn that way round.
-                _vitalStatistics.InnerPath.AddLine(_vitalStatistics.ActualInnerPetalSource, _vitalStatistics.ActualInnerArcEnd);
+                _topGameGraphicsData.InnerPath.AddLine(_topGameGraphicsData.ActualInnerPetalSource, _topGameGraphicsData.ActualInnerArcEnd);
 
                 // !! The y coordinate of the enclosing rectangle represents the TOP of the shape, not the bottom
-                _vitalStatistics.InnerArcSquare.X = _vitalStatistics.ActualArcCentre.X - (int)Math.Round(_vitalStatistics.InnerArcRadius, 0, MidpointRounding.AwayFromZero);
-                _vitalStatistics.InnerArcSquare.Y = _vitalStatistics.ActualArcCentre.Y - (int)Math.Round(_vitalStatistics.InnerArcRadius, 0, MidpointRounding.AwayFromZero);
-                _vitalStatistics.InnerArcSquare.Width = (int)Math.Round(_vitalStatistics.InnerArcRadius * 2, 0, MidpointRounding.AwayFromZero);
-                _vitalStatistics.InnerArcSquare.Height = (int)Math.Round(_vitalStatistics.InnerArcRadius * 2, 0, MidpointRounding.AwayFromZero);
+                _topGameGraphicsData.InnerArcSquare.X = _topGameGraphicsData.ActualArcCentre.X - (int)Math.Round(_topGameGraphicsData.InnerArcRadius, 0, MidpointRounding.AwayFromZero);
+                _topGameGraphicsData.InnerArcSquare.Y = _topGameGraphicsData.ActualArcCentre.Y - (int)Math.Round(_topGameGraphicsData.InnerArcRadius, 0, MidpointRounding.AwayFromZero);
+                _topGameGraphicsData.InnerArcSquare.Width = (int)Math.Round(_topGameGraphicsData.InnerArcRadius * 2, 0, MidpointRounding.AwayFromZero);
+                _topGameGraphicsData.InnerArcSquare.Height = (int)Math.Round(_topGameGraphicsData.InnerArcRadius * 2, 0, MidpointRounding.AwayFromZero);
 
                 // See AddArcPath for explanation of how arcs are drawn.
-                _vitalStatistics.InnerPath.AddArcPath(_vitalStatistics.InnerArcSquare, (float)_vitalStatistics.ArcStartAngle, (float)180);
-                _vitalStatistics.InnerPath.AddLine(_vitalStatistics.ActualInnerArcStart, _vitalStatistics.ActualInnerPetalSource);
+                _topGameGraphicsData.InnerPath.AddArcPath(_topGameGraphicsData.InnerArcSquare, (float)_topGameGraphicsData.ArcStartAngle, (float)180);
+                _topGameGraphicsData.InnerPath.AddLine(_topGameGraphicsData.ActualInnerArcStart, _topGameGraphicsData.ActualInnerPetalSource);
             }
         }
 
         private void CalculateArmSegmentLength()
         {
-            _vitalStatistics.ArmSegmentLength = TopGameConstants.ConstantSegmentLength;
+            _topGameGraphicsData.ArmSegmentLength = TopGameConstants.ConstantSegmentLength;
             GrowSegmentLengthByALittleToAccountForExtraArcSegments();
 
-            double potentialOuterArmLength = (_vitalStatistics.NumArmSegments + 1) * _vitalStatistics.ArmSegmentLength;
+            double potentialOuterArmLength = (_topGameGraphicsData.NumArmSegments + 1) * _topGameGraphicsData.ArmSegmentLength;
             if (potentialOuterArmLength > MaximumArmLengthWhichFitsInFrame())
             {
-                _vitalStatistics.ArmSegmentLength = MaximumArmLengthWhichFitsInFrame() / _vitalStatistics.NumArmSegments;
+                _topGameGraphicsData.ArmSegmentLength = MaximumArmLengthWhichFitsInFrame() / _topGameGraphicsData.NumArmSegments;
                 ShrinkSegmentLengthByALittleToAccountForExtraArcSegments();
             }
         }
@@ -713,49 +681,49 @@ namespace Domain.GraphicModels
         {
             double segmentAddition = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().LeftoverAfterDividedBy3() : 0;
 
-            _vitalStatistics.ArmSegmentLength = _vitalStatistics.ArmSegmentLength + (TopGameConstants.SegmentGrowthRatio * segmentAddition);
+            _topGameGraphicsData.ArmSegmentLength = _topGameGraphicsData.ArmSegmentLength + (TopGameConstants.SegmentGrowthRatio * segmentAddition);
         }
 
         private void ShrinkSegmentLengthByALittleToAccountForExtraArcSegments()
         {
             double segmentAddition = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().LeftoverAfterDividedBy3() : 0;
 
-            _vitalStatistics.ArmSegmentLength = _vitalStatistics.ArmSegmentLength
+            _topGameGraphicsData.ArmSegmentLength = _topGameGraphicsData.ArmSegmentLength
                 - (TopGameConstants.SegmentGrowthRatio * (2 - segmentAddition));
         }
 
         private int MaximumArmLengthWhichFitsInFrame()
         {
-            return _vitalStatistics.Origin.Y - 70;
+            return _topGameGraphicsData.Origin.Y - 70;
         }
 
         private bool ArcWillExist()
         {
-            return _vitalStatistics.NumTotalSegments > 2;
+            return _topGameGraphicsData.NumTotalSegments > 2;
         }
 
         private int NumSegmentsContainedInArmsAndArc()
         {
-            return _vitalStatistics.NumTotalSegments - 2;
+            return _topGameGraphicsData.NumTotalSegments - 2;
         }
 
         private void ClearAllArmDivisions()
         {
-            if (_vitalStatistics.StartArmDivisionStarts.Points.Any())
+            if (_topGameGraphicsData.StartArmDivisionStarts.Points.Any())
             {
-                _vitalStatistics.StartArmDivisionStarts.Points.Clear();
+                _topGameGraphicsData.StartArmDivisionStarts.Points.Clear();
             }
-            if (_vitalStatistics.StartArmDivisionEnds.Points.Any())
+            if (_topGameGraphicsData.StartArmDivisionEnds.Points.Any())
             {
-                _vitalStatistics.StartArmDivisionEnds.Points.Clear();
+                _topGameGraphicsData.StartArmDivisionEnds.Points.Clear();
             }
-            if (_vitalStatistics.EndArmDivisionStarts.Points.Any())
+            if (_topGameGraphicsData.EndArmDivisionStarts.Points.Any())
             {
-                _vitalStatistics.EndArmDivisionStarts.Points.Clear();
+                _topGameGraphicsData.EndArmDivisionStarts.Points.Clear();
             }
-            if (_vitalStatistics.EndArmDivisionEnds.Points.Any())
+            if (_topGameGraphicsData.EndArmDivisionEnds.Points.Any())
             {
-                _vitalStatistics.EndArmDivisionEnds.Points.Clear();
+                _topGameGraphicsData.EndArmDivisionEnds.Points.Clear();
             }
         }
 
@@ -838,46 +806,46 @@ namespace Domain.GraphicModels
                 if (bGo)
                 {
                     // Draw outer path
-                    e.Graphics.DrawPath(myPen, _vitalStatistics.OuterPath.ActualPath);
+                    e.Graphics.DrawPath(myPen, _topGameGraphicsData.OuterPath.ActualPath);
 
                     // Draw inner path
-                    e.Graphics.DrawPath(myPen, _vitalStatistics.InnerPath.ActualPath);
+                    e.Graphics.DrawPath(myPen, _topGameGraphicsData.InnerPath.ActualPath);
 
                     // Draw arc spokes
-                    for (int iCount = 0; iCount < _vitalStatistics.ArcSpokes.Points.Count(); iCount++)
+                    for (int iCount = 0; iCount < _topGameGraphicsData.ArcSpokes.Points.Count(); iCount++)
                     {
-                        e.Graphics.DrawLine(myPen, _vitalStatistics.ActualArcCentre.Point, _vitalStatistics.ArcSpokes.Points.ElementAt(iCount).Point);
+                        e.Graphics.DrawLine(myPen, _topGameGraphicsData.ActualArcCentre.Point, _topGameGraphicsData.ArcSpokes.Points.ElementAt(iCount).Point);
                     }
 
                     // Draw the divisions of the start arm.
-                    for (int iCount = 0; iCount < _vitalStatistics.ArcSpokes.Points.Count(); iCount++)
+                    for (int iCount = 0; iCount < _topGameGraphicsData.ArcSpokes.Points.Count(); iCount++)
                     {
-                        e.Graphics.DrawLine(myPen, _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(iCount).Point, _vitalStatistics.StartArmDivisionEnds.Points.ElementAt(iCount).Point);
+                        e.Graphics.DrawLine(myPen, _topGameGraphicsData.StartArmDivisionStarts.Points.ElementAt(iCount).Point, _topGameGraphicsData.StartArmDivisionEnds.Points.ElementAt(iCount).Point);
                     }
 
                     // Draw the divisions of the end arm.
-                    for (int iCount = 0; iCount < _vitalStatistics.ArcSpokes.Points.Count(); iCount++)
+                    for (int iCount = 0; iCount < _topGameGraphicsData.ArcSpokes.Points.Count(); iCount++)
                     {
-                        e.Graphics.DrawLine(myPen, _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(iCount).Point, _vitalStatistics.EndArmDivisionEnds.Points.ElementAt(iCount).Point);
+                        e.Graphics.DrawLine(myPen, _topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(iCount).Point, _topGameGraphicsData.EndArmDivisionEnds.Points.ElementAt(iCount).Point);
                     }
 
                     // Draw outer path first line
-                    e.Graphics.DrawLine(myPen, _vitalStatistics.Origin.Point, _vitalStatistics.ActualOuterArcStart.Point);
+                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.Origin.Point, _topGameGraphicsData.ActualOuterArcStart.Point);
                     // Draw outer path arc square
-                    e.Graphics.DrawRectangle(myPen, _vitalStatistics.OuterArcSquare.Rectangle);
+                    e.Graphics.DrawRectangle(myPen, _topGameGraphicsData.OuterArcSquare.Rectangle);
                     // Draw outer path arc 
-                    e.Graphics.DrawArc(myPen, _vitalStatistics.OuterArcSquare.Rectangle, (float)_vitalStatistics.ArcStartAngle, (float)180);
+                    e.Graphics.DrawArc(myPen, _topGameGraphicsData.OuterArcSquare.Rectangle, (float)_topGameGraphicsData.ArcStartAngle, (float)180);
                     // Draw outer path last line
-                    e.Graphics.DrawLine(myPen, _vitalStatistics.ActualOuterArcEnd.Point, _vitalStatistics.Origin.Point);
+                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.ActualOuterArcEnd.Point, _topGameGraphicsData.Origin.Point);
 
                     // Draw inner path first line
-                    e.Graphics.DrawLine(myPen, _vitalStatistics.ActualInnerPetalSource.Point, _vitalStatistics.ActualInnerArcStart.Point);
+                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.ActualInnerPetalSource.Point, _topGameGraphicsData.ActualInnerArcStart.Point);
                     // Draw inner path arc square
-                    e.Graphics.DrawRectangle(myPen, _vitalStatistics.InnerArcSquare.Rectangle);
+                    e.Graphics.DrawRectangle(myPen, _topGameGraphicsData.InnerArcSquare.Rectangle);
                     // Draw inner path arc 
-                    e.Graphics.DrawArc(myPen, _vitalStatistics.InnerArcSquare.Rectangle, (float)_vitalStatistics.ArcStartAngle, (float)180);
+                    e.Graphics.DrawArc(myPen, _topGameGraphicsData.InnerArcSquare.Rectangle, (float)_topGameGraphicsData.ArcStartAngle, (float)180);
                     // Draw inner path last line
-                    e.Graphics.DrawLine(myPen, _vitalStatistics.ActualInnerArcEnd.Point, _vitalStatistics.Origin.Point);
+                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.ActualInnerArcEnd.Point, _topGameGraphicsData.Origin.Point);
                 }
             }
         }
@@ -1056,7 +1024,7 @@ namespace Domain.GraphicModels
 
             // Don't copy vital statistics until after the call to PrepareActualData
             GoldenMasterVitalGraphicStatistics calculatedGraphicStatistics = new GoldenMasterVitalGraphicStatistics();
-            calculatedGraphicStatistics.Copy(_vitalStatistics);
+            calculatedGraphicStatistics.Copy(_topGameGraphicsData);
 
             // All the collections of regions will be populated during the call to PrepareActualData above
             resultsOfThisCall.VitalGraphicStatistics = calculatedGraphicStatistics;

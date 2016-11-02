@@ -94,7 +94,7 @@
     <Compile Include="GraphicModels\TopGamePoint.cs" />
     <Compile Include="GraphicModels\TopGamePointCollection.cs" />
     <Compile Include="GraphicModels\TopGameRectangle.cs" />
-    <Compile Include="GraphicModels\VitalStatistics.cs" />
+    <Compile Include="GraphicModels\TopGameGraphicsData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TopGameConstants.cs" />
     <Compile Include="TopGameJsonWriter.cs" />
