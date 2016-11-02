@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 
 namespace Domain.GraphicModels
@@ -7,6 +8,17 @@ namespace Domain.GraphicModels
         public TopGameRectangle()
         {
             // Do nothing
+        }
+
+        public TopGameRectangle(
+            TopGamePoint sourceCircleCentre,
+            double sourceCircleRadius)
+        {
+            X = sourceCircleCentre.X - (int)Math.Round(sourceCircleRadius, 0, MidpointRounding.AwayFromZero);
+            Y = sourceCircleCentre.Y - (int)Math.Round(sourceCircleRadius, 0, MidpointRounding.AwayFromZero);
+
+            Width = (int)Math.Round(sourceCircleRadius * 2, 0, MidpointRounding.AwayFromZero);
+            Height = (int)Math.Round(sourceCircleRadius * 2, 0, MidpointRounding.AwayFromZero);
         }
 
         public TopGameRectangle(int x, int y, int width, int height)

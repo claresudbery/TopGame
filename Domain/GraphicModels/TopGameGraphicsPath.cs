@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 
@@ -72,6 +73,30 @@ namespace Domain.GraphicModels
             {
                 ArcPaths.Add(arcPath);
             }
+        }
+
+        public void AddForwardCircularArc(
+            TopGamePoint circleCentre, 
+            double circleRadius, 
+            double arcStartAngle)
+        {
+            // !! The y coordinate of the enclosing rectangle represents the TOP of the shape, not the bottom
+            var enclosingSquare = new TopGameRectangle(circleCentre, circleRadius);
+
+            // See AddArcPath for explanation of how arcs are drawn.
+            AddArcPath(enclosingSquare, (float)arcStartAngle, (float)180);
+        }
+
+        public void AddBackwardCircularArc(
+            TopGamePoint circleCentre,
+            double circleRadius,
+            double arcStartAngle)
+        {
+            // !! The y coordinate of the enclosing rectangle represents the TOP of the shape, not the bottom
+            var enclosingSquare = new TopGameRectangle(circleCentre, circleRadius);
+
+            // See AddArcPath for explanation of how arcs are drawn.
+            AddArcPath(enclosingSquare, (float)arcStartAngle + 180, (float)-180);
         }
     }
 }
