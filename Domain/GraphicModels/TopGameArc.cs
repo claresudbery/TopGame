@@ -16,17 +16,11 @@ namespace Domain.GraphicModels
 
             RelativeInnerArcStart = new TopGamePoint();
             RelativeInnerArcEnd = new TopGamePoint();
-
             RelativeOuterArcStart = new TopGamePoint();
             RelativeOuterArcEnd = new TopGamePoint();
-            ActualInnerArcStart = new TopGamePoint();
-            ActualInnerArcEnd = new TopGamePoint();
-
             RelativeArcCentre = new TopGamePoint();
-            ActualArcCentre = new TopGamePoint();
 
-            ActualOuterArcStart = new TopGamePoint();
-            ActualOuterArcEnd = new TopGamePoint();
+            ActualArcCentre = new TopGamePoint();
 
             OuterPath = new TopGameGraphicsPath();
             InnerPath = new TopGameGraphicsPath();
@@ -34,6 +28,11 @@ namespace Domain.GraphicModels
 
             InnerArcSquare = new TopGameRectangle();
             OuterArcSquare = new TopGameRectangle();
+
+            ActualInnerArcStart = new TopGamePoint();
+            ActualInnerArcEnd = new TopGamePoint(); 
+            ActualOuterArcStart = new TopGamePoint();
+            ActualOuterArcEnd = new TopGamePoint();
         }
 
         public double InnerArcRadius { get; set; }
@@ -45,24 +44,12 @@ namespace Domain.GraphicModels
         public double ArcStartAngle { get; set; }
 
         public TopGamePoint RelativeArcCentre { get; set; }
-
         public TopGamePoint RelativeInnerArcStart { get; set; }
-
         public TopGamePoint RelativeInnerArcEnd { get; set; }
-
         public TopGamePoint RelativeOuterArcStart { get; set; }
-
         public TopGamePoint RelativeOuterArcEnd { get; set; }
 
-        public TopGamePoint ActualInnerArcStart { get; set; }
-
-        public TopGamePoint ActualInnerArcEnd { get; set; }
-
         public TopGamePoint ActualArcCentre { get; set; }
-
-        public TopGamePoint ActualOuterArcStart { get; set; }
-
-        public TopGamePoint ActualOuterArcEnd { get; set; }
 
         public int NumArcSegments { get; set; }
 
@@ -80,26 +67,30 @@ namespace Domain.GraphicModels
 
         public double OuterArmLength { get; set; }
 
-        public double InnerArmLength { get; set; }
+        public double InnerArmLength { get; set; }        
+
+        public TopGamePoint ActualInnerArcStart { get; set; }
+        public TopGamePoint ActualInnerArcEnd { get; set; }
+        public TopGamePoint ActualOuterArcStart { get; set; }
+        public TopGamePoint ActualOuterArcEnd { get; set; }
 
         public void Copy(TopGameArc topGameArcSource)
         {
             RelativeArcCentre = topGameArcSource.RelativeArcCentre;
-
             RelativeInnerArcStart = topGameArcSource.RelativeInnerArcStart;
             RelativeInnerArcEnd = topGameArcSource.RelativeInnerArcEnd;
-
             RelativeOuterArcStart = topGameArcSource.RelativeOuterArcStart;
             RelativeOuterArcEnd = topGameArcSource.RelativeOuterArcEnd;
+            OuterPath.Copy(topGameArcSource.OuterPath);
+            InnerPath.Copy(topGameArcSource.InnerPath);
+
             ActualInnerArcStart = topGameArcSource.ActualInnerArcStart;
             ActualInnerArcEnd = topGameArcSource.ActualInnerArcEnd;
-
-            ActualArcCentre = topGameArcSource.ActualArcCentre;
             ActualOuterArcStart = topGameArcSource.ActualOuterArcStart;
             ActualOuterArcEnd = topGameArcSource.ActualOuterArcEnd;
 
-            OuterPath.Copy(topGameArcSource.OuterPath);
-            InnerPath.Copy(topGameArcSource.InnerPath);
+            ActualArcCentre = topGameArcSource.ActualArcCentre;
+
             ArcSpokes.Copy(topGameArcSource.ArcSpokes);
 
             InnerArcSquare.Copy(topGameArcSource.InnerArcSquare);
@@ -262,10 +253,7 @@ namespace Domain.GraphicModels
 
             if (NumArcSegments > 0)
             {
-                petalPath.AddForwardCircularArc(
-                    ActualArcCentre,
-                    OuterArcRadius,
-                    ArcStartAngle);
+                petalPath.AddForwardCircularArc(ActualArcCentre, OuterArcRadius, ArcStartAngle);
             }
 
             if (InnerArmLength <= 0)
@@ -276,12 +264,7 @@ namespace Domain.GraphicModels
             else
             {
                 petalPath.AddLine(ActualOuterArcStart, ActualInnerArcStart);
-
-                petalPath.AddBackwardCircularArc(
-                    ActualArcCentre,
-                    InnerArcRadius,
-                    ArcStartAngle);
-
+                petalPath.AddBackwardCircularArc(ActualArcCentre, InnerArcRadius, ArcStartAngle);
                 petalPath.AddLine(ActualInnerArcEnd, ActualOuterArcEnd);
             }
 
