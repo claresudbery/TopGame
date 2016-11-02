@@ -42,6 +42,8 @@ Mongo DB:
 		
 To do:
 	Get rid of AngleB and AngleC
+	Get rid of ConstantCentralSegmentLength
+	Make sure all graphics-dependent code is only accessible to OnePLayerGraphicsLoop, not GraphicsData - this will mean removing the ActualPath object from TopGameGraphicsPath?
 	PopulateFromLengthTopAngleAndStartPoint: Get rid of tempRelativePoint!
 	Get rid of MakeObsoleteOuterAndInnerPath and associated objects (but not the squares! And need to add new PetalPath thing)
 	Start using PointF instead of Point throughout? (allows for decimals, so no rounding needed)
