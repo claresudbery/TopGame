@@ -74,16 +74,6 @@ namespace Domain.GraphicModels
             }
         }
 
-        public void LoadConstants(Point newOrigin, double constantStartAngle, double segmentLength, double centralSegmentLength, int numTotalCards, int numCardsPlayed)
-        {
-            _vitalStatistics.ConstantBottomAngle = constantStartAngle;
-            _vitalStatistics.Origin.X = newOrigin.X;
-            _vitalStatistics.Origin.Y = newOrigin.Y;
-            _vitalStatistics.ConstantSegmentLength = segmentLength;
-            _vitalStatistics.ConstantCentralSegmentLength = centralSegmentLength;
-            _vitalStatistics.NumTotalCardsInGame = numTotalCards;
-        }
-
         public void Clear()
         {
             _vitalStatistics.NumTotalSegments = 0;
@@ -321,30 +311,46 @@ namespace Domain.GraphicModels
             _vitalStatistics.InnerArcRadius = (_vitalStatistics.InnerArmLength > 0) ? GetOppositeSide(_vitalStatistics.InnerArmLength, _vitalStatistics.CentralAngle / 2) : 0;
             _vitalStatistics.ArcSegmentAngle = (_vitalStatistics.NumArcSegments > 0) ? 180 / _vitalStatistics.NumArcSegments : 0;
 
-            _vitalStatistics.AngleB = 90 - _vitalStatistics.ConstantBottomAngle / 2;
-            _vitalStatistics.AngleC = (180 - _vitalStatistics.CentralAngle) / 2;
+            _vitalStatistics.AngleB = 90 - _vitalStatistics.ConstantBottomAngle / 2; // ConstantBottomAngle = angleShare, ie 360 / num hands
+            _vitalStatistics.AngleC = 90 - _vitalStatistics.CentralAngle / 2;
             _vitalStatistics.ArcStartAngle = 180 - (_vitalStatistics.AngleB + _vitalStatistics.AngleC);
+            //_vitalStatistics.ArcStartAngle = _vitalStatistics.CentralAngle / 2 + 10; // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
 
             _vitalStatistics.OriginToArcCentre = GetAdjacentSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
+
             _vitalStatistics.RelativeArcCentre.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.RelativeArcCentre.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2);
+            _vitalStatistics.RelativeArcCentre.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2); 
+
+            //_vitalStatistics.RelativeArcCentre.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.CentralAngle / 2 + 10); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
+            //_vitalStatistics.RelativeArcCentre.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.CentralAngle / 2 + 10); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
 
             _vitalStatistics.OuterArcRadius = GetOppositeSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
             _vitalStatistics.RelativeInnerPetalSource.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.RelativeInnerPetalSource.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2);
+            _vitalStatistics.RelativeInnerPetalSource.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2); 
+            //_vitalStatistics.RelativeInnerPetalSource.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.CentralAngle / 2 + 10); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
+            //_vitalStatistics.RelativeInnerPetalSource.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.CentralAngle / 2 + 10); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
             
             if (_vitalStatistics.InnerArmLength > 0)
             {
+                // !! Caution !! The inner arc values are relative to the inner petal source, NOT to the Origin!
                 _vitalStatistics.RelativeInnerArcEnd.X = GetXFromLineLengthAndBottomAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.AngleB);
                 _vitalStatistics.RelativeInnerArcEnd.Y = GetYFromLineLengthAndBottomAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.AngleB);
                 _vitalStatistics.RelativeInnerArcStart.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle);
-                _vitalStatistics.RelativeInnerArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle);
+                _vitalStatistics.RelativeInnerArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle); 
+                //_vitalStatistics.RelativeInnerArcEnd.X = GetXFromLineLengthAndBottomAngle(_vitalStatistics.InnerArmLength, 80); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
+                //_vitalStatistics.RelativeInnerArcEnd.Y = GetYFromLineLengthAndBottomAngle(_vitalStatistics.InnerArmLength, 80); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
+                //_vitalStatistics.RelativeInnerArcStart.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, 80 - _vitalStatistics.CentralAngle); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
+                //_vitalStatistics.RelativeInnerArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, 80 - _vitalStatistics.CentralAngle); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
             }
 
             _vitalStatistics.RelativeOuterArcEnd.X = GetXFromLineLengthAndBottomAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.AngleB);
             _vitalStatistics.RelativeOuterArcEnd.Y = GetYFromLineLengthAndBottomAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.AngleB);
             _vitalStatistics.RelativeOuterArcStart.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle);
             _vitalStatistics.RelativeOuterArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle);
+            //_vitalStatistics.RelativeOuterArcEnd.X = GetXFromLineLengthAndBottomAngle(_vitalStatistics.OuterArmLength, 80); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
+            //_vitalStatistics.RelativeOuterArcEnd.Y = GetYFromLineLengthAndBottomAngle(_vitalStatistics.OuterArmLength, 80); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
+            //_vitalStatistics.RelativeOuterArcStart.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, 80 - _vitalStatistics.CentralAngle); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
+            //_vitalStatistics.RelativeOuterArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, 80 - _vitalStatistics.CentralAngle); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
 
             _vitalStatistics.ActualArcCentre.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeArcCentre.X;
             _vitalStatistics.ActualArcCentre.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeArcCentre.Y;

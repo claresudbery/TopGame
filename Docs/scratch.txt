@@ -1,4 +1,7 @@
-(184,160)(157,240)(171,200)(187,150)(154,250)
+180 - (_vitalStatistics.AngleB + _vitalStatistics.AngleC)
+= 180 - ((90 - _vitalStatistics.ConstantBottomAngle / 2) + (90 - _vitalStatistics.CentralAngle / 2))
+= 180 - 90 + _vitalStatistics.ConstantBottomAngle / 2 - 90 + _vitalStatistics.CentralAngle / 2
+= _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2
 
 
 "ActualInnerArcStart":
