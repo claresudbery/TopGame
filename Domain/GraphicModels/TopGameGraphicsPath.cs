@@ -18,6 +18,24 @@ namespace Domain.GraphicModels
             ActualPath.AddLine(pointA.Point, pointB.Point);
         }
 
+        public void AddLine(TopGameLine newLine)
+        {
+            Lines.Add(newLine);
+            ActualPath.AddLine(newLine.Start.Point, newLine.End.Point);
+        }
+
+        // The way an arc path is drawn is like this:
+        // An arc is basically just a sub-section of an ellipse.
+        // First of all, you provide an enclosing rectangle. This defines a whole ellipse (or circle, if it's a square).
+        // If you want, you can get the full ellipse by simply giving a sweep angle of 360.
+        // The sweep angle defines how much of the ellipse will be drawn.
+        // The start angle defines where the ellipse will start:
+        // This is interpreted by drawing a horizontal line through the centre of your ellipse - this is your x axis.
+        // Then, starting from the left hand side, your angle comes up clockwise from your x axis.
+        // Imagine a line which goes from the centre of the ellipse to the edge of the ellipse, at an angle which is measured clockwise
+        // from the left hand end of the x axis. Where this line meets the edge of the ellipse, this is where your arc starts.
+        // Your arc will then continue clockwise for as far as the sweep angle will take it. So for instance, 180 degrees would give half of the ellipse.
+        // See TopGame\Docs\GraphicsPath-Arc.png for explanatory diagram.
         public void AddArcPath(TopGameRectangle rectangle, float startAngle, float sweepAngle)
         {
             ArcPaths.Add(new TopGameArcPath(rectangle, startAngle, sweepAngle));

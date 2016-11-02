@@ -62,7 +62,7 @@ namespace Domain.GraphicModels
 
         public double InnerArmLength { get; set; }
 
-        public double ConstantSegmentLength { get; set; }
+        public double SegmentLength { get; set; }
 
         public double ConstantCentralSegmentLength { get; set; }
 
@@ -207,7 +207,7 @@ namespace Domain.GraphicModels
             OuterArcRadius = vitalStatisticsSource.OuterArcRadius;
             OuterArmLength = vitalStatisticsSource.OuterArmLength;
             InnerArmLength = vitalStatisticsSource.InnerArmLength;
-            ConstantSegmentLength = vitalStatisticsSource.ConstantSegmentLength;
+            SegmentLength = vitalStatisticsSource.SegmentLength;
             ConstantCentralSegmentLength = vitalStatisticsSource.ConstantCentralSegmentLength;
             ArcStartAngle = vitalStatisticsSource.ArcStartAngle;
             AngleB = vitalStatisticsSource.AngleB;

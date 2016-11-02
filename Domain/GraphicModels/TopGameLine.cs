@@ -1,3 +1,5 @@
+using System;
+using System.Drawing;
 using Domain.GraphicModels.GoldenMaster;
 
 namespace Domain.GraphicModels
@@ -13,6 +15,12 @@ namespace Domain.GraphicModels
         {
             Start = start;
             End = end;
+        }
+
+        public TopGameLine(PointF start, PointF end)
+        {
+            Start = new TopGamePoint((int)Math.Floor(start.X), (int)Math.Floor(start.Y));
+            End = new TopGamePoint((int)Math.Ceiling(end.X), (int)Math.Ceiling(end.Y));
         }
 
         public TopGamePoint Start { get; set; }

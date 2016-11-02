@@ -30,6 +30,7 @@ namespace TopGameWindowsApp
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainGame));
             this.imgPlayer1Played01 = new System.Windows.Forms.PictureBox();
             this.imgPlayer2Played01 = new System.Windows.Forms.PictureBox();
             this.btnPlayer2Plays = new System.Windows.Forms.Button();
@@ -95,7 +96,6 @@ namespace TopGameWindowsApp
             this.label10 = new System.Windows.Forms.Label();
             this.lblPauseSize = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imgPlayer1Played01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPlayer2Played01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPlayer2Deck01)).BeginInit();
@@ -119,7 +119,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer1Played01
             // 
-            this.imgPlayer1Played01.Image = Resource1.c1;
+            this.imgPlayer1Played01.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer1Played01.Image")));
             this.imgPlayer1Played01.ImageLocation = "";
             this.imgPlayer1Played01.Location = new System.Drawing.Point(198, 177);
             this.imgPlayer1Played01.Name = "imgPlayer1Played01";
@@ -132,7 +132,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer2Played01
             // 
-            this.imgPlayer2Played01.Image = Resource1.d1;
+            this.imgPlayer2Played01.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer2Played01.Image")));
             this.imgPlayer2Played01.ImageLocation = "";
             this.imgPlayer2Played01.Location = new System.Drawing.Point(215, 169);
             this.imgPlayer2Played01.Name = "imgPlayer2Played01";
@@ -167,7 +167,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer2Deck01
             // 
-            this.imgPlayer2Deck01.Image = Resource1.b1fv;
+            this.imgPlayer2Deck01.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer2Deck01.Image")));
             this.imgPlayer2Deck01.ImageLocation = "";
             this.imgPlayer2Deck01.Location = new System.Drawing.Point(395, 101);
             this.imgPlayer2Deck01.Name = "imgPlayer2Deck01";
@@ -180,7 +180,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer1Deck01
             // 
-            this.imgPlayer1Deck01.Image = Resource1.b1fv;
+            this.imgPlayer1Deck01.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer1Deck01.Image")));
             this.imgPlayer1Deck01.ImageLocation = "";
             this.imgPlayer1Deck01.Location = new System.Drawing.Point(26, 102);
             this.imgPlayer1Deck01.Name = "imgPlayer1Deck01";
@@ -227,7 +227,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer1Deck02
             // 
-            this.imgPlayer1Deck02.Image = Resource1.b1fv;
+            this.imgPlayer1Deck02.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer1Deck02.Image")));
             this.imgPlayer1Deck02.ImageLocation = "";
             this.imgPlayer1Deck02.Location = new System.Drawing.Point(30, 99);
             this.imgPlayer1Deck02.Name = "imgPlayer1Deck02";
@@ -240,7 +240,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer1Deck03
             // 
-            this.imgPlayer1Deck03.Image = Resource1.b1fv;
+            this.imgPlayer1Deck03.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer1Deck03.Image")));
             this.imgPlayer1Deck03.ImageLocation = "";
             this.imgPlayer1Deck03.Location = new System.Drawing.Point(34, 95);
             this.imgPlayer1Deck03.Name = "imgPlayer1Deck03";
@@ -253,7 +253,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer1Deck04
             // 
-            this.imgPlayer1Deck04.Image = Resource1.b1fv;
+            this.imgPlayer1Deck04.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer1Deck04.Image")));
             this.imgPlayer1Deck04.ImageLocation = "";
             this.imgPlayer1Deck04.Location = new System.Drawing.Point(38, 92);
             this.imgPlayer1Deck04.Name = "imgPlayer1Deck04";
@@ -266,7 +266,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer1Deck05
             // 
-            this.imgPlayer1Deck05.Image = Resource1.b1fv;
+            this.imgPlayer1Deck05.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer1Deck05.Image")));
             this.imgPlayer1Deck05.ImageLocation = "";
             this.imgPlayer1Deck05.Location = new System.Drawing.Point(42, 89);
             this.imgPlayer1Deck05.Name = "imgPlayer1Deck05";
@@ -279,7 +279,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer2Deck02
             // 
-            this.imgPlayer2Deck02.Image = Resource1.b1fv;
+            this.imgPlayer2Deck02.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer2Deck02.Image")));
             this.imgPlayer2Deck02.ImageLocation = "";
             this.imgPlayer2Deck02.Location = new System.Drawing.Point(399, 98);
             this.imgPlayer2Deck02.Name = "imgPlayer2Deck02";
@@ -292,7 +292,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer2Deck03
             // 
-            this.imgPlayer2Deck03.Image = Resource1.b1fv;
+            this.imgPlayer2Deck03.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer2Deck03.Image")));
             this.imgPlayer2Deck03.ImageLocation = "";
             this.imgPlayer2Deck03.Location = new System.Drawing.Point(403, 95);
             this.imgPlayer2Deck03.Name = "imgPlayer2Deck03";
@@ -305,7 +305,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer2Deck04
             // 
-            this.imgPlayer2Deck04.Image = Resource1.b1fv;
+            this.imgPlayer2Deck04.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer2Deck04.Image")));
             this.imgPlayer2Deck04.ImageLocation = "";
             this.imgPlayer2Deck04.Location = new System.Drawing.Point(407, 92);
             this.imgPlayer2Deck04.Name = "imgPlayer2Deck04";
@@ -318,7 +318,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer2Deck05
             // 
-            this.imgPlayer2Deck05.Image = Resource1.b1fv;
+            this.imgPlayer2Deck05.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer2Deck05.Image")));
             this.imgPlayer2Deck05.ImageLocation = "";
             this.imgPlayer2Deck05.Location = new System.Drawing.Point(411, 89);
             this.imgPlayer2Deck05.Name = "imgPlayer2Deck05";
@@ -331,7 +331,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer1Played02
             // 
-            this.imgPlayer1Played02.Image = Resource1.c2;
+            this.imgPlayer1Played02.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer1Played02.Image")));
             this.imgPlayer1Played02.ImageLocation = "";
             this.imgPlayer1Played02.Location = new System.Drawing.Point(189, 174);
             this.imgPlayer1Played02.Name = "imgPlayer1Played02";
@@ -344,7 +344,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer2Played02
             // 
-            this.imgPlayer2Played02.Image = Resource1.d2;
+            this.imgPlayer2Played02.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer2Played02.Image")));
             this.imgPlayer2Played02.ImageLocation = "";
             this.imgPlayer2Played02.Location = new System.Drawing.Point(222, 166);
             this.imgPlayer2Played02.Name = "imgPlayer2Played02";
@@ -357,7 +357,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer1Played03
             // 
-            this.imgPlayer1Played03.Image = Resource1.c3;
+            this.imgPlayer1Played03.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer1Played03.Image")));
             this.imgPlayer1Played03.ImageLocation = "";
             this.imgPlayer1Played03.Location = new System.Drawing.Point(180, 171);
             this.imgPlayer1Played03.Name = "imgPlayer1Played03";
@@ -370,7 +370,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer1Played04
             // 
-            this.imgPlayer1Played04.Image = Resource1.c4;
+            this.imgPlayer1Played04.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer1Played04.Image")));
             this.imgPlayer1Played04.ImageLocation = "";
             this.imgPlayer1Played04.Location = new System.Drawing.Point(172, 168);
             this.imgPlayer1Played04.Name = "imgPlayer1Played04";
@@ -383,7 +383,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer2Played03
             // 
-            this.imgPlayer2Played03.Image = Resource1.d3;
+            this.imgPlayer2Played03.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer2Played03.Image")));
             this.imgPlayer2Played03.ImageLocation = "";
             this.imgPlayer2Played03.Location = new System.Drawing.Point(229, 163);
             this.imgPlayer2Played03.Name = "imgPlayer2Played03";
@@ -396,7 +396,7 @@ namespace TopGameWindowsApp
             // 
             // imgPlayer2Played04
             // 
-            this.imgPlayer2Played04.Image = Resource1.d4;
+            this.imgPlayer2Played04.Image = ((System.Drawing.Image)(resources.GetObject("imgPlayer2Played04.Image")));
             this.imgPlayer2Played04.ImageLocation = "";
             this.imgPlayer2Played04.Location = new System.Drawing.Point(236, 160);
             this.imgPlayer2Played04.Name = "imgPlayer2Played04";
@@ -587,12 +587,13 @@ namespace TopGameWindowsApp
             // 
             // btnNextRegion
             // 
-            this.btnNextRegion.Location = new System.Drawing.Point(395, 24);
+            this.btnNextRegion.Location = new System.Drawing.Point(552, 67);
             this.btnNextRegion.Name = "btnNextRegion";
             this.btnNextRegion.Size = new System.Drawing.Size(75, 23);
             this.btnNextRegion.TabIndex = 42;
             this.btnNextRegion.Text = "Next Region";
             this.btnNextRegion.UseVisualStyleBackColor = true;
+            this.btnNextRegion.Visible = false;
             this.btnNextRegion.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnAllRegions
@@ -828,22 +829,11 @@ namespace TopGameWindowsApp
             this.label11.TabIndex = 67;
             this.label11.Text = "653,534,134,886,878,200,000";
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(229, 13);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 68;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // MainGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(991, 484);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.lblPauseSize);
             this.Controls.Add(this.label10);
@@ -867,7 +857,6 @@ namespace TopGameWindowsApp
             this.Controls.Add(this.btnSetNumSegments);
             this.Controls.Add(this.btnColourCycle);
             this.Controls.Add(this.btnAllRegions);
-            this.Controls.Add(this.btnNextRegion);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblCardColoursInPlay);
             this.Controls.Add(this.label9);
@@ -907,6 +896,7 @@ namespace TopGameWindowsApp
             this.Controls.Add(this.imgPlayer1Played02);
             this.Controls.Add(this.imgPlayer1Played01);
             this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnNextRegion);
             this.Controls.Add(this.pictureBox2);
             this.Name = "MainGame";
             this.Text = "Top Game!";
@@ -1003,7 +993,6 @@ namespace TopGameWindowsApp
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblPauseSize;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button5;
     }
 }
 

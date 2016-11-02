@@ -902,11 +902,6 @@ namespace TopGameWindowsApp
             DisplayAllDeckContents();
             InitialisePlayerDisplay();
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("oi");
-        }// end function
     }
 
 // end class
