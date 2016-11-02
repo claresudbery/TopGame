@@ -86,11 +86,14 @@
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterSingleGraphicPass.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterStraightEdgedRegion.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterVitalGraphicStatistics.cs" />
+    <Compile Include="GraphicModels\LineCalculator.cs" />
     <Compile Include="GraphicModels\OnePlayerGraphicsLoop.cs" />
     <Compile Include="GraphicModels\GoldenMaster\GoldenMasterArcPath.cs" />
+    <Compile Include="GraphicModels\TopGameArc.cs" />
     <Compile Include="GraphicModels\TopGameArcPath.cs" />
     <Compile Include="GraphicModels\TopGameGraphicsPath.cs" />
     <Compile Include="GraphicModels\TopGameLine.cs" />
+    <Compile Include="GraphicModels\TopGameLoop.cs" />
     <Compile Include="GraphicModels\TopGamePoint.cs" />
     <Compile Include="GraphicModels\TopGamePointCollection.cs" />
     <Compile Include="GraphicModels\TopGameRectangle.cs" />

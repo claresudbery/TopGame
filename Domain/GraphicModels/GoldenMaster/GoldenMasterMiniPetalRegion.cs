@@ -12,7 +12,7 @@ namespace Domain.GraphicModels.GoldenMaster
 
         public GoldenMasterGraphicsPath GraphicsPath { get; set; }
 
-        public virtual void Copy(TopGameGraphicsPath sourcePath)
+        public override void Copy(TopGameGraphicsPath sourcePath)
         {
             Corners.Add(sourcePath.Lines[0].Start.ToGoldenMasterPoint());
             Corners.Add(sourcePath.Lines[0].End.ToGoldenMasterPoint());

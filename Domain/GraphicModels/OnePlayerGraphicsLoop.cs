@@ -59,19 +59,19 @@ namespace Domain.GraphicModels
 
         public void RemoveTopSegment()
         {
-            _topGameGraphicsData.NumTotalSegments--;
+            _topGameGraphicsData.GeneralLoopData.NumTotalSegments--;
             regionColours.RemoveAt(0);
         }
 
         public void RemoveBottomSegment()
         {
-            _topGameGraphicsData.NumTotalSegments--;
+            _topGameGraphicsData.GeneralLoopData.NumTotalSegments--;
             regionColours.RemoveAt(regionColours.Count() - 1);
         }
 
         public void AddSegment()
         {
-            _topGameGraphicsData.NumTotalSegments++;
+            _topGameGraphicsData.GeneralLoopData.NumTotalSegments++;
             regionColours.Add(new ColouredRegion());
         }
 
@@ -86,17 +86,17 @@ namespace Domain.GraphicModels
 
         public int GetNumTotalSegments()
         {
-            return _topGameGraphicsData.NumTotalSegments;
+            return _topGameGraphicsData.GeneralLoopData.NumTotalSegments;
         }
 
         public void SetCentralAngle(double newAngle)
         {
-            _topGameGraphicsData.CentralAngle = newAngle;
+            _topGameGraphicsData.GeneralLoopData.CentralAngle = newAngle;
         }
 
         public double GetCentralAngle()
         {
-            return _topGameGraphicsData.CentralAngle;
+            return _topGameGraphicsData.GeneralLoopData.CentralAngle;
         }
 
         public int NumRegions()
@@ -106,19 +106,19 @@ namespace Domain.GraphicModels
 
         public bool IsMinimumAngleApplied()
         {
-            return _topGameGraphicsData.MinimumAngleApplied;
+            return _topGameGraphicsData.GeneralLoopData.MinimumAngleApplied;
         }
 
         public bool IsMaximumAngleApplied()
         {
-            return _topGameGraphicsData.MaximumAngleApplied;
+            return _topGameGraphicsData.GeneralLoopData.MaximumAngleApplied;
         }
 
         // This one displays rainbow colours
         // If iRegionIndex is -1, all regions are displayed - otherwise just the region indicated by iRegionIndex.
         public void Display(int iRegionIndex, int iColourCycler, PaintEventArgs e, bool bClearGraphics)
         {
-            if (_topGameGraphicsData.NumTotalSegments > 0)
+            if (_topGameGraphicsData.GeneralLoopData.NumTotalSegments > 0)
             {
                 int iRegionCount = (iRegionIndex == -1) ? subRegions.Count() : iRegionIndex + 1;
                 int iRegionStart = (iRegionIndex == -1) ? 0 : iRegionIndex;
@@ -186,7 +186,7 @@ namespace Domain.GraphicModels
                 //e.Graphics.FillRegion(myBrush, storedPetalRegion);
 
                 System.Drawing.Pen myPen = new System.Drawing.Pen(System.Drawing.Color.Black, 1);
-                e.Graphics.DrawPath(myPen, _topGameGraphicsData.OuterPath.ActualPath);
+                e.Graphics.DrawPath(myPen, _topGameGraphicsData.TopGameArc.OuterPath.ActualPath);
 
                 //System.Drawing.Pen myOtherPen = new System.Drawing.Pen(System.Drawing.Color.Red, 1);
                 //e.Graphics.DrawPath(myOtherPen, _vitalStatistics.InnerPath.ActualPath);
@@ -196,7 +196,7 @@ namespace Domain.GraphicModels
         // This one displays stored colours
         public void Display(int iRegionIndex, PaintEventArgs e)
         {
-            if (_topGameGraphicsData.NumTotalSegments > 0)
+            if (_topGameGraphicsData.GeneralLoopData.NumTotalSegments > 0)
             {
                 int iRegionCount = (iRegionIndex == -1) ? subRegions.Count() : iRegionIndex + 1;
                 int iRegionStart = (iRegionIndex == -1) ? 0 : iRegionIndex;
@@ -216,7 +216,7 @@ namespace Domain.GraphicModels
 
         public void LoadNewData(double rotationAngle)
         {
-            if (_topGameGraphicsData.NumTotalSegments > 0)
+            if (_topGameGraphicsData.GeneralLoopData.NumTotalSegments > 0)
             {
                 PrepareActualData(rotationAngle);
             }
@@ -241,46 +241,46 @@ namespace Domain.GraphicModels
                 if (bGo)
                 {
                     // Draw outer path
-                    e.Graphics.DrawPath(myPen, _topGameGraphicsData.OuterPath.ActualPath);
+                    e.Graphics.DrawPath(myPen, _topGameGraphicsData.TopGameArc.OuterPath.ActualPath);
 
                     // Draw inner path
-                    e.Graphics.DrawPath(myPen, _topGameGraphicsData.InnerPath.ActualPath);
+                    e.Graphics.DrawPath(myPen, _topGameGraphicsData.TopGameArc.InnerPath.ActualPath);
 
                     // Draw arc spokes
-                    for (int iCount = 0; iCount < _topGameGraphicsData.ArcSpokes.Points.Count(); iCount++)
+                    for (int iCount = 0; iCount < _topGameGraphicsData.TopGameArc.ArcSpokes.Points.Count(); iCount++)
                     {
-                        e.Graphics.DrawLine(myPen, _topGameGraphicsData.ActualArcCentre.Point, _topGameGraphicsData.ArcSpokes.Points.ElementAt(iCount).Point);
+                        e.Graphics.DrawLine(myPen, _topGameGraphicsData.TopGameArc.ActualArcCentre.Point, _topGameGraphicsData.TopGameArc.ArcSpokes.Points.ElementAt(iCount).Point);
                     }
 
                     // Draw the divisions of the start arm.
-                    for (int iCount = 0; iCount < _topGameGraphicsData.ArcSpokes.Points.Count(); iCount++)
+                    for (int iCount = 0; iCount < _topGameGraphicsData.TopGameArc.ArcSpokes.Points.Count(); iCount++)
                     {
                         e.Graphics.DrawLine(myPen, _topGameGraphicsData.StartArmDivisionStarts.Points.ElementAt(iCount).Point, _topGameGraphicsData.StartArmDivisionEnds.Points.ElementAt(iCount).Point);
                     }
 
                     // Draw the divisions of the end arm.
-                    for (int iCount = 0; iCount < _topGameGraphicsData.ArcSpokes.Points.Count(); iCount++)
+                    for (int iCount = 0; iCount < _topGameGraphicsData.TopGameArc.ArcSpokes.Points.Count(); iCount++)
                     {
                         e.Graphics.DrawLine(myPen, _topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(iCount).Point, _topGameGraphicsData.EndArmDivisionEnds.Points.ElementAt(iCount).Point);
                     }
 
                     // Draw outer path first line
-                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.Origin.Point, _topGameGraphicsData.ActualOuterArcStart.Point);
+                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.GeneralLoopData.Origin.Point, _topGameGraphicsData.TopGameArc.ActualOuterArcStart.Point);
                     // Draw outer path arc square
-                    e.Graphics.DrawRectangle(myPen, _topGameGraphicsData.OuterArcSquare.Rectangle);
+                    e.Graphics.DrawRectangle(myPen, _topGameGraphicsData.TopGameArc.OuterArcSquare.Rectangle);
                     // Draw outer path arc 
-                    e.Graphics.DrawArc(myPen, _topGameGraphicsData.OuterArcSquare.Rectangle, (float)_topGameGraphicsData.ArcStartAngle, (float)180);
+                    e.Graphics.DrawArc(myPen, _topGameGraphicsData.TopGameArc.OuterArcSquare.Rectangle, (float)_topGameGraphicsData.TopGameArc.ArcStartAngle, (float)180);
                     // Draw outer path last line
-                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.ActualOuterArcEnd.Point, _topGameGraphicsData.Origin.Point);
+                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.TopGameArc.ActualOuterArcEnd.Point, _topGameGraphicsData.GeneralLoopData.Origin.Point);
 
                     // Draw inner path first line
-                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.ActualInnerPetalSource.Point, _topGameGraphicsData.ActualInnerArcStart.Point);
+                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.GeneralLoopData.ActualInnerPetalSource.Point, _topGameGraphicsData.TopGameArc.ActualInnerArcStart.Point);
                     // Draw inner path arc square
-                    e.Graphics.DrawRectangle(myPen, _topGameGraphicsData.InnerArcSquare.Rectangle);
+                    e.Graphics.DrawRectangle(myPen, _topGameGraphicsData.TopGameArc.InnerArcSquare.Rectangle);
                     // Draw inner path arc 
-                    e.Graphics.DrawArc(myPen, _topGameGraphicsData.InnerArcSquare.Rectangle, (float)_topGameGraphicsData.ArcStartAngle, (float)180);
+                    e.Graphics.DrawArc(myPen, _topGameGraphicsData.TopGameArc.InnerArcSquare.Rectangle, (float)_topGameGraphicsData.TopGameArc.ArcStartAngle, (float)180);
                     // Draw inner path last line
-                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.ActualInnerArcEnd.Point, _topGameGraphicsData.Origin.Point);
+                    e.Graphics.DrawLine(myPen, _topGameGraphicsData.TopGameArc.ActualInnerArcEnd.Point, _topGameGraphicsData.GeneralLoopData.Origin.Point);
                 }
             }
         }
@@ -409,7 +409,7 @@ namespace Domain.GraphicModels
         {
             using (Matrix rotateMatrix = new Matrix())
             {
-                rotateMatrix.RotateAt((float)rotationAngle, _topGameGraphicsData.Origin.Point);
+                rotateMatrix.RotateAt((float)rotationAngle, _topGameGraphicsData.GeneralLoopData.Origin.Point);
                 for (int iCount = 0; iCount < subRegions.Count(); iCount++)
                 {
                     subRegions.ElementAt(iCount).Transform(rotateMatrix);
