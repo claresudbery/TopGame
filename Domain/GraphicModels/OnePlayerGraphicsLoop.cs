@@ -325,10 +325,11 @@ namespace Domain.GraphicModels
             _vitalStatistics.OuterArcRadius = GetOppositeSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
             _vitalStatistics.InnerArcRadius = (_vitalStatistics.InnerArmLength > 0) ? GetOppositeSide(_vitalStatistics.InnerArmLength, _vitalStatistics.CentralAngle / 2) : 0;
 
-            _vitalStatistics.RelativeArcCentre.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.RelativeArcCentre.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.ActualArcCentre.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeArcCentre.X;
-            _vitalStatistics.ActualArcCentre.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeArcCentre.Y;
+            _vitalStatistics.ActualArcCentre.PopulateFromLengthTopAngleAndStartPoint(
+                _vitalStatistics.OriginToArcCentre,
+                _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2,
+                _vitalStatistics.Origin,
+                _vitalStatistics.RelativeArcCentre);
 
             // Outer Arc Path
             
@@ -337,10 +338,11 @@ namespace Domain.GraphicModels
             _vitalStatistics.ArcSegmentAngle = (_vitalStatistics.NumArcSegments > 0) ? 180 / _vitalStatistics.NumArcSegments : 0;
 
             // Inner petal source
-            _vitalStatistics.RelativeInnerPetalSource.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.RelativeInnerPetalSource.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.ActualInnerPetalSource.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeInnerPetalSource.X;
-            _vitalStatistics.ActualInnerPetalSource.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeInnerPetalSource.Y;
+            _vitalStatistics.ActualInnerPetalSource.PopulateFromLengthTopAngleAndStartPoint(
+                _vitalStatistics.CentralSpokeLength,
+                _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2,
+                _vitalStatistics.Origin,
+                _vitalStatistics.RelativeInnerPetalSource);
             
             if (_vitalStatistics.InnerArmLength > 0)
             {
@@ -351,21 +353,24 @@ namespace Domain.GraphicModels
                     _vitalStatistics.ActualInnerPetalSource,
                     _vitalStatistics.RelativeInnerArcStart);
 
-                _vitalStatistics.RelativeInnerArcEnd.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.TotalAngleShare / 2);
-                _vitalStatistics.RelativeInnerArcEnd.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.TotalAngleShare / 2);
-                _vitalStatistics.ActualInnerArcEnd.X = _vitalStatistics.ActualInnerPetalSource.X + _vitalStatistics.RelativeInnerArcEnd.X;
-                _vitalStatistics.ActualInnerArcEnd.Y = _vitalStatistics.ActualInnerPetalSource.Y + _vitalStatistics.RelativeInnerArcEnd.Y;
+                _vitalStatistics.ActualInnerArcEnd.PopulateFromLengthTopAngleAndStartPoint(
+                    _vitalStatistics.InnerArmLength,
+                    _vitalStatistics.TotalAngleShare / 2,
+                    _vitalStatistics.ActualInnerPetalSource,
+                    _vitalStatistics.RelativeInnerArcEnd);
             }
 
-            _vitalStatistics.RelativeOuterArcStart.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle);
-            _vitalStatistics.RelativeOuterArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle);
-            _vitalStatistics.ActualOuterArcStart.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeOuterArcStart.X;
-            _vitalStatistics.ActualOuterArcStart.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeOuterArcStart.Y;
+            _vitalStatistics.ActualOuterArcStart.PopulateFromLengthTopAngleAndStartPoint(
+                _vitalStatistics.OuterArmLength,
+                _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle,
+                _vitalStatistics.Origin,
+                _vitalStatistics.RelativeOuterArcStart);
 
-            _vitalStatistics.RelativeOuterArcEnd.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.TotalAngleShare / 2);
-            _vitalStatistics.RelativeOuterArcEnd.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.TotalAngleShare / 2);
-            _vitalStatistics.ActualOuterArcEnd.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeOuterArcEnd.X;
-            _vitalStatistics.ActualOuterArcEnd.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeOuterArcEnd.Y;
+            _vitalStatistics.ActualOuterArcEnd.PopulateFromLengthTopAngleAndStartPoint(
+                _vitalStatistics.OuterArmLength,
+                _vitalStatistics.TotalAngleShare / 2,
+                _vitalStatistics.Origin,
+                _vitalStatistics.RelativeOuterArcEnd);
             
             _vitalStatistics.OuterPath.Reset();
             // We have to go from end to start instead of from start to end, because the arc gets drawn that way round.
@@ -947,31 +952,6 @@ namespace Domain.GraphicModels
         double GetOppositeSide(double hypotenuse, double angle)
         {
             return SafeSin(angle) * hypotenuse;
-        }
-
-        double GetHypotenuseFromAdjacent(double adjacentSide, double adjacentAngle)
-        {
-            return adjacentSide / SafeCos(adjacentAngle);
-        }
-
-        int GetXFromLineLengthAndTopAngle(double lineLength, double topAngle)
-        {
-            return -(int)Math.Round(lineLength * SafeSin(topAngle), 0, MidpointRounding.AwayFromZero);
-        }
-
-        int GetYFromLineLengthAndTopAngle(double lineLength, double topAngle)
-        {
-            return (int)Math.Round(lineLength * SafeCos(topAngle), 0, MidpointRounding.AwayFromZero);
-        }
-
-        int GetXFromLineLengthAndBottomAngle(double lineLength, double bottomAngle)
-        {
-            return -(int)Math.Round(lineLength * SafeCos(bottomAngle), 0, MidpointRounding.AwayFromZero);
-        }
-
-        int GetYFromLineLengthAndBottomAngle(double lineLength, double bottomAngle)
-        {
-            return (int)Math.Round(lineLength * SafeSin(bottomAngle), 0, MidpointRounding.AwayFromZero);
         }
 
         public void ReloadColour(int iRegionIndex, System.Drawing.Color newColour)

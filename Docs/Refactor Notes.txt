@@ -41,6 +41,7 @@ Mongo DB:
 			.\mongod.exe
 		
 To do:
+	PopulateFromLengthTopAngleAndStartPoint: Get rid of tempRelativePoint!
 	Start using PointF instead of Point throughout? (allows for decimals, so no rounding needed)
 	Use interfaces instead of inheritance for GoldenMasterRegion and its descendants?
 	The reasons the neighbouring parallelograms and arcs don't share corners are
