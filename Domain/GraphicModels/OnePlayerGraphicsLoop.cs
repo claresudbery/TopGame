@@ -306,10 +306,23 @@ namespace Domain.GraphicModels
             double rotationAngle,
             GoldenMasterSingleGraphicPass goldenMasterData = null)
         {
-            // AngleB and AngleC are now not used - only here so as not to break golden master
-            _vitalStatistics.AngleB = 90 - _vitalStatistics.TotalAngleShare / 2; // ConstantBottomAngle = angleShare, ie 360 / num hands
-            _vitalStatistics.AngleC = 90 - _vitalStatistics.CentralAngle / 2; // was previously expressed as (180 - _vitalStatistics.CentralAngle) / 2
+            CalculateObsoleteAngleAAndAngleB();
 
+            CalculateGlobalValues();
+            CalculateArcCoordinates();
+            CalculateArmDivisions();
+            AddSubRegions(goldenMasterData);
+
+            Debug.Assert(_vitalStatistics.NumTotalSegments == subRegions.Count(), "Region count", "Number of regions is not num total segments");
+
+            if (rotationAngle > 0)
+            {
+                RotateByAngle(rotationAngle);
+            }
+        }
+
+        private void CalculateGlobalValues()
+        {
             // Arms
             _vitalStatistics.NumArmSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3() : 0;
             CalculateArmSegmentLength();
@@ -325,8 +338,236 @@ namespace Domain.GraphicModels
                 _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2,
                 _vitalStatistics.Origin,
                 _vitalStatistics.RelativeInnerPetalSource);
+        }
 
-            // General arc stuff
+        private void CalculateObsoleteAngleAAndAngleB()
+        {
+            // AngleB and AngleC are now not used - only here so as not to break golden master
+            _vitalStatistics.AngleB = 90 - _vitalStatistics.TotalAngleShare / 2; // ConstantBottomAngle = angleShare, ie 360 / num hands
+            _vitalStatistics.AngleC = 90 - _vitalStatistics.CentralAngle / 2; // was previously expressed as (180 - _vitalStatistics.CentralAngle) / 2
+        }
+
+        // The sub-regions are all the areas that get coloured in: Each region represents an individual card.
+        // They are displayed in three sections, all of which added together look a bit like a petal:
+        // 1) The straight "start-arm", basically made out of two parallel lines (but tapering to a triangular point at the centre)
+        // 2) The curved "arc" which joins the two arms together
+        // 3) The straight "end-arm", basically made out of two parallel lines (but tapering to a triangular point at the centre)
+        private void AddSubRegions(GoldenMasterSingleGraphicPass goldenMasterData)
+        {
+            DisposeRegions();
+
+            AddStartArmCentralRegion(goldenMasterData);
+            AddStartArmSegments(goldenMasterData);
+            AddArcSegments(goldenMasterData);
+            AddEndArmSegments(goldenMasterData);
+            AddEndArmCentralRegion(goldenMasterData);
+        }
+
+        private void AddEndArmCentralRegion(GoldenMasterSingleGraphicPass goldenMasterData)
+        {
+            // End with the central region of the end-arm - this is the triangular bit that goes from the centre out to the end of the parallel-lines part of the arm
+            // (apart from the central triangle, all the regions in the end-arm are parallelograms)
+            if (_vitalStatistics.NumTotalSegments > 1)
+            {
+                // end-arm central region
+                AddTriangularRegion(
+                    _vitalStatistics.Origin,
+                    _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(0),
+                    _vitalStatistics.ActualInnerPetalSource,
+                            goldenMasterData
+                    );
+            }
+        }
+
+        private void AddEndArmSegments(GoldenMasterSingleGraphicPass goldenMasterData)
+        {
+            if (_vitalStatistics.NumArmSegments > 0)
+            {
+                // all the divisions of the end arm (in reverse)
+                AddParallelogramRegion(
+                    _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
+                    _vitalStatistics.EndArmDivisionEnds.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
+                    _vitalStatistics.ActualInnerArcEnd,
+                    _vitalStatistics.ActualOuterArcEnd,
+                            goldenMasterData
+                    );
+
+                if (_vitalStatistics.NumArmSegments > 1)
+                {
+                    for (int iCount = _vitalStatistics.NumArmSegments - 1; iCount > 0; iCount--)
+                    {
+                        AddParallelogramRegion(
+                            _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(iCount),
+                            _vitalStatistics.EndArmDivisionEnds.Points.ElementAt(iCount),
+                            _vitalStatistics.EndArmDivisionEnds.Points.ElementAt(iCount - 1),
+                            _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(iCount - 1),
+                            goldenMasterData
+                            );
+                    }
+                }
+            }
+        }
+
+        private void AddArcSegments(GoldenMasterSingleGraphicPass goldenMasterData)
+        {
+            Region petalRegion = MakePetalRegion();
+
+            // the divisions of the arc (sounds biblical!)
+            if (_vitalStatistics.NumArcSegments > 0)
+            {
+                if (_vitalStatistics.ArcSpokes.Points.Count() == 0)
+                {
+                    // the division is the arc itself.
+                    TopGameGraphicsPath tempRegionPath = new TopGameGraphicsPath();
+                    // See AddArcPath for explanation of how arcs are drawn.
+                    tempRegionPath.AddArcPath(_vitalStatistics.OuterArcSquare, (float)_vitalStatistics.ArcStartAngle, (float)180);
+                    tempRegionPath.AddLine(_vitalStatistics.ActualOuterArcStart, _vitalStatistics.ActualOuterArcEnd);
+                    subRegions.Add(new Region(tempRegionPath.ActualPath));
+
+                    if (goldenMasterData != null)
+                    {
+                        var miniPetalRegion = new GoldenMasterMiniPetalRegion();
+                        miniPetalRegion.Copy(tempRegionPath);
+                        goldenMasterData.Regions.Add(miniPetalRegion);
+                    }
+                }
+                else
+                {
+                    // 1st arc division
+                    AddArcRegion(
+                        petalRegion,
+                        _vitalStatistics.ActualArcCentre,
+                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ActualOuterArcStart, 1.5),
+                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(0), 1.5),
+                            goldenMasterData);
+
+                    // middle arc divisions
+                    for (int iCount = 1; iCount < _vitalStatistics.ArcSpokes.Points.Count(); iCount++)
+                    {
+                        AddArcRegion(
+                            petalRegion,
+                            _vitalStatistics.ActualArcCentre,
+                            MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(iCount - 1), 1.5),
+                            MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(iCount), 1.5),
+                            goldenMasterData);
+                    }
+
+                    // last arc division
+                    AddArcRegion(
+                        petalRegion,
+                        _vitalStatistics.ActualArcCentre,
+                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(_vitalStatistics.ArcSpokes.Points.Count() - 1), 1.5),
+                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ActualOuterArcEnd, 1.5),
+                            goldenMasterData);
+                }
+            }
+        }
+
+        private void AddStartArmSegments(GoldenMasterSingleGraphicPass goldenMasterData)
+        {
+            if (_vitalStatistics.NumArmSegments > 0)
+            {
+                // all the divisions of the start arm
+                if (_vitalStatistics.NumArmSegments > 1)
+                {
+                    for (int iCount = 0; iCount < _vitalStatistics.NumArmSegments - 1; iCount++)
+                    {
+                        AddParallelogramRegion(
+                            _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(iCount),
+                            _vitalStatistics.StartArmDivisionEnds.Points.ElementAt(iCount),
+                            _vitalStatistics.StartArmDivisionEnds.Points.ElementAt(iCount + 1),
+                            _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(iCount + 1),
+                            goldenMasterData
+                            );
+                    }
+                }
+
+                // the last one hooks up to the arc.
+                AddParallelogramRegion(
+                    _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
+                    _vitalStatistics.StartArmDivisionEnds.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
+                    _vitalStatistics.ActualInnerArcStart,
+                    _vitalStatistics.ActualOuterArcStart,
+                    goldenMasterData
+                    );
+            }
+        }
+
+        private void AddStartArmCentralRegion(GoldenMasterSingleGraphicPass goldenMasterData)
+        {// Start with the central region of the start-arm - this is the triangular bit that goes from the centre out to the start of the parallel-lines part of the arm
+            // (after the central triangle, all the regions in the start-arm are parallelograms)
+            if (_vitalStatistics.NumTotalSegments > 1)
+            {
+                // start-arm central region
+                AddTriangularRegion(
+                    _vitalStatistics.Origin,
+                    _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(0),
+                    _vitalStatistics.ActualInnerPetalSource,
+                            goldenMasterData);
+            }
+            else
+            {
+                // just one central region
+                AddTriangularRegion(
+                    _vitalStatistics.Origin,
+                    _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(0),
+                    _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(0),
+                            goldenMasterData);
+            }
+        }
+
+        private void CalculateArcSpokeCoordinates()
+        {
+            // Create NumArcSegments divisions of the arc
+            _vitalStatistics.ArcSpokes.Points.Clear();
+            if (_vitalStatistics.NumArcSegments > 1)
+            {
+                TopGamePoint currentArcSpoke = GetEndPointOfRotatedLine(_vitalStatistics.OuterArcRadius, _vitalStatistics.ActualArcCentre, _vitalStatistics.ActualOuterArcStart, _vitalStatistics.ArcSegmentAngle);
+                _vitalStatistics.ArcSpokes.Points.Add(currentArcSpoke);
+                TopGamePoint previousArcSpoke = currentArcSpoke;
+                for (int iCount = 1; iCount < _vitalStatistics.NumArcSegments - 1; iCount++)
+                {
+                    currentArcSpoke = GetEndPointOfRotatedLine(_vitalStatistics.OuterArcRadius, _vitalStatistics.ActualArcCentre, previousArcSpoke, _vitalStatistics.ArcSegmentAngle);
+                    _vitalStatistics.ArcSpokes.Points.Add(currentArcSpoke);
+                    previousArcSpoke = currentArcSpoke;
+                }
+            }
+        }
+
+        private void CalculateArmDivisions()
+        {
+            // Create NumArmSegments + 1 divisions of the start arm and end arm (including the centre).
+            ClearAllArmDivisions();
+
+            // Always create the first division, even if the arms have no segments.
+            double fractionalMultiplier = 1.0 / ((double)_vitalStatistics.NumArmSegments + 1.0);
+
+            _vitalStatistics.StartArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcStart, fractionalMultiplier));
+            _vitalStatistics.EndArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcEnd, fractionalMultiplier));
+
+            _vitalStatistics.StartArmDivisionEnds.Points.Add(_vitalStatistics.ActualInnerPetalSource);
+            _vitalStatistics.EndArmDivisionEnds.Points.Add(_vitalStatistics.ActualInnerPetalSource);
+
+            // now create the rest, if necessary
+            if (_vitalStatistics.NumArmSegments > 1) // If there's only one, there's no dividers necessary
+            {
+                for (int iCount = 2; iCount <= _vitalStatistics.NumArmSegments; iCount++)
+                {
+                    double outerFractionalMultiplier = (double)(iCount) / ((double)_vitalStatistics.NumArmSegments + 1.0); // eg 4 segments: 2/5, 3/5, 4/5
+                    _vitalStatistics.StartArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcStart, outerFractionalMultiplier));
+                    _vitalStatistics.EndArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcEnd, outerFractionalMultiplier));
+
+                    double innerFractionalMultiplier = ((double)(iCount) - 1.0) / (double)(_vitalStatistics.NumArmSegments); // eg 4 segments: 1/4, 2/4, 3/4
+                    _vitalStatistics.StartArmDivisionEnds.Points.Add(MoveAlongLineByFraction(_vitalStatistics.ActualInnerPetalSource, _vitalStatistics.ActualInnerArcStart, innerFractionalMultiplier));
+                    _vitalStatistics.EndArmDivisionEnds.Points.Add(MoveAlongLineByFraction(_vitalStatistics.ActualInnerPetalSource, _vitalStatistics.ActualInnerArcEnd, innerFractionalMultiplier));
+                }
+            }
+        }
+
+        private void CalculateArcCoordinates()
+        {
+            _vitalStatistics.NumArcSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3PlusLeftovers() : 0;
+            _vitalStatistics.ArcSegmentAngle = (_vitalStatistics.NumArcSegments > 0) ? 180 / _vitalStatistics.NumArcSegments : 0;
             _vitalStatistics.ArcStartAngle = _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2; // was previously expressed as 180 - (_vitalStatistics.AngleB + _vitalStatistics.AngleC)
             _vitalStatistics.OriginToArcCentre = GetAdjacentSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
             _vitalStatistics.OuterArcRadius = GetOppositeSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
@@ -337,7 +578,7 @@ namespace Domain.GraphicModels
                 _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2,
                 _vitalStatistics.Origin,
                 _vitalStatistics.RelativeArcCentre);
-            
+
             if (_vitalStatistics.InnerArmLength > 0)
             {
                 // !! Caution !! The inner arc values are relative to the inner petal source, NOT to the Origin!
@@ -366,211 +607,7 @@ namespace Domain.GraphicModels
                 _vitalStatistics.Origin,
                 _vitalStatistics.RelativeOuterArcEnd);
 
-            // Arc segments
-            _vitalStatistics.NumArcSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3PlusLeftovers() : 0;
-            _vitalStatistics.ArcSegmentAngle = (_vitalStatistics.NumArcSegments > 0) ? 180 / _vitalStatistics.NumArcSegments : 0;
-            
-            // Petal region
-            Region petalRegion = MakePetalRegion();
-
-            // Create NumArmSegments + 1 divisions of the start arm and end arm (including the centre).
-            ClearAllArmDivisions();
-            // always create the first division, even if the arms have no segments.
-            double fractionalMultiplier = 1.0 / ((double)_vitalStatistics.NumArmSegments + 1.0);
-
-            // STARTS ****central segment length change STARTS
-            _vitalStatistics.StartArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcStart, fractionalMultiplier));
-            _vitalStatistics.EndArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcEnd, fractionalMultiplier));
-            // ENDS ****central segment length change ENDS
-
-            _vitalStatistics.StartArmDivisionEnds.Points.Add(_vitalStatistics.ActualInnerPetalSource);
-            _vitalStatistics.EndArmDivisionEnds.Points.Add(_vitalStatistics.ActualInnerPetalSource);
-
-            // now create the rest, if necessary
-            if (_vitalStatistics.NumArmSegments > 1) // If there's only one, there's no dividers necessary
-            {
-                for (int iCount = 2; iCount <= _vitalStatistics.NumArmSegments; iCount++)
-                {
-                    // STARTS ****central segment length change STARTS
-                    double outerFractionalMultiplier = (double)(iCount) / ((double)_vitalStatistics.NumArmSegments + 1.0); // eg 4 segments: 2/5, 3/5, 4/5
-                    _vitalStatistics.StartArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcStart, outerFractionalMultiplier));
-                    _vitalStatistics.EndArmDivisionStarts.Points.Add(MoveAlongLineByFraction(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcEnd, outerFractionalMultiplier));
-                    // ENDS ****central segment length change ENDS
-
-                    double innerFractionalMultiplier = ((double)(iCount) - 1.0) / (double)(_vitalStatistics.NumArmSegments); // eg 4 segments: 1/4, 2/4, 3/4
-                    _vitalStatistics.StartArmDivisionEnds.Points.Add(MoveAlongLineByFraction(_vitalStatistics.ActualInnerPetalSource, _vitalStatistics.ActualInnerArcStart, innerFractionalMultiplier));
-                    _vitalStatistics.EndArmDivisionEnds.Points.Add(MoveAlongLineByFraction(_vitalStatistics.ActualInnerPetalSource, _vitalStatistics.ActualInnerArcEnd, innerFractionalMultiplier));
-                }
-            }
-
-            // Create NumArcSegments divisions of the arc
-            _vitalStatistics.ArcSpokes.Points.Clear();
-            if (_vitalStatistics.NumArcSegments > 1)
-            {
-                TopGamePoint currentArcSpoke = GetEndPointOfRotatedLine(_vitalStatistics.OuterArcRadius, _vitalStatistics.ActualArcCentre, _vitalStatistics.ActualOuterArcStart, _vitalStatistics.ArcSegmentAngle);
-                _vitalStatistics.ArcSpokes.Points.Add(currentArcSpoke);
-                TopGamePoint previousArcSpoke = currentArcSpoke;
-                for (int iCount = 1; iCount < _vitalStatistics.NumArcSegments - 1; iCount++)
-                {
-                    currentArcSpoke = GetEndPointOfRotatedLine(_vitalStatistics.OuterArcRadius, _vitalStatistics.ActualArcCentre, previousArcSpoke, _vitalStatistics.ArcSegmentAngle);
-                    _vitalStatistics.ArcSpokes.Points.Add(currentArcSpoke);
-                    previousArcSpoke = currentArcSpoke;
-                }
-            }
-
-            // Create sub-regions
-            DisposeRegions(); 
-            Debug.Assert(subRegions.Count() == 0, "There are some subregions left after disposing of them!");
-
-            // The sub-regions are all the areas that get coloured in: Each region represents an individual card.
-            // They are displayed in three sections, all of which added together look a bit like a petal:
-            // 1) The straight "start-arm", basically made out of two parallel lines (but tapering to a triangular point at the centre)
-            // 2) The curved "arc" which joins the two arms together
-            // 3) The straight "end-arm", basically made out of two parallel lines (but tapering to a triangular point at the centre)
-
-            // Start with the central region of the start-arm - this is the triangular bit that goes from the centre out to the start of the parallel-lines part of the arm
-            // (after the central triangle, all the regions in the start-arm are parallelograms)
-            if (_vitalStatistics.NumTotalSegments > 1)
-            {
-                // start-arm central region
-                AddTriangularRegion(
-                    _vitalStatistics.Origin,
-                    _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(0),
-                    _vitalStatistics.ActualInnerPetalSource,
-                            goldenMasterData);
-            }
-            else
-            {
-                // just one central region
-                AddTriangularRegion(
-                    _vitalStatistics.Origin,
-                    _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(0),
-                    _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(0),
-                            goldenMasterData);
-            }
-
-            if (_vitalStatistics.NumArmSegments > 0)
-            {
-                // all the divisions of the start arm
-                if (_vitalStatistics.NumArmSegments > 1)
-                {
-                    for (int iCount = 0; iCount < _vitalStatistics.NumArmSegments - 1; iCount++)
-                    {
-                        AddParallelogramRegion(
-                            _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(iCount),
-                            _vitalStatistics.StartArmDivisionEnds.Points.ElementAt(iCount),
-                            _vitalStatistics.StartArmDivisionEnds.Points.ElementAt(iCount + 1),
-                            _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(iCount + 1),
-                            goldenMasterData
-                            );
-                    }
-                }
-                // the last one hooks up to the arc.
-                AddParallelogramRegion(
-                    _vitalStatistics.StartArmDivisionStarts.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
-                    _vitalStatistics.StartArmDivisionEnds.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
-                    _vitalStatistics.ActualInnerArcStart,
-                    _vitalStatistics.ActualOuterArcStart,
-                    goldenMasterData
-                    );
-            }
-
-            // the divisions of the arc (sounds biblical!)
-            if (_vitalStatistics.NumArcSegments > 0)
-            {
-                if (_vitalStatistics.ArcSpokes.Points.Count() == 0)
-                {
-                    // the division is the arc itself.
-                    TopGameGraphicsPath tempRegionPath = new TopGameGraphicsPath();
-                    // See AddArcPath for explanation of how arcs are drawn.
-                    tempRegionPath.AddArcPath(_vitalStatistics.OuterArcSquare, (float)_vitalStatistics.ArcStartAngle, (float)180);
-                    tempRegionPath.AddLine(_vitalStatistics.ActualOuterArcStart, _vitalStatistics.ActualOuterArcEnd);
-                    subRegions.Add(new Region(tempRegionPath.ActualPath));
-
-                    if (goldenMasterData != null)
-                    {
-                        var miniPetalRegion = new GoldenMasterMiniPetalRegion();
-                        miniPetalRegion.Copy(tempRegionPath);
-                        goldenMasterData.Regions.Add(miniPetalRegion);
-                    }
-                }
-                else
-                {
-                    // 1st arc division
-                    AddArcRegion(
-                        petalRegion, 
-                        _vitalStatistics.ActualArcCentre,
-                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ActualOuterArcStart, 1.5),
-                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(0), 1.5),
-                            goldenMasterData);
-
-                    // middle arc divisions
-                    for (int iCount = 1; iCount < _vitalStatistics.ArcSpokes.Points.Count(); iCount++)
-                    {
-                        AddArcRegion(
-                            petalRegion,
-                            _vitalStatistics.ActualArcCentre,
-                            MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(iCount - 1), 1.5),
-                            MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(iCount), 1.5),
-                            goldenMasterData);
-                    }
-
-                    // last arc division
-                    AddArcRegion(
-                        petalRegion,
-                        _vitalStatistics.ActualArcCentre,
-                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ArcSpokes.Points.ElementAt(_vitalStatistics.ArcSpokes.Points.Count() - 1), 1.5),
-                        MoveAlongLineByFraction(_vitalStatistics.ActualArcCentre, _vitalStatistics.ActualOuterArcEnd, 1.5),
-                            goldenMasterData);
-                }
-            }
-
-            if (_vitalStatistics.NumArmSegments > 0)
-            {
-                // all the divisions of the end arm (in reverse)
-                AddParallelogramRegion(
-                    _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
-                    _vitalStatistics.EndArmDivisionEnds.Points.ElementAt(_vitalStatistics.NumArmSegments - 1),
-                    _vitalStatistics.ActualInnerArcEnd,
-                    _vitalStatistics.ActualOuterArcEnd,
-                            goldenMasterData
-                    );
-
-                if (_vitalStatistics.NumArmSegments > 1)
-                {
-                    for (int iCount = _vitalStatistics.NumArmSegments - 1; iCount > 0; iCount--)
-                    {
-                        AddParallelogramRegion(
-                            _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(iCount),
-                            _vitalStatistics.EndArmDivisionEnds.Points.ElementAt(iCount),
-                            _vitalStatistics.EndArmDivisionEnds.Points.ElementAt(iCount - 1),
-                            _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(iCount - 1),
-                            goldenMasterData
-                            );
-                    }
-                }
-            }
-
-            // End with the central region of the end-arm - this is the triangular bit that goes from the centre out to the end of the parallel-lines part of the arm
-            // (apart from the central triangle, all the regions in the end-arm are parallelograms)
-            if (_vitalStatistics.NumTotalSegments > 1)
-            {
-                // end-arm central region
-                AddTriangularRegion(
-                    _vitalStatistics.Origin,
-                    _vitalStatistics.EndArmDivisionStarts.Points.ElementAt(0),
-                    _vitalStatistics.ActualInnerPetalSource,
-                            goldenMasterData
-                    );
-            }
-
-            Debug.Assert(_vitalStatistics.NumTotalSegments == subRegions.Count(), "Region count",
-                                                "Number of regions is not num total segments");
-
-            if (rotationAngle > 0)
-            {
-                RotateByAngle(rotationAngle);
-            }
+            CalculateArcSpokeCoordinates();
         }
 
         private Region MakePetalRegion()

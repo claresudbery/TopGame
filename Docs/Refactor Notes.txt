@@ -41,8 +41,9 @@ Mongo DB:
 			.\mongod.exe
 		
 To do:
+	Get rid of AngleB and AngleC
 	PopulateFromLengthTopAngleAndStartPoint: Get rid of tempRelativePoint!
-	Get rid of MakeObsoleteOuterAndInnerPath and associated objects
+	Get rid of MakeObsoleteOuterAndInnerPath and associated objects (but not the squares! And need to add new PetalPath thing)
 	Start using PointF instead of Point throughout? (allows for decimals, so no rounding needed)
 	Use interfaces instead of inheritance for GoldenMasterRegion and its descendants?
 	The reasons the neighbouring parallelograms and arcs don't share corners are
