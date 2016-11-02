@@ -50,7 +50,7 @@ namespace Domain.GraphicModels
 
             _vitalStatistics.Origin.X = 215; // 430; // 500, 360
             _vitalStatistics.Origin.Y = 215; // 430; // 400, 360
-            _vitalStatistics.SegmentLength = TopGameConstants.ConstantSegmentLength;
+            _vitalStatistics.ArmSegmentLength = TopGameConstants.ConstantSegmentLength;
             _vitalStatistics.NumTotalCardsInGame = 52;
             _vitalStatistics.NumTotalSegments = 0;
             _vitalStatistics.NumCardsInPlay = 0;
@@ -129,7 +129,7 @@ namespace Domain.GraphicModels
 
         public void SetConstantBottomAngle(double newBottom)
         {
-            _vitalStatistics.ConstantBottomAngle = newBottom;
+            _vitalStatistics.TotalAngleShare = newBottom;
         }
 
         public void SetCentralAngle(double newAngle)
@@ -307,78 +307,66 @@ namespace Domain.GraphicModels
             GoldenMasterSingleGraphicPass goldenMasterData = null)
         {
             // AngleB and AngleC are now not used - only here so as not to break golden master
-            _vitalStatistics.AngleB = 90 - _vitalStatistics.ConstantBottomAngle / 2; // ConstantBottomAngle = angleShare, ie 360 / num hands
+            _vitalStatistics.AngleB = 90 - _vitalStatistics.TotalAngleShare / 2; // ConstantBottomAngle = angleShare, ie 360 / num hands
             _vitalStatistics.AngleC = 90 - _vitalStatistics.CentralAngle / 2; // was previously expressed as (180 - _vitalStatistics.CentralAngle) / 2
 
+            // Arms
             _vitalStatistics.NumArmSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3() : 0;
-            _vitalStatistics.NumArcSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3PlusLeftovers() : 0;
+            CalculateArmSegmentLength();
+            _vitalStatistics.OuterArmLength = (_vitalStatistics.NumArmSegments + 1) * _vitalStatistics.ArmSegmentLength;
+            _vitalStatistics.InnerArmLength = _vitalStatistics.NumArmSegments * _vitalStatistics.ArmSegmentLength;
 
-            CalculateSegmentLength();
+            // Central triangle(s)
+            _vitalStatistics.CentralSpokeLength = GetAdjacentSide(_vitalStatistics.ArmSegmentLength, _vitalStatistics.CentralAngle / 2);
 
-            _vitalStatistics.CentralSpokeLength = GetAdjacentSide(_vitalStatistics.SegmentLength, _vitalStatistics.CentralAngle / 2);
-
-            _vitalStatistics.OuterArmLength = (_vitalStatistics.NumArmSegments + 1) * _vitalStatistics.SegmentLength;
-            _vitalStatistics.InnerArmLength = _vitalStatistics.NumArmSegments * _vitalStatistics.SegmentLength;
-
+            // General arc stuff
+            _vitalStatistics.ArcStartAngle = _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2; // was previously expressed as 180 - (_vitalStatistics.AngleB + _vitalStatistics.AngleC)
+            _vitalStatistics.OriginToArcCentre = GetAdjacentSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
+            _vitalStatistics.OuterArcRadius = GetOppositeSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
             _vitalStatistics.InnerArcRadius = (_vitalStatistics.InnerArmLength > 0) ? GetOppositeSide(_vitalStatistics.InnerArmLength, _vitalStatistics.CentralAngle / 2) : 0;
+
+            _vitalStatistics.RelativeArcCentre.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2);
+            _vitalStatistics.RelativeArcCentre.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2);
+            _vitalStatistics.ActualArcCentre.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeArcCentre.X;
+            _vitalStatistics.ActualArcCentre.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeArcCentre.Y;
+
+            // Outer Arc Path
+            
+            // Arc segments
+            _vitalStatistics.NumArcSegments = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().DividedBy3PlusLeftovers() : 0;
             _vitalStatistics.ArcSegmentAngle = (_vitalStatistics.NumArcSegments > 0) ? 180 / _vitalStatistics.NumArcSegments : 0;
 
-            _vitalStatistics.ArcStartAngle = _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2; // was previously expressed as 180 - (_vitalStatistics.AngleB + _vitalStatistics.AngleC)
-
-            _vitalStatistics.OriginToArcCentre = GetAdjacentSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
-
-            _vitalStatistics.RelativeArcCentre.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.RelativeArcCentre.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2); 
-
-            //_vitalStatistics.RelativeArcCentre.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.CentralAngle / 2 + 10); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-            //_vitalStatistics.RelativeArcCentre.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OriginToArcCentre, _vitalStatistics.CentralAngle / 2 + 10); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-
-            _vitalStatistics.OuterArcRadius = GetOppositeSide(_vitalStatistics.OuterArmLength, _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.RelativeInnerPetalSource.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2);
-            _vitalStatistics.RelativeInnerPetalSource.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle / 2); 
-            //_vitalStatistics.RelativeInnerPetalSource.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.CentralAngle / 2 + 10); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-            //_vitalStatistics.RelativeInnerPetalSource.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.CentralAngle / 2 + 10); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
+            // Inner petal source
+            _vitalStatistics.RelativeInnerPetalSource.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2);
+            _vitalStatistics.RelativeInnerPetalSource.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.CentralSpokeLength, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle / 2);
+            _vitalStatistics.ActualInnerPetalSource.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeInnerPetalSource.X;
+            _vitalStatistics.ActualInnerPetalSource.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeInnerPetalSource.Y;
             
             if (_vitalStatistics.InnerArmLength > 0)
             {
                 // !! Caution !! The inner arc values are relative to the inner petal source, NOT to the Origin!
-                _vitalStatistics.RelativeInnerArcEnd.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.ConstantBottomAngle / 2);
-                _vitalStatistics.RelativeInnerArcEnd.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.ConstantBottomAngle / 2);
-                _vitalStatistics.RelativeInnerArcStart.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle);
-                _vitalStatistics.RelativeInnerArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle); 
-                //_vitalStatistics.RelativeInnerArcEnd.X = GetXFromLineLengthAndBottomAngle(_vitalStatistics.InnerArmLength, 80); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-                //_vitalStatistics.RelativeInnerArcEnd.Y = GetYFromLineLengthAndBottomAngle(_vitalStatistics.InnerArmLength, 80); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-                //_vitalStatistics.RelativeInnerArcStart.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, 80 - _vitalStatistics.CentralAngle); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-                //_vitalStatistics.RelativeInnerArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, 80 - _vitalStatistics.CentralAngle); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-            }
+                _vitalStatistics.ActualInnerArcStart.PopulateFromLengthTopAngleAndStartPoint(
+                    _vitalStatistics.InnerArmLength,
+                    _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle,
+                    _vitalStatistics.ActualInnerPetalSource,
+                    _vitalStatistics.RelativeInnerArcStart);
 
-            _vitalStatistics.RelativeOuterArcEnd.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.ConstantBottomAngle / 2);
-            _vitalStatistics.RelativeOuterArcEnd.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.ConstantBottomAngle / 2);
-            _vitalStatistics.RelativeOuterArcStart.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle);
-            _vitalStatistics.RelativeOuterArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.ConstantBottomAngle / 2 + _vitalStatistics.CentralAngle);
-            //_vitalStatistics.RelativeOuterArcEnd.X = GetXFromLineLengthAndBottomAngle(_vitalStatistics.OuterArmLength, 80); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-            //_vitalStatistics.RelativeOuterArcEnd.Y = GetYFromLineLengthAndBottomAngle(_vitalStatistics.OuterArmLength, 80); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-            //_vitalStatistics.RelativeOuterArcStart.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, 80 - _vitalStatistics.CentralAngle); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-            //_vitalStatistics.RelativeOuterArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, 80 - _vitalStatistics.CentralAngle); // Trying to get rid of the baseline angle of _vitalStatistics.ConstantBottomAngle/2 + _vitalStatistics.CentralAngle/2
-
-            _vitalStatistics.ActualArcCentre.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeArcCentre.X;
-            _vitalStatistics.ActualArcCentre.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeArcCentre.Y;
-            _vitalStatistics.ActualInnerPetalSource.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeInnerPetalSource.X;
-            _vitalStatistics.ActualInnerPetalSource.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeInnerPetalSource.Y;
-            _vitalStatistics.ActualOuterArcStart.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeOuterArcStart.X;
-            _vitalStatistics.ActualOuterArcStart.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeOuterArcStart.Y;
-            _vitalStatistics.ActualOuterArcEnd.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeOuterArcEnd.X;
-            _vitalStatistics.ActualOuterArcEnd.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeOuterArcEnd.Y;
-
-            if (_vitalStatistics.InnerArmLength > 0)
-            {
-                // !! Caution !! The inner arc values are relative to the inner petal source, NOT to the Origin!
-                _vitalStatistics.ActualInnerArcStart.X = _vitalStatistics.ActualInnerPetalSource.X + _vitalStatistics.RelativeInnerArcStart.X;
-                _vitalStatistics.ActualInnerArcStart.Y = _vitalStatistics.ActualInnerPetalSource.Y + _vitalStatistics.RelativeInnerArcStart.Y;
+                _vitalStatistics.RelativeInnerArcEnd.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.TotalAngleShare / 2);
+                _vitalStatistics.RelativeInnerArcEnd.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.InnerArmLength, _vitalStatistics.TotalAngleShare / 2);
                 _vitalStatistics.ActualInnerArcEnd.X = _vitalStatistics.ActualInnerPetalSource.X + _vitalStatistics.RelativeInnerArcEnd.X;
                 _vitalStatistics.ActualInnerArcEnd.Y = _vitalStatistics.ActualInnerPetalSource.Y + _vitalStatistics.RelativeInnerArcEnd.Y;
             }
 
+            _vitalStatistics.RelativeOuterArcStart.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle);
+            _vitalStatistics.RelativeOuterArcStart.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.TotalAngleShare / 2 + _vitalStatistics.CentralAngle);
+            _vitalStatistics.ActualOuterArcStart.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeOuterArcStart.X;
+            _vitalStatistics.ActualOuterArcStart.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeOuterArcStart.Y;
+
+            _vitalStatistics.RelativeOuterArcEnd.X = GetXFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.TotalAngleShare / 2);
+            _vitalStatistics.RelativeOuterArcEnd.Y = GetYFromLineLengthAndTopAngle(_vitalStatistics.OuterArmLength, _vitalStatistics.TotalAngleShare / 2);
+            _vitalStatistics.ActualOuterArcEnd.X = _vitalStatistics.Origin.X + _vitalStatistics.RelativeOuterArcEnd.X;
+            _vitalStatistics.ActualOuterArcEnd.Y = _vitalStatistics.Origin.Y + _vitalStatistics.RelativeOuterArcEnd.Y;
+            
             _vitalStatistics.OuterPath.Reset();
             // We have to go from end to start instead of from start to end, because the arc gets drawn that way round.
             _vitalStatistics.OuterPath.AddLine(_vitalStatistics.Origin, _vitalStatistics.ActualOuterArcEnd);
@@ -627,15 +615,15 @@ namespace Domain.GraphicModels
             }
         }
 
-        private void CalculateSegmentLength()
+        private void CalculateArmSegmentLength()
         {
-            _vitalStatistics.SegmentLength = TopGameConstants.ConstantSegmentLength;
+            _vitalStatistics.ArmSegmentLength = TopGameConstants.ConstantSegmentLength;
             GrowSegmentLengthByALittleToAccountForExtraArcSegments();
 
-            double potentialOuterArmLength = (_vitalStatistics.NumArmSegments + 1) * _vitalStatistics.SegmentLength;
+            double potentialOuterArmLength = (_vitalStatistics.NumArmSegments + 1) * _vitalStatistics.ArmSegmentLength;
             if (potentialOuterArmLength > MaximumArmLengthWhichFitsInFrame())
             {
-                _vitalStatistics.SegmentLength = MaximumArmLengthWhichFitsInFrame() / _vitalStatistics.NumArmSegments;
+                _vitalStatistics.ArmSegmentLength = MaximumArmLengthWhichFitsInFrame() / _vitalStatistics.NumArmSegments;
                 ShrinkSegmentLengthByALittleToAccountForExtraArcSegments();
             }
         }
@@ -644,14 +632,14 @@ namespace Domain.GraphicModels
         {
             double segmentAddition = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().LeftoverAfterDividedBy3() : 0;
 
-            _vitalStatistics.SegmentLength = _vitalStatistics.SegmentLength + (TopGameConstants.SegmentGrowthRatio * segmentAddition);
+            _vitalStatistics.ArmSegmentLength = _vitalStatistics.ArmSegmentLength + (TopGameConstants.SegmentGrowthRatio * segmentAddition);
         }
 
         private void ShrinkSegmentLengthByALittleToAccountForExtraArcSegments()
         {
             double segmentAddition = ArcWillExist() ? NumSegmentsContainedInArmsAndArc().LeftoverAfterDividedBy3() : 0;
 
-            _vitalStatistics.SegmentLength = _vitalStatistics.SegmentLength
+            _vitalStatistics.ArmSegmentLength = _vitalStatistics.ArmSegmentLength
                 - (TopGameConstants.SegmentGrowthRatio * (2 - segmentAddition));
         }
 

@@ -209,12 +209,12 @@ namespace Domain.GraphicModels.GoldenMaster
             OuterArcRadius = vitalStatisticsSource.OuterArcRadius;
             OuterArmLength = vitalStatisticsSource.OuterArmLength;
             InnerArmLength = vitalStatisticsSource.InnerArmLength;
-            ConstantSegmentLength = vitalStatisticsSource.SegmentLength;
+            ConstantSegmentLength = vitalStatisticsSource.ArmSegmentLength;
             ConstantCentralSegmentLength = vitalStatisticsSource.ConstantCentralSegmentLength;
             ArcStartAngle = vitalStatisticsSource.ArcStartAngle;
             AngleB = vitalStatisticsSource.AngleB;
             AngleC = vitalStatisticsSource.AngleC;
-            ConstantBottomAngle = vitalStatisticsSource.ConstantBottomAngle;
+            ConstantBottomAngle = vitalStatisticsSource.TotalAngleShare;
             CentralAngle = vitalStatisticsSource.CentralAngle;
             ArcSegmentAngle = vitalStatisticsSource.ArcSegmentAngle;
             NumArmSegments = vitalStatisticsSource.NumArmSegments;

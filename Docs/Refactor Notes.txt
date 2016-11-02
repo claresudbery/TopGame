@@ -20,8 +20,8 @@ Golden Masters:
 	Graphics-016: 3900aec538143a000df55552e285226e9143cb16: All regions now have a type description, and all mini-petal regions have two corners (instead of only one)
 	Graphics-017: 8d00925a572eb6470ed82179bff49022734885b1: No longer using json deserialisation decorators in the golden master model objects.
 	Graphics-018: 1ff1691a9a55e40ca5a40b2d02e1c3b091eea2f7: Renamed a load of variables.
-	Graphics-019: Regenerated to get slightly differently-rounded numbers caused by refactor
-	Graphics-020: Regenerated to take account of arc paths swapping start and end points around (to fix visual leakage bug)
+	Graphics-019: 39a00a28414e5c7c312b1d1d78ffe776c33214ef: Regenerated to get slightly differently-rounded numbers caused by refactor
+	Graphics-020: 39a00a28414e5c7c312b1d1d78ffe776c33214ef: Regenerated to take account of arc paths swapping start and end points around (to fix visual leakage bug)
 	Game-001: 7535145f77fed9c8847ded8885be042d399a0bde: First attempt to store game data. Storing all moves for 2 to 12 players, using unshuffled deck each time.
 	Game-002: 6d241618fcaff0daa36a943684c44c01d6f531d0: Added player start hands and num players.
 	Game-003: 8d00925a572eb6470ed82179bff49022734885b1: No longer using json deserialisation decorators in the golden master model objects.

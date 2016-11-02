@@ -62,7 +62,7 @@ namespace Domain.GraphicModels
 
         public double InnerArmLength { get; set; }
 
-        public double SegmentLength { get; set; }
+        public double ArmSegmentLength { get; set; }
 
         public double ConstantCentralSegmentLength { get; set; }
 
@@ -75,11 +75,7 @@ namespace Domain.GraphicModels
 
         public double ArcStartAngle { get; set; }
 
-        public double AngleB { get; set; }
-
-        public double AngleC { get; set; }
-
-        public double ConstantBottomAngle { get; set; }
+        public double TotalAngleShare { get; set; }
 
         public double CentralAngle { get; set; }
 
@@ -161,8 +157,17 @@ namespace Domain.GraphicModels
         // ***********************************************************
         
         public TopGameRectangle InnerArcSquare { get; set; }
-        
+
         public TopGameRectangle OuterArcSquare { get; set; }
+
+
+        // ***********************************************************
+        // Obsolete
+        // ***********************************************************
+
+        public double AngleB { get; set; }
+
+        public double AngleC { get; set; }
 
 
         public void Copy(VitalStatistics vitalStatisticsSource)
@@ -207,12 +212,12 @@ namespace Domain.GraphicModels
             OuterArcRadius = vitalStatisticsSource.OuterArcRadius;
             OuterArmLength = vitalStatisticsSource.OuterArmLength;
             InnerArmLength = vitalStatisticsSource.InnerArmLength;
-            SegmentLength = vitalStatisticsSource.SegmentLength;
+            ArmSegmentLength = vitalStatisticsSource.ArmSegmentLength;
             ConstantCentralSegmentLength = vitalStatisticsSource.ConstantCentralSegmentLength;
             ArcStartAngle = vitalStatisticsSource.ArcStartAngle;
             AngleB = vitalStatisticsSource.AngleB;
             AngleC = vitalStatisticsSource.AngleC;
-            ConstantBottomAngle = vitalStatisticsSource.ConstantBottomAngle;
+            TotalAngleShare = vitalStatisticsSource.TotalAngleShare;
             CentralAngle = vitalStatisticsSource.CentralAngle;
             ArcSegmentAngle = vitalStatisticsSource.ArcSegmentAngle;
             NumArmSegments = vitalStatisticsSource.NumArmSegments;
