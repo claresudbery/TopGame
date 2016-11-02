@@ -903,5 +903,29 @@ namespace Domain.GraphicModels
         {
             return SafeSin(angle) * hypotenuse;
         }
+
+        /// <summary>
+        /// Sort out what proportion of the circle we are getting
+        /// </summary>
+        /// <param name="maxCentralAngle"></param>
+        /// <param name="angleShare"></param>
+        public void SetAngles(double maxCentralAngle, double angleShare)
+        {
+            SetMaxCentralAngle(maxCentralAngle);
+            SetTotalAngleShare(angleShare);
+
+            // Note that CalculateCentralAngle will return different results depending on how many segments there are.
+            CalculateCentralAngle(360, 52, false);
+        }
+
+        private void SetMaxCentralAngle(double newMax)
+        {
+            MaxCentralAngle = newMax;
+        }
+
+        private void SetTotalAngleShare(double newTotalAngleShare)
+        {
+            TotalAngleShare = newTotalAngleShare;
+        }
     }
 }

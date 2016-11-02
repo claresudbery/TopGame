@@ -89,16 +89,6 @@ namespace Domain.GraphicModels
             return _topGameGraphicsData.NumTotalSegments;
         }
 
-        public void SetMaxCentralAngle(double newMax)
-        {
-            _topGameGraphicsData.MaxCentralAngle = newMax;
-        }
-
-        public void SetConstantBottomAngle(double newBottom)
-        {
-            _topGameGraphicsData.TotalAngleShare = newBottom;
-        }
-
         public void SetCentralAngle(double newAngle)
         {
             _topGameGraphicsData.CentralAngle = newAngle;
@@ -224,25 +214,6 @@ namespace Domain.GraphicModels
             }
         }
 
-        public void DisplayFinalRegion(PaintEventArgs e)
-        {
-            using (SolidBrush myBrush = new SolidBrush(System.Drawing.Color.Black))
-            using (System.Drawing.Pen myPen = new System.Drawing.Pen(System.Drawing.Color.Red, 1))
-            using (GraphicsPath tempRegionPath = new GraphicsPath())
-            {
-                // end-arm central region
-                tempRegionPath.AddLine(_topGameGraphicsData.Origin.Point, _topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(0).Point);
-                tempRegionPath.AddLine(_topGameGraphicsData.EndArmDivisionStarts.Points.ElementAt(0).Point, _topGameGraphicsData.ActualInnerPetalSource.Point);
-                tempRegionPath.AddLine(_topGameGraphicsData.ActualInnerPetalSource.Point, _topGameGraphicsData.Origin.Point);
-                e.Graphics.FillRegion(myBrush, subRegions.ElementAt(subRegions.Count() - 1));
-            }
-        }
-
-        public double CalculateCentralAngle(double numDegreesAvailable, int numCardsBeingShared, bool bSuppressMinAndMax)
-        {
-            return _topGameGraphicsData.CalculateCentralAngle(numDegreesAvailable, numCardsBeingShared, bSuppressMinAndMax);
-        }
-
         public void LoadNewData(double rotationAngle)
         {
             if (_topGameGraphicsData.NumTotalSegments > 0)
@@ -319,6 +290,11 @@ namespace Domain.GraphicModels
             regionColours.ElementAt(iRegionIndex).TheColour = newColour;
         }// end function
 
+        public double CalculateCentralAngle(double numDegreesAvailable, int numCardsBeingShared, bool bSuppressMinAndMax)
+        {
+            return _topGameGraphicsData.CalculateCentralAngle(numDegreesAvailable, numCardsBeingShared, bSuppressMinAndMax);
+        }
+
         /// <summary>
         /// Sort out what proportion of the circle we are getting
         /// </summary>
@@ -326,11 +302,7 @@ namespace Domain.GraphicModels
         /// <param name="angleShare"></param>
         public void SetAngles(double maxCentralAngle, double angleShare)
         {
-            SetMaxCentralAngle(maxCentralAngle);
-            SetConstantBottomAngle(angleShare);
-
-            // Note that CalculateCentralAngle will return different results depending on how many segments there are.
-            CalculateCentralAngle(360, 52, false);
+            _topGameGraphicsData.SetAngles(maxCentralAngle, angleShare);
         }
 
         public GoldenMasterSingleGraphicPass GenerateGoldenMasterData(int numPlayersInGame)
