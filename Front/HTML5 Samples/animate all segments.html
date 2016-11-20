@@ -1,4 +1,5 @@
 <!-- multiple canvas example from here: http://jsfiddle.net/bnwpS/15/ -->
+<!-- animation example from here: http://www.html5canvastutorials.com/advanced/html5-canvas-animation-stage/ -->
 <!DOCTYPE html>
 <html>
 
@@ -146,7 +147,7 @@ function animate(startTime) {
   drawLeftRect(14, 1, colours[13 + colourIndex]);
   colourIndex = colourIndex + 1;
 
-  // request new frame
+  // request new frame in 250 milliseconds
   requestAnimFrame(function() {
     setTimeout(function() {
       var newStartTime = (new Date()).getTime();
