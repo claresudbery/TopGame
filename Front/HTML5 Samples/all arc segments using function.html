@@ -1,0 +1,86 @@
+<!-- multiple canvas example from here: http://jsfiddle.net/bnwpS/15/ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+.canvas-layers { position:relative; width:300px; height:300px }
+.canvas-layers canvas { position:absolute; top:0; left:0 }
+</style>
+</head>
+
+<body>
+
+<div class="canvas-layers">
+<canvas id="myCanvas1" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas2" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas3" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas4" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas5" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas6" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas7" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas8" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas9" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas10" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas11" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas12" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas13" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas14" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas15" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+</div>
+
+<script>
+
+// Combine all
+var c15 = document.getElementById('myCanvas15');
+var ctx15 = c15.getContext('2d');
+ctx15.drawImage(drawArc(1, "red"), 0, 0);
+ctx15.drawImage(drawArc(2, "blue"), 0, 0);
+ctx15.drawImage(drawArc(3, "green"), 0, 0);
+ctx15.drawImage(drawArc(4, "yellow"), 0, 0);
+ctx15.drawImage(drawArc(5, "pink"), 0, 0);
+ctx15.drawImage(drawArc(6, "orange"), 0, 0);
+
+function drawArc(arcNumber, colour) {
+  var c = document.getElementById("myCanvas" + arcNumber);
+  var ctx = c.getContext("2d");
+  // Arc
+  ctx.beginPath();
+  ctx.arc(150, 100, 100, 0, Math.PI, true);
+  ctx.arc(150, 100, 85, Math.PI, 0, false);
+  ctx.closePath();
+  ctx.fill();               
+  // set composite property
+  ctx.globalCompositeOperation = 'source-in';
+  // 3rd triangle from left
+  ctx.beginPath();
+  ctx.moveTo(150,300);
+  ctx.lineTo(0 + (arcNumber - 1) * 50, 0);
+  ctx.lineTo(50 + (arcNumber - 1) * 50, 0);
+  ctx.lineTo(150,300);
+  ctx.closePath();
+  ctx.fillStyle=colour;
+  ctx.fill();
+  return c;
+}
+
+</script>
+
+</body>
+</html>
+

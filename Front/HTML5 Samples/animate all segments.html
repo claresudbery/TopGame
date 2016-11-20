@@ -1,0 +1,169 @@
+<!-- multiple canvas example from here: http://jsfiddle.net/bnwpS/15/ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+.canvas-layers { position:relative; width:300px; height:300px }
+.canvas-layers canvas { position:absolute; top:0; left:0 }
+</style>
+</head>
+
+<body>
+
+<div class="canvas-layers">
+<canvas id="myCanvas1" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas2" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas3" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas4" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas5" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas6" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas7" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas8" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas9" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas10" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas11" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas12" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas13" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas14" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas15" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+</div>
+
+<script>
+
+function drawArc(arcNumber, colour) {
+  var c = document.getElementById("myCanvas" + arcNumber);
+  var ctx = c.getContext("2d");
+  // Arc
+  ctx.beginPath();
+  ctx.arc(150, 100, 100, 0, Math.PI, true);
+  ctx.arc(150, 100, 85, Math.PI, 0, false);
+  ctx.closePath();
+  ctx.fill();
+  // set composite property
+  ctx.globalCompositeOperation = 'source-in';
+  // nth triangle from left
+  ctx.beginPath();
+  ctx.moveTo(150,300);
+  ctx.lineTo(0 + (arcNumber - 1) * 50, 0);
+  ctx.lineTo(50 + (arcNumber - 1) * 50, 0);
+  ctx.lineTo(150,300);
+  ctx.closePath();
+  ctx.fillStyle=colour;
+  ctx.fill();
+  return c;
+}
+
+function drawLeftRect(canvasNumber, rectNumber, colour) {
+  var c = document.getElementById("myCanvas" + canvasNumber);
+  var ctx = c.getContext("2d");
+  // Petal arms
+  ctx.beginPath();
+  ctx.fillStyle="red";
+  ctx.moveTo(50,100);
+  ctx.lineTo(150,300);
+  ctx.lineTo(250,100);
+  ctx.lineTo(235,100);
+  ctx.lineTo(150,270);
+  ctx.lineTo(65,100);
+  ctx.closePath();
+  ctx.fill();
+  // set composite property
+  ctx.globalCompositeOperation = 'source-in';
+  // nth rectangle down on left
+  ctx.beginPath();
+  ctx.rect(0, 100 + (rectNumber - 1) * 50, 150, 50);
+  ctx.fillStyle=colour;
+  ctx.fill();
+  return c;
+}
+
+function drawRightRect(canvasNumber, rectNumber, colour) {
+  var c = document.getElementById("myCanvas" + canvasNumber);
+  var ctx = c.getContext("2d");
+  // Petal arms
+  ctx.beginPath();
+  ctx.fillStyle="red";
+  ctx.moveTo(50,100);
+  ctx.lineTo(150,300);
+  ctx.lineTo(250,100);
+  ctx.lineTo(235,100);
+  ctx.lineTo(150,270);
+  ctx.lineTo(65,100);
+  ctx.closePath();
+  ctx.fill();
+  // set composite property
+  ctx.globalCompositeOperation = 'source-in';
+  // nth rectangle down on right
+  ctx.beginPath();
+  ctx.rect(150, 100 + (rectNumber - 1) * 50, 150, 50);
+  ctx.fillStyle=colour;
+  ctx.fill();
+  return c;
+}
+
+var colourIndex = 0;
+var colours = ['red','green','yellow','orange','pink','blue','magenta','red','green','yellow','orange','pink','blue','magenta','red','green','yellow','orange','pink','blue','magenta','red','green','yellow','orange','pink','blue','magenta'];
+
+window.requestAnimFrame = (function(callback) {
+  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+    function(callback) {
+      window.setTimeout(callback, 1000 / 60);
+    };
+ })();
+
+function animate(startTime) {
+  if (colourIndex > 6) colourIndex = 0;
+  //console.log(iteration);
+  drawArc(1, colours[0 + colourIndex]);
+  drawArc(2, colours[1 + colourIndex]);
+  drawArc(3, colours[2 + colourIndex]);
+  drawArc(4, colours[3 + colourIndex]);
+  drawArc(5, colours[4 + colourIndex]);
+  drawArc(6, colours[5 + colourIndex]);
+  drawRightRect(7, 1, colours[6 + colourIndex]);
+  drawRightRect(8, 2, colours[7 + colourIndex]);
+  drawRightRect(9, 3, colours[8 + colourIndex]);
+  drawRightRect(10, 4, colours[9 + colourIndex]);
+  drawLeftRect(11, 4, colours[10 + colourIndex]);
+  drawLeftRect(12, 3, colours[11 + colourIndex]);
+  drawLeftRect(13, 2, colours[12 + colourIndex]);
+  drawLeftRect(14, 1, colours[13 + colourIndex]);
+  colourIndex = colourIndex + 1;
+
+  // request new frame
+  requestAnimFrame(function() {
+    setTimeout(function() {
+      var newStartTime = (new Date()).getTime();
+      animate(newStartTime );
+    }, 250);
+  });
+}
+
+// wait one second before starting animation
+setTimeout(function() {
+  var startTime = (new Date()).getTime();
+  animate(startTime);
+}, 1000);
+
+</script>
+
+</body>
+</html>
+
+

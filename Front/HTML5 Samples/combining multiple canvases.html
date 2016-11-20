@@ -1,0 +1,74 @@
+<!-- multiple canvas example from here: http://jsfiddle.net/bnwpS/15/ -->
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas1" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<canvas id="myCanvas2" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<canvas id="myCanvas3" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+
+var c1 = document.getElementById("myCanvas1");
+var ctx1 = c1.getContext("2d");
+
+// Arc
+ctx1.beginPath();
+ctx1.arc(150, 100, 100, 0, Math.PI, true);
+ctx1.arc(150, 100, 85, Math.PI, 0, false);
+ctx1.closePath();
+ctx1.fill();
+               
+// set composite property
+ctx1.globalCompositeOperation = 'source-in';
+
+// First triangle on left
+ctx1.beginPath();
+ctx1.fillStyle="red";
+ctx1.moveTo(150,300);
+ctx1.lineTo(0,0);
+ctx1.lineTo(50,0);
+ctx1.lineTo(150,300);
+ctx1.closePath();
+ctx1.fill();
+
+
+var c2 = document.getElementById("myCanvas2");
+var ctx2 = c2.getContext("2d");
+
+// Arc
+ctx2.beginPath();
+ctx2.arc(150, 100, 100, 0, Math.PI, true);
+ctx2.arc(150, 100, 85, Math.PI, 0, false);
+ctx2.closePath();
+ctx2.fill();
+               
+// set composite property
+ctx2.globalCompositeOperation = 'source-in';
+
+// 2nd triangle from left
+ctx2.beginPath();
+ctx2.fillStyle="blue";
+ctx2.moveTo(150,300);
+ctx2.lineTo(50,0);
+ctx2.lineTo(100,0);
+ctx2.lineTo(150,300);
+ctx2.closePath();
+ctx2.fill();
+
+var c3 = document.getElementById('myCanvas3');
+var ctx3 = c3.getContext('2d');
+
+ctx3.drawImage(c1, 0, 0);
+ctx3.drawImage(c2, 0, 0);
+
+</script>
+
+</body>
+</html>
+
