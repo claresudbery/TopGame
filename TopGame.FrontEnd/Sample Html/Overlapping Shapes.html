@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<span>Without clip():</span>
+<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+// Draw a rectangle
+ctx.rect(50, 20, 200, 120);
+ctx.stroke();
+
+// Draw red filled rectangle
+//ctx.fillStyle = "red";
+//ctx.fillRect(0, 0, 200, 100);
+
+// Draw green triangle
+ctx.beginPath();
+ctx.lineWidth = "5";
+ctx.strokeStyle = "green";  // Green path
+ctx.moveTo(100, 150);
+ctx.lineTo(100, 0);
+ctx.lineTo(200, 0);
+ctx.closePath();
+ctx.stroke();  // Draw it
+
+// Draw blue filled semi-circle
+ctx.beginPath();
+ctx.lineWidth = "5";
+ctx.strokeStyle = "blue";  // Blue path
+ctx.arc(100, 100, 100, 0, Math.PI, true);
+ctx.lineTo(5, 100);
+ctx.arc(100, 100, 85, Math.PI, 0, false);
+ctx.closePath();
+ctx.fillStyle = "blue";
+ctx.fill();
+ctx.stroke();
+</script>
+
+<br/>
+<br/>
+<br/>
+<span>With triangular clip():</span>
+<canvas id="myCanvas3" width="300" height="150" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas3");
+var ctx = c.getContext("2d");
+
+// Clip a triangular area
+ctx.beginPath();
+ctx.lineWidth = "0";
+ctx.strokeStyle = "transparent";
+ctx.moveTo(100, 150);
+ctx.lineTo(100, 0);
+ctx.lineTo(200, 0);
+ctx.closePath();
+ctx.stroke();  // Draw it
+ctx.clip();
+
+// Draw blue filled semi-circle after clip()
+ctx.beginPath();
+ctx.lineWidth = "5";
+ctx.strokeStyle = "blue";  // Blue path
+ctx.arc(100, 100, 100, 0, Math.PI, true);
+ctx.lineTo(5, 100);
+ctx.arc(100, 100, 85, Math.PI, 0, false);
+ctx.closePath();
+ctx.fillStyle = "blue";
+ctx.fill();
+ctx.stroke();
+</script>
+
+<br/>
+<br/>
+<br/>
+<span>With rectangular clip():</span>
+<canvas id="myCanvas2" width="300" height="150" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas2");
+var ctx = c.getContext("2d");
+
+// Clip a rectangular area
+ctx.lineWidth = "0";
+ctx.strokeStyle = "transparent";
+ctx.rect(50, 20, 200, 120);
+ctx.stroke();
+ctx.clip();
+
+// Draw blue filled semi-circle after clip()
+ctx.beginPath();
+ctx.lineWidth = "5";
+ctx.strokeStyle = "blue";  // Blue path
+ctx.arc(100, 100, 100, 0, Math.PI, true);
+ctx.lineTo(5, 100);
+ctx.arc(100, 100, 85, Math.PI, 0, false);
+ctx.closePath();
+ctx.fillStyle = "blue";
+ctx.fill();
+ctx.stroke();
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<span>Without clip():</span>
+<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+// Draw green triangles
+ctx.beginPath();
+ctx.lineWidth = "5";
+ctx.strokeStyle = "green";  // Green path
+
+// triangle 1 - near right
+ctx.moveTo(100, 300);
+ctx.lineTo(100, 0);
+ctx.lineTo(150, 0);
+ctx.closePath();
+ctx.stroke();  // Draw it
+
+// triangle 2 - middle right
+ctx.moveTo(100, 300);
+ctx.lineTo(150, 0);
+ctx.lineTo(200, 0);
+ctx.closePath();
+ctx.stroke();  // Draw it
+
+// triangle 3 - far right
+ctx.moveTo(100, 300);
+ctx.lineTo(200, 0);
+ctx.lineTo(250, 0);
+ctx.closePath();
+ctx.stroke();  // Draw it
+
+// triangle 4 - near left
+ctx.moveTo(100, 300);
+ctx.lineTo(100, 0);
+ctx.lineTo(50, 0);
+ctx.closePath();
+ctx.stroke();  // Draw it
+
+// triangle 5 - middle left
+ctx.moveTo(100, 300);
+ctx.lineTo(50, 0);
+ctx.lineTo(0, 0);
+ctx.closePath();
+ctx.stroke();  // Draw it
+
+// triangle 6 - far left
+ctx.moveTo(100, 300);
+ctx.lineTo(0, 100);
+ctx.lineTo(0, 0);
+ctx.closePath();
+ctx.stroke();  // Draw it
+
+// Draw green rectangles
+ctx.strokeRect(0, 100, 100, 50); // top left
+ctx.strokeRect(100, 100, 200, 50); // top right
+ctx.strokeRect(0, 150, 100, 50); // 2nd down left
+ctx.strokeRect(100, 150, 200, 50); // 2nd down right
+ctx.strokeRect(0, 200, 100, 50); // 3rd down left
+ctx.strokeRect(100, 200, 200, 50); // 3rd down right
+ctx.strokeRect(0, 250, 100, 50); // bottom left
+ctx.strokeRect(100, 250, 200, 50); // bottom right
+
+// Draw blue filled petal
+ctx.beginPath();
+ctx.lineWidth = "5";
+ctx.strokeStyle = "blue";  // Blue path
+ctx.arc(100, 100, 100, 0, Math.PI, true);
+ctx.lineTo(100, 300);
+ctx.lineTo(200, 100);
+ctx.lineTo(185, 100);
+ctx.arc(100, 100, 85, Math.PI, 0, false);
+ctx.lineTo(100, 285);
+ctx.lineTo(15, 100);
+ctx.closePath();
+ctx.fillStyle = "blue";
+ctx.fill();
+ctx.stroke();
+</script>
+
+<br/>
+<br/>
+<br/>
+<span>With triangular clip():</span>
+<canvas id="myCanvas3" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas3");
+var ctx = c.getContext("2d");
+
+// Clip triangular area 1 
+ctx.beginPath();
+ctx.lineWidth = "0";
+ctx.strokeStyle = "transparent";
+// triangle 1 - near right
+ctx.moveTo(100, 300);
+ctx.lineTo(100, 0);
+ctx.lineTo(150, 0);
+ctx.closePath();
+ctx.stroke();  // Draw it
+// Clip
+//ctx.clip();
+
+
+// Clip triangular area 2 
+ctx.lineWidth = "0";
+ctx.strokeStyle = "transparent";
+// triangle 2 - middle right
+ctx.moveTo(100, 300);
+ctx.lineTo(150, 0);
+ctx.lineTo(200, 0);
+ctx.closePath();
+ctx.stroke();  // Draw it
+// Clip
+ctx.clip();
+// Draw blue filled petal after clip()
+ctx.beginPath();
+ctx.lineWidth = "5";
+//ctx.strokeStyle = "blue";  // Blue path
+ctx.arc(100, 100, 100, 0, Math.PI, true);
+ctx.lineTo(100, 300);
+ctx.lineTo(200, 100);
+ctx.lineTo(185, 100);
+ctx.arc(100, 100, 85, Math.PI, 0, false);
+ctx.lineTo(100, 285);
+ctx.lineTo(15, 100);
+ctx.closePath();
+ctx.fillStyle = "blue";
+ctx.fill();
+ctx.stroke();
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+// Draw green triangles
+ctx.beginPath();
+ctx.lineWidth = "5";
+ctx.strokeStyle = "green";  // Green path
+ctx.fillStyle = "green";
+// triangle 1 - near right
+ctx.moveTo(100, 300);
+ctx.lineTo(100, 0);
+ctx.lineTo(150, 0);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();  // Draw it
+
+//ctx.fillStyle = "blue";
+ctx.globalCompositeOperation = "source-in";
+
+// Draw petal
+ctx.fillStyle = "blue";
+ctx.beginPath();
+ctx.lineWidth = "5";
+ctx.strokeStyle = "blue";  // Blue path
+ctx.arc(100, 100, 100, 0, Math.PI, true);
+ctx.lineTo(100, 300);
+ctx.lineTo(200, 100);
+ctx.lineTo(185, 100);
+ctx.arc(100, 100, 85, Math.PI, 0, false);
+ctx.lineTo(100, 285);
+ctx.lineTo(15, 100);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
+</script>
+
+<p><strong>Note:</strong> The canvas tag is not supported in Internet
+Explorer 8 and earlier versions.</p>
+
+</body>
+</html>
+
