@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+// Arc
+ctx.beginPath();
+ctx.arc(150, 100, 100, 0, Math.PI, true);
+ctx.arc(150, 100, 85, Math.PI, 0, false);
+ctx.closePath();
+ctx.fill();
+
+// Petal arms
+ctx.beginPath();
+ctx.fillStyle="red";
+ctx.moveTo(50,100);
+ctx.lineTo(150,300);
+ctx.lineTo(250,100);
+ctx.lineTo(235,100);
+ctx.lineTo(150,270);
+ctx.lineTo(65,100);
+ctx.closePath();
+ctx.fill();
+
+// First triangle on left
+ctx.beginPath();
+ctx.moveTo(150,300);
+ctx.lineTo(0,0);
+ctx.lineTo(50,0);
+ctx.lineTo(150,300);
+ctx.closePath();
+ctx.stroke();
+
+// 2nd triangle from left
+ctx.beginPath();
+ctx.moveTo(150,300);
+ctx.lineTo(50,0);
+ctx.lineTo(100,0);
+ctx.lineTo(150,300);
+ctx.closePath();
+ctx.stroke();
+
+// 3rd triangle from left
+ctx.beginPath();
+ctx.moveTo(150,300);
+ctx.lineTo(100,0);
+ctx.lineTo(150,0);
+ctx.lineTo(150,300);
+ctx.closePath();
+ctx.stroke();
+
+// 4th triangle from left
+ctx.beginPath();
+ctx.moveTo(150,300);
+ctx.lineTo(150,0);
+ctx.lineTo(200,0);
+ctx.lineTo(150,300);
+ctx.closePath();
+ctx.stroke();
+
+// 5th triangle from left
+ctx.beginPath();
+ctx.moveTo(150,300);
+ctx.lineTo(200,0);
+ctx.lineTo(250,0);
+ctx.lineTo(150,300);
+ctx.closePath();
+ctx.stroke();
+
+// 6th triangle from left
+ctx.beginPath();
+ctx.moveTo(150,300);
+ctx.lineTo(250,0);
+ctx.lineTo(300,0);
+ctx.lineTo(150,300);
+ctx.closePath();
+ctx.stroke();
+
+// 1st rectangle down on left
+ctx.beginPath();
+ctx.rect(0, 100, 150, 50);
+ctx.stroke();
+
+// 2nd rectangle down on left
+ctx.beginPath();
+ctx.rect(0, 150, 150, 50);
+ctx.stroke();
+
+// 3rd rectangle down on left
+ctx.beginPath();
+ctx.rect(0, 200, 150, 50);
+ctx.stroke();
+
+// 4th rectangle down on left
+ctx.beginPath();
+ctx.rect(0, 250, 150, 50);
+ctx.stroke();
+
+// 1st rectangle down on right
+ctx.beginPath();
+ctx.rect(150, 100, 150, 50);
+ctx.stroke();
+
+// 2nd rectangle down on right
+ctx.beginPath();
+ctx.rect(150, 150, 150, 50);
+ctx.stroke();
+
+// 3rd rectangle down on right
+ctx.beginPath();
+ctx.rect(150, 200, 150, 50);
+ctx.stroke();
+
+// 4th rectangle down on right
+ctx.beginPath();
+ctx.rect(150, 250, 150, 50);
+ctx.stroke();
+
+</script>
+
+</body>
+</html>
+

@@ -41,6 +41,7 @@ Mongo DB:
 			.\mongod.exe
 		
 To do:
+	See Useful/GoLang Chrome bookmarks folder for Golang stuff!
 	Get rid of AngleB and AngleC
 	Get rid of ConstantCentralSegmentLength
 	Make sure all graphics-dependent code is only accessible to OnePLayerGraphicsLoop, not GraphicsData - this will mean removing the ActualPath object from TopGameGraphicsPath?
